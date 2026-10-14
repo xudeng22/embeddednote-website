@@ -1,6 +1,6 @@
 ---
-title: "About EmbeddedNote"
-description: "Editorial mission, coverage and contact details for EmbeddedNote."
+title: About EmbeddedNote
+description: Editorial mission, coverage and contact details for EmbeddedNote.
 locale: en
 ---
 # About EmbeddedNote
@@ -14,3 +14,5 @@ We examine projects from schematics and source code to real-world implementation
 ## Editorial and contact
 
 Edit this page using Pages CMS to add your editorial policy, contact address, and partnership information. Do not publish private contact details without reviewing them.
+
+Email  xden2019@gmail.com
