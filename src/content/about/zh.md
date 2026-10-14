@@ -15,4 +15,4 @@ EmbeddedNote（嵌入式杂谈）是一份聚焦嵌入式系统、芯片半导�
 
 客观中立，可复现项目原则，欢迎联系。
 
-Email xden@gmail.com
+Email  [xden2019@gmail.com](mailto:xden2019@gmail.com)
