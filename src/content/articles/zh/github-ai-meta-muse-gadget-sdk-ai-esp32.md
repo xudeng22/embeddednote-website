@@ -6,7 +6,7 @@ description: Meta 这两天在 GitHub 上开源了一个叫 Muse Gadget SDK 的�
   接大模型的方案，毕竟前面已经在这块板上折腾过小智，录音、识别、生成回答、播放，这条链路并不陌生。但把源码拉下来翻了一遍之后发现，它和小智 AI、Home
   Assistant Voice PE 这些项目走的并不是同一条路线。
 locale: zh
-translationKey: github-22-jumper
+translationKey: github-ai-meta-muse-gadget-sdk-ai-esp32
 pubDate: 2026-10-12
 category: open-source
 tags:
