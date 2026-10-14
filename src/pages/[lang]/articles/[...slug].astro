@@ -1,30 +1,120 @@
+
 ---
 import Base from '../../../layouts/Base.astro';
 import GiscusComments from '../../../components/GiscusComments.astro';
-import {getCollection,render} from 'astro:content';
+import { getCollection, render } from 'astro:content';
+
 export async function getStaticPaths() {
-  const entries = await getCollection('articles',({data})=>!data.draft);
-  return entries.map(a=>{
-    const [lang,...parts]=a.id.split('/');
-    if(lang!==a.data.locale || !parts.length) throw new Error(`Invalid locale/id: ${a.id}`);
-    return {params:{lang,slug:parts.join('/')},props:{article:a}};
+  const entries = await getCollection(
+    'articles',
+    ({ data }) => !data.draft
+  );
+
+  return entries.map((article) => {
+    const [lang, ...parts] = article.id.split('/');
+
+    if (lang !== article.data.locale || !parts.length) {
+      throw new Error(`Invalid locale/id: ${article.id}`);
+    }
+
+    const related = entries.filter(
+      (item) =>
+        item.data.translationKey === article.data.translationKey
+    );
+
+    const translations = Object.fromEntries(
+      related.map((item) => [
+        item.data.locale,
+        `/${item.data.locale}/articles/${item.id
+          .split('/')
+          .slice(1)
+          .join('/')}/`
+      ])
+    );
+
+    return {
+      params: {
+        lang,
+        slug: parts.join('/')
+      },
+      props: {
+        article,
+        translations
+      }
+    };
   });
 }
-const {article}=Astro.props;
-const lang=article.data.locale;
-const all=await getCollection('articles',({data})=>!data.draft && data.translationKey===article.data.translationKey);
-const translations=Object.fromEntries(all.map(a=>[a.data.locale,`/${a.data.locale}/articles/${a.id.split('/').slice(1).join('/')}/`]));
-const {Content}=await render(article);
-const jsonld={'@context':'https://schema.org','@type':'TechArticle',headline:article.data.title,description:article.data.description,datePublished:article.data.pubDate.toISOString(),dateModified:(article.data.updatedDate??article.data.pubDate).toISOString(),inLanguage:lang==='zh'?'zh-CN':'en',mainEntityOfPage:new URL(Astro.url.pathname,'https://embeddednote.com').href};
+
+const { article, translations } = Astro.props;
+
+const lang = article.data.locale;
+const { Content } = await render(article);
+
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: article.data.title,
+  description: article.data.description,
+  datePublished: article.data.pubDate.toISOString(),
+  dateModified: (
+    article.data.updatedDate ?? article.data.pubDate
+  ).toISOString(),
+  inLanguage: lang === 'zh' ? 'zh-CN' : 'en',
+  mainEntityOfPage: new URL(
+    Astro.url.pathname,
+    'https://embeddednote.com'
+  ).href
+};
 ---
-<Base lang={lang} title={article.data.seoTitle??article.data.title} description={article.data.seoDescription??article.data.description} translations={translations} article={true}>
+
+<Base
+  lang={lang}
+  title={article.data.seoTitle ?? article.data.title}
+  description={
+    article.data.seoDescription ?? article.data.description
+  }
+  translations={translations}
+  article={true}
+>
   <article class="prose" data-pagefind-body>
-    <p class="eyebrow">EMBEDDED NOTES · {article.data.category.toUpperCase()}</p>
+    <p class="eyebrow">
+      EMBEDDED NOTES · {article.data.category.toUpperCase()}
+    </p>
+
     <h1>{article.data.title}</h1>
-    <p class="meta">{article.data.pubDate.toLocaleDateString(lang==='zh'?'zh-CN':'en-US')} · {article.data.tags.join(' / ')}</p>
+
+    <p class="meta">
+      {article.data.pubDate.toLocaleDateString(
+        lang === 'zh' ? 'zh-CN' : 'en-US'
+      )}
+      {' · '}
+      {article.data.tags.join(' / ')}
+    </p>
+
     <Content />
-    {article.data.sourceUrl && <p><a href={article.data.sourceUrl} rel="noopener noreferrer" target="_blank">{article.data.sourceUrl}</a></p>}
+
+    {
+      article.data.sourceUrl && (
+        <p>
+          <a
+            href={article.data.sourceUrl}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {article.data.sourceUrl}
+          </a>
+        </p>
+      )
+    }
   </article>
-  <GiscusComments lang={lang} term={article.data.translationKey} />
-  <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />
+
+  <GiscusComments
+    lang={lang}
+    term={article.data.translationKey}
+  />
+
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(jsonld)}
+  />
 </Base>
