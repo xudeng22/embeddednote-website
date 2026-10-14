@@ -110,5 +110,5 @@ As for the loud bang that made this project famous, watching the demonstration i
 
 There are plenty of ways to wake someone up. There's really no reason for an alarm clock to double as a fire drill.
 
-![image.png](blob:https:/app.pagescms.org/b5a7c3d0-3889-455c-9778-750904726284)
+![image.png](/uploads/image-28.png)
 
