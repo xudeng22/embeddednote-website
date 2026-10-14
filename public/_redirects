@@ -1,2 +1,2 @@
-# Add verified OLD URL -> NEW URL mappings here, e.g.:
-# /old-article /articles/new-article/ 301
+/ /en/ 302
+/articles/embeddednote-launch/ /zh/articles/embeddednote-launch/ 301
