@@ -10,7 +10,7 @@ pubDate: 2026-10-13
 category: open-source
 tags:
   - 机器人
-draft: true
+draft: false
 seoTitle: 硬核开源项目
 seoDescription: 硬核开源项目之——22 自由度的螃蟹机器人 Jumper，从训练到板端全开源
 ---
