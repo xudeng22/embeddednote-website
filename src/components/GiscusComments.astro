@@ -1,0 +1,11 @@
+---
+const {lang='en', term} = Astro.props;
+const repo = import.meta.env.PUBLIC_GISCUS_REPO;
+const repoId = import.meta.env.PUBLIC_GISCUS_REPO_ID;
+const categoryId = import.meta.env.PUBLIC_GISCUS_CATEGORY_ID;
+const enabled = Boolean(repo && repoId && categoryId && term);
+---
+{enabled ? <section class="comments" aria-label={lang === 'zh' ? '技术讨论' : 'Technical discussion'}>
+  <h2>{lang === 'zh' ? '技术讨论' : 'Discussion'}</h2>
+  <script is:inline src="https://giscus.app/client.js" data-repo={repo} data-repo-id={repoId} data-category="Blog Comments" data-category-id={categoryId} data-mapping="specific" data-term={term} data-strict="1" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang={lang === 'zh' ? 'zh-CN' : 'en'} crossorigin="anonymous" async></script>
+</section> : <section class="comments comments-pending"><h2>{lang === 'zh' ? '技术讨论' : 'Discussion'}</h2><p>{lang === 'zh' ? '评论将在 GitHub Discussions 配置完成后开放。' : 'Comments will be available after GitHub Discussions is configured.'}</p></section>}

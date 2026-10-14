@@ -1,11 +1,12 @@
 ---
 import Base from '../../../layouts/Base.astro';
-import {getCollection, render} from 'astro:content';
-export async function getStaticPaths(){
-  const entries=await getCollection('articles',({data})=>!data.draft);
+import GiscusComments from '../../../components/GiscusComments.astro';
+import {getCollection,render} from 'astro:content';
+export async function getStaticPaths() {
+  const entries = await getCollection('articles',({data})=>!data.draft);
   return entries.map(a=>{
     const [lang,...parts]=a.id.split('/');
-    if(lang!==a.data.locale || !parts.length)throw new Error(`Invalid locale/id: ${a.id}`);
+    if(lang!==a.data.locale || !parts.length) throw new Error(`Invalid locale/id: ${a.id}`);
     return {params:{lang,slug:parts.join('/')},props:{article:a}};
   });
 }
@@ -16,4 +17,14 @@ const translations=Object.fromEntries(all.map(a=>[a.data.locale,`/${a.data.local
 const {Content}=await render(article);
 const jsonld={'@context':'https://schema.org','@type':'TechArticle',headline:article.data.title,description:article.data.description,datePublished:article.data.pubDate.toISOString(),dateModified:(article.data.updatedDate??article.data.pubDate).toISOString(),inLanguage:lang==='zh'?'zh-CN':'en',mainEntityOfPage:new URL(Astro.url.pathname,'https://embeddednote.com').href};
 ---
-<Base lang={lang} title={article.data.seoTitle??article.data.title} description={article.data.seoDescription??article.data.description} translations={translations} article={true}><article class="prose" data-pagefind-body><p class="eyebrow">EMBEDDED NOTES · {article.data.category.toUpperCase()}</p><h1>{article.data.title}</h1><p class="meta">{article.data.pubDate.toLocaleDateString(lang==='zh'?'zh-CN':'en-US')} · {article.data.tags.join(' / ')}</p><Content />{article.data.sourceUrl && <p><a href={article.data.sourceUrl} rel="noopener noreferrer" target="_blank">{article.data.sourceUrl}</a></p>}</article><script type="application/ld+json" set:html={JSON.stringify(jsonld)} /></Base>
+<Base lang={lang} title={article.data.seoTitle??article.data.title} description={article.data.seoDescription??article.data.description} translations={translations} article={true}>
+  <article class="prose" data-pagefind-body>
+    <p class="eyebrow">EMBEDDED NOTES · {article.data.category.toUpperCase()}</p>
+    <h1>{article.data.title}</h1>
+    <p class="meta">{article.data.pubDate.toLocaleDateString(lang==='zh'?'zh-CN':'en-US')} · {article.data.tags.join(' / ')}</p>
+    <Content />
+    {article.data.sourceUrl && <p><a href={article.data.sourceUrl} rel="noopener noreferrer" target="_blank">{article.data.sourceUrl}</a></p>}
+  </article>
+  <GiscusComments lang={lang} term={article.data.translationKey} />
+  <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />
+</Base>

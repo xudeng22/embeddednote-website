@@ -1,0 +1,24 @@
+---
+const {lang='en'} = Astro.props;
+const placeholder = lang === 'zh' ? '搜索芯片型号、协议、项目或关键词' : 'Search chips, protocols, projects or keywords';
+---
+<section class="search-section" role="search" aria-label={lang === 'zh' ? '站内全文检索' : 'Full-text search'}>
+  <div id="search" data-placeholder={placeholder}></div>
+</section>
+<link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+<script is:inline src="/pagefind/pagefind-ui.js"></script>
+<script is:inline>
+  function initEmbeddedSearch() {
+    const node = document.getElementById('search');
+    if (!node || !window.PagefindUI || node.dataset.ready === 'true') return;
+    node.dataset.ready = 'true';
+    new window.PagefindUI({
+      element: '#search',
+      showSubResults: true,
+      translations: { placeholder: node.dataset.placeholder }
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEmbeddedSearch, {once: true});
+  } else { initEmbeddedSearch(); }
+</script>

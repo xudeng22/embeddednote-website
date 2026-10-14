@@ -1,0 +1,18 @@
+/* Include by adding: @import './v2-editorial.css'; to global.css */
+/* Keep the six numbered topic links, remove their introductory label. */
+.topic-strip {padding-left:0;padding-right:0}
+.topic-strip a {min-width:145px;padding:14px 18px;line-height:1.45}
+.topic-strip a:first-child {border-left:0}
+/* Retain the editorial masthead, ivory background and serif typography. */
+.masthead-tagline {font-size:12px;max-width:430px;line-height:1.5}
+.comments {max-width:800px;margin:26px auto 58px;padding:25px 0;border-top:1px solid #cfc8bc}
+.comments h2 {font:700 23px Georgia,'Times New Roman',serif}
+.comments-pending p {color:#59625a;font-size:14px}
+.about-prose {margin-top:48px;margin-bottom:60px;min-height:46vh}
+@media(max-width:700px){.topic-strip a{flex:1 0 45%;min-width:145px}.masthead-tagline{display:none}}
+
+/* Entire supplied PNG replaces the former EN square + text lockup. */
+.masthead .brand-image-link{display:inline-flex;align-items:center;flex:0 0 auto;line-height:0;white-space:normal;text-decoration:none}
+.brand-image{display:block;width:240px;max-width:100%;height:auto;object-fit:contain}
+@media(max-width:700px){.brand-image{width:184px}.masthead-inner{gap:8px}}
+@media(max-width:390px){.brand-image{width:165px}}
