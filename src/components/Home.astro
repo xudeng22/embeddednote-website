@@ -1,23 +1,36 @@
 ---
 import Base from '../layouts/Base.astro';
-import {channels,ui} from '../i18n/ui';
-import {getCollection} from 'astro:content';
-const {lang} = Astro.props;
-const t=ui[lang];
-const articles=(await getCollection('articles', ({data})=>!data.draft && data.locale===lang))
-  .sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf());
+import { channels, ui } from '../i18n/ui';
+import { getCollection } from 'astro:content';
+import SearchBox from './SearchBox.astro';
+const { lang } = Astro.props;
+const t = ui[lang];
+const articles = (await getCollection('articles', ({data}) => !data.draft && data.locale === lang))
+  .sort((a,b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const urlFor = (a) => `/${lang}/articles/${a.id.split('/').slice(1).join('/')}/`;
 ---
 <Base lang={lang} title={t.title} description={t.description} translations={{en:'/en/',zh:'/zh/'}}>
   <section class="editorial-hero">
-    <div><p class="eyebrow">EMBEDDED NOTES · ENGINEERING JOURNAL</p><h1>{t.title}</h1><p>{t.description}</p><a class="cta" href="#latest">{t.latest} ↓</a></div>
-    <div class="hero-art" aria-hidden="true"><div class="chip-art"><span>01</span><span>MCU</span><b></b><span>SoC</span><span>EDA</span></div><small>工程 / ENGINEERING</small></div>
+    <div>
+      <p class="eyebrow">EMBEDDED NOTES · ENGINEERING JOURNAL</p>
+      <h1>{t.title}</h1>
+      <p>{t.description}</p>
+      <a class="cta" href="#latest">{t.latest} ↓</a>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="chip-art"><span>01</span><span>MCU</span><b></b><span>SoC</span><span>EDA</span></div>
+      <small>工程 / ENGINEERING</small>
+    </div>
   </section>
-  <section class="topic-strip" aria-label={t.topics}><strong>{t.topics}</strong>{channels.map((c,i)=><a href={`/${lang}/category/${c.slug}/`}><small>0{i+1}</small>{c[lang]}</a>)}</section>
-  <section class="search-section"><div id="search" data-placeholder={t.search}></div></section>
-  <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
-  <script is:inline src="/pagefind/pagefind-ui.js"></script>
-  <script is:inline>function setupSearch(){const el=document.querySelector('#search');if(el && window.PagefindUI){new window.PagefindUI({element:'#search',showSubResults:true,translations:{placeholder:el.dataset.placeholder}});}}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setupSearch);else setupSearch();</script>
-  <section id="latest" class="editorial-list" data-pagefind-ignore><div class="section-heading"><small>LATEST / 2026</small><h2>{t.latest}</h2><small>{String(articles.length).padStart(2,'0')} ARTICLES</small></div>
-  {articles.length ? articles.map((a,i)=><article class="editorial-item"><span class="item-number">{String(i+1).padStart(2,'0')}</span><div><p class="meta">{a.data.category.toUpperCase()} · {a.data.pubDate.toISOString().slice(0,10)}</p><h3><a href={urlFor(a)}>{a.data.title}</a></h3><p>{a.data.description}</p></div></article>) : <p>{t.empty}</p>}</section>
+  <section class="topic-strip" aria-label={lang === 'en' ? 'Technical topics' : '技术专题'}>
+    {channels.map((c,i) => <a href={`/${lang}/category/${c.slug}/`}><small>{String(i+1).padStart(2,'0')}</small>{c[lang]}</a>)}
+  </section>
+  <SearchBox lang={lang} />
+  <section id="latest" class="editorial-list" data-pagefind-ignore>
+    <div class="section-heading"><small>LATEST / {new Date().getFullYear()}</small><h2>{t.latest}</h2><small>{String(articles.length).padStart(2,'0')} ARTICLES</small></div>
+    {articles.length ? articles.map((a,i) => <article class="editorial-item">
+      <span class="item-number">{String(i+1).padStart(2,'0')}</span>
+      <div><p class="meta">{a.data.category.toUpperCase()} · {a.data.pubDate.toISOString().slice(0,10)}</p><h3><a href={urlFor(a)}>{a.data.title}</a></h3><p>{a.data.description}</p></div>
+    </article>) : <p>{t.empty}</p>}
+  </section>
 </Base>
