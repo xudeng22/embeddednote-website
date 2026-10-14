@@ -1,7 +1,40 @@
 ---
 import '../styles/global.css';
-const {title='EmbeddedNote 嵌入式杂谈',description='嵌入式系统、开源硬件、芯片与工程实践'}=Astro.props;
-const canonical=new URL(Astro.url.pathname,Astro.site).toString();
-const links=[['开源项目','/category/open-source/'],['MCU & SoC','/category/mcu-soc/'],['硬件设计','/category/hardware/'],['通信技术','/category/connectivity/'],['显示技术','/category/display/'],['开发工具','/category/tools/']];
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import {channels, ui} from '../i18n/ui';
+const {lang='en', title, description, translations={}, article=false} = Astro.props;
+const dict = ui[lang];
+const pageTitle = title ?? 'EmbeddedNote';
+const pageDesc = description ?? dict.description;
+const canonical = new URL(Astro.url.pathname, 'https://embeddednote.com').href;
+const alternates = Object.entries(translations).filter(([,v])=>Boolean(v));
 ---
-<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>{title}</title><meta name="description" content={description}/><link rel="canonical" href={canonical}/><meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:type" content="website"/><link rel="alternate" type="application/rss+xml" title="EmbeddedNote RSS" href="/rss.xml"/></head><body><header><div class="shell top"><a class="brand" href="/">◈ EmbeddedNote <small>嵌入式杂谈</small></a><nav>{links.map(([name,href])=><a href={href}>{name}</a>)}</nav></div></header><main class="shell"><slot/></main><footer><div class="shell">© {new Date().getFullYear()} EmbeddedNote · 内容版权以各文章说明为准 · <a href="/about/">关于</a> · <a href="/rss.xml">RSS</a></div></footer></body></html>
+<!doctype html>
+<html lang={lang === 'zh' ? 'zh-CN' : 'en'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{pageTitle} | EmbeddedNote</title>
+    <meta name="description" content={pageDesc} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:url" content={canonical} />
+    {alternates.map(([locale,path]) => <link rel="alternate" hreflang={locale === 'zh' ? 'zh-CN' : 'en'} href={new URL(path,'https://embeddednote.com').href} />)}
+    {translations.en && <link rel="alternate" hreflang="x-default" href={new URL(translations.en,'https://embeddednote.com').href} />}
+    <link rel="alternate" type="application/rss+xml" title="EmbeddedNote RSS" href="/rss.xml" />
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="shell masthead-inner">
+        <a href={`/${lang}/`} class="brand" aria-label="EmbeddedNote homepage"><span class="brand-mark">EN</span><span>EmbeddedNote<small>嵌入式杂谈</small></span></a>
+        <span class="masthead-tagline">{lang === 'en' ? 'Reusable engineering judgment, from registers to the supply chain' : '从寄存器到产业链，记录可复用的工程判断'}</span>
+        <LanguageSwitcher lang={lang} translations={translations}/>
+      </div>
+      <nav class="mainnav"><div class="shell navlinks">{channels.map(c => <a href={`/${lang}/category/${c.slug}/`}>{c[lang]}</a>)}</div></nav>
+    </header>
+    <main class="shell"><slot /></main>
+    <footer><div class="shell">© {new Date().getFullYear()} EmbeddedNote · <a href={`/${lang}/about/`}>{dict.about}</a> · <a href="/rss.xml">RSS</a></div></footer>
+  </body>
+</html>

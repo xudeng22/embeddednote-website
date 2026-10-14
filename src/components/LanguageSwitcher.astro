@@ -1,0 +1,6 @@
+---
+const {lang='en', translations={}} = Astro.props;
+const other = lang === 'en' ? 'zh' : 'en';
+const href = translations[other] ?? `/${other}/`;
+---
+<a class="language-link" href={href} lang={other} hreflang={other === 'zh' ? 'zh-CN' : 'en'} aria-label={other === 'zh' ? '切换为中文' : 'Switch to English'}>{other === 'zh' ? '中' : 'EN'} / {lang === 'zh' ? '中' : 'EN'}</a>
