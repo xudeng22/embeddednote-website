@@ -6,7 +6,7 @@ description: Meta 这两天在 GitHub 上开源了一个叫 Muse Gadget SDK 的�
   接大模型的方案，毕竟前面已经在这块板上折腾过小智，录音、识别、生成回答、播放，这条链路并不陌生。但把源码拉下来翻了一遍之后发现，它和小智 AI、Home
   Assistant Voice PE 这些项目走的并不是同一条路线。
 locale: zh
-translationKey: embeddednote-launch
+translationKey: github-22-jumper
 pubDate: 2026-10-12
 category: open-source
 tags:
@@ -24,7 +24,7 @@ Meta 这两天在 GitHub 上开源了一个叫 Muse Gadget SDK 的项目，仓�
 
 **Github地址**
 
-https://github.com/facebookincubator/muse-gadget-sdk
+[https://github.com/facebookincubator/muse-gadget-sdk](https://github.com/facebookincubator/muse-gadget-sdk)
 
 硬件层面，ESP32 这条路子支持的开发板已经有 11 款。官方首推的是乐鑫的 ESP32-C5 DevKitC-1，还有 M5Stack StickS3、微雪的 ESP32-S3-Touch-AMOLED-1.75C、Seeed 的电子纸显示屏等等。
 
