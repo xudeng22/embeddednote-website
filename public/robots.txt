@@ -1,3 +1,9 @@
+# Public technical journalism and engineering documentation.
 User-agent: *
 Allow: /
+
+# OpenAI's search crawler; separate from GPTBot used for model training.
+User-agent: OAI-SearchBot
+Allow: /
+
 Sitemap: https://embeddednote.com/sitemap-index.xml

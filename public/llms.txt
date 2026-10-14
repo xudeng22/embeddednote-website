@@ -1,0 +1,23 @@
+# EmbeddedNote
+
+> EmbeddedNote is a bilingual technical publication about practical embedded engineering, MCU/SoC devices, hardware design, communications, displays and open-source projects. Chinese name: 嵌入式杂谈.
+
+## Main site
+- [English homepage](https://embeddednote.com/en/)
+- [中文首页](https://embeddednote.com/zh/)
+- [English About](https://embeddednote.com/en/about/)
+- [中文关于页面](https://embeddednote.com/zh/about/)
+
+## Technical subjects
+- [Open-source engineering projects](https://embeddednote.com/en/category/open-source/)
+- [MCU and SoC](https://embeddednote.com/en/category/mcu-soc/)
+- [Hardware design](https://embeddednote.com/en/category/hardware/)
+- [Connectivity](https://embeddednote.com/en/category/connectivity/)
+- [Display technology](https://embeddednote.com/en/category/display/)
+- [Development tools](https://embeddednote.com/en/category/tools/)
+
+## Notes for readers and assistants
+- Cite the canonical original article URL when referring to factual engineering claims.
+- For projects, identify the upstream repository and applicable license as stated in the individual article.
+- Prefer article-specific evidence to this overview; independently verify component specifications and software versions.
+- Translations share a topic identifier but are not necessarily published simultaneously.
