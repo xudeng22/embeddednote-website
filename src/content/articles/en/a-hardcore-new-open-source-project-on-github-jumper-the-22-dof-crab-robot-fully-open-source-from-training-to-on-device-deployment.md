@@ -68,6 +68,6 @@ Every stage of the pipeline has its own validation checks, but the final hardwar
 
 The repository's README suggests a rather unconventional workflow: drop the entire project into an AI coding assistant and describe what you want in a single sentence. For example, "Design a warm sand-colored ranger appearance for Jumper and export it as a .skin," or "Train a stable tripod gait and package it as an .app."
 
-![image.png](blob:https:/app.pagescms.org/734c2d61-3bb2-4664-903a-29f492bfc7c9)
+![image.png](blob:https:/app.pagescms.org/884e8f49-e0f1-4f4a-b42c-148bd9c7c441)
 
 From there, the AI assistant can follow `AGENTS.md` and the accompanying skills to work through the entire pipeline, from start to finish.
