@@ -73,6 +73,8 @@ for (const lang of languages) {
   const html = readFile(path);
   const expectedLang = lang === 'zh' ? 'zh-CN' : 'en';
 
+
+
   check(
     new RegExp(`<html[^>]*lang=["']${expectedLang}["']`, 'i')
       .test(html),
@@ -95,7 +97,7 @@ for (const lang of languages) {
   );
 }
 
-// 4. 双语文章和独立 SEO
+ // 4. 双语文章和独立 SEO
 for (const lang of languages) {
   const path =
     `${lang}/articles/embeddednote-launch/index.html`;
@@ -104,6 +106,14 @@ for (const lang of languages) {
 
   const html = readFile(path);
   const otherLang = lang === 'en' ? 'zh' : 'en';
+
+  const alternateLinks =
+    html.match(/<link\b[^>]*hreflang=[^>]*>/gi) ?? [];
+
+  console.log(
+    `DEBUG ${lang} article alternate links:`,
+    alternateLinks
+  );
 
   check(
     html.includes('rel="canonical"') &&
@@ -117,6 +127,7 @@ for (const lang of languages) {
     `${lang} article translation reference`
   );
 }
+
 
 // 5. RSS
 if (fileExists('rss.xml')) {
