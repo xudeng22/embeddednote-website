@@ -1,7 +1,0 @@
----
-// Replace placeholders only after enabling GitHub Discussions and installing Giscus.
-const repo=import.meta.env.PUBLIC_GISCUS_REPO;
-const repoId=import.meta.env.PUBLIC_GISCUS_REPO_ID;
-const categoryId=import.meta.env.PUBLIC_GISCUS_CATEGORY_ID;
----
-{repo && repoId && categoryId ? <script is:inline src="https://giscus.app/client.js" data-repo={repo} data-repo-id={repoId} data-category="General" data-category-id={categoryId} data-mapping="pathname" data-strict="1" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async></script> : <p class="muted">评论系统待启用：请在 .env 中配置 Giscus 参数。</p>}

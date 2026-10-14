@@ -1,2 +1,12 @@
 import {getCollection} from 'astro:content';
-export async function GET(){const entries=(await getCollection('articles',({data})=>!data.draft)).sort((a,b)=>b.data.pubDate-a.data.pubDate);const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');const items=entries.map(a=>`<item><title>${esc(a.data.title)}</title><link>https://embeddednote.com/articles/${a.id}/</link><guid>https://embeddednote.com/articles/${a.id}/</guid><description>${esc(a.data.description)}</description><pubDate>${a.data.pubDate.toUTCString()}</pubDate></item>`).join('');return new Response(`<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>EmbeddedNote</title><link>https://embeddednote.com/</link><description>嵌入式杂谈</description>${items}</channel></rss>`,{headers:{'Content-Type':'application/rss+xml; charset=utf-8'}})}
+const escapeXml=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+export async function GET(){
+  const entries=(await getCollection('articles',({data})=>!data.draft)).sort((a,b)=>b.data.pubDate-a.data.pubDate);
+  const items=entries.map(a=>{
+    const [lang,...parts]=a.id.split('/');
+    const url=`https://embeddednote.com/${lang}/articles/${parts.join('/')}/`;
+    return `<item><title>${escapeXml(a.data.title)}</title><link>${escapeXml(url)}</link><guid>${escapeXml(url)}</guid><description>${escapeXml(a.data.description)}</description><pubDate>${a.data.pubDate.toUTCString()}</pubDate><language>${lang}</language></item>`;
+  }).join('');
+  const xml=`<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>EmbeddedNote</title><link>https://embeddednote.com/en/</link><description>Embedded engineering journal</description>${items}</channel></rss>`;
+  return new Response(xml,{headers:{'Content-Type':'application/rss+xml; charset=utf-8'}});
+}

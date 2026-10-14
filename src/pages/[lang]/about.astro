@@ -1,0 +1,6 @@
+---
+import Base from '../../layouts/Base.astro';
+export function getStaticPaths(){return [{params:{lang:'en'}},{params:{lang:'zh'}}];}
+const lang=Astro.params.lang;
+---
+<Base lang={lang} title={lang==='en'?'About':'关于'} translations={{en:'/en/about/',zh:'/zh/about/'}}><article class="prose"><h1>{lang==='en'?'About EmbeddedNote':'关于嵌入式杂谈'}</h1><p>{lang==='en'?'A bilingual engineering journal focused on practical embedded systems and open-source projects.':'专注嵌入式系统、芯片、硬件设计和开源项目的双语技术媒体。'}</p></article></Base>
