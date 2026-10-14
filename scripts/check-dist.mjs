@@ -72,14 +72,7 @@ for (const lang of languages) {
 
   const html = readFile(path);
   const expectedLang = lang === 'zh' ? 'zh-CN' : 'en';
-  
-  if (lang === 'en') {
-    console.log(
-      'DEBUG English alternate links:',
-      html.match(/<link[^>]+rel="alternate"[^>]*>/g)
-        ?? 'NO ALTERNATE LINKS'
-    );
-  }
+
 
 
   check(
