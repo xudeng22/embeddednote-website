@@ -1,0 +1,7 @@
+---
+import Base from '../../layouts/Base.astro';import {getCollection} from 'astro:content';
+const cats={'open-source':'开源项目','mcu-soc':'MCU & SoC','hardware':'硬件设计','connectivity':'通信技术','display':'显示技术','tools':'开发工具'};
+export async function getStaticPaths(){return Object.entries(cats).map(([slug,name])=>({params:{slug},props:{name}}));}
+const {name}=Astro.props;const slug=Astro.params.slug;const articles=(await getCollection('articles',({data})=>!data.draft&&data.category===slug)).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf());
+---
+<Base title={name+' | EmbeddedNote'}><h1>{name}</h1><p>共 {articles.length} 篇文章</p><div class="article-grid">{articles.map(a=><article class="card"><h3><a href={'/articles/'+a.id+'/'}>{a.data.title}</a></h3><p>{a.data.description}</p></article>)}</div></Base>

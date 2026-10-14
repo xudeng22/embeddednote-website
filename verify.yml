@@ -1,0 +1,29 @@
+name: Verify Astro static site
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build-and-smoke-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build Astro and Pagefind
+        run: npm run build
+      - name: Smoke test generated site
+        run: node scripts/check-dist.mjs
+      - name: Upload built site for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: embeddednote-dist
+          path: dist/
+          retention-days: 7
