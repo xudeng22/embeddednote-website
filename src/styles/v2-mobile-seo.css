@@ -1,0 +1,117 @@
+/* EmbeddedNote V2.5: precise mobile journal grid and social/brand refinements.
+   Loaded AFTER global.css to avoid touching the existing theme. */
+
+/* Transparent logo: original artwork, no extra ivory/white rectangle. */
+.masthead .brand-image-link {
+  min-width: 0;
+  max-width: min(100%, 280px);
+}
+.masthead .brand-image {
+  display: block;
+  width: 248px;
+  max-width: 100%;
+  height: auto;
+  background: transparent;
+}
+
+/* Protect long technical names, images and code from viewport overflow. */
+.editorial-item,
+.editorial-item > div,
+.category-entry-content,
+.prose,
+.search-section {
+  min-width: 0;
+}
+.editorial-item {
+  grid-template-columns: 60px minmax(0, 1fr);
+}
+.prose img,
+.prose video,
+.prose iframe { max-width: 100%; height: auto; }
+.prose pre { overflow-x: auto; max-width: 100%; }
+.prose table { display: block; overflow-x: auto; max-width: 100%; }
+
+@media (max-width: 700px) {
+  .masthead-inner { gap: 12px; min-width: 0; }
+  .masthead .brand-image-link { flex: 0 1 auto; }
+  .masthead .brand-image { width: min(59vw, 235px); }
+  .masthead-tagline { display: none; }
+
+  /* TOP menu: exactly 2 equal columns × 3 equal-height rows.
+     Prevent '2 + 3 + 1' distribution and broken vertical rules. */
+  .mainnav .navlinks {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: minmax(55px, auto);
+    gap: 0;
+    padding: 0;
+    border-left: 1px solid #cfc8bc;
+    border-top: 1px solid #cfc8bc;
+  }
+  .mainnav .navlinks > a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 0;
+    width: 100%;
+    margin: 0;
+    padding: 10px 12px;
+    border: 0;
+    border-right: 1px solid #cfc8bc;
+    border-bottom: 1px solid #cfc8bc;
+    font: 700 clamp(11px, 3.25vw, 13px)/1.38 system-ui, -apple-system, sans-serif;
+    overflow-wrap: anywhere;
+  }
+  .mainnav .navlinks > a:last-child { border-right: 1px solid #cfc8bc; }
+
+  /* BLACK topic strip: one CSS Grid instead of separately wrapped flex items.
+     All three row separators and the middle divider have equal lengths. */
+  .topic-strip {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: minmax(82px, auto);
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
+    margin-inline: 0;
+  }
+  .topic-strip > a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    flex: none;
+    padding: 12px 15px;
+    border: 0;
+    border-right: 1px solid #46504d;
+    border-bottom: 1px solid #46504d;
+    line-height: 1.45;
+    font-size: clamp(11px, 3.2vw, 13px);
+    overflow-wrap: anywhere;
+  }
+  .topic-strip > a:nth-child(even) { border-right: 0; }
+  .topic-strip > a:nth-last-child(-n+2) { border-bottom: 0; }
+  .topic-strip > a:first-child { border-left: 0; }
+  .topic-strip > a small { display: block; font-size: 10px; margin-bottom: 3px; }
+
+  main.shell { padding-top: 16px !important; }
+  .editorial-hero { padding-top: 24px; }
+  .editorial-item { grid-template-columns: 35px minmax(0, 1fr); gap: 10px; }
+  .section-heading { align-items: center; }
+  .section-heading h2 { font-size: clamp(23px, 5.7vw, 32px); text-align: center; line-height: 1.3; }
+  .section-heading small { flex: 0 0 auto; }
+  .search-section, #search, .pagefind-ui { min-width: 0; max-width: 100%; }
+  .pagefind-ui__search-input { min-width: 0; width: 100%; }
+}
+
+@media (max-width: 370px) {
+  .masthead .brand-image { width: min(55vw, 204px); }
+  .mainnav .navlinks > a { padding-inline: 10px; }
+  .topic-strip > a { padding-inline: 11px; }
+  .section-heading h2 { font-size: 22px; }
+  .section-heading small { font-size: 8px; }
+}
