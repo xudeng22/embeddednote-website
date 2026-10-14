@@ -5,7 +5,7 @@ description: 今年 7 月 WAIC 上横着走过展台、8 月在 WRC 上跟着热
   KingKongRobotics/jumper，Apache-2.0。跟多数"开源机器人"只丢一个模型和几段视频不一样，这个仓库把训练、仿真、导出、部署到板端
   NPU 的整条链路都放了出来，另外摆了 100 台工程机当比赛奖品——你教它一个新动作，机器归你。
 locale: zh
-translationKey: embeddednote-launch
+translationKey: github-22-jumper
 pubDate: 2026-10-13
 category: open-source
 tags:
