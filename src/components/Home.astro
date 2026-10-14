@@ -11,15 +11,17 @@ const urlFor = (a) => `/${lang}/articles/${a.id.split('/').slice(1).join('/')}/`
 ---
 <Base lang={lang} title={t.title} description={t.description} translations={{en:'/en/',zh:'/zh/'}}>
   <section class="editorial-hero">
-    <div>
+    <div class="hero-copy">
       <p class="eyebrow">EMBEDDED NOTES · ENGINEERING JOURNAL</p>
       <h1>{t.title}</h1>
       <p>{t.description}</p>
       <a class="cta" href="#latest">{t.latest} ↓</a>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      <div class="chip-art"><span>01</span><span>MCU</span><b></b><span>SoC</span><span>EDA</span></div>
-      <small>工程 / ENGINEERING</small>
+    <div class="hero-visual">
+      <img src="/images/embeddednote-hero.webp"
+        alt={lang === 'zh' ? '嵌入式微控制器与PCB电路板' : 'Microcontroller and PCB circuit board'}
+        width="1200" height="900" loading="eager" fetchpriority="high" decoding="async" />
+      <small>ENGINEERING / EMBEDDED SYSTEMS</small>
     </div>
   </section>
   <section class="topic-strip" aria-label={lang === 'en' ? 'Technical topics' : '技术专题'}>
@@ -30,7 +32,16 @@ const urlFor = (a) => `/${lang}/articles/${a.id.split('/').slice(1).join('/')}/`
     <div class="section-heading"><small>LATEST / {new Date().getFullYear()}</small><h2>{t.latest}</h2><small>{String(articles.length).padStart(2,'0')} ARTICLES</small></div>
     {articles.length ? articles.map((a,i) => <article class="editorial-item">
       <span class="item-number">{String(i+1).padStart(2,'0')}</span>
-      <div><p class="meta">{a.data.category.toUpperCase()} · {a.data.pubDate.toISOString().slice(0,10)}</p><h3><a href={urlFor(a)}>{a.data.title}</a></h3><p>{a.data.description}</p></div>
+      <div class="item-copy"><p class="meta">{a.data.category.toUpperCase()} · {a.data.pubDate.toISOString().slice(0,10)}</p><h3><a href={urlFor(a)}>{a.data.title}</a></h3><p>{a.data.description}</p></div>
     </article>) : <p>{t.empty}</p>}
   </section>
 </Base>
+<style>
+.editorial-hero > * {min-width:0}
+.hero-visual{width:100%;min-width:0;align-self:center}
+.hero-visual img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border:1px solid #cfc8bc}
+.hero-visual small{display:block;text-align:right;margin-top:12px;color:#b94530;font:10px system-ui,sans-serif;letter-spacing:.06em}
+.item-copy{min-width:0;overflow-wrap:anywhere}
+.item-copy h3{overflow-wrap:anywhere;word-break:normal;line-height:1.4}
+@media(max-width:700px){.editorial-hero{grid-template-columns:minmax(0,1fr)}.hero-visual{display:block;max-width:480px;margin:0 auto}.hero-copy h1{overflow-wrap:anywhere}}
+</style>
