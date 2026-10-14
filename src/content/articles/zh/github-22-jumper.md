@@ -26,7 +26,7 @@ seoDescription: 硬核开源项目之——22 自由度的螃蟹机器人 Jumper
 
 **Github地址：**
 
-https://github.com/KingKongRobotics/jumper
+[https://github.com/KingKongRobotics/jumper](https://github.com/KingKongRobotics/jumper)
 
 主控用的是瑞芯微 RK3576，4×Cortex-A72 @ 2.2 GHz 加 4×Cortex-A53 @ 2.0 GHz，6 TOPS INT8 的 NPU，4 GB 内存配 64 GB 存储，系统上跑 Ubuntu 22.04.5 加 6.1.99 的 PREEMPT_RT 实时内核。22 个关节全用金钢自研的触觉舵机，双磁编码器全闭环、24 位分辨率，一个读电机输出端、一个读减速之后的关节端，还能回传力矩——这是它能做出跳跃动作的前提，只看电机端编码器，控制器压根不知道腿有没有到位。感知这边是 6 轴 IMU、一颗 dToF 深度传感器（54×42 阵列，每帧 2268 个测距点，量程 5 cm 到 8.8 m）、500 万像素对角视场 162.2° 的相机；交互是两块 0.9 英寸圆形 TFT 做的眼睛，加双扬声器和 4 颗 MEMS 麦克风。供电是 25.2 V / 3000 mAh 可拆卸电池，约两小时续航，USB-C PD 3.1 最高 140 W 回血，对一台 1.8 kg 的机器来说相当奢侈。
 
