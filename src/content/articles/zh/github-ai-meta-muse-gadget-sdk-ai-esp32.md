@@ -1,10 +1,6 @@
 ---
 title: GitHub 上的 AI 硬件项目：Meta 开源的 Muse Gadget SDK，把 AI 智能体塞进一块 ESP32
-description: Meta 这两天在 GitHub 上开源了一个叫 Muse Gadget SDK 的项目，仓库地址是
-  facebookincubator/muse-gadget-sdk，Apache 2.0 许可，发布不到 48 小时 Star 就破了
-  1000。一开始我以为又是一个给 ESP32
-  接大模型的方案，毕竟前面已经在这块板上折腾过小智，录音、识别、生成回答、播放，这条链路并不陌生。但把源码拉下来翻了一遍之后发现，它和小智 AI、Home
-  Assistant Voice PE 这些项目走的并不是同一条路线。
+description: "Meta Muse Gadget SDK 为 ESP32 和 Linux 设备提供 AI 交互反馈。本文介绍开发板支持、交互状态与嵌入式实现思路。"
 locale: zh
 translationKey: github-ai-meta-muse-gadget-sdk-ai-esp32
 pubDate: 2026-10-12
@@ -16,7 +12,7 @@ draft: false
 ---
 Meta 这两天在 GitHub 上开源了一个叫 Muse Gadget SDK 的项目，仓库地址是 facebookincubator/muse-gadget-sdk，Apache 2.0 许可，发布不到 48 小时 Star 就破了 1000。一开始我以为又是一个给 ESP32 接大模型的方案，毕竟前面已经在这块板上折腾过小智，录音、识别、生成回答、播放，这条链路并不陌生。但把源码拉下来翻了一遍之后发现，它和小智 AI、Home Assistant Voice PE 这些项目走的并不是同一条路线。
 
-![image.png](/uploads/image-9.png)
+![Meta Muse Gadget SDK——项目架构和交互概览配图](/uploads/image-9.png)
 
 很多项目关注的是怎么把语音接入大模型，而 Muse 更关注的是怎么让一个桌面 AI 终端看起来像一个有状态、有情绪反馈的设备。它不是在等回答回来以后才动一下，录音时有电平反馈，等待时有对应的动作，回复时让出字幕空间，结束后还有短暂的动作反馈。对放在桌上的设备来说，让人知道“它现在在干什么”，是很实际的一件事。
 
@@ -28,9 +24,9 @@ Meta 这两天在 GitHub 上开源了一个叫 Muse Gadget SDK 的项目，仓�
 
 硬件层面，ESP32 这条路子支持的开发板已经有 11 款。官方首推的是乐鑫的 ESP32-C5 DevKitC-1，还有 M5Stack StickS3、微雪的 ESP32-S3-Touch-AMOLED-1.75C、Seeed 的电子纸显示屏等等。
 
-![image.png](/uploads/image-10.png)
+![Meta Muse Gadget SDK——ESP32 开发板支持相关配图一](/uploads/image-10.png)
 
-![image.png](/uploads/image-11.png)
+![Meta Muse Gadget SDK——ESP32 开发板支持相关配图二](/uploads/image-11.png)
 
 **ESP32 和 Linux 两条线，能力面不太一样。** ESP32 Device SDK 面向的是低成本、低功耗的微控制器场景，接上屏幕、麦克风、喇叭或者传感器，就变成了 Muse 的一个物理外设。Linux Device SDK 面向树莓派这类单板计算机，能跑 shell 命令、读写文件、检查设备健康状态，开发者还可以通过自定义命令把系统管理或者 Home Assistant 的操作交给 Muse 来干。
 
