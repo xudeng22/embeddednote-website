@@ -8,7 +8,7 @@ def check(cond,name):
 pkg=json.loads((root/'package.json').read_text())
 check(pkg['scripts'].get('build')=='astro build && pagefind --site dist','Astro + Pagefind build command')
 check(pkg.get('type')=='module','Node ESM package')
-for p in ('astro.config.mjs','src/content.config.ts','src/pages/index.astro','src/layouts/Base.astro','src/pages/rss.xml.js','src/components/Giscus.astro','.github/workflows/verify.yml','scripts/check-dist.mjs'):
+for p in ('astro.config.mjs','src/content.config.ts','src/pages/index.astro','src/layouts/Base.astro','src/pages/rss.xml.js','src/components/GiscusComments.astro','.github/workflows/verify.yml','scripts/check-dist.mjs'):
  check((root/p).is_file(),'File '+p)
 ct=(root/'src/content.config.ts').read_text()
 for cat in ('open-source','mcu-soc','hardware','connectivity','display','tools'):

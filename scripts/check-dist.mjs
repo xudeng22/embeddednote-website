@@ -1,167 +1,68 @@
-
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const root = 'dist';
 const languages = ['en', 'zh'];
-
-const categories = [
-  'open-source',
-  'mcu-soc',
-  'hardware',
-  'connectivity',
-  'display',
-  'tools'
-];
-
+const categories = ['open-source', 'mcu-soc', 'hardware', 'connectivity', 'display', 'tools'];
 let failures = 0;
 let checks = 0;
 
-function check(condition, description) {
+function check(condition, label) {
   checks++;
-  console.log(`${condition ? 'PASS' : 'FAIL'} ${description}`);
-
+  console.log(`${condition ? 'PASS' : 'FAIL'} ${label}`);
   if (!condition) failures++;
 }
+function has(path) { return existsSync(join(root, path)); }
+function read(path) { return readFileSync(join(root, path), 'utf8'); }
 
-function fileExists(path) {
-  return existsSync(join(root, path));
+for (const file of ['index.html', 'rss.xml', 'robots.txt', 'sitemap-index.xml',
+  '_redirects', 'pagefind/pagefind.js', 'pagefind/pagefind-ui.js', 'pagefind/pagefind-ui.css']) {
+  check(has(file), `Base file: ${file}`);
 }
 
-function readFile(path) {
-  return readFileSync(join(root, path), 'utf8');
-}
-
-// 1. 基础资源
-const baseFiles = [
-  'index.html',
-  'rss.xml',
-  'robots.txt',
-  'sitemap-index.xml',
-  '_redirects',
-  'pagefind/pagefind.js',
-  'pagefind/pagefind-ui.js',
-  'pagefind/pagefind-ui.css'
-];
-
-for (const file of baseFiles) {
-  check(fileExists(file), `Base file: ${file}`);
-}
-
-// 2. 中英文首页、关于、文章和分类
 for (const lang of languages) {
-  const paths = [
-    `${lang}/index.html`,
-    `${lang}/about/index.html`,
-    `${lang}/articles/embeddednote-launch/index.html`,
-    ...categories.map(
-      category => `${lang}/category/${category}/index.html`
-    )
-  ];
+  const home = `${lang}/index.html`;
+  const about = `${lang}/about/index.html`;
+  const oldWelcome = `${lang}/articles/embeddednote-launch/index.html`;
+  for (const path of [home, about, ...categories.map(c => `${lang}/category/${c}/index.html`)]) {
+    check(has(path), `Route: ${path}`);
+  }
+  check(!has(oldWelcome), `Old welcome article removed: ${lang}`);
+  if (has(home)) {
+    const html = read(home);
+    check(new RegExp(`<html[^>]*lang=["']${lang === 'zh' ? 'zh-CN' : 'en'}["']`, 'i').test(html), `${lang} homepage language`);
+    check(html.includes('rel="canonical"'), `${lang} homepage canonical`);
+    check(!html.includes(`/articles/embeddednote-launch/`), `${lang} homepage without welcome article`);
+    for (const c of ['display', 'connectivity']) {
+      check(html.includes(`/${lang}/category/${c}/`), `${lang} homepage category ${c}`);
+    }
+  }
+  if (has(about)) {
+    const html = read(about);
+    const other = lang === 'en' ? 'zh' : 'en';
+    check(html.includes('rel="canonical"') && html.includes(`/${lang}/about/`), `${lang} about canonical`);
+    check(html.includes('hreflang=') && html.includes(`/${other}/about/`), `${lang} about alternate`);
+    check(html.includes('data-pagefind-body'), `${lang} about indexed content`);
+  }
+  const articleDir = join(root, lang, 'articles');
+  check(existsSync(articleDir) && readdirSync(articleDir, {withFileTypes: true}).some(e => e.isDirectory()),
+    `${lang} technical articles remain`);
+}
 
-  for (const path of paths) {
-    check(fileExists(path), `Route: ${path}`);
+if (has('rss.xml')) {
+  check(!read('rss.xml').includes('/articles/embeddednote-launch/'), 'Welcome article removed from RSS');
+}
+if (has('_redirects')) {
+  const rules = read('_redirects');
+  check(/^\/\s+\/en\/\s+302\s*$/m.test(rules), 'Root default language redirect');
+  for (const [source, target] of [
+    ['/en/articles/embeddednote-launch/', '/en/about/'],
+    ['/zh/articles/embeddednote-launch/', '/zh/about/'],
+    ['/articles/embeddednote-launch/', '/zh/about/']
+  ]) {
+    check(rules.split(/\r?\n/).some(line => line.trim() === `${source} ${target} 301`), `301: ${source}`);
   }
 }
 
-// 3. 检查首页语言和 SEO
-for (const lang of languages) {
-  const path = `${lang}/index.html`;
-
-  if (!fileExists(path)) continue;
-
-  const html = readFile(path);
-  const expectedLang = lang === 'zh' ? 'zh-CN' : 'en';
-
-
-
-  check(
-    new RegExp(`<html[^>]*lang=["']${expectedLang}["']`, 'i')
-      .test(html),
-    `${lang} homepage language`
-  );
-
-  check(
-    html.includes('rel="canonical"'),
-    `${lang} homepage canonical`
-  );
-
-  check(
-    html.includes(`/${lang}/category/display/`),
-    `${lang} display category link`
-  );
-
-  check(
-    html.includes(`/${lang}/category/connectivity/`),
-    `${lang} connectivity category link`
-  );
-}
-
- // 4. 双语文章和独立 SEO
-for (const lang of languages) {
-  const path =
-    `${lang}/articles/embeddednote-launch/index.html`;
-
-  if (!fileExists(path)) continue;
-
-  const html = readFile(path);
-  const otherLang = lang === 'en' ? 'zh' : 'en';
-
-  const alternateLinks =
-    html.match(/<link\b[^>]*hreflang=[^>]*>/gi) ?? [];
-
-  console.log(
-    `DEBUG ${lang} article alternate links:`,
-    alternateLinks
-  );
-
-  check(
-    html.includes('rel="canonical"') &&
-    html.includes(`/${lang}/articles/embeddednote-launch/`),
-    `${lang} article canonical`
-  );
-
-  check(
-    html.includes('hreflang=') &&
-    html.includes(`/${otherLang}/articles/embeddednote-launch/`),
-    `${lang} article translation reference`
-  );
-}
-
-
-// 5. RSS
-if (fileExists('rss.xml')) {
-  const rss = readFile('rss.xml');
-
-  check(
-    rss.includes('/en/articles/embeddednote-launch/'),
-    'English article in RSS'
-  );
-
-  check(
-    rss.includes('/zh/articles/embeddednote-launch/'),
-    'Chinese article in RSS'
-  );
-}
-
-// 6. Cloudflare 根路径重定向
-if (fileExists('_redirects')) {
-  const redirects = readFile('_redirects');
-
-  check(
-    /^\/\s+\/en\/\s+302\s*$/m.test(redirects),
-    'Default language redirects to /en/'
-  );
-}
-
-// 7. 总结
-console.log(`\nTotal checks: ${checks}`);
-console.log(`Passed: ${checks - failures}`);
-console.log(`Failed: ${failures}`);
-
-if (failures > 0) {
-  console.error('V2.1 build validation failed.');
-  process.exitCode = 1;
-} else {
-  console.log('V2.1 bilingual site validation passed.');
-}
+console.log(`\nTotal checks: ${checks}; Passed: ${checks - failures}; Failed: ${failures}`);
+if (failures) process.exitCode = 1;
