@@ -62,3 +62,23 @@ content:
       - {name: description, label: 描述, type: text, required: true}
       - {name: locale, label: 语言, type: string, default: zh, required: true}
       - {name: body, label: 页面正文, type: rich-text}
+  - name: privacy_en
+    label: Privacy Policy (English)
+    type: file
+    path: src/content/privacy/en.md
+    format: yaml-frontmatter
+    fields:
+      - {name: title, label: Title, type: string, required: true}
+      - {name: description, label: Description, type: text, required: true}
+      - {name: locale, label: Language, type: string, default: en, required: true}
+      - {name: body, label: Policy Content, type: rich-text}
+  - name: privacy_zh
+    label: 隐私政策（中文）
+    type: file
+    path: src/content/privacy/zh.md
+    format: yaml-frontmatter
+    fields:
+      - {name: title, label: 标题, type: string, required: true}
+      - {name: description, label: 描述, type: text, required: true}
+      - {name: locale, label: 语言, type: string, default: zh, required: true}
+      - {name: body, label: 政策正文, type: rich-text}

@@ -17,4 +17,8 @@ const about = defineCollection({
   loader: glob({pattern:'*.md',base:'./src/content/about'}),
   schema: z.object({title:z.string(),description:z.string(),locale:z.enum(['en','zh'])})
 });
-export const collections = {articles,about};
+const privacy = defineCollection({
+  loader: glob({pattern:'*.md',base:'./src/content/privacy'}),
+  schema: z.object({title:z.string(),description:z.string(),locale:z.enum(['en','zh'])})
+});
+export const collections = {articles,about,privacy};

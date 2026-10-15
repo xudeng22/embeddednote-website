@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import {getCollection, render} from 'astro:content';
+export async function getStaticPaths() {
+  const policies = await getCollection('privacy');
+  return policies.map(entry => ({params:{lang:entry.data.locale},props:{entry}}));
+}
+const {entry} = Astro.props;
+const lang = entry.data.locale;
+const {Content} = await render(entry);
+---
+<Base lang={lang} title={entry.data.title} description={entry.data.description} translations={{en:'/en/privacy/', zh:'/zh/privacy/'}}>
+  <article class="prose about-prose" data-pagefind-body>
+    <Content />
+  </article>
+</Base>

@@ -23,15 +23,24 @@ for (const file of ['index.html', 'rss.xml', 'robots.txt', 'sitemap-index.xml',
 for (const lang of languages) {
   const home = `${lang}/index.html`;
   const about = `${lang}/about/index.html`;
+  const privacy = `${lang}/privacy/index.html`;
   const oldWelcome = `${lang}/articles/embeddednote-launch/index.html`;
-  for (const path of [home, about, ...categories.map(c => `${lang}/category/${c}/index.html`)]) {
+  for (const path of [home, about, privacy, ...categories.map(c => `${lang}/category/${c}/index.html`)]) {
     check(has(path), `Route: ${path}`);
+  }
+  if (has(privacy)) {
+    const htmlPolicy = read(privacy);
+    const otherLang = lang === 'en' ? 'zh' : 'en';
+    check(htmlPolicy.includes('rel="canonical"') && htmlPolicy.includes(`/${lang}/privacy/`), `${lang} privacy canonical`);
+    check(htmlPolicy.includes('hreflang=') && htmlPolicy.includes(`/${otherLang}/privacy/`), `${lang} privacy language alternate`);
+    check(htmlPolicy.includes('data-pagefind-body'), `${lang} privacy indexed content`);
   }
   check(!has(oldWelcome), `Old welcome article removed: ${lang}`);
   if (has(home)) {
     const html = read(home);
     check(new RegExp(`<html[^>]*lang=["']${lang === 'zh' ? 'zh-CN' : 'en'}["']`, 'i').test(html), `${lang} homepage language`);
     check(html.includes('rel="canonical"'), `${lang} homepage canonical`);
+    check(html.includes(`/${lang}/privacy/`), `${lang} privacy footer link`);
     check(!html.includes(`/articles/embeddednote-launch/`), `${lang} homepage without welcome article`);
     for (const c of ['display', 'connectivity']) {
       check(html.includes(`/${lang}/category/${c}/`), `${lang} homepage category ${c}`);

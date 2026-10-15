@@ -92,7 +92,7 @@ const siteIdentity = {
     </header>
     <main class="shell"><slot /></main>
     <footer>
-      <div class="shell">© {new Date().getFullYear()} EmbeddedNote · <a href={`/${lang}/about/`}>{dict.about}</a></div>
+      <div class="shell">© {new Date().getFullYear()} EmbeddedNote · <a href={`/${lang}/about/`}>{dict.about}</a> · <a href={`/${lang}/privacy/`}>{lang === 'zh' ? '隐私政策' : 'Privacy Policy'}</a></div>
     </footer>
   </body>
 </html>
