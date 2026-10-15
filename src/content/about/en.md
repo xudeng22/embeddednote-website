@@ -13,6 +13,6 @@ We examine projects from schematics and source code to real-world implementation
 
 ## Editorial and contact
 
-Edit this page using Pages CMS to add your editorial policy, contact address, and partnership information. Do not publish private contact details without reviewing them.
+Objective, neutral, and based on the principle of project reproducibility. Feel free to contact us.
 
-Email  xden2019@gmail.com
+Email  [xden2019@gmail.com](mailto:xden2019@gmail.com)
