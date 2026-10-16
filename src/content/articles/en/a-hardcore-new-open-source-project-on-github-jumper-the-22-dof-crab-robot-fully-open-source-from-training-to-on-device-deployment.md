@@ -13,13 +13,13 @@ draft: false
 ---
 Remember that little red crab robot that walked sideways across the exhibition floor at WAIC in July, then danced to trending music at WRC in August and even used its claw to pick up a refrigerator magnet and hand it to a visitor? On September 30, its developers open-sourced the entire software stack. The repository is KingKongRobotics/jumper, licensed under Apache-2.0. Unlike most "open-source robots" that release little more than a model and a few videos, this repository provides the complete pipeline, from training and simulation to model export and deployment on the onboard NPU. The team has also put up 100 engineering prototypes as competition prizes — teach Jumper a new move, and you get to keep the robot.
 
-![Jumper open-source robot — introductory project image](/uploads/image-12.png)
+![Jumper open-source robot — introductory project image](/uploads/image-12.webp)
 
 Almost every report describes it as a hexapod, but open the MuJoCo model file `assets/jumper/jumper.xml` in the repository and count the legs: it actually has only four walking legs. Its 22 degrees of freedom break down as follows: the two front claws each have 5 DoF (shoulder, upper arm, forearm, palm, and finger), while the four walking legs — two on each side — each have 3 DoF (hip, thigh, and lower leg). That gives 2 × 5 + 4 × 3 = 22.
 
 The locomotion and jumping policies observe and control only 20 of those joints, excluding the two finger joints at indices 4 and 9 in the actuator ordering. The deployment documentation dedicates an entire diagram to this detail. If you map joints by index rather than by name, every joint mapping from the fifth joint onward will be wrong, and no error will be reported. This is exactly the kind of problem that only shows up once you deploy the policy to the physical robot.
 
-![Jumper robot — figure accompanying the 22-DoF joint layout discussion](/uploads/image-14.png)
+![Jumper robot — figure accompanying the 22-DoF joint layout discussion](/uploads/image-14.webp)
 
 GitHub Repository:
 
@@ -27,7 +27,7 @@ GitHub Repository:
 
 The main controller is built around Rockchip's RK3576, featuring four Cortex-A72 cores running at 2.2 GHz, four Cortex-A53 cores at 2.0 GHz, and a 6 TOPS INT8 NPU. It comes with 4 GB of RAM and 64 GB of storage, running Ubuntu 22.04.5 with a Linux 6.1.99 PREEMPT_RT real-time kernel.
 
-![Jumper robot — figure accompanying RK3576 hardware specifications](/uploads/image-15.png)
+![Jumper robot — figure accompanying RK3576 hardware specifications](/uploads/image-15.webp)
 
 All 22 joints use KingKong Robotics' proprietary tactile servos, featuring dual magnetic encoders, fully closed-loop control, and 24-bit resolution. One encoder measures the motor output, while the other measures the joint position after the gearbox. The servos can also report torque feedback. This is what makes jumping possible: with only a motor-side encoder, the controller cannot actually tell whether the leg has reached its target position.
 
@@ -45,7 +45,7 @@ The documentation highlights two configuration errors that were caught and rejec
 
 Second, the joystick command range was set to 0.80 m/s, even though the policy had only been trained on commands up to 0.50 m/s. Pushing the joystick to its maximum was effectively asking the policy to respond to an input it had never encountered during training. The resulting behavior looked like a policy that simply couldn't move fast enough, when the real problem was a misleading configuration.
 
-![Jumper robot — figure accompanying the controller and deployment discussion](/uploads/image-16.png)
+![Jumper robot — figure accompanying the controller and deployment discussion](/uploads/image-16.webp)
 
 Both values are now read directly from the contract. On the device side, any contract missing `joint_limits` is rejected outright. The team would rather have an export fail than allow a nonfunctional policy to reach the robot.
 
@@ -67,6 +67,6 @@ Every stage of the pipeline has its own validation checks, but the final hardwar
 
 The repository's README suggests a rather unconventional workflow: drop the entire project into an AI coding assistant and describe what you want in a single sentence. For example, "Design a warm sand-colored ranger appearance for Jumper and export it as a .skin," or "Train a stable tripod gait and package it as an .app."
 
-![Jumper robot — figure accompanying AI-assisted development](/uploads/image-29.png)
+![Jumper robot — figure accompanying AI-assisted development](/uploads/image-29.webp)
 
 From there, the AI assistant can follow `AGENTS.md` and the accompanying skills to work through the entire pipeline, from start to finish.

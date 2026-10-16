@@ -1,6 +1,7 @@
 
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import embeddednoteImages from './scripts/rehype-embeddednote-images.mjs';
 
 export default defineConfig({
   site: 'https://embeddednote.com',
@@ -8,6 +9,7 @@ export default defineConfig({
   trailingSlash: 'always',
 
   integrations: [sitemap()],
+  markdown: { rehypePlugins: [embeddednoteImages] },
 
   i18n: {
     locales: ['en', 'zh'],

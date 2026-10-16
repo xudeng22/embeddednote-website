@@ -3,7 +3,7 @@ const {lang='en'} = Astro.props;
 const placeholder = lang === 'zh' ? '搜索芯片型号、协议、项目或关键词' : 'Search chips, protocols, projects or keywords';
 ---
 <section class="search-section" role="search" aria-label={lang === 'zh' ? '站内全文检索' : 'Full-text search'}>
-  <div id="search" data-placeholder={placeholder}></div>
+  <div id="search" data-placeholder={placeholder} style="min-height:76px"></div>
 </section>
 <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
 <script is:inline src="/pagefind/pagefind-ui.js"></script>

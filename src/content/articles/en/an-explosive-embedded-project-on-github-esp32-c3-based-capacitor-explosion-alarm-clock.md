@@ -21,13 +21,13 @@ GitHub Repository:
 
 Exploding electrolytic capacitors can produce high-velocity fragments, hot materials, and irritating fumes. This article is intended to introduce an open-source engineering project. Building this device or conducting similar experiments indoors or near a bed is strongly discouraged.
 
-![ESP32-C3 capacitor alarm clock — introductory project figure](/uploads/image-18.png)
+![ESP32-C3 capacitor alarm clock — introductory project figure](/uploads/image-18.webp)
 
 Putting the dangerous gimmick aside, this is actually a surprisingly complete project. It includes a full PCB design, bill of materials (BOM), 3D enclosure models, PlatformIO firmware, and a web-based configuration interface. The repository currently has around 117 GitHub stars.
 
 The entire device measures just 72 × 74 × 36 mm. On the front, there's a 128 × 64 OLED display and two buttons, while the top has three capacitor slots. Inside is a three-channel, high-side switching circuit controlled by an ESP32-C3. From the outside, it looks like a perfectly ordinary little alarm clock. Remove the cover, though, and the relays, current-limiting resistors, and wide PCB traces make it immediately clear that this is no ordinary clock.
 
-![ESP32-C3 capacitor alarm clock — figure accompanying enclosure design](/uploads/image-20.png)
+![ESP32-C3 capacitor alarm clock — figure accompanying enclosure design](/uploads/image-20.webp)
 
 The front panel features only an OLED display and two buttons, giving the device a remarkably understated appearance.
 
@@ -37,7 +37,7 @@ The main controller is an ESP32-C3-MINI-1-N4, featuring a RISC-V core and built-
 
 The display is an X096-2864KSWPG01-H30 OLED module with an SSD1315-compatible controller and a resolution of 128 × 64 pixels. Users can navigate the settings using the left and right buttons and combinations of both buttons. They can set the alarm time, recurrence schedule, and capacitor slot to be used for the next alarm. Once the device is connected to the local network, its configuration page can also be accessed through its IP address.
 
-![ESP32-C3 capacitor alarm clock — figure accompanying system configuration](/uploads/image-21.png)
+![ESP32-C3 capacitor alarm clock — figure accompanying system configuration](/uploads/image-21.webp)
 
 The really unusual part is the three relay channels. According to the BOM, the project uses three Omron G5NB-1A-E DC12 relays. Each channel also includes a BC817 transistor, an indicator LED, a Schottky diode, and a high-power series resistor.
 
@@ -45,7 +45,7 @@ The relays separate the ESP32-C3's low-voltage control logic from the actuator s
 
 Power can be supplied through USB-C or a 12–15 V DC barrel connector. Onboard linear regulators then generate the 12 V and 3.3 V supply rails. The creator also acknowledges that stepping down a relatively high input voltage using linear regulators generates considerable heat. If the hardware were redesigned, a buck DC-DC converter would be a more sensible choice.
 
-![ESP32-C3 capacitor alarm clock — figure accompanying power design](/uploads/image-22.png)
+![ESP32-C3 capacitor alarm clock — figure accompanying power design](/uploads/image-22.webp)
 
 Main Components
 
@@ -66,7 +66,7 @@ The firmware is built using PlatformIO. Early in the project, while the develope
 
 After powering on and connecting to Wi-Fi, the device synchronizes its clock through NTP and displays the current time on the OLED. The two buttons handle menu navigation and confirmation through button combinations, while the web server provides another, more intuitive configuration interface.
 
-![ESP32-C3 capacitor alarm clock — figure accompanying the user controls](/uploads/image-23.png)
+![ESP32-C3 capacitor alarm clock — figure accompanying the user controls](/uploads/image-23.webp)
 
 From a software architecture perspective, this isn't particularly different from an ordinary internet-connected clock. The time service handles synchronization, the configuration module stores alarm schedules, the display task updates the user interface, and the trigger module selects an output channel when the specified conditions are met.
 
@@ -80,7 +80,7 @@ If someone wanted to turn this into a safe version, they could retain the OLED, 
 
 This approach would preserve the most interesting parts of the project's software architecture without requiring anyone to deal with electrolyte, flying fragments, or irritating fumes inside their room.
 
-![ESP32-C3 capacitor alarm clock — figure accompanying firmware discussion](/uploads/image-24.png)
+![ESP32-C3 capacitor alarm clock — figure accompanying firmware discussion](/uploads/image-24.webp)
 
 # The PCB and Mechanical Design Are Where This Joke Gets Surprisingly Serious
 
@@ -88,7 +88,7 @@ The repository organizes its KiCad project into hierarchical schematics covering
 
 Based on the general component cost estimate, the PCB costs approximately $2, while the onboard components cost around $20. Add a few screws and miscellaneous consumables, and the overall cost is still fairly reasonable.
 
-![ESP32-C3 capacitor alarm clock — figure accompanying enclosure construction](/uploads/image-25.png)
+![ESP32-C3 capacitor alarm clock — figure accompanying enclosure construction](/uploads/image-25.webp)
 
 The enclosure consists of an upper and lower shell. Three openings on the top correspond to the capacitor slots, while the OLED and buttons are mounted on the front panel. The PCB occupies almost all of the available internal space.
 
@@ -100,5 +100,5 @@ As for the loud bang that made this project famous, watching the demonstration i
 
 There are plenty of ways to wake someone up. There's really no reason for an alarm clock to double as a fire drill.
 
-![ESP32-C3 capacitor alarm clock — final project reference image](/uploads/image-28.png)
+![ESP32-C3 capacitor alarm clock — final project reference image](/uploads/image-28.webp)
 
