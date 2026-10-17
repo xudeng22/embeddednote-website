@@ -21,7 +21,7 @@ seoDescription: Machdyne FERRIT 采用 FERRIT-CY 控制板、FERRIT-M8 存储卡
 
 今天的存储设备动辄以 TB 计算，但 Machdyne 的 **FERRIT** 走的是另一条路线：它把总容量控制在几百 MB，却把长期保存数据作为设计重点。项目采用 **F-RAM（铁电随机存取存储器）**，官方提出了**最长 200 年数据保持**的目标。
 
-需要先纠正原稿标题中的一个数字：FERRIT 的目标上限是 **256MB**，并非 250MB。这样的容量不适合放视频，但保存校准记录、设备证书、历史档案或少量重要文件仍然有实际意义。
+FERRIT 的目标容量最高为 **256MB**。这样的容量不适合放视频，但保存校准记录、设备证书、历史档案或少量重要文件仍然有实际意义。
 
 ![FERRIT 模块化数据存档设备](/uploads/ferrit/ferrit-01.webp)
 
@@ -45,7 +45,7 @@ FERRIT-CY 控制板以 **RP2040** 为核心，通过 USB Full-Speed 与计算机
 
 ![FERRIT-CY RP2040 控制卡](/uploads/ferrit/ferrit-03.webp)
 
-存储卡采用共享的 QSPI 时钟和数据总线，再利用 **3-to-8 译码器**选择 F-RAM 芯片。原稿所展示的 **FERRIT-M8 实物卡包含 8 颗 F-RAM**；项目 README 另列出单卡最多 **16 颗芯片**的寻址能力，这对应双面卡扩展设计，两者不是同一个概念。
+存储卡采用共享的 QSPI 时钟和数据总线，再利用 **3-to-8 译码器**选择 F-RAM 芯片。**FERRIT-M8 实物卡包含 8 颗 F-RAM**；项目 README 另列出单卡最多 **16 颗芯片**的寻址能力，这对应双面卡扩展设计，两者不是同一个概念。
 
 ![FERRIT-M8 存储卡原理图](/uploads/ferrit/ferrit-04.webp)
 

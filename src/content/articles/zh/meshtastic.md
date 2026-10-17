@@ -33,7 +33,7 @@ seoDescription: 了解 Meshtastic LoRa Mesh 通信架构、端到端加密、节
 - **定位选项**：带 GNSS 的设备可在配置允许时发送位置。
 - **灵活供电**：手持节点可以使用电池，固定节点还可以结合 USB 或太阳能供电。
 
-原稿提到 MartinR7 与 alleg 曾达到 **331 公里**的通信记录。这样的纪录依赖特殊视距和无线条件，不能当作普通手持设备的日常通信距离。
+MartinR7 与 alleg 曾创下 **331 公里**的通信记录。这样的纪录依赖特殊视距和无线条件，不能当作普通手持设备的日常通信距离。
 
 项目入口：[Meshtastic GitHub](https://github.com/meshtastic)；[Meshtastic 官网](https://meshtastic.org/)。
 
@@ -43,11 +43,11 @@ Meshtastic 固件运行在兼容的 LoRa 设备上。节点收到需要转发的
 
 手机并不是所有场景下都必需。部分节点可以独立显示和输入消息；没有完整交互界面的节点通常通过 Bluetooth 连接手机，用 iOS 或 Android 应用配置和收发消息。还可以使用 Web 客户端及其他配套工具。
 
-无线频段必须按实际国家或地区设置。**北美常用 902–928MHz，欧洲有 868MHz 等配置**，相关发射功率、占空比和设备认证限制各不相同。原稿提到国内设备可用 470–510MHz，并称无需许可；这一说法不能直接推导为该整个频段在中国大陆均可免许可自由使用。部署前应查询当地无线电主管部门要求及具体设备的核准情况。
+无线频段必须按实际国家或地区设置。**北美常用 902–928MHz，欧洲有 868MHz 等配置**，相关发射功率、占空比和设备认证限制各不相同。在中国大陆，470–510MHz 等频段的使用仍须核对具体无线电管理规定，不能认为整个频段均可免许可自由使用。部署前应查询当地无线电主管部门要求及具体设备的核准情况。
 
 ## 支持的硬件
 
-Meshtastic 生态包含多种现成开发板与便携设备，原稿列出的例子包括：
+Meshtastic 生态包含多种现成开发板与便携设备，常见设备包括：
 
 - RAK Meshtastic Starter Kit（RAK19007 + RAK4631）
 - Seeed Card Tracker T1000-E
@@ -77,9 +77,9 @@ Meshtastic 提供 Android、iOS 和 Web 客户端，生态中也有 Meshtastic U
 
 ## 面向初学者的 GAT562 手持终端
 
-如果只是想体验 LoRa Mesh，购买开发板、焊接外围电路、刷入固件并不一定是每个人都愿意做的准备工作。原稿进一步介绍了 **GAT562 Mesh Trial Tracker**：一款将 LoRa 无线电、天线、电池和显示屏集成在一起的便携设备，目的就是减少装配和设置工作。
+如果只是想体验 LoRa Mesh，购买开发板、焊接外围电路、刷入固件并不一定是每个人都愿意做的准备工作。**GAT562 Mesh Trial Tracker** 则是一款集成了 LoRa 无线电、天线、电池和显示屏，目的是减少装配和设置工作。
 
-该项目在 GitHub 公开了 **PCB Gerber 文件及 BOM**，并以兼容 Meshtastic 软件为目标：[quhyhao/GAT562](https://github.com/quhyhao/GAT562)。下面保留原稿的外观、特性以及参数配图。
+该项目在 GitHub 公开了 **PCB Gerber 文件及 BOM**，并以兼容 Meshtastic 软件为目标：[quhyhao/GAT562](https://github.com/quhyhao/GAT562)。下图展示其外观、特性和主要参数。
 
 ![GAT562 Mesh Trial Tracker 产品图](/uploads/meshtastic/meshtastic-08.webp)
 

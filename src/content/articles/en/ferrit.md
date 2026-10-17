@@ -23,7 +23,7 @@ seoDescription: 'Inside Machdyne FERRIT: removable F-RAM cards, a 16-slot backpl
 
 Most storage products compete on capacity. Machdyne’s **FERRIT** takes a different approach: it trades gigabytes for longevity, using **ferroelectric RAM (F-RAM)** in a modular archival system. The project describes a **data-retention target of up to 200 years**.
 
-The capacity figure is worth getting right. Although the original article’s headline said 250MB, the published design target is **up to 256MB**. That is tiny by modern storage standards, but sufficient for calibration records, device certificates, cryptographic material and small archival datasets.
+The published design target is **up to 256MB**. That is tiny by modern storage standards, but sufficient for calibration records, device certificates, cryptographic material and small archival datasets.
 
 ![Modular FERRIT digital archival hardware](/uploads/ferrit/ferrit-01.webp)
 

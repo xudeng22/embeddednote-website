@@ -29,8 +29,6 @@ Johnson wrote the firmware in **Rust**, using the **Embassy** embedded asynchron
 
 ![Animated FLIP fluid simulation on the badge, 93-frame GIF](/uploads/flip-card/flip-card-01.gif)
 
-*This is the original animated GIF from the source document, with the full animation retained.*
-
 ![flip-card hardware and LED matrix close-up](/uploads/flip-card/flip-card-02.webp)
 
 The code is on GitHub: [Nicholas-L-Johnson/flip-card](https://github.com/Nicholas-L-Johnson/flip-card/).

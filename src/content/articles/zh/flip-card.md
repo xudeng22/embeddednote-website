@@ -27,8 +27,6 @@ seoDescription: 查看 flip-card 开源项目：RP2350、21×22 LED 矩阵、FLI
 
 ![FLIP 流体模拟动画，93 帧 GIF](/uploads/flip-card/flip-card-01.gif)
 
-*上图保留了 Word 原稿中的完整 GIF 动画，可直接在网页端播放。*
-
 ![flip-card PCB 与 LED 矩阵实物](/uploads/flip-card/flip-card-02.webp)
 
 项目源码：[Nicholas-L-Johnson/flip-card](https://github.com/Nicholas-L-Johnson/flip-card/)，作者为 Nick Johnson。
