@@ -1,6 +1,30 @@
 ---
-const {lang='en', translations={}} = Astro.props;
-const other = lang === 'en' ? 'zh' : 'en';
-const href = translations[other] ?? `/${other}/`;
+/** Both languages stay in the same position on every page. */
+const { lang = 'en', translations = {} } = Astro.props;
+const enHref = translations.en ?? (lang === 'en' ? Astro.url.pathname : '/en/');
+const zhHref = translations.zh ?? (lang === 'zh' ? Astro.url.pathname : '/zh/');
 ---
-<a class="language-link" href={href} lang={other} hreflang={other === 'zh' ? 'zh-CN' : 'en'} aria-label={other === 'zh' ? '切换为中文' : 'Switch to English'}>{other === 'zh' ? '中' : 'EN'} / {lang === 'zh' ? '中' : 'EN'}</a>
+<div class="language-link en-language-switch" role="group" aria-label={lang === 'zh' ? '切换语言' : 'Choose language'}>
+  <a href={enHref} lang="en" hreflang="en" aria-current={lang === 'en' ? 'page' : undefined}
+    aria-label="English">EN</a>
+  <span class="en-language-divider" aria-hidden="true">/</span>
+  <a href={zhHref} lang="zh-CN" hreflang="zh-CN" aria-current={lang === 'zh' ? 'page' : undefined}
+    aria-label="中文">中文</a>
+</div>
+<style>
+  .en-language-switch {
+    display:inline-flex; align-items:center; justify-content:center;
+    flex:0 0 auto; gap:8px; min-height:37px;
+    border:1px solid #17211e; border-radius:5px;
+    padding:7px 12px; background:#f3efe6;
+    white-space:nowrap; line-height:1;
+    font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
+    font-size:12px; letter-spacing:.01em;
+  }
+  .en-language-switch a {color:#68726c; text-decoration:none; font-weight:600;}
+  .en-language-switch a[aria-current="page"] {color:#17211e;font-weight:800;}
+  .en-language-switch a:hover {color:#b94530;text-decoration:none;}
+  .en-language-switch a:focus-visible {outline:2px solid #b94530;outline-offset:3px;}
+  .en-language-divider {color:#b5a99d;}
+  @media(max-width:390px){.en-language-switch {gap:6px;padding:7px 9px;font-size:11px;}}
+</style>

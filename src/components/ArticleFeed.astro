@@ -1,0 +1,141 @@
+---
+/**
+ * EmbeddedNote V2.7 — reusable media-led article list.
+ * Reads existing Markdown body images; no frontmatter/CMS migration needed.
+ * Articles with no suitable image get the site's existing PCB photograph.
+ */
+import { channels } from '../i18n/ui';
+
+const {
+  entries = [],
+  lang = 'en',
+  showCategory = true,
+  headingLevel = 3
+} = Astro.props;
+
+const fallbackCover = '/images/embeddednote-hero.webp';
+const dateFormat = new Intl.DateTimeFormat(lang === 'zh' ? 'zh-CN' : 'en-US', {
+  year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC'
+});
+
+function cleanImageSource(raw) {
+  const value = String(raw || '').replace(/&amp;/g, '&').trim();
+  if (!value || /\.(gif|svg)(?:[?#].*)?$/i.test(value)) return null;
+  if (value.startsWith('/') && !value.startsWith('//')) return value;
+  if (/^https?:\/\//i.test(value)) return value;
+  return null;
+}
+
+function firstArticleImage(body) {
+  if (typeof body !== 'string') return fallbackCover;
+  const matches = [];
+  // Standard Markdown images, including optional quoted captions.
+  for (const match of body.matchAll(/!\[[^\]]*\]\(\s*(?:<([^>]+)>|([^\s)]+))(?:\s+['"][^'"]*['"])?\s*\)/g)) {
+    matches.push({ index: match.index ?? 0, url: match[1] || match[2] });
+  }
+  // Also support embedded HTML image tags in imported articles.
+  for (const match of body.matchAll(/<img\b[^>]*\bsrc\s*=\s*['"]([^'"]+)['"][^>]*>/gi)) {
+    matches.push({ index: match.index ?? 0, url: match[1] });
+  }
+  matches.sort((a, b) => a.index - b.index);
+  for (const match of matches) {
+    const url = cleanImageSource(match.url);
+    if (url) return url;
+  }
+  return fallbackCover;
+}
+
+const cards = entries.map(article => {
+  const category = channels.find(c => c.slug === article.data.category);
+  const slug = article.id.split('/').slice(1).join('/');
+  return {
+    title: article.data.title,
+    description: article.data.description,
+    url: `/${lang}/articles/${slug}/`,
+    image: firstArticleImage(article.body),
+    categoryLabel: category?.[lang] ?? article.data.category,
+    dateLabel: dateFormat.format(article.data.pubDate),
+    dateISO: article.data.pubDate.toISOString().slice(0, 10)
+  };
+});
+---
+<div class="en-feed">
+  {cards.map(card => (
+    <article class="en-feed__item">
+      <a class="en-feed__photo" href={card.url} aria-label={card.title}>
+        <img src={card.image} alt={card.title} width="640" height="360" loading="lazy" decoding="async" />
+      </a>
+      <div class="en-feed__copy">
+        {headingLevel === 2
+          ? <h2 class="en-feed__title"><a href={card.url}>{card.title}</a></h2>
+          : <h3 class="en-feed__title"><a href={card.url}>{card.title}</a></h3>}
+        <div class="en-feed__meta">
+          {showCategory && <span class="en-feed__category">{card.categoryLabel}</span>}
+          {showCategory && <span aria-hidden="true" class="en-feed__dot">·</span>}
+          <time datetime={card.dateISO}>{card.dateLabel}</time>
+        </div>
+        <p class="en-feed__excerpt">{card.description}</p>
+      </div>
+    </article>
+  ))}
+</div>
+<style>
+  .en-feed {width:100%; min-width:0;}
+  .en-feed__item {
+    display:grid;
+    grid-template-columns:minmax(215px, 31%) minmax(0, 1fr);
+    align-items:start;
+    gap:clamp(18px, 2.5vw, 30px);
+    padding:28px 0;
+    border-bottom:1px solid #d4cdc2;
+  }
+  .en-feed__item:first-child {padding-top:25px;}
+  .en-feed__photo {
+    display:block; width:100%; min-width:0;
+    overflow:hidden; border-radius:8px;
+    background:#e3dcd0; line-height:0;
+  }
+  .en-feed__photo img {
+    display:block; width:100%; height:auto; aspect-ratio:16/9;
+    object-fit:cover; object-position:center;
+    transition:transform .24s ease;
+  }
+  .en-feed__photo:hover img {transform:scale(1.025);}
+  .en-feed__copy {min-width:0; padding-top:0;}
+  .en-feed__title {
+    margin:0 0 11px;
+    font:700 clamp(21px, 2.15vw, 29px)/1.27 Georgia, "Times New Roman", "Noto Serif SC", serif;
+    letter-spacing:-.012em;
+    overflow-wrap:anywhere;
+  }
+  .en-feed__title a {color:#17211e; text-decoration:none;}
+  .en-feed__title a:hover {color:#b94530;}
+  .en-feed__title a:focus-visible, .en-feed__photo:focus-visible {outline:2px solid #b94530;outline-offset:3px;}
+  .en-feed__meta {
+    display:flex; align-items:center; flex-wrap:wrap;
+    gap:8px; font:500 12px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;
+    color:#6f7772; margin:0 0 12px;
+  }
+  .en-feed__category {color:#b94530; font-weight:700;}
+  .en-feed__dot {color:#afa498;}
+  .en-feed__excerpt {
+    color:#5f6964; font:400 15px/1.72 system-ui,-apple-system,"Segoe UI",sans-serif;
+    margin:0; overflow-wrap:anywhere;
+    display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+  }
+  @media(max-width:760px) {
+    .en-feed__item {grid-template-columns:minmax(170px, 34%) minmax(0, 1fr); gap:17px; padding:22px 0;}
+    .en-feed__title {font-size:clamp(19px, 2.5vw, 24px);}
+    .en-feed__excerpt {font-size:14px; -webkit-line-clamp:2;}
+  }
+  @media(max-width:600px) {
+    .en-feed__item {grid-template-columns:minmax(0,1fr); gap:14px; padding:23px 0 26px;}
+    .en-feed__item:first-child {padding-top:19px;}
+    .en-feed__photo {border-radius:8px;}
+    .en-feed__photo img {aspect-ratio:16/9; max-height:260px;}
+    .en-feed__title {font-size:clamp(21px,5.3vw,26px);line-height:1.33;margin-bottom:10px;}
+    .en-feed__meta {margin-bottom:8px;}
+    .en-feed__excerpt {font-size:14px;line-height:1.65;-webkit-line-clamp:2;}
+  }
+  @media(prefers-reduced-motion:reduce) {.en-feed__photo img {transition:none;} .en-feed__photo:hover img {transform:none;}}
+</style>
