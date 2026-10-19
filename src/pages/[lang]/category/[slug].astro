@@ -1,36 +1,35 @@
 ---
 import Base from '../../../layouts/Base.astro';
-import {channels,ui} from '../../../i18n/ui';
-import {getCollection} from 'astro:content';
+import { channels, ui } from '../../../i18n/ui';
+import { getCollection } from 'astro:content';
+import ArticleFeed from '../../../components/ArticleFeed.astro';
+
 export function getStaticPaths(){
   const langs=['en','zh'];
   const slugs=['open-source','mcu-soc','hardware','connectivity','display','tools'];
   return langs.flatMap(lang=>slugs.map(slug=>({params:{lang,slug}})));
 }
-const lang=Astro.params.lang;
-const slug=Astro.params.slug;
-const c=channels.find(item=>item.slug===slug);
-const entries=(await getCollection('articles',({data})=>!data.draft && data.locale===lang && data.category===slug)).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf());
+const lang = Astro.params.lang;
+const slug = Astro.params.slug;
+const c = channels.find(item=>item.slug===slug);
+const entries = (await getCollection('articles', ({data}) =>
+  !data.draft && data.locale===lang && data.category===slug
+)).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf());
 ---
-<Base lang={lang} title={c[lang]} description={lang==='zh'?c.zhDesc:c.enDesc} translations={{en:`/en/category/${slug}/`,zh:`/zh/category/${slug}/`}}>
+<Base lang={lang} title={c[lang]} description={lang==='zh'?c.zhDesc:c.enDesc}
+  translations={{en:`/en/category/${slug}/`,zh:`/zh/category/${slug}/`}}>
   <section class="category-page">
     <p class="eyebrow">EMBEDDED NOTES / {slug.toUpperCase()}</p>
     <h1>{c[lang]}</h1>
-    <p>{lang==='zh'?c.zhDesc:c.enDesc}</p>
-    {entries.length ? entries.map((a,i)=><article class="editorial-item category-entry">
-      <span class="item-number">{String(i+1).padStart(2,'0')}</span>
-      <div class="category-entry-content">
-        <p class="meta">{a.data.pubDate.toISOString().slice(0,10)}</p>
-        <h2><a href={`/${lang}/articles/${a.id.split('/').slice(1).join('/')}/`}>{a.data.title}</a></h2>
-        <p>{a.data.description}</p>
-      </div>
-    </article>) : <p>{ui[lang].empty}</p>}
+    <p class="category-intro">{lang==='zh'?c.zhDesc:c.enDesc}</p>
+    {entries.length
+      ? <ArticleFeed entries={entries} lang={lang} headingLevel={2} showCategory={false} />
+      : <p>{ui[lang].empty}</p>}
   </section>
 </Base>
 <style>
-.category-entry{grid-template-columns:60px minmax(0,1fr);max-width:100%;min-width:0}
-.category-entry-content{min-width:0;max-width:100%;overflow-wrap:anywhere}
-.category-entry-content h2{line-height:1.42;overflow-wrap:anywhere;word-break:normal}
-.category-entry-content p{overflow-wrap:anywhere}
-@media(max-width:700px){.category-entry{grid-template-columns:35px minmax(0,1fr);gap:10px;padding-inline:0}.category-page{min-width:0}.category-entry-content h2{font-size:clamp(19px,5vw,25px)}}
+  .category-page{min-width:0; padding-top:clamp(32px,5vw,55px)}
+  .category-intro{margin:0 0 20px;color:#64716a;font-size:clamp(15px,2vw,18px)}
+  .category-page h1{margin:13px 0 14px}
+  @media(max-width:700px){.category-page{padding-top:27px}}
 </style>
