@@ -161,3 +161,67 @@ main.en-home-layout{padding-top:12px!important;}
   .mainnav .navlinks > a { gap: 7px; padding-inline: 8px; }
   .mainnav .navlinks > a::before { flex-basis: 21px; width: 21px; height: 21px; }
 }
+
+
+/* =======================================================================
+   EmbeddedNote V2.8.4 — approved crossed-tools icon + restored masthead text.
+   Small append-only override: keeps the existing V2.8.3 navigation,
+   page-aware red highlighting and all other site features untouched.
+   ======================================================================= */
+/* Make the approved crossed wrench/screwdriver match the other five icons.
+   The PNG is a transparent alpha mask, so it takes the link's currentColor;
+   both the symbol and label become brick red on the active category. */
+.mainnav .navlinks > a:nth-child(6) {
+  --en-nav-icon: url('/icons/nav/development-tools.png');
+  --en-glyph-size: 22px;
+}
+
+/* Restore the existing bilingual tagline instead of duplicating the copy.
+   Equal outer columns keep the sentence optically centered alongside the
+   logo and language picker, without changing either of those components. */
+.masthead .masthead-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 420px) minmax(0, 1fr);
+  align-items: center;
+  column-gap: 12px;
+}
+.masthead .brand-image-link { justify-self: start; }
+.masthead .masthead-tagline {
+  display: block;
+  justify-self: center;
+  margin: 0;
+  max-width: 420px;
+  color: #59625a;
+  font: 400 13px/1.24 Georgia, "Times New Roman", "Noto Serif SC", serif;
+  text-align: center;
+  text-wrap: balance;
+}
+.masthead .en-language-select { justify-self: end; }
+
+/* Retain the tagline at narrow widths but move it to a compact second row,
+   leaving the original logo and dropdown undisturbed. */
+@media (max-width: 700px) {
+  .masthead .masthead-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    column-gap: 10px;
+    row-gap: 4px;
+  }
+  .masthead .masthead-tagline {
+    display: block;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    max-width: 100%;
+    padding: 0 3px;
+    font-size: 10px;
+    line-height: 1.25;
+  }
+  .masthead .brand-image-link,
+  .masthead .en-language-select { grid-row: 1; }
+}
+@media (min-width: 701px) and (max-width: 900px) {
+  .masthead .masthead-inner {
+    grid-template-columns: minmax(175px, 1fr) minmax(210px, 1.1fr) minmax(64px, .35fr);
+  }
+  .masthead .masthead-tagline { font-size: 11px; }
+}
