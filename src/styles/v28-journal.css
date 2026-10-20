@@ -84,3 +84,79 @@ main.en-home-layout{padding-top:12px!important;}
   .en-site-footer .en-footer-links{font-size:12px;gap:8px;}
   .mainnav .navlinks>a{padding-inline:8px;}
 }
+
+
+/* ========================================================================
+   EmbeddedNote V2.8.2 — coherent six-icon navigation.
+   ONLY the two approved artwork masks are new images; the MCU, connectivity,
+   display and tools icons reuse the existing V2.6 inline SVG masks.
+   Loaded after v2-mobile-seo.css, overriding V2.8's icon-hiding rules.
+   ========================================================================= */
+.mainnav .navlinks > a {
+  gap: clamp(6px, .8vw, 10px);
+  min-height: 54px;
+  padding-inline: 6px;
+  text-align: left;
+  text-decoration: none;
+  white-space: normal;
+  min-width: 0;
+}
+.mainnav .navlinks > a::before {
+  content: "";
+  display: block;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  background: currentColor;
+  -webkit-mask-image: var(--en-nav-icon);
+  mask-image: var(--en-nav-icon);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: var(--en-glyph-size, 22px);
+  mask-size: var(--en-glyph-size, 22px);
+}
+.mainnav .navlinks > a::after { display: none; content: none; }
+/* Open Source: approved folded-document mark (optically narrow). */
+.mainnav .navlinks > a:nth-child(1) {
+  --en-nav-icon: url('/icons/nav/open-source.png');
+  --en-glyph-size: 24px;
+}
+/* Hardware: approved PCB routing and microcontroller illustration. */
+.mainnav .navlinks > a:nth-child(3) {
+  --en-nav-icon: url('/icons/nav/hardware-design.png');
+  --en-glyph-size: 24px;
+}
+/* Remaining existing SVG icons are lighter; normalize their visual area. */
+.mainnav .navlinks > a:nth-child(2) { --en-glyph-size: 22px; }
+.mainnav .navlinks > a:nth-child(4) { --en-glyph-size: 22px; }
+.mainnav .navlinks > a:nth-child(5) { --en-glyph-size: 22px; }
+.mainnav .navlinks > a:nth-child(6) { --en-glyph-size: 22px; }
+.mainnav .navlinks > a:hover,
+.mainnav .navlinks > a:focus-visible { color: var(--en-accent); }
+/* Match the red first item in the approved desktop reference. */
+.mainnav .navlinks > a:first-child { color: var(--en-accent); }
+@media (min-width:701px) and (max-width:920px) {
+  .mainnav .navlinks > a { min-height: 55px; gap: 9px; }
+}
+@media (max-width:700px) {
+  .mainnav .navlinks > a {
+    min-height: 61px;
+    gap: 9px;
+    padding: 10px 11px;
+    justify-content: flex-start;
+    text-align: left;
+  }
+  .mainnav .navlinks > a::before {
+    flex-basis: 23px;
+    width: 23px;
+    height: 23px;
+    -webkit-mask-size: min(var(--en-glyph-size, 22px), 23px);
+    mask-size: min(var(--en-glyph-size, 22px), 23px);
+  }
+}
+@media (max-width:375px) {
+  .mainnav .navlinks > a { gap: 7px; padding-inline: 8px; }
+  .mainnav .navlinks > a::before { flex-basis: 21px; width: 21px; height: 21px; }
+}
