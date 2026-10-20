@@ -1,11 +1,17 @@
 ---
 import '../styles/global.css';
 import '../styles/v2-mobile-seo.css';
+import '../styles/v28-journal.css';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import { channels, ui } from '../i18n/ui';
 
-const { lang = 'en', title, description, translations = {}, article = false } = Astro.props;
+const { lang = 'en', title, description, translations = {}, switchLinks = translations, article = false, homepage = false, activeCategory = null } = Astro.props;
 const dict = ui[lang];
+const pathname = Astro.url.pathname;
+// Match channel pages (including /page/N/) and preserve an article's category.
+// Home, About, Contact and Privacy deliberately have no selected channel.
+const routeCategory = pathname.match(/^\/(?:en|zh)\/category\/([^/]+)(?:\/|$)/)?.[1];
+const currentCategory = activeCategory ?? routeCategory ?? null;
 const origin = 'https://embeddednote.com';
 const rawTitle = title ?? 'EmbeddedNote';
 const pageTitle = /embeddednote/i.test(rawTitle) ? rawTitle : `${rawTitle} | EmbeddedNote`;
@@ -17,31 +23,11 @@ const socialImage = new URL('/images/embeddednote-hero.webp', origin).href;
 const tagline = lang === 'en'
   ? 'From a chip and a small project to the industry supply chain — documenting reusable engineering insights'
   : '从一个芯片、一个小项目到产业链，记录可复用的工程判断';
-
-// Publisher and website identity. Article-level TechArticle JSON-LD remains
-// in the existing [lang]/articles/[...slug].astro template.
 const siteIdentity = {
   '@context': 'https://schema.org',
   '@graph': [
-    {
-      '@type': 'Organization',
-      '@id': `${origin}/#publisher`,
-      name: 'EmbeddedNote',
-      url: `${origin}/`,
-      logo: {
-        '@type': 'ImageObject',
-        url: `${origin}/images/embeddednote-logo.webp`
-      }
-    },
-    {
-      '@type': 'WebSite',
-      '@id': `${origin}/#website`,
-      name: 'EmbeddedNote',
-      url: `${origin}/`,
-      inLanguage: ['en', 'zh-CN'],
-      publisher: { '@id': `${origin}/#publisher` },
-      description: 'A bilingual publication on practical embedded engineering and open-source projects.'
-    }
+    {'@type':'Organization','@id':`${origin}/#publisher`,name:'EmbeddedNote',url:`${origin}/`,logo:{'@type':'ImageObject',url:`${origin}/images/embeddednote-logo.webp`}},
+    {'@type':'WebSite','@id':`${origin}/#website`,name:'EmbeddedNote',url:`${origin}/`,inLanguage:['en','zh-CN'],publisher:{'@id':`${origin}/#publisher`},description:'A bilingual publication on practical embedded engineering and open-source projects.'}
   ]
 };
 ---
@@ -49,8 +35,7 @@ const siteIdentity = {
 <html lang={lang === 'zh' ? 'zh-CN' : 'en'}>
   <head>
     <meta charset="utf-8" />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9169011296822300"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9169011296822300" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <title>{pageTitle}</title>
@@ -69,12 +54,8 @@ const siteIdentity = {
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDesc} />
     <meta name="twitter:image" content={socialImage} />
-    {alternates.map(([locale, path]) =>
-      <link rel="alternate" hreflang={locale === 'zh' ? 'zh-CN' : 'en'} href={new URL(path, origin).href} />
-    )}
-    {translations.en &&
-      <link rel="alternate" hreflang="x-default" href={new URL(translations.en, origin).href} />
-    }
+    {alternates.map(([locale, path]) => <link rel="alternate" hreflang={locale === 'zh' ? 'zh-CN' : 'en'} href={new URL(path, origin).href} />)}
+    {translations.en && <link rel="alternate" hreflang="x-default" href={new URL(translations.en, origin).href} />}
     <script type="application/ld+json" set:html={JSON.stringify(siteIdentity)} />
   </head>
   <body>
@@ -84,17 +65,31 @@ const siteIdentity = {
           <img class="brand-image" src="/images/embeddednote-logo.webp" alt="EmbeddedNote" width="1628" height="253" decoding="async" />
         </a>
         <span class="masthead-tagline">{tagline}</span>
-        <LanguageSwitcher lang={lang} translations={translations} />
+        <LanguageSwitcher lang={lang} translations={switchLinks} />
       </div>
       <nav class="mainnav" aria-label={lang === 'zh' ? '技术导航' : 'Technical navigation'}>
         <div class="shell navlinks">
-          {channels.map(c => <a href={`/${lang}/category/${c.slug}/`}>{c[lang]}</a>)}
+          {channels.map(c => <a
+            href={`/${lang}/category/${c.slug}/`}
+            class={currentCategory === c.slug ? 'is-current-category' : undefined}
+            aria-current={pathname === `/${lang}/category/${c.slug}/` ? 'page' : undefined}
+          >{c[lang]}</a>)}
         </div>
       </nav>
     </header>
-    <main class="shell"><slot /></main>
-    <footer>
-      <div class="shell">© {new Date().getFullYear()} EmbeddedNote · <a href={`/${lang}/about/`}>{dict.about}</a> · <a href={`/${lang}/privacy/`}>{lang === 'zh' ? '隐私政策' : 'Privacy Policy'}</a></div>
+    <main class:list={['shell', {'en-home-layout': homepage}]}><slot /></main>
+    <footer class="en-site-footer">
+      <div class="shell en-footer-inner">
+        <a href={`/${lang}/`} class="en-footer-brand" aria-label="EmbeddedNote homepage">Embedded<span>Note</span></a>
+        <nav class="en-footer-links" aria-label={lang === 'zh' ? '页脚链接' : 'Footer links'}>
+          <a href={`/${lang}/contact/`}>{lang === 'zh' ? '联系我们' : 'Contact'}</a>
+          <span aria-hidden="true">|</span>
+          <a href={`/${lang}/about/`}>{dict.about}</a>
+          <span aria-hidden="true">|</span>
+          <a href={`/${lang}/privacy/`}>{lang === 'zh' ? '隐私政策' : 'Privacy Policy'}</a>
+        </nav>
+        <p class="en-footer-copyright">© {new Date().getFullYear()} EmbeddedNote. {lang === 'zh' ? '保留所有权利。' : 'All rights reserved.'}</p>
+      </div>
     </footer>
   </body>
 </html>

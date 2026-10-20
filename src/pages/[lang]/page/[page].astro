@@ -1,0 +1,15 @@
+---
+import Home from '../../../components/Home.astro';
+import { getCollection } from 'astro:content';
+export async function getStaticPaths() {
+  const all = await getCollection('articles', ({ data }) => !data.draft);
+  return ['en','zh'].flatMap(lang => {
+    const count = all.filter(a=>a.data.locale===lang).length;
+    const lastPage = Math.ceil(count/15);
+    return Array.from({length:Math.max(0,lastPage-1)},(_,i)=>({params:{lang,page:String(i+2)}, props:{page:i+2}}));
+  });
+}
+const {lang}=Astro.params;
+const {page}=Astro.props;
+---
+<Home lang={lang} page={page}/>

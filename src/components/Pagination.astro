@@ -1,0 +1,44 @@
+---
+/** Static, crawlable navigation. First page remains at the existing canonical URL. */
+const { lang = 'en', basePath, page = 1, pageCount = 1, total = 0, perPage = 15 } = Astro.props;
+const path = String(basePath).endsWith('/') ? basePath : `${basePath}/`;
+const pageUrl = (n) => n === 1 ? path : `${path}page/${n}/`;
+const firstItem = total ? (page - 1) * perPage + 1 : 0;
+const lastItem = Math.min(page * perPage, total);
+const near = [...new Set([1, page - 1, page, page + 1, pageCount])]
+  .filter((n) => n >= 1 && n <= pageCount)
+  .sort((a,b) => a-b);
+const tokens = [];
+for (let i = 0; i < near.length; i++) {
+  if (i > 0 && near[i] - near[i-1] > 1) tokens.push({type:'ellipsis'});
+  tokens.push({type:'page', value:near[i]});
+}
+const previousLabel = lang === 'zh' ? '上一页' : 'Previous';
+const nextLabel = lang === 'zh' ? '下一页' : 'Next';
+const countLabel = lang === 'zh'
+  ? `显示第 ${firstItem}–${lastItem} 篇，共 ${total} 篇文章（每页 ${perPage} 篇）`
+  : `Showing ${firstItem}–${lastItem} of ${total} articles (${perPage} per page)`;
+---
+{total > 0 && <div class="en-pagination-row">
+  <p class="en-pagination-count">{countLabel}</p>
+  {pageCount > 1 && <nav class="en-pagination" aria-label={lang === 'zh' ? '文章分页' : 'Article pagination'}>
+    {page > 1 ? <a href={pageUrl(page-1)} rel="prev" aria-label={previousLabel}>{previousLabel}</a> : <span class="en-pagination-disabled" aria-disabled="true">{previousLabel}</span>}
+    {tokens.map(t => t.type === 'ellipsis'
+      ? <span class="en-pagination-ellipsis" aria-hidden="true">…</span>
+      : t.value === page
+        ? <span class="en-pagination-current" aria-current="page" aria-label={`${lang === 'zh' ? '第' : 'Page '}${t.value}${lang === 'zh' ? '页' : ''}`}>{t.value}</span>
+        : <a href={pageUrl(t.value)} aria-label={`${lang === 'zh' ? '第' : 'Page '}${t.value}${lang === 'zh' ? '页' : ''}`}>{t.value}</a>)}
+    {page < pageCount ? <a href={pageUrl(page+1)} rel="next" aria-label={nextLabel}>{nextLabel}</a> : <span class="en-pagination-disabled" aria-disabled="true">{nextLabel}</span>}
+  </nav>}
+</div>}
+<style>
+  .en-pagination-row{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;padding:25px 0 20px;}
+  .en-pagination-count{font:13px/1.6 system-ui,sans-serif;color:#6b746e;margin:0;}
+  .en-pagination{display:flex;gap:7px;align-items:center;flex-wrap:wrap;}
+  .en-pagination a,.en-pagination-current,.en-pagination-disabled{display:inline-flex;align-items:center;justify-content:center;min-width:34px;min-height:34px;padding:6px 11px;border:1px solid #d2c9bc;border-radius:5px;text-decoration:none;font:600 13px/1.2 system-ui,sans-serif;color:#17211e;}
+  .en-pagination a:hover,.en-pagination a:focus-visible{border-color:#b94530;color:#b94530;}
+  .en-pagination-current{background:#b94530;border-color:#b94530;color:#fff;}
+  .en-pagination-disabled{opacity:.45;}
+  .en-pagination-ellipsis{color:#6b746e;padding:0 2px;}
+  @media(max-width:600px){.en-pagination-row{justify-content:center;padding:24px 0;}.en-pagination-count{width:100%;text-align:center;}}
+</style>

@@ -1,0 +1,227 @@
+/* EmbeddedNote V2.8 — faithful final journal design, loaded AFTER existing themes.
+   Preserve the original logo, Pagefind, Giscus, Adsense, article/SEO templates. */
+:root{--en-ivory:#f3efe6;--en-ink:#17211e;--en-line:#d0c8bb;--en-accent:#b94530}
+
+/* Compact two-level masthead; use original brand image. */
+.masthead{background:var(--en-ivory);border-bottom:0}
+.masthead .masthead-inner{padding-top:10px;padding-bottom:8px;gap:12px;}
+.masthead .brand-image{width:min(220px,100%);height:auto;}
+.masthead .masthead-tagline{display:none;}
+.mainnav{padding:0;border-top:0;border-bottom:1px solid var(--en-line);background:var(--en-ivory)}
+.mainnav .navlinks{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:auto;gap:0;width:100%;max-width:1160px;margin:auto;padding:0 24px;background:transparent;border:0;border-radius:0;overflow:visible;border-top:1px solid var(--en-line)}
+.mainnav .navlinks>a{display:flex;align-items:center;justify-content:center;gap:0;min-height:41px;width:100%;padding:9px 4px;margin:0;border:0;background:transparent;text-align:center;font:600 clamp(11px,1.03vw,13px)/1.3 Georgia,"Noto Serif SC","Songti SC",serif;color:var(--en-ink);transition:color .15s ease;}
+.mainnav .navlinks>a::before,.mainnav .navlinks>a::after{display:none;content:none;}
+.mainnav .navlinks>a:hover{background:transparent;text-decoration:underline;text-underline-offset:6px;color:var(--en-accent);}
+.mainnav .navlinks>a:focus-visible{outline:2px solid var(--en-accent);outline-offset:-2px;}
+
+/* Editorial hero: real original copy and artwork, reduced whitespace. */
+main.en-home-layout{padding-top:12px!important;}
+.en-home-layout .editorial-hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(22px,4vw,56px);padding:8px 0 16px;}
+.en-home-layout .editorial-hero h1{font:700 clamp(34px,4.2vw,56px)/1.07 Georgia,"Times New Roman",serif;letter-spacing:-.035em;max-width:600px;margin:0;color:var(--en-ink)}
+.en-home-layout .editorial-hero .hero-copy p{color:#57605b;font-size:clamp(15px,1.55vw,18px);line-height:1.5;margin:0;max-width:570px;}
+.en-home-layout .editorial-hero .hero-visual img{width:100%;aspect-ratio:2.1/1;object-fit:cover;border:0;border-radius:6px;}
+/* Hide only the now-redundant secondary navigation if any older version emits it. */
+.en-home-layout>.topic-strip{display:none!important;}
+
+/* Retain REAL Pagefind search; do not replace it with an inert demo button. */
+.en-home-layout>.search-section{margin:0;padding:0 0 8px;}
+.en-home-layout .search-section .pagefind-ui{--pagefind-ui-background:#f8f4ed;--pagefind-ui-border:#d0c8bb;--pagefind-ui-text:#17211e;--pagefind-ui-primary:#b94530;}
+.en-home-layout .pagefind-ui__search-input{border-radius:6px;min-height:46px;}
+.en-home-layout #search{min-height:0;}
+
+/* One story per row; keep image at left and natural editorial hierarchy. */
+.en-journal-feed .en-feed__item{grid-template-columns:minmax(165px,22%) minmax(0,1fr);align-items:center;gap:clamp(16px,2vw,26px);padding:15px 0;border-color:#d7d0c6;}
+.en-journal-feed .en-feed__item:first-child{padding-top:14px;}
+.en-journal-feed .en-feed__photo{border-radius:6px;}
+.en-journal-feed .en-feed__photo img{aspect-ratio:16/9;max-height:140px;}
+.en-journal-feed .en-feed__copy{display:flex;flex-direction:column;min-width:0;}
+.en-journal-feed .en-feed__meta{order:-1;margin:0 0 5px;gap:8px;font-size:11px;}
+.en-journal-feed .en-feed__title{order:0;margin:0 0 5px;font-size:clamp(19px,1.8vw,23px);line-height:1.28;}
+.en-journal-feed .en-feed__excerpt{order:1;margin:0;font-size:14px;line-height:1.55;-webkit-line-clamp:2;}
+
+/* Narrow, three-zone footer. Contact is a real mailto link. */
+.en-site-footer{background:#17211e;color:#f3efe6;padding:20px 0;border-top:0;font-size:13px;}
+.en-site-footer .en-footer-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;}
+.en-site-footer .en-footer-brand{font:700 clamp(20px,2vw,27px)/1.15 Georgia,"Times New Roman",serif;letter-spacing:-.02em;color:#f3efe6;text-decoration:none;white-space:nowrap;}
+.en-site-footer .en-footer-brand span{color:#b94530;}
+.en-site-footer .en-footer-links{display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap;font:500 13px/1.4 Georgia,serif;}
+.en-site-footer .en-footer-links a{color:#f3efe6;text-decoration:none;white-space:nowrap;}
+.en-site-footer .en-footer-links a:hover{color:#e49b8b;text-decoration:underline;}
+.en-site-footer .en-footer-links span{color:#89958c;}
+.en-site-footer .en-footer-copyright{margin:0;text-align:right;color:#f3efe6;font:12px/1.5 Georgia,serif;white-space:nowrap;}
+
+@media (min-width:701px) and (max-width:920px){
+  .mainnav .navlinks{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .mainnav .navlinks>a{min-height:45px;border-bottom:1px solid var(--en-line);}
+  .mainnav .navlinks>a:nth-last-child(-n+3){border-bottom:0;}
+}
+@media(max-width:920px){
+  .mainnav .navlinks>a{font-size:11px;}
+  .en-site-footer .en-footer-inner{grid-template-columns:1fr auto;}
+  .en-site-footer .en-footer-links{justify-content:flex-end;}
+  .en-site-footer .en-footer-copyright{grid-column:1/-1;text-align:center;}
+}
+@media(max-width:700px){
+  .masthead .masthead-inner{padding-top:11px;padding-bottom:9px;}
+  .masthead .brand-image{width:min(56vw,220px);}
+  .mainnav .navlinks{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:auto;padding:0 16px;}
+  .mainnav .navlinks>a{min-height:46px;justify-content:flex-start;text-align:left;padding:9px 12px;border-right:0;border-bottom:1px solid var(--en-line);font-size:clamp(12px,3.1vw,14px);}
+  .mainnav .navlinks>a:nth-child(odd){border-right:1px solid var(--en-line);}
+  .mainnav .navlinks>a:nth-last-child(-n+2){border-bottom:0;}
+  main.en-home-layout{padding-top:6px!important;}
+  .en-home-layout .editorial-hero{grid-template-columns:minmax(0,1fr);gap:18px;padding:16px 0 18px;}
+  .en-home-layout .editorial-hero h1{font-size:clamp(34px,8.3vw,48px);}
+  .en-home-layout .editorial-hero .hero-visual img{aspect-ratio:16/9;}
+  .en-journal-feed .en-feed__item{grid-template-columns:minmax(0,1fr);gap:12px;padding:20px 0;}
+  .en-journal-feed .en-feed__photo img{aspect-ratio:16/9;max-height:260px;}
+  .en-journal-feed .en-feed__title{font-size:clamp(20px,5vw,25px);}
+  .en-site-footer{padding:22px 0;}
+  .en-site-footer .en-footer-inner{display:flex;flex-direction:column;justify-content:center;gap:12px;text-align:center;}
+  .en-site-footer .en-footer-links{justify-content:center;gap:10px;}
+  .en-site-footer .en-footer-copyright{text-align:center;white-space:normal;}
+}
+@media(max-width:370px){
+  .en-site-footer .en-footer-links{font-size:12px;gap:8px;}
+  .mainnav .navlinks>a{padding-inline:8px;}
+}
+
+
+/* ========================================================================
+   EmbeddedNote V2.8.2 — coherent six-icon navigation.
+   ONLY the two approved artwork masks are new images; the MCU, connectivity,
+   display and tools icons reuse the existing V2.6 inline SVG masks.
+   Loaded after v2-mobile-seo.css, overriding V2.8's icon-hiding rules.
+   ========================================================================= */
+.mainnav .navlinks > a {
+  gap: clamp(6px, .8vw, 10px);
+  min-height: 54px;
+  padding-inline: 6px;
+  text-align: left;
+  text-decoration: none;
+  white-space: normal;
+  min-width: 0;
+}
+.mainnav .navlinks > a::before {
+  content: "";
+  display: block;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  background: currentColor;
+  -webkit-mask-image: var(--en-nav-icon);
+  mask-image: var(--en-nav-icon);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: var(--en-glyph-size, 22px);
+  mask-size: var(--en-glyph-size, 22px);
+}
+.mainnav .navlinks > a::after { display: none; content: none; }
+/* Open Source: approved folded-document mark (optically narrow). */
+.mainnav .navlinks > a:nth-child(1) {
+  --en-nav-icon: url('/icons/nav/open-source.png');
+  --en-glyph-size: 24px;
+}
+/* Hardware: approved PCB routing and microcontroller illustration. */
+.mainnav .navlinks > a:nth-child(3) {
+  --en-nav-icon: url('/icons/nav/hardware-design.png');
+  --en-glyph-size: 24px;
+}
+/* Remaining existing SVG icons are lighter; normalize their visual area. */
+.mainnav .navlinks > a:nth-child(2) { --en-glyph-size: 22px; }
+.mainnav .navlinks > a:nth-child(4) { --en-glyph-size: 22px; }
+.mainnav .navlinks > a:nth-child(5) { --en-glyph-size: 22px; }
+.mainnav .navlinks > a:nth-child(6) { --en-glyph-size: 22px; }
+.mainnav .navlinks > a:hover,
+.mainnav .navlinks > a:focus-visible { color: var(--en-accent); }
+/* Page-aware channel highlight. Color drives both text and CSS-mask icon.
+   No hard-coded first-item red; all other channels retain the ink color. */
+.mainnav .navlinks > a.is-current-category { color: var(--en-accent); }
+@media (min-width:701px) and (max-width:920px) {
+  .mainnav .navlinks > a { min-height: 55px; gap: 9px; }
+}
+@media (max-width:700px) {
+  .mainnav .navlinks > a {
+    min-height: 61px;
+    gap: 9px;
+    padding: 10px 11px;
+    justify-content: flex-start;
+    text-align: left;
+  }
+  .mainnav .navlinks > a::before {
+    flex-basis: 23px;
+    width: 23px;
+    height: 23px;
+    -webkit-mask-size: min(var(--en-glyph-size, 22px), 23px);
+    mask-size: min(var(--en-glyph-size, 22px), 23px);
+  }
+}
+@media (max-width:375px) {
+  .mainnav .navlinks > a { gap: 7px; padding-inline: 8px; }
+  .mainnav .navlinks > a::before { flex-basis: 21px; width: 21px; height: 21px; }
+}
+
+
+/* =======================================================================
+   EmbeddedNote V2.8.4 — approved crossed-tools icon + restored masthead text.
+   Small append-only override: keeps the existing V2.8.3 navigation,
+   page-aware red highlighting and all other site features untouched.
+   ======================================================================= */
+/* Make the approved crossed wrench/screwdriver match the other five icons.
+   The PNG is a transparent alpha mask, so it takes the link's currentColor;
+   both the symbol and label become brick red on the active category. */
+.mainnav .navlinks > a:nth-child(6) {
+  --en-nav-icon: url('/icons/nav/development-tools.png');
+  --en-glyph-size: 22px;
+}
+
+/* Restore the existing bilingual tagline instead of duplicating the copy.
+   Equal outer columns keep the sentence optically centered alongside the
+   logo and language picker, without changing either of those components. */
+.masthead .masthead-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 420px) minmax(0, 1fr);
+  align-items: center;
+  column-gap: 12px;
+}
+.masthead .brand-image-link { justify-self: start; }
+.masthead .masthead-tagline {
+  display: block;
+  justify-self: center;
+  margin: 0;
+  max-width: 420px;
+  color: #59625a;
+  font: 400 13px/1.24 Georgia, "Times New Roman", "Noto Serif SC", serif;
+  text-align: center;
+  text-wrap: balance;
+}
+.masthead .en-language-select { justify-self: end; }
+
+/* Retain the tagline at narrow widths but move it to a compact second row,
+   leaving the original logo and dropdown undisturbed. */
+@media (max-width: 700px) {
+  .masthead .masthead-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    column-gap: 10px;
+    row-gap: 4px;
+  }
+  .masthead .masthead-tagline {
+    display: block;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    max-width: 100%;
+    padding: 0 3px;
+    font-size: 10px;
+    line-height: 1.25;
+  }
+  .masthead .brand-image-link,
+  .masthead .en-language-select { grid-row: 1; }
+}
+@media (min-width: 701px) and (max-width: 900px) {
+  .masthead .masthead-inner {
+    grid-template-columns: minmax(175px, 1fr) minmax(210px, 1.1fr) minmax(64px, .35fr);
+  }
+  .masthead .masthead-tagline { font-size: 11px; }
+}

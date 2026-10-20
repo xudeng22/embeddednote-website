@@ -1,35 +1,9 @@
 ---
-import Base from '../../../layouts/Base.astro';
-import { channels, ui } from '../../../i18n/ui';
-import { getCollection } from 'astro:content';
-import ArticleFeed from '../../../components/ArticleFeed.astro';
-
-export function getStaticPaths(){
-  const langs=['en','zh'];
-  const slugs=['open-source','mcu-soc','hardware','connectivity','display','tools'];
-  return langs.flatMap(lang=>slugs.map(slug=>({params:{lang,slug}})));
+import CategoryView from '../../../components/CategoryView.astro';
+import { channels } from '../../../i18n/ui';
+export function getStaticPaths() {
+  return ['en','zh'].flatMap(lang => channels.map(({slug}) => ({params:{lang,slug}})));
 }
-const lang = Astro.params.lang;
-const slug = Astro.params.slug;
-const c = channels.find(item=>item.slug===slug);
-const entries = (await getCollection('articles', ({data}) =>
-  !data.draft && data.locale===lang && data.category===slug
-)).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf());
+const {lang,slug} = Astro.params;
 ---
-<Base lang={lang} title={c[lang]} description={lang==='zh'?c.zhDesc:c.enDesc}
-  translations={{en:`/en/category/${slug}/`,zh:`/zh/category/${slug}/`}}>
-  <section class="category-page">
-    <p class="eyebrow">EMBEDDED NOTES / {slug.toUpperCase()}</p>
-    <h1>{c[lang]}</h1>
-    <p class="category-intro">{lang==='zh'?c.zhDesc:c.enDesc}</p>
-    {entries.length
-      ? <ArticleFeed entries={entries} lang={lang} headingLevel={2} showCategory={false} />
-      : <p>{ui[lang].empty}</p>}
-  </section>
-</Base>
-<style>
-  .category-page{min-width:0; padding-top:clamp(32px,5vw,55px)}
-  .category-intro{margin:0 0 20px;color:#64716a;font-size:clamp(15px,2vw,18px)}
-  .category-page h1{margin:13px 0 14px}
-  @media(max-width:700px){.category-page{padding-top:27px}}
-</style>
+<CategoryView lang={lang} slug={slug} page={1} />
