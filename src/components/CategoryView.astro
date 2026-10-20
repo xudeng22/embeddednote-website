@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import { channels, ui } from '../i18n/ui';
+import { getCollection } from 'astro:content';
+import ArticleFeed from './ArticleFeed.astro';
+import Pagination from './Pagination.astro';
+const { lang = 'en', slug, page = 1 } = Astro.props;
+const c = channels.find(item => item.slug === slug);
+if (!c) throw new Error(`Unknown category slug: ${slug}`);
+const perPage = 15;
+const entries = (await getCollection('articles', ({data}) => !data.draft && data.locale === lang && data.category === slug))
+  .sort((a,b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf() || a.id.localeCompare(b.id));
+const pageCount = Math.max(1,Math.ceil(entries.length/perPage));
+const visible = entries.slice((page-1)*perPage,page*perPage);
+const headline = c[lang];
+---
+<Base lang={lang} title={page > 1 ? `${headline} — ${lang === 'zh' ? '第' : 'Page '}${page}${lang === 'zh' ? '页' : ''}` : headline}
+  description={lang === 'zh' ? c.zhDesc : c.enDesc}
+  translations={page === 1 ? {en:`/en/category/${slug}/`,zh:`/zh/category/${slug}/`} : {}}
+  switchLinks={{en:`/en/category/${slug}/`,zh:`/zh/category/${slug}/`}}>
+  <section class="category-page en-journal-feed">
+    <p class="eyebrow">EMBEDDED NOTES / {slug.toUpperCase()}</p>
+    <h1>{headline}</h1>
+    <p class="category-intro">{lang === 'zh' ? c.zhDesc : c.enDesc}</p>
+    {visible.length ? <ArticleFeed entries={visible} lang={lang} headingLevel={2} showCategory={false} /> : <p>{ui[lang].empty}</p>}
+    <Pagination lang={lang} basePath={`/${lang}/category/${slug}/`} page={page} pageCount={pageCount} total={entries.length} perPage={perPage}/>
+  </section>
+</Base>
+<style>
+.category-page{min-width:0;padding-top:clamp(26px,4vw,42px)}
+.category-intro{margin:0 0 20px;color:#64716a;font-size:clamp(15px,2vw,18px)}
+.category-page h1{margin:13px 0 14px}
+@media(max-width:700px){.category-page{padding-top:24px}}
+</style>

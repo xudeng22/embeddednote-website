@@ -1,0 +1,16 @@
+---
+import CategoryView from '../../../../../components/CategoryView.astro';
+import { channels } from '../../../../../i18n/ui';
+import { getCollection } from 'astro:content';
+export async function getStaticPaths() {
+  const all = await getCollection('articles', ({ data }) => !data.draft);
+  return ['en','zh'].flatMap(lang => channels.flatMap(({slug}) => {
+    const count = all.filter(a => a.data.locale===lang && a.data.category===slug).length;
+    const lastPage = Math.ceil(count/15);
+    return Array.from({length:Math.max(0,lastPage-1)},(_,i)=>({params:{lang,slug,page:String(i+2)},props:{page:i+2}}));
+  }));
+}
+const {lang,slug}=Astro.params;
+const {page}=Astro.props;
+---
+<CategoryView lang={lang} slug={slug} page={page}/>

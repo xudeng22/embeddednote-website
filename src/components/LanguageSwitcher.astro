@@ -1,30 +1,31 @@
 ---
-/** Both languages stay in the same position on every page. */
-const { lang = 'en', translations = {} } = Astro.props;
-const enHref = translations.en ?? (lang === 'en' ? Astro.url.pathname : '/en/');
-const zhHref = translations.zh ?? (lang === 'zh' ? Astro.url.pathname : '/zh/');
+/** Native no-JavaScript language dropdown with explicit bilingual links. */
+const {lang='en', translations={}} = Astro.props;
+const enHref = translations.en ?? '/en/';
+const zhHref = translations.zh ?? '/zh/';
 ---
-<div class="language-link en-language-switch" role="group" aria-label={lang === 'zh' ? '切换语言' : 'Choose language'}>
-  <a href={enHref} lang="en" hreflang="en" aria-current={lang === 'en' ? 'page' : undefined}
-    aria-label="English">EN</a>
-  <span class="en-language-divider" aria-hidden="true">/</span>
-  <a href={zhHref} lang="zh-CN" hreflang="zh-CN" aria-current={lang === 'zh' ? 'page' : undefined}
-    aria-label="中文">中文</a>
-</div>
+<details class="en-language-select">
+  <summary aria-label={lang === 'zh' ? '选择语言' : 'Choose language'}>
+    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3c-3.2 3-4.5 6-4.5 9s1.3 6 4.5 9M12 3c3.2 3 4.5 6 4.5 9s-1.3 6-4.5 9" />
+    </svg>
+    <span>{lang === 'zh' ? '中文' : 'EN'}</span>
+    <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6" /></svg>
+  </summary>
+  <div class="en-language-options">
+    <a href={enHref} lang="en" hreflang="en" aria-current={lang === 'en' ? 'page' : undefined}>English</a>
+    <a href={zhHref} lang="zh-CN" hreflang="zh-CN" aria-current={lang === 'zh' ? 'page' : undefined}>中文</a>
+  </div>
+</details>
 <style>
-  .en-language-switch {
-    display:inline-flex; align-items:center; justify-content:center;
-    flex:0 0 auto; gap:8px; min-height:37px;
-    border:1px solid #17211e; border-radius:5px;
-    padding:7px 12px; background:#f3efe6;
-    white-space:nowrap; line-height:1;
-    font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
-    font-size:12px; letter-spacing:.01em;
-  }
-  .en-language-switch a {color:#68726c; text-decoration:none; font-weight:600;}
-  .en-language-switch a[aria-current="page"] {color:#17211e;font-weight:800;}
-  .en-language-switch a:hover {color:#b94530;text-decoration:none;}
-  .en-language-switch a:focus-visible {outline:2px solid #b94530;outline-offset:3px;}
-  .en-language-divider {color:#b5a99d;}
-  @media(max-width:390px){.en-language-switch {gap:6px;padding:7px 9px;font-size:11px;}}
+  .en-language-select{position:relative;flex:0 0 auto;color:#17211e;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:13px;z-index:30;}
+  .en-language-select summary{display:flex;align-items:center;gap:7px;padding:9px 5px;cursor:pointer;list-style:none;min-height:38px;white-space:nowrap;}
+  .en-language-select summary::-webkit-details-marker{display:none;}
+  .en-language-select summary:hover{color:#b94530;}
+  .en-language-select summary:focus-visible{outline:2px solid #b94530;outline-offset:2px;}
+  .en-language-options{position:absolute;top:calc(100% + 4px);right:0;min-width:132px;display:grid;gap:0;padding:5px;background:#f8f4ed;border:1px solid #cfc8bc;border-radius:7px;box-shadow:0 9px 24px #17211e20;}
+  .en-language-options a{padding:10px 12px;color:#17211e;text-decoration:none;border-radius:4px;font-size:13px;}
+  .en-language-options a[aria-current="page"]{color:#b94530;font-weight:700;}
+  .en-language-options a:hover,.en-language-options a:focus-visible{background:#eee7dc;}
 </style>
