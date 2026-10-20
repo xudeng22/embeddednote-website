@@ -13,9 +13,41 @@ const entries = (await getCollection('articles', ({data}) => !data.draft && data
 const pageCount = Math.max(1,Math.ceil(entries.length/perPage));
 const visible = entries.slice((page-1)*perPage,page*perPage);
 const headline = c[lang];
+
+// Keep the brief category-intro on screen; use a distinct, informative SEO description in the head.
+const seoDescriptions = {
+  'open-source': {
+    en: 'Explore open-source embedded projects on GitHub, including schematics, BOMs, key components, firmware, and engineering trade-offs.',
+    zh: '探索实用的 GitHub 嵌入式开源项目，涵盖 ESP32、STM32、机器人、电子纸、原理图、BOM 与固件，重点解析关键器件、项目架构和实现方法。'
+  },
+  'mcu-soc': {
+    en: 'Technical coverage of MCUs and SoCs, including STM32, ESP32, RISC-V, processor architecture, peripherals, development boards, and embedded software.',
+    zh: '深入了解 MCU 与 SoC 技术，包括 STM32、ESP32、RISC-V、处理器架构、开发板、外设接口和软硬件生态，关注器件选型与实际开发。'
+  },
+  hardware: {
+    en: 'Explore hardware design, PCB layout, power supplies, interface circuits, component selection, and real-world electronics engineering methods.',
+    zh: '分享嵌入式硬件设计与 PCB 工程实践，包括原理图、电源电路、接口设计、元器件选型、测试与可靠性分析，结合项目讲解设计取舍。'
+  },
+  connectivity: {
+    en: 'Learn about embedded connectivity using BLE, Wi-Fi, NFC, LoRa, CAN and related protocols, with hands-on hardware projects and integration insights.',
+    zh: '关注嵌入式设备通信技术，介绍 BLE、Wi-Fi、NFC、LoRa、CAN 等协议与模块，结合开源项目分析无线连接、网络架构和实际应用。'
+  },
+  display: {
+    en: 'Explore e-paper, TFT, OLED, and Mini LED technologies, with driver ICs, embedded display interfaces, refresh methods, and practical projects.',
+    zh: '解析电子纸、TFT、OLED、Mini LED 等显示技术，关注驱动芯片、接口电路、刷新方式、硬件方案及实际嵌入式显示项目。'
+  },
+  tools: {
+    en: 'Find embedded development tools, including IDEs, compilers, oscilloscopes, firmware debugging, test instruments, and open-source workflows.',
+    zh: '介绍嵌入式开发与调试工具，涵盖 IDE、编译工具链、示波器、测试仪器、固件调试和开源工具项目，帮助工程师提高开发效率。'
+  }
+};
+const categorySeoDescription = seoDescriptions[slug][lang];
+const seoDescription = page > 1
+  ? (lang === 'zh' ? `第 ${page} 页：${categorySeoDescription}` : `Page ${page}: ${categorySeoDescription}`)
+  : categorySeoDescription;
 ---
 <Base lang={lang} title={page > 1 ? `${headline} — ${lang === 'zh' ? '第' : 'Page '}${page}${lang === 'zh' ? '页' : ''}` : headline}
-  description={lang === 'zh' ? c.zhDesc : c.enDesc}
+  description={seoDescription}
   translations={page === 1 ? {en:`/en/category/${slug}/`,zh:`/zh/category/${slug}/`} : {}}
   switchLinks={{en:`/en/category/${slug}/`,zh:`/zh/category/${slug}/`}}>
   <section class="category-page en-journal-feed">

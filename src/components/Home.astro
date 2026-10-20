@@ -13,9 +13,21 @@ const articles = (await getCollection('articles', ({ data }) => !data.draft && d
   .sort((a,b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf() || a.id.localeCompare(b.id));
 const pageCount = Math.max(1, Math.ceil(articles.length / perPage));
 const visible = articles.slice((page-1)*perPage, page*perPage);
+
+// Search snippets are intentionally richer than the short, visible Hero subtitle.
+// This changes the HTML meta description, not the typography or homepage copy.
+const seoDescriptions = {
+  en: 'EmbeddedNote covers MCUs, PCB design, wireless connectivity, displays, and open-source hardware with practical engineering insights.',
+  zh: 'EmbeddedNote（嵌入式杂谈）面向嵌入式与硬件工程师，分享 MCU、SoC、PCB 设计、BLE、Wi-Fi、电子纸及 GitHub 开源项目的技术解析、原理图和工程实践经验.'
+};
+const seoDescription = page > 1
+  ? (lang === 'zh'
+    ? `第 ${page} 页：${seoDescriptions.zh}`
+    : `Page ${page}: ${seoDescriptions.en}`)
+  : seoDescriptions[lang];
 ---
 <Base lang={lang} title={page > 1 ? `${t.latest} — ${lang === 'zh' ? '第' : 'Page '}${page}${lang === 'zh' ? '页' : ''}` : t.title}
-  description={t.description} translations={page === 1 ? {en:'/en/',zh:'/zh/'} : {}} switchLinks={{en:'/en/',zh:'/zh/'}} homepage={true}>
+  description={seoDescription} translations={page === 1 ? {en:'/en/',zh:'/zh/'} : {}} switchLinks={{en:'/en/',zh:'/zh/'}} homepage={true}>
   {page === 1 && <section class="editorial-hero" aria-label={t.title}>
     <div class="hero-copy">
       <h1>{t.title}</h1>
