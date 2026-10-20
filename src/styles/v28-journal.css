@@ -135,8 +135,9 @@ main.en-home-layout{padding-top:12px!important;}
 .mainnav .navlinks > a:nth-child(6) { --en-glyph-size: 22px; }
 .mainnav .navlinks > a:hover,
 .mainnav .navlinks > a:focus-visible { color: var(--en-accent); }
-/* Match the red first item in the approved desktop reference. */
-.mainnav .navlinks > a:first-child { color: var(--en-accent); }
+/* Page-aware channel highlight. Color drives both text and CSS-mask icon.
+   No hard-coded first-item red; all other channels retain the ink color. */
+.mainnav .navlinks > a.is-current-category { color: var(--en-accent); }
 @media (min-width:701px) and (max-width:920px) {
   .mainnav .navlinks > a { min-height: 55px; gap: 9px; }
 }

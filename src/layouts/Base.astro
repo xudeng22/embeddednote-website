@@ -5,8 +5,13 @@ import '../styles/v28-journal.css';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import { channels, ui } from '../i18n/ui';
 
-const { lang = 'en', title, description, translations = {}, switchLinks = translations, article = false, homepage = false } = Astro.props;
+const { lang = 'en', title, description, translations = {}, switchLinks = translations, article = false, homepage = false, activeCategory = null } = Astro.props;
 const dict = ui[lang];
+const pathname = Astro.url.pathname;
+// Match channel pages (including /page/N/) and preserve an article's category.
+// Home, About, Contact and Privacy deliberately have no selected channel.
+const routeCategory = pathname.match(/^\/(?:en|zh)\/category\/([^/]+)(?:\/|$)/)?.[1];
+const currentCategory = activeCategory ?? routeCategory ?? null;
 const origin = 'https://embeddednote.com';
 const rawTitle = title ?? 'EmbeddedNote';
 const pageTitle = /embeddednote/i.test(rawTitle) ? rawTitle : `${rawTitle} | EmbeddedNote`;
@@ -64,7 +69,11 @@ const siteIdentity = {
       </div>
       <nav class="mainnav" aria-label={lang === 'zh' ? '技术导航' : 'Technical navigation'}>
         <div class="shell navlinks">
-          {channels.map(c => <a href={`/${lang}/category/${c.slug}/`}>{c[lang]}</a>)}
+          {channels.map(c => <a
+            href={`/${lang}/category/${c.slug}/`}
+            class={currentCategory === c.slug ? 'is-current-category' : undefined}
+            aria-current={pathname === `/${lang}/category/${c.slug}/` ? 'page' : undefined}
+          >{c[lang]}</a>)}
         </div>
       </nav>
     </header>
