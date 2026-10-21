@@ -18,9 +18,9 @@ seoDescription: 'Inside M5Stack PaperDIY: a 4.7-inch, 960 × 540 e-paper display
 
 M5Stack sells its PaperDIY e-paper development platform in two versions. The $25 Assembly Kit includes a 4.7-inch display, controller board, 140 mAh battery and acrylic retaining plate for user assembly. The $29.90 Complete Kit uses the same core electronics, preassembled in a 3D-printed enclosure. Either version provides a practical starting point for a desk calendar, status display or other device that updates only occasionally. The display connection, power circuitry and basic mounting hardware are already part of the design.
 
-[![M5Stack PaperDIY Complete Kit factory test screen](https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1288/K159-B_PaperDIY_Complete_Kit_main_pictures_07.webp)](https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1288/K159-B_PaperDIY_Complete_Kit_main_pictures_07.webp)
+[![M5Stack PaperDIY Complete Kit: front and rear hardware overview](/uploads/paperdiy/paperdiy-cover.webp)](/uploads/paperdiy/paperdiy-cover.webp)
 
-*PaperDIY Complete Kit running M5Stack's factory test firmware. Image: M5Stack.*
+*PaperDIY Complete Kit, showing the front and rear hardware layout, display, battery and connectors. Image: M5Stack.*
 
 [![PaperDIY Assembly Kit components](https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1287/K159-PaperDIY-Assembly-Kit_main_pictures_02.webp)](https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1287/K159-PaperDIY-Assembly-Kit_main_pictures_02.webp)
 

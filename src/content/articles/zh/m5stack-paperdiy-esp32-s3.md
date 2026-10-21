@@ -18,9 +18,9 @@ seoDescription: 'M5Stack PaperDIY 的 4.7 英寸电子纸、ESP32-S3、8 位并�
 
 M5Stack 最近上架的 PaperDIY，第一眼看着像一块普通的电子纸开发板。点开套件清单，才发现它把屏、主板、电池、亚克力板甚至外壳都拆开卖了。Assembly Kit 给的是屏幕、主板、电池和亚克力压板，得自己装；Complete Kit 已经装进 3D 打印外壳，到手可以直接写程序。两者核心电路相同，区别主要在结构。想做桌面日历、低功耗信息牌，或者给自己的设备换一块像样的显示屏，这套东西比从零画板省事得多。尤其是电子纸的排线、电源时序和固定方式，一开始就有人替你处理好了。
 
-[![PaperDIY 完整版电子纸出厂测试画面](https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1288/K159-B_PaperDIY_Complete_Kit_main_pictures_07.webp)](https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1288/K159-B_PaperDIY_Complete_Kit_main_pictures_07.webp)
+[![M5Stack PaperDIY Complete Kit 正反面与硬件参数说明](/uploads/paperdiy/paperdiy-cover.webp)](/uploads/paperdiy/paperdiy-cover.webp)
 
-*PaperDIY Complete Kit 运行出厂测试程序。图片：M5Stack。*
+*PaperDIY Complete Kit 正反面及显示屏、电池、按键等硬件标注。图片：M5Stack。*
 
 [![PaperDIY Assembly Kit 拆件](https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1287/K159-PaperDIY-Assembly-Kit_main_pictures_02.webp)](https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1287/K159-PaperDIY-Assembly-Kit_main_pictures_02.webp)
 
