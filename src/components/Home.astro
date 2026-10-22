@@ -40,7 +40,7 @@ const seoDescription = page > 1
         width="1200" height="900" loading="eager" fetchpriority="high" decoding="async" />
     </div>
   </section>}
-  {page > 1 && <header class="en-feed-page-heading"><h1>{t.latest} — {lang === 'zh' ? `第 ${page} 页` : `Page ${page}`}</h1></header>}
+  {page > 1 && <header class="en-feed-page-heading"><h1 class="visually-hidden">{t.latest} — {lang === 'zh' ? `第 ${page} 页` : `Page ${page}`}</h1></header>}
   <SearchBox lang={lang} />
   <section id="latest" class="en-journal-feed" data-pagefind-ignore>
     <h2 class="visually-hidden">{t.latest}</h2>
@@ -54,6 +54,6 @@ const seoDescription = page > 1
   .hero-visual img{display:block;width:100%;height:auto;aspect-ratio:2.1/1;object-fit:cover;border-radius:6px}
   .hero-accent{height:3px;width:34px;background:#b94530;margin:16px 0 12px}
   .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
-  .en-feed-page-heading h1{font:700 clamp(30px,4vw,48px)/1.2 Georgia,serif;margin:35px 0 8px;}
+  .en-feed-page-heading{height:clamp(20px,3vw,32px);}
   @media(max-width:700px){.editorial-hero{grid-template-columns:minmax(0,1fr)}.hero-visual{max-width:100%;margin:0 auto}.hero-copy h1{overflow-wrap:anywhere}}
 </style>
