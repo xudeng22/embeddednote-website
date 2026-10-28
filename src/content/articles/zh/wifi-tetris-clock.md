@@ -1,28 +1,27 @@
 ---
 title: Github上有趣嵌入式项目——用俄罗斯方块报时的WiFi时钟
-description: Brian Lough 的 WiFi 俄罗斯方块时钟用 ESP32、64×32 RGB 矩阵屏、PxMatrix 和 ezTime 实现方块下落报时，附接线图与供电建议。
+description: Brian Lough 的 WiFi 俄罗斯方块时钟用 ESP32、64×32 RGB 矩阵屏、PxMatrix 和 ezTime
+  实现方块下落报时，附接线图与供电建议。
 locale: zh
 translationKey: wifi-tetris-clock
-pubDate: '2026-10-23'
+pubDate: 2026-10-27
 category: open-source
-draft: false
-author: EmbeddedNote
-sourceUrl: https://github.com/witnessmenow/WiFi-Tetris-Clock
 tags:
-- ESP32
-- Wi-Fi
-- 俄罗斯方块时钟
-- RGB LED矩阵
-- PxMatrix
-- HUB75
-- 开源项目
+  - ESP32
+  - Wi-Fi
+  - 俄罗斯方块时钟
+  - RGB LED矩阵
+  - PxMatrix
+  - HUB75
+  - 开源项目
+draft: false
 seoTitle: ESP32 俄罗斯方块 WiFi 时钟：64×32 RGB矩阵屏与开源接线方案
-seoDescription: 介绍 ESP32 WiFi Tetris Clock 的64×32 P3 RGB矩阵屏接线、PxMatrix/TetrisAnimation、ezTime联网校时和5V供电选型。
+seoDescription: 介绍 ESP32 WiFi Tetris Clock 的64×32 P3
+  RGB矩阵屏接线、PxMatrix/TetrisAnimation、ezTime联网校时和5V供电选型。
 ---
-
 俄罗斯方块的下落方块，游戏圈没人不认识，但有人拿它来报时。Brian Lough做了个WiFi时钟，时间数字不是画出来的，而是俄罗斯方块一块块落下来拼成的，整块64×32的P3 RGB矩阵屏当表盘，分辨率不高，效果却出奇地抓眼。屏幕物理尺寸19cm×9.5cm，摆在桌面上比任何普通电子钟都醒目，路过的人基本都要多看两眼。
 
-仓库地址 https://github.com/witnessmenow/WiFi-Tetris-Clock 。作者Brian是个软件开发者，爱尔兰人，2016年入坑Arduino，之后在开源圈挺活跃，TinyPICO、ESP8266教程视频都出自他手，还维护了一堆Arduino库。这个项目还在 Instructables 上发布过制作教程。硬件门槛很低：TinyPICO 或通用 ESP32 开发板加 64×32 P3 RGB 矩阵屏，再配作者推荐的 5V/8A 电源、连接线和 3D 打印支架，接线和调试熟练的话装起来并不复杂。
+仓库地址 [https://github.com/witnessmenow/WiFi-Tetris-Clock](https://github.com/witnessmenow/WiFi-Tetris-Clock) 。作者Brian是个软件开发者，爱尔兰人，2016年入坑Arduino，之后在开源圈挺活跃，TinyPICO、ESP8266教程视频都出自他手，还维护了一堆Arduino库。这个项目还在 Instructables 上发布过制作教程。硬件门槛很低：TinyPICO 或通用 ESP32 开发板加 64×32 P3 RGB 矩阵屏，再配作者推荐的 5V/8A 电源、连接线和 3D 打印支架，接线和调试熟练的话装起来并不复杂。
 
 ![基于 ESP32 的俄罗斯方块 WiFi 时钟，64×32 RGB 矩阵屏显示 2:32 PM](/uploads/tetris-clock/tetris-clock-cover.webp)
 
@@ -60,7 +59,7 @@ seoDescription: 介绍 ESP32 WiFi Tetris Clock 的64×32 P3 RGB矩阵屏接线�
 
 *电源接线。请按屏幕实际电流需求选择电源；项目 README 推荐 5V/8A。*
 
-这个项目的生态很有意思。还有其他作者基于这个思路扩展出“会说话的俄罗斯方块时钟”，加了个MP3/WAV播放器，数字变化时来点音效，还加了网页界面在线改设置，视频在这：https://www.youtube.com/watch?v=ey2mjZ-UQNM 。在国内，B站UP主心暖爸爸用二手P2.5租赁屏加ESP32复刻过一台，效果相当漂亮。
+这个项目的生态很有意思。还有其他作者基于这个思路扩展出“会说话的俄罗斯方块时钟”，加了个MP3/WAV播放器，数字变化时来点音效，还加了网页界面在线改设置，视频在这：[https://www.youtube.com/watch?v=ey2mjZ-UQNM](https://www.youtube.com/watch?v=ey2mjZ-UQNM) 。在国内，B站UP主心暖爸爸用二手P2.5租赁屏加ESP32复刻过一台，效果相当漂亮。
 
 固件本身也能折腾。方块下落拼数字的效果可以通过修改代码调整，彩色方块也能呈现各种配色。原始示例提供了时区、12/24小时制，以及是否每分钟重画所有数字的配置项；亮度、动画速度这类设置则需要进一步修改驱动或动画代码。数字切换的瞬间特别有游戏感，和呆板的数码管时钟完全是两种气质。3D打印支架在Thingiverse上有现成模型，还有人重混过，装起来就是个桌面小摆件。
 

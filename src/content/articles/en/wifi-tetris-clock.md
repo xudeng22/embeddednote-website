@@ -1,27 +1,26 @@
 ---
-title: 'ESP32 Tetris Clock: A Practical Wi-Fi LED Matrix Build'
-description: Build a Tetris-style Wi-Fi clock with an ESP32 and a 64×32 RGB LED matrix. Explore the wiring,
-  ezTime synchronization, animation libraries and power requirements.
+title: "ESP32 Tetris Clock: A Practical Wi-Fi LED Matrix Build"
+description: Build a Tetris-style Wi-Fi clock with an ESP32 and a 64×32 RGB LED
+  matrix. Explore the wiring, ezTime synchronization, animation libraries and
+  power requirements.
 locale: en
 translationKey: wifi-tetris-clock
-pubDate: '2026-10-23'
+pubDate: 2026-10-27
 category: open-source
-draft: false
-author: EmbeddedNote
-sourceUrl: https://github.com/witnessmenow/WiFi-Tetris-Clock
 tags:
-- ESP32
-- Wi-Fi Clock
-- RGB LED Matrix
-- Tetris Clock
-- PxMatrix
-- HUB75
-- Open Source Hardware
-seoTitle: 'ESP32 Tetris Clock: Wi-Fi Time Sync and 64×32 RGB LED Matrix'
-seoDescription: 'How Brian Lough’s ESP32 Tetris Clock works: 64×32 RGB LED wiring, PxMatrix and TetrisAnimation,
-  ezTime synchronization, power supply and build limitations.'
+  - ESP32
+  - Wi-Fi Clock
+  - RGB LED Matrix
+  - Tetris Clock
+  - PxMatrix
+  - HUB75
+  - Open Source Hardware
+draft: false
+seoTitle: "ESP32 Tetris Clock: Wi-Fi Time Sync and 64×32 RGB LED Matrix"
+seoDescription: "How Brian Lough’s ESP32 Tetris Clock works: 64×32 RGB LED
+  wiring, PxMatrix and TetrisAnimation, ezTime synchronization, power supply and
+  build limitations."
 ---
-
 When a conventional digital clock ticks over to the next minute, its digits simply change. Brian Lough’s **WiFi Tetris Clock** makes an event out of it. Colored tetrominoes fall across a 64×32 RGB LED matrix, settling into the numbers that show the current time. It is an uncomplicated idea with an unusually satisfying result—especially on a display large enough to sit on a desk rather than disappear into a project enclosure.
 
 The build uses a **P3 RGB matrix** with a 3 mm pixel pitch. At 64 columns by 32 rows, the active display area is roughly 192 × 96 mm. You can see the individual LEDs up close, but the clock is easy to read from across a room. The project is by Irish maker and Arduino developer **Brian Lough**, who published the code, wiring references and component choices on GitHub. The original design is also documented on [Hackaday.io](https://hackaday.io/project/168931-wifi-tetris-clock).
