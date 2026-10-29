@@ -55,6 +55,8 @@ const jsonld = {
   '@type': 'TechArticle',
   headline: article.data.title,
   description: article.data.description,
+  author: { '@type': 'Organization', '@id': 'https://embeddednote.com/#publisher', name: article.data.author },
+  publisher: { '@id': 'https://embeddednote.com/#publisher' },
   datePublished: article.data.pubDate.toISOString(),
   dateModified: (
     article.data.updatedDate ?? article.data.pubDate
@@ -85,9 +87,11 @@ const jsonld = {
     <h1>{article.data.title}</h1>
 
     <p class="meta">
-      {article.data.pubDate.toLocaleDateString(
-        lang === 'zh' ? 'zh-CN' : 'en-US'
-      )}
+      <time datetime={article.data.pubDate.toISOString().slice(0, 10)}>
+        {article.data.pubDate.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'})}
+      </time>
+      {' · '}
+      <span>{lang === 'zh' ? '作者：' : 'By '}{article.data.author}</span>
       {' · '}
       {article.data.tags.join(' / ')}
     </p>
