@@ -1,86 +1,85 @@
 ---
-title: 'HachimoDock: Meet the Desktop AI Buddy That Keeps Tabs on Your Coding Agents'
-description: 'Inside HachimoDock: an ESP32-P4 desk pet that follows Codex and Claude sessions, shows status animations and accepts voice or joystick input over USB.'
+title: 'HachimoDock: A Desktop AI Sidekick for Coding Agents and Xiaomi Home'
+description: 'HachimoDock puts Codex and Claude Code status on an ESP32-P4 desk pet, with USB session tracking, voice controls, PetUI widgets and optional Xiaomi MiLoCo integration.'
 locale: en
 translationKey: hachimodock-desktop-ai-buddy
 pubDate: '2026-10-29'
 category: open-source
 tags:
-- HachimoDock
-- ESP32-P4
-- AI Agent
-- Desktop AI Buddy
-- Codex
-- Claude
-- MIPI-DSI
-- PetUI
+  - HachimoDock
+  - ESP32-P4
+  - AI Agent
+  - Desktop AI Sidekick
+  - Codex
+  - Claude Code
+  - MIPI-DSI
+  - PetUI
+  - Xiaomi MiLoCo
 draft: false
 author: EmbeddedNote
 sourceUrl: https://github.com/YizhengWw/HachimoDock
-seoTitle: 'HachimoDock: An ESP32-P4 Desktop AI Buddy for Codex and Claude'
-seoDescription: 'Inside the HachimoDock desk pet: ESP32-P4, 480×640 DSI display, Agent sessions over USB, PetUI widgets, MiLoCo integration and open hardware files.'
+seoTitle: 'HachimoDock: ESP32-P4 Desktop AI Sidekick for Codex and Claude Code'
+seoDescription: 'How HachimoDock tracks coding agents over USB, animates an ESP32-P4 desktop pet, supports PetUI widgets and bridges Xiaomi Home through MiLoCo.'
 ---
 
-Coding agents are good at taking over a task, but they are not especially good at telling you when to look back at the terminal. A long Codex or Claude session may be reading a repository, calling tools, waiting for approval, or sitting on an error. HachimoDock makes those states visible without another application window: a small West Highland terrier on your desk changes its expression, animation and speech bubble as the job progresses. The project has drawn attention in China following reports of incubation by a Xiaomi innovation team, although the GitHub repository is maintained under an individual's account and this is not a Xiaomi retail product. The hardware is documented separately on OSHWHub. [Conference coverage](https://www.ithome.com/1/017/842.htm) gives some background.
+When you hand a coding job to Codex or Claude Code, the awkward part isn't always the wait. It's figuring out whether the agent is still working, calling a tool, or sitting at an approval prompt while you're doing something else. You can keep switching back to the terminal, or you can put HachimoDock on your desk. Its small screen shows a West Highland terrier that reacts to the agent's current state—thinking, working, waiting for input, finished or failed. A glance across the desk is enough to tell whether you need to step in.
 
-![HachimoDock desktop device beside a laptop](https://image.lceda.cn/oshwhub/pullImage/6c47814b144549beb179528ea77cd75e.png)
+HachimoDock, also known in Chinese as the *Hachimi machine*, was presented at the 2026 Guancha conference; [Chinese technology coverage](https://www.ithome.com/1/017/842.htm) describes it as a project incubated by a Xiaomi innovation team. The repository is maintained under an individual GitHub account, though, and it isn't a Xiaomi retail product. The [GitHub repository](https://github.com/YizhengWw/HachimoDock) holds the Windows/macOS desktop client and ESP32-P4 firmware. Schematics, PCB layout, BOM, enclosure models and assembly instructions are published separately on [OSHWHub](https://oshwhub.com/eda_gqvzlprk/project_cnbmkbjc), a Chinese open-hardware platform.
 
-*The HachimoDock device, with three keys and an orange joystick, beside its host computer. Source: project documentation.*
+![HachimoDock desktop device displaying a West Highland terrier](https://image.lceda.cn/oshwhub/pullImage/6c47814b144549beb179528ea77cd75e.png)
 
-It is tempting to describe the device as an AI speaker with a screen, but that misses the design. The ESP32-P4 does not run Codex, Claude or a local large language model. The host application watches desktop Agent sessions, normalizes the states it can obtain and sends updates over USB. The embedded firmware handles the pet animation, session bubbles and a small widget runtime called PetUI. Button, joystick and microphone events go the other way, back to the host. Integrations cover Codex, Claude, OpenClaw, MiMoCode and WorkBuddy, with different levels of session access. In particular, selecting a WorkBuddy bubble on the device does not automatically switch the corresponding desktop conversation.
+*HachimoDock on a desk: three mechanical keys, an orange joystick and a computer running the agent.*
 
-![HachimoDock active Agent session bubbles](https://raw.githubusercontent.com/YizhengWw/HachimoDock/main/assets/session-bubbles.webp)
+The hardware starts with a Waveshare **ESP32-P4-WIFI6-series** development board. Its ESP32-P4 is a dual-core RISC-V MCU with a high-performance core running at up to 400 MHz; the documented board carries **32 MB of PSRAM and 32 MB of flash**. The display is a **2.8-inch, 480 × 640 IPS panel connected over MIPI DSI**. That's a useful amount of space for character animations, subtitles and session bubbles without resorting to a more powerful application processor. Check the display's connector and cable version before ordering: the hardware guide lists 15- and 22-pin DSI variants, with a shaped cover glass as an enclosure option. Touch input isn't required.
 
-*Session bubbles indicate active tasks; completed and failed sessions remain visible briefly rather than disappearing immediately.*
+The board name includes Wi-Fi 6, but that shouldn't be confused with a Wi-Fi radio inside the ESP32-P4 itself. Wireless capability depends on the development board's companion hardware; **the current HachimoDock device runtime communicates with the host primarily over USB**.
 
-![HachimoDock functional architecture](/uploads/hachimodock/hachimodock-architecture-en.webp)
+Below the screen sit three Kailh **CPG135001D01** mechanical switches. A **YA13S-L7.4-B10Ka(60)-0-DL01** self-centering, 5 kΩ joystick adds four directions and a center press. Short and long presses give the firmware a total of twelve configurable input gestures. The audio hardware includes a microphone, small speaker and an ES8311 codec path; the firmware also supports an ES7210 capture path on suitable hardware. Audio is captured on the device and sent to the PC for speech recognition—it does not run a full ASR service on the P4.
 
-*Functional diagram assembled from the public documentation—not the project's electrical schematic.*
+![HachimoDock keys and four-way joystick](https://image.lceda.cn/oshwhub/pullImage/0187d6df22f74724acda54e111c7c850.png)
 
-### An ESP32-P4 board, a DSI display and actual controls
+*Three switches and a joystick provide most of the interaction; the display doesn't have to be touch-enabled.*
 
-The hardware is built around an **ESP32-P4** with dual-core RISC-V processing, a high-performance core rated up to 400 MHz, **32 MB of flash** and **32 MB of PSRAM** in the documented board configuration. Its **2.8-inch, 480 × 640 MIPI-DSI display** provides substantially more room for animations, subtitles and session cards than a tiny monochrome OLED. Three Kailh mechanical switches sit below the display, with a four-way joystick and center push to the right. A microphone and small speaker support the voice features. Short and long presses across the three keys and the joystick add up to twelve configurable input gestures.
+This isn't a custom ESP32-P4 motherboard built from scratch. The Waveshare module supplies the processor, memory and main interfaces, while a smaller carrier PCB brings the keys, joystick and connectors together. Two 2.54 mm, 20-position female headers join the boards. The [OSHWHub hardware page](https://oshwhub.com/eda_gqvzlprk/project_cnbmkbjc) shows the key and joystick connections in the schematic and the header footprint arrangement on **PCB_V1.2**. It's the right place to check actual pin assignments, enclosure dimensions and the BOM rather than relying on a product photo.
 
-![HachimoDock hardware close-up](https://image.lceda.cn/oshwhub/pullImage/0187d6df22f74724acda54e111c7c850.png)
+The hardware has changed direction along the way. Earlier versions explored a Radxa Cubie A7Z and a Raspberry Pi Zero 2W, including networked MQTT/HTTP approaches. The current design settled on an ESP32-P4 with a direct USB connection. You will still find MQTT in parts of the **PC-side bridge**, but that does **not** mean the current P4 firmware receives its status stream over MQTT. USB serial is the active device link.
 
-*The key-and-joystick enclosure. The project does not require a touch-sensitive display for its current interaction model.*
+![HachimoDock desktop-agent and ESP32-P4 architecture](/uploads/hachimodock/hachimodock-architecture-en.webp)
 
-This is not a fully custom ESP32-P4 mainboard. The Waveshare development board supplies the processor, memory and primary interfaces; the additional PCB organizes the switches, joystick and wiring into something that fits a compact enclosure. Everyday device-to-PC messaging runs over **USB-UART**. The hardware preserves the ESP32-P4's native USB High-Speed OTG capability, but that does not mean the current firmware exposes a USB video or audio class device. The LCD uses **DSI, not CSI**, and the display pinout and P4 chip revision need checking before ordering parts.
+*The host monitors agent sessions and exchanges state and input events with the ESP32-P4 over USB. See the hardware repository for electrical schematics.*
 
-The published bill of materials is also worth reading before trusting the often-quoted **¥150 build cost**. The listed prices put the Waveshare board at roughly ¥81.15, the 480 × 640 panel at ¥65, the joystick at ¥3.54 and three Kailh switches at ¥12.70, before adding a speaker and headers. Those listed items alone bring the partial total above **¥167**, without fully accounting for PCB fabrication, enclosure, shipping and assembly losses. The figure is an indicative DIY budget, not a delivered kit price. The [OSHWHub hardware project](https://oshwhub.com/eda_gqvzlprk/project_cnbmkbjc) contains the PCB, schematic preview, BOM, enclosure files and an assembly video attachment; those are the files to consult for component footprints and wiring rather than an editorial block diagram.
+The often-repeated **¥150 DIY cost** also deserves some context. The hardware listing quotes the Waveshare board from about **¥81.15**, the display at **¥65**, and the joystick from **¥3.54**. Those three parts alone approach ¥150, before the Kailh switches, speaker, headers, carrier PCB, printed case or shipping. It's a starting estimate, not the price of a ready-to-use kit. Before flashing anything, check the **ESP32-P4 silicon revision**: the project's complete v1 and v3 firmware images are not interchangeable, and a full flash can overwrite the device's settings and media assets.
 
-![HachimoDock button mappings in desktop manager](https://image.lceda.cn/oshwhub/pullImage/49606595868244acbb1fd15502b6f2df.png)
+The desktop manager handles the part that makes the pet useful: tracking agent state. The **Tauri/React manager** runs a local bridge that monitors the sessions exposed by Codex, Claude Code, OpenClaw and other supported agents. It normalizes what each integration can report, then sends the relevant updates to the P4 over USB. The display can show several active sessions as bubbles; the dog changes animation as a task starts working, calls tools or waits for approval. Completed and failed sessions remain visible for about a minute so the notification doesn't vanish as soon as the task ends. Capabilities differ between integrations: selecting a WorkBuddy bubble on the device, for example, does not automatically switch the active desktop conversation.
 
-*The management app allows physical controls to be remapped. This screenshot may represent an earlier UI revision.*
+![HachimoDock multiple agent session bubbles](https://raw.githubusercontent.com/YizhengWw/HachimoDock/main/assets/session-bubbles.webp)
 
-### From agent status display to a usable desktop tool
+*Session bubbles show the tasks the desktop integration can currently observe.*
 
-The software side is a **Tauri/React desktop client** with a bridge responsible for Agent sessions, speech recognition and USB messaging. Release builds are provided for Windows x64 and Apple-silicon Macs. The ESP32-P4 factory image includes the partition layout, default character and widget assets, not just the application executable. There are separate **v1 and v3 flashing packages** for different P4 revisions; mixing them is explicitly discouraged. A full flash can erase settings and media, whereas routine updates should use the desktop manager. The maintainer also notes that a Windows COM-port issue remains under investigation.
+![HachimoDock agent-state animation](https://raw.githubusercontent.com/YizhengWw/HachimoDock/main/assets/agent-status.gif)
 
-One particularly interesting feature is **PetUI**. Instead of hard-coding a permanently animated dog, the system lets a coding agent help create small tools or games—a Pomodoro timer, water reminder, task list, computer-status display or simple button-driven game. A bundled Skill generates component assets and interaction definitions, which the desktop manager validates against the 480 × 640 layout, device controls and memory limits before synchronization. Long-pressing the configured voice button starts input collection; the desktop performs ASR and routes a draft or message to the selected Agent, subject to its integration capabilities and confirmation flow. Speech services and generated character content require users to configure their own API credentials.
+*The bundled character animations change as an agent moves between states.*
+
+*The project also includes animation clips for “thinking” and “task completed”:*
+
+<video controls playsinline preload="none" width="720"><source src="https://raw.githubusercontent.com/YizhengWw/HachimoDock/main/pc/public/terrier-clips/working.thinking.mp4" type="video/mp4" /></video>
+
+<video controls playsinline preload="none" width="720"><source src="https://raw.githubusercontent.com/YizhengWw/HachimoDock/main/pc/public/terrier-clips/done.mp4" type="video/mp4" /></video>
+
+The controls are useful for more than checking progress. Hold the configured voice key and the device records audio; the host handles ASR and routes the resulting text into the selected agent's input flow. Some integrations leave the text as a draft until you confirm it. The keys and joystick can also switch between session bubbles, navigate widgets and provide shortcuts. A Westie is the default character, but you can import images and animation clips or generate a new character using a separately configured service. Public builds don't include anyone else's API credentials.
 
 ![HachimoDock voice input interface](https://image.lceda.cn/oshwhub/pullImage/0dddebc05c064f3a812d278b7c5dbe6e.png)
 
-*Speech recognition and message routing run on the desktop. How text is submitted depends on the selected Agent integration.*
+*Audio capture happens on the device; recognition and agent input routing happen on the PC.*
 
-![PetUI component center and game preview](https://image.lceda.cn/oshwhub/pullImage/410d87c82a0049d483f58391c23c5c72.jpg)
+Then there's **PetUI**, a runtime for small games and tools rather than just a single animated pet. The component manager can sync utilities such as a Pomodoro timer, task list, computer-status panel and stock watchlist, along with simple games. You can also ask a coding agent to build a new component using the project's `petui` Skill. Its output is checked against the **480 × 640 layout**, control mapping and resource limits before being copied to the device. The P4 runs the resulting component through its own widget runtime; it isn't executing arbitrary web JavaScript supplied by the agent.
 
-*PetUI components are managed on the PC and transferred to the device rather than installed from a cloud app store.*
+![HachimoDock PetUI component manager](https://image.lceda.cn/oshwhub/pullImage/410d87c82a0049d483f58391c23c5c72.jpg)
 
-![Official HachimoDock animated Agent states](https://raw.githubusercontent.com/YizhengWw/HachimoDock/main/assets/agent-status.gif)
+*PetUI components are managed on the computer and synchronized to the display.*
 
-*The official animated status sample shows how agent activity changes the character's behavior.*
+There is also an optional **Xiaomi MiLoCo** integration. Once a Xiaomi Home account is authorized on the desktop side, supported devices can be controlled through natural-language requests—playing music on a compatible speaker, for instance, or opening an available smart-home panel. That connection is handled by the PC software, not by having the ESP32-P4 join Xiaomi's network. The exact controls depend on the authorized devices and service configuration.
 
-<video controls playsinline preload="none" width="720"><source src="https://raw.githubusercontent.com/YizhengWw/HachimoDock/main/pc/public/terrier-clips/working.thinking.mp4" type="video/mp4" />If the video does not load, open the animation file in the source repository.</video>
+Check the licensing terms before turning the design into a product. Although the design files and source code are public, the current [HachimoDock license](https://github.com/YizhengWw/HachimoDock/blob/main/LICENSE) is **non-commercial and source-available**, not a standard open-source license such as GPL or MIT. Personal, non-commercial builds and modifications are permitted under its terms; selling kits, integrating it into a paid product or offering an independent commercial service requires separate written permission. An older GPL-3.0-only label on the hardware-sharing page does not override the current repository license, and the MiLoCo integration has additional Xiaomi license conditions.
 
-*An original “thinking” character animation asset—not a video of hardware assembly.*
-
-<video controls playsinline preload="none" width="720"><source src="https://raw.githubusercontent.com/YizhengWw/HachimoDock/main/pc/public/terrier-clips/done.mp4" type="video/mp4" />If this video does not load, view the clip in the source repository.</video>
-
-*The original “task completed” animation. An actual hardware assembly video is available from the [OSHWHub project attachments](https://oshwhub.com/eda_gqvzlprk/project_cnbmkbjc).*
-
-There is a Xiaomi connection beyond the event coverage. The desktop software includes **MiLoCo-based smart-home control**: once an authorized Xiaomi Home account is connected, supported devices can receive natural-language requests. The host performs that integration; the ESP32-P4 does not need to join the home network just to display Agent status. The MiLoCo implementation and associated materials have **separate Xiaomi license terms**, so compatibility should not be mistaken for unrestricted permission to distribute a commercial product.
-
-That licensing distinction extends to HachimoDock itself. Despite having public source code, firmware and PCB documentation, the current GitHub project uses a **custom non-commercial, source-available license**, not GPL or MIT. Personal non-commercial builds and modifications are permitted within its terms; paid hardware, commercial integration and independent services require separate written permission. The older GPL-3.0 label still visible on the hardware-sharing page does not override the current [repository license](https://github.com/YizhengWw/HachimoDock/blob/main/LICENSE). For a hobby build, there is plenty to study: the firmware, the desktop bridge, the PCBs and the resource pipeline are all accessible. Just check the screen pinout and chip revision before committing to the parts list.
-
-**Project links:** [Source and docs](https://github.com/YizhengWw/HachimoDock) · [PCB / schematic / BOM / assembly tutorial](https://oshwhub.com/eda_gqvzlprk/project_cnbmkbjc) · [Desktop and firmware releases](https://github.com/YizhengWw/HachimoDock/releases/latest) · [Flash and build instructions](https://github.com/YizhengWw/HachimoDock/blob/main/firmware/BUILD.md).
+For a hands-on build, start with the [repository README](https://github.com/YizhengWw/HachimoDock), the [OSHWHub hardware files](https://oshwhub.com/eda_gqvzlprk/project_cnbmkbjc) and the [firmware flashing guide](https://github.com/YizhengWw/HachimoDock/blob/main/firmware/BUILD.md). The wiring and chip revision are worth checking before you order parts or flash the complete image.
