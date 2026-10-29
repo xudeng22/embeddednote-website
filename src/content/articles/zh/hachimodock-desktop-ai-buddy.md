@@ -3,40 +3,41 @@ title: Github上有趣嵌入式项目——能盯AI任务、还能控制小米�
 description: HachimoDock用ESP32-P4与2.8英寸DSI屏把Codex、Claude等Agent的任务状态变成桌面宠物动画，还支持按键语音、PetUI组件和小米MiLoCo联动。
 locale: zh
 translationKey: hachimodock-desktop-ai-buddy
-pubDate: '2026-10-29'
+pubDate: 2026-10-29
 category: open-source
 tags:
-- HachimoDock
-- ESP32-P4
-- 桌面 AI
-- 小米 MiLoCo
-- AI Agent
-- MIPI-DSI
-- PetUI
+  - HachimoDock
+  - ESP32-P4
+  - 桌面 AI
+  - 小米 MiLoCo
+  - AI Agent
+  - MIPI-DSI
+  - PetUI
 draft: false
-author: EmbeddedNote
-sourceUrl: https://github.com/YizhengWw/HachimoDock
 seoTitle: HachimoDock桌面AI搭子：ESP32-P4、Codex状态跟随与小米MiLoCo联动
 seoDescription: 拆解HachimoDock哈基米机：ESP32-P4硬件、2.8英寸DSI屏、USB-Agent架构、PetUI语音交互、立创PCB/BOM与非商业许可证。
 ---
+做 AI 编程的人估计都有这个经历：把任务丢给 Codex 或 Claude，等它跑完，隔几分钟还得切回终端看看。它是在读文件、调用工具，还是停在某个授权弹窗前等你点确认？由小米技术委创新产品团队孵化的 HachimoDock 最近挺火，思路倒很直接——给电脑上的 Agent 安排一只桌面小狗。AI 忙着干活，旁边的桌面小狗也跟着换表情，思考、敲代码、等待确认、完成任务，一眼能看出来。
 
-做 AI 编程的人估计都有这个经历：把任务丢给 Codex 或 Claude，等它跑完，隔几分钟还得切回终端看看。它是在读文件、调用工具，还是停在某个授权弹窗前等你点确认？据发布会报道，由小米技术委创新产品团队孵化的 HachimoDock 最近挺火，思路倒很直接——给电脑上的 Agent 安排一只桌面小狗。AI 忙着干活，旁边的西高地也跟着换表情，思考、敲代码、等待确认、完成任务，一眼能看出来。它的名字叫哈基米机，正式项目名 HachimoDock。项目由个人账号维护，软件固件放在 Github，PCB 和复刻资料放在立创开源硬件平台，并不是一款已经在小米商城上架的成品。关于孵化背景，可参考[相关发布会报道](https://www.ithome.com/1/017/842.htm)。
+这只小狗的名字叫哈基米机，正式项目名 HachimoDock。项目由个人账号维护，软件固件放在 Github，PCB 和复刻资料放在立创开源硬件平台，并不是一款已经在小米商城上架的成品。
 
 ![HachimoDock桌面AI搭子实拍，西高地宠物显示在小屏幕上](https://image.lceda.cn/oshwhub/pullImage/6c47814b144549beb179528ea77cd75e.png)
 
 *桌面上的 HachimoDock：前面三个实体键，右侧橙色摇杆，后面是一台运行 Agent 的电脑。图源：项目官方。*
 
-拿它当“AI 音箱”就理解错了。小屏本身不运行 Codex，也不在 ESP32-P4 上跑大模型推理。电脑端管理软件负责盯住 Agent Session，把工作状态、会话标题和需要用户处理的事件整理出来，经 USB 发给桌面设备。ESP32-P4 负责渲染宠物动画、状态气泡和 PetUI 小组件；反过来，按键、摇杆、麦克风产生的输入，也走 USB 交回电脑处理。支持的 Agent 包括 Codex、Claude、OpenClaw、MiMoCode、WorkBuddy，但**会话自动切换和可获取的信息因各家接口而异**。例如 WorkBuddy 不能只靠小屏切换气泡就自动切换电脑上的对话。
+*Github地址*
+
+[https://github.com/YizhengWw/HachimoDock](https://github.com/YizhengWw/HachimoDock)
+
+立创开源硬件平台地址
+
+[https://oshwhub.com/eda_gqvzlprk/project_cnbmkbjc](https://oshwhub.com/eda_gqvzlprk/project_cnbmkbjc)
+
+HachimoDock有个小屏幕，小屏本身不运行 Codex，也不在 ESP32-P4 上跑大模型推理。电脑端管理软件负责盯住 Agent Session，把工作状态、会话标题和需要用户处理的事件整理出来，经 USB 发给桌面设备。ESP32-P4 负责渲染宠物动画、状态气泡和 PetUI 小组件；反过来，按键、摇杆、麦克风产生的输入，也走 USB 交回电脑处理。支持的 Agent 包括 Codex、Claude、OpenClaw、MiMoCode、WorkBuddy，但**会话自动切换和可获取的信息因各家接口而异**。例如 WorkBuddy 不能只靠小屏切换气泡就自动切换电脑上的对话。
 
 ![HachimoDock Agent Session气泡界面](https://raw.githubusercontent.com/YizhengWw/HachimoDock/main/assets/session-bubbles.webp)
 
 *多个 Agent Session 以气泡呈现；完成和报错的任务会保留一段时间，避免提示一闪而过。*
-
-![HachimoDock系统架构框图](/uploads/hachimodock/hachimodock-architecture-zh.webp)
-
-*根据项目公开资料整理的功能架构图，不是电路原理图。*
-
-### 2.8 英寸小屏，硬件倒不是玩具
 
 主控选的是 **ESP32-P4**，双核 RISC-V，高性能核心最高 400 MHz；配套方案标注 32MB Flash 和 32MB PSRAM。显示屏是 **2.8 英寸、480×640 的 MIPI-DSI 竖屏**。这个选型挺有意思，通常 DIY 桌宠会找一块 SPI 小屏将就，HachimoDock 直接上 DSI，动画、字幕、气泡能分出更细的层次。机身留了三个凯华机械按键和一个四向带中键摇杆，还配麦克风、扬声器。三键各有短按/长按，摇杆四向与中键同样能配置动作，总计 12 种交互手势。这里尤其要注意，**当前交互主要靠实体按键、摇杆和语音，屏幕不要求具备触摸功能**。
 
@@ -70,16 +71,16 @@ seoDescription: 拆解HachimoDock哈基米机：ESP32-P4硬件、2.8英寸DSI屏
 
 *官方状态动画：Agent 工作、等待或完成时，宠物会作出不同反馈。*
 
-<video controls playsinline preload="none" width="720"><source src="https://raw.githubusercontent.com/YizhengWw/HachimoDock/main/pc/public/terrier-clips/working.thinking.mp4" type="video/mp4" />浏览器不支持内嵌视频时，可从 Github 查看对应动画素材。</video>
+浏览器不支持内嵌视频时，可从 Github 查看对应动画素材。
 
 *上面是仓库里的“思考中”宠物动画素材，不是硬件装配演示。*
 
-<video controls playsinline preload="none" width="720"><source src="https://raw.githubusercontent.com/YizhengWw/HachimoDock/main/pc/public/terrier-clips/done.mp4" type="video/mp4" />浏览器不支持内嵌视频时，请从 Github 查看素材。</video>
+浏览器不支持内嵌视频时，请从 Github 查看素材。
 
 *官方“任务完成”动作素材。完整装配视频请到[立创项目附件](https://oshwhub.com/eda_gqvzlprk/project_cnbmkbjc)下载。*
 
 小米相关的部分也不是只贴个 logo。项目在桌面端接入 **MiLoCo**，获得米家账号授权后，部分已授权设备可以接受自然语言指令，比如控制智能灯具；实际能力要看账号、设备及服务权限。**这条链路由电脑端完成，不是 ESP32-P4 自己接入米家局域网。**第三方 MiLoCo 还有单独的 Xiaomi 许可条件，不能因为它跟 HachimoDock 一起使用，就默认拿到商业授权。
 
-最后说个复刻前必须看的地方：Github 当前版本把项目定位为 **non-commercial source-available**，自有源码允许个人非商业学习、修改和复刻，但做收费产品、商业集成或独立衍生服务需要权利人另行书面授权；它不是 GPL、MIT 那类标准开源许可。立创页面较早的 GPL-3.0 标注与当前仓库不一致，准备拿去做产品的人要看最新 [LICENSE](https://github.com/YizhengWw/HachimoDock/blob/main/LICENSE)。对个人玩家来说，原理图、PCB、BOM、桌面端源码和固件都能找到，已经足够动手研究；但先买对屏、对主控修订版，再决定要不要给桌上添只哈基米。
+最后说个复刻前必须看的地方：Github 当前版本把项目定位为 **non-commercial source-available**，自有源码允许个人非商业学习、修改和复刻，但做收费产品、商业集成或独立衍生服务需要权利人另行书面授权；它不是 GPL、MIT 那类标准开源许可。立创页面较早的 GPL-3.0 标注与当前仓库不一致，准备拿去做产品的人要看最新 [LICENSE](https://github.com/YizhengWw/HachimoDock/blob/main/LICENSE)。
 
 **相关资料：** [项目源码及说明](https://github.com/YizhengWw/HachimoDock) · [硬件原理图 / PCB / BOM / 装配视频](https://oshwhub.com/eda_gqvzlprk/project_cnbmkbjc) · [最新客户端与烧录包](https://github.com/YizhengWw/HachimoDock/releases/latest) · [固件烧录指南](https://github.com/YizhengWw/HachimoDock/blob/main/firmware/BUILD.md)。
