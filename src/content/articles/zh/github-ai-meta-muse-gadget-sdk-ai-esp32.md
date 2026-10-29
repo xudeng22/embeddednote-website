@@ -1,5 +1,5 @@
 ---
-title: GitHub 上的 AI 硬件项目：Meta 开源的 Muse Gadget SDK，把 AI 智能体塞进一块 ESP32
+title: Github 上的 AI 硬件项目：Meta 开源的 Muse Gadget SDK，把 AI 智能体塞进一块 ESP32
 description: "Meta Muse Gadget SDK 为 ESP32 和 Linux 设备提供 AI 交互反馈。本文介绍开发板支持、交互状态与嵌入式实现思路。"
 locale: zh
 translationKey: github-ai-meta-muse-gadget-sdk-ai-esp32

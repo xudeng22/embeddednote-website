@@ -1,5 +1,5 @@
 ---
-title: GitHub 上超小巧的嵌入式项目：把航班雷达塞进 1.28 寸圆屏里
+title: Github 上超小巧的嵌入式项目：把航班雷达塞进 1.28 寸圆屏里
 description: 利用 ESP32-C3、1.28 英寸圆屏和 OpenSky 航空数据制作桌面航班雷达，分析网页配置、轨迹预测及双缓冲显示。
 locale: zh
 translationKey: micro-radar-esp32-c3
@@ -11,7 +11,7 @@ tags:
 - GC9A01
 - Micro Radar
 draft: false
-seoTitle: GitHub 上超小巧的嵌入式项目：把航班雷达塞进 1.28 寸圆屏里
+seoTitle: Github 上超小巧的嵌入式项目：把航班雷达塞进 1.28 寸圆屏里
 seoDescription: 利用 ESP32-C3、1.28 英寸圆屏和 OpenSky 航空数据制作桌面航班雷达，分析网页配置、轨迹预测及双缓冲显示。
 ---
 

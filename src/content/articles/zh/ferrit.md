@@ -1,5 +1,5 @@
 ---
-title: GitHub 开源 FERRIT：最大 256MB 的 F-RAM 存档设备，目标保存 200 年
+title: Github 开源 FERRIT：最大 256MB 的 F-RAM 存档设备，目标保存 200 年
 description: Machdyne FERRIT 用可更换的 F-RAM 卡、RP2040 控制器和 USB Mass Storage 接口，构建容量最高 256MB 的长期数据存档平台。
 locale: zh
 translationKey: ferrit

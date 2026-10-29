@@ -1,5 +1,5 @@
 ---
-title: GitHub 上超酷嵌入式项目：个人开源的带大模型推理的 2U 小卫星
+title: Github 上超酷嵌入式项目：个人开源的带大模型推理的 2U 小卫星
 description: KENSAT 2U 小卫星方案用 PIC24 管理电源与故障恢复，Jetson Orin Nano 运行 TinyLlama，并通过 UHF 回传结果。
 locale: zh
 translationKey: kensat-2u-cubesat-llm
@@ -11,7 +11,7 @@ tags:
 - TinyLlama
 - UHF
 draft: false
-seoTitle: GitHub 上超酷嵌入式项目：个人开源的带大模型推理的 2U 小卫星
+seoTitle: Github 上超酷嵌入式项目：个人开源的带大模型推理的 2U 小卫星
 seoDescription: KENSAT 2U 小卫星方案用 PIC24 管理电源与故障恢复，Jetson Orin Nano 运行 TinyLlama，并通过 UHF 回传结果。
 ---
 

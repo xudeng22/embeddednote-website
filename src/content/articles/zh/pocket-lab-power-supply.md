@@ -1,5 +1,5 @@
 ---
-title: GitHub 上实用开源嵌入式项目：口袋实验室电源，20V/5A 可调，支持 PD 快充
+title: Github 上实用开源嵌入式项目：口袋实验室电源，20V/5A 可调，支持 PD 快充
 description: 从 USB-C PD 取电到电池充电、TPS55289 升降压、电流检测与 eFuse 保护，拆解一台 20V/5A 便携式开源实验室电源。
 locale: zh
 translationKey: pocket-lab-power-supply
@@ -11,7 +11,7 @@ tags:
 - TPS55289
 - 开源硬件
 draft: false
-seoTitle: GitHub 上实用开源嵌入式项目：口袋实验室电源，20V/5A 可调，支持 PD 快充
+seoTitle: Github 上实用开源嵌入式项目：口袋实验室电源，20V/5A 可调，支持 PD 快充
 seoDescription: 从 USB-C PD 取电到电池充电、TPS55289 升降压、电流检测与 eFuse 保护，拆解一台 20V/5A 便携式开源实验室电源。
 ---
 

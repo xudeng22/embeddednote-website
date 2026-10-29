@@ -1,5 +1,5 @@
 ---
-title: GitHub 上超硬核嵌入式项目：32 颗 IMU 与 FPGA 阵列，探索地震检波器替代方案
+title: Github 上超硬核嵌入式项目：32 颗 IMU 与 FPGA 阵列，探索地震检波器替代方案
 description: 32 颗 ICM-42688-P、iCE40 FPGA 与 RP2040 组成 MEMS 阵列，分析同步采样、低频噪声、艾伦方差与传感器标定。
 locale: zh
 translationKey: imu-array-32-fpga
@@ -11,7 +11,7 @@ tags:
 - RP2040
 - ICM-42688-P
 draft: false
-seoTitle: GitHub 上超硬核嵌入式项目：32 颗 IMU 与 FPGA 阵列，探索地震检波器替代方案
+seoTitle: Github 上超硬核嵌入式项目：32 颗 IMU 与 FPGA 阵列，探索地震检波器替代方案
 seoDescription: 32 颗 ICM-42688-P、iCE40 FPGA 与 RP2040 组成 MEMS 阵列，分析同步采样、低频噪声、艾伦方差与传感器标定。
 ---
 

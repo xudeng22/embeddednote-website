@@ -1,5 +1,5 @@
 ---
-title: GitHub 开源项目：RP2350 驱动的 21×22 LED 流体模拟胸牌
+title: Github 开源项目：RP2350 驱动的 21×22 LED 流体模拟胸牌
 description: Nick Johnson 的 flip-card 将 RP2350、21×22 LED 阵列与 Rust/Embassy 固件结合，把 FLIP 流体模拟做进名片尺寸的硬件。
 locale: zh
 translationKey: flip-card

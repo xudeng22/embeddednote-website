@@ -1,5 +1,5 @@
 ---
-title: GitHub 上超硬核嵌入式项目：伯克利开源人形机器人 Berkeley Humanoid Lite
+title: Github 上超硬核嵌入式项目：伯克利开源人形机器人 Berkeley Humanoid Lite
 description: 伯克利开源人形机器人使用 3D 打印结构、摆线减速 BLDC 执行器、CAN 总线与强化学习，实现低成本可复现设计。
 locale: zh
 translationKey: berkeley-humanoid-lite
@@ -11,7 +11,7 @@ tags:
 - 3D Printing
 - Reinforcement Learning
 draft: false
-seoTitle: GitHub 上超硬核嵌入式项目：伯克利开源人形机器人 Berkeley Humanoid Lite
+seoTitle: Github 上超硬核嵌入式项目：伯克利开源人形机器人 Berkeley Humanoid Lite
 seoDescription: 伯克利开源人形机器人使用 3D 打印结构、摆线减速 BLDC 执行器、CAN 总线与强化学习，实现低成本可复现设计。
 ---
 
