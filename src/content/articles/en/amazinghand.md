@@ -101,3 +101,7 @@ A hand-tracking demonstration is available on [YouTube](https://www.youtube.com/
 The published design provides the mechanics and code needed to experiment with articulated fingers. It has not, however, been validated as an industrial gripper. The developers note that 3D-printing tolerances, individually adjusted linkages and the flexibility of the printed structure can make actual joint angles differ from the ideal model. The hand has also not been qualified for prolonged, high-load grasping.
 
 The SCS0009's position and load-related feedback provides a starting point for better closed-loop grasp control, but additional software is needed to regulate contact and protect the actuators in demanding tasks. The repository tracks ongoing work in its **[Amazing Hand Enhanced](https://github.com/pollen-robotics/AmazingHand/tree/Amazing-Hand-Enhanced/AmazingHand_Enhanced)** branch.
+
+<!-- embeddednote-seo-p2:internal-links:start -->
+For a different use of robotic grippers, [Jumper's 22-DoF platform](/en/articles/a-hardcore-new-open-source-project-on-github-jumper-the-22-dof-crab-robot-fully-open-source-from-training-to-on-device-deployment/) combines two claws with four walking legs and a MuJoCo-based training pipeline.
+<!-- embeddednote-seo-p2:internal-links:end -->

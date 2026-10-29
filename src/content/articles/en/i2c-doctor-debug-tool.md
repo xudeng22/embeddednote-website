@@ -12,7 +12,9 @@ tags:
 - Open Hardware
 draft: false
 seoTitle: 'I²C Doctor: ESP32-Based Bus Debugging Tool'
-seoDescription: I²C Doctor is a standalone ESP32-based bus diagnostic tool with a color screen, rise-time measurements, address scanning and practical fault reports.
+seoDescription: 'I²C Doctor uses an ESP32, address scanning, rise-time measurements and switchable pull-ups to help trace wiring and signal-integrity faults.'
+author: 'EmbeddedNote'
+sourceUrl: 'https://i2c-doctor.com/docs.html#downloads'
 ---
 
 I²C Doctor is a compact, standalone diagnostic instrument built around a 1.3-inch color TFT display. It can scan, analyze, debug, and test an I²C bus in real time. Rather than requiring you to spend hours interpreting oscilloscope traces, it presents a bus health score from 0 to 100% along with specific suggestions for what to check.
@@ -36,6 +38,10 @@ I²C Doctor is a compact, standalone diagnostic instrument built around a 1.3-in
 
 **Standalone operation.** With its own screen and USB-C power, it can be used on-site without a connected computer.
 
+<!-- embeddednote-seo-p2:i2c-note:start -->
+**A scan isn't a signal-integrity test.** Finding a device address only means something responded. Slow SDA/SCL edges or marginal pull-ups can still cause intermittent errors, especially as bus speed increases. Check the rise-time reading and pull-up setting before blaming the firmware.
+<!-- embeddednote-seo-p2:i2c-note:end -->
+
 ## Schematic
 
 ![i2c doctor debug tool — figure 2](/uploads/i2c-doctor-debug-tool/i2c-doctor-debug-tool-02.webp)
@@ -51,3 +57,7 @@ During a scan, it measures voltages, checks for shorts, evaluates rise time and 
 ![i2c doctor debug tool — figure 4](/uploads/i2c-doctor-debug-tool/i2c-doctor-debug-tool-04.webp)
 
 The price is less appealing than the feature list: the article lists I²C Doctor at $59.
+
+<!-- embeddednote-seo-p2:internal-links:start -->
+For a different kind of open-hardware bench instrument, [ArbWave30](/en/articles/arbwave30-waveform-generator/) covers an FPGA-based 30 MHz waveform generator rather than a bus fault finder.
+<!-- embeddednote-seo-p2:internal-links:end -->
