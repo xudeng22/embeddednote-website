@@ -30,7 +30,15 @@ seoDescription: 1.54英寸200×200电子纸实现约30
 
 这儿有个容易误会的数字：**Game Boy 模拟器约以 59.7 fps 运行，电子纸端每 33.3 ms 取一次最新画面，约合 30 次更新/秒**。画面忙时可能掉帧，而且像素需要多次短脉冲才能达到目标灰度，不能理解成每个像素都在 33 ms 内彻底稳定。
 
-
+<iframe
+  title="InkBoy — original Game Boy on e-paper demo at 30 FPS"
+  src="https://www.youtube-nocookie.com/embed/XiZmM6hwwAU"
+  loading="lazy"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+  style="display:block;width:100%;max-width:900px;aspect-ratio:16/9;border:0;border-radius:8px;"
+></iframe>
 
 *作者原始演示视频：[GameBoy on E-Paper ESP32 at 30FPS](https://www.youtube.com/watch?v=XiZmM6hwwAU)。如果网页内无法播放，可点击链接在 YouTube 观看。*
 

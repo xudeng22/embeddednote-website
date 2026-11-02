@@ -34,7 +34,15 @@ The SSD1681 has two image planes, each 5,000 bytes for this 200 × 200 panel. In
 
 There is an important distinction behind the headline figure. **The Game Boy emulator runs at approximately 59.7 fps; the display takes the newest completed image every 33.3 ms**, giving it about 30 update opportunities per second. It drops stale frames rather than queueing them. A busy scene can miss that pace, and a pixel may need several short pulses before reaching its intended shade. In other words, 30 fps does not mean every pixel has fully settled in 33 ms.
 
-
+<iframe
+  title="InkBoy — original Game Boy on e-paper demo at 30 FPS"
+  src="https://www.youtube-nocookie.com/embed/XiZmM6hwwAU"
+  loading="lazy"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+  style="display:block;width:100%;max-width:900px;aspect-ratio:16/9;border:0;border-radius:8px;"
+></iframe>
 
 *The developer's [original Game Boy-on-e-paper demonstration](https://www.youtube.com/watch?v=XiZmM6hwwAU). If the embedded player is blocked, the link opens the video on YouTube.*
 
@@ -45,3 +53,4 @@ The hardware is a **Waveshare ESP32-S3-ePaper-1.54 V2** board with a built-in mi
 One warning deserves more attention than the frame-rate number: these are **experimental drive waveforms**. The maintainer explicitly cautions that sustained high-speed operation may cause permanent image retention or panel damage, and long-term lifetime has not been validated. This is an ingenious demonstration of what careful waveform control can extract from a familiar e-paper module—not a general claim that e-paper panels can safely refresh at 30 fps.
 
 **Further reading:** [InkBoy source and build instructions](https://github.com/kuslota/InkBoy) · [Per-pixel drive explanation](https://github.com/kuslota/InkBoy/blob/main/docs/how-it-works.md) · [Hackaday's original report](https://hackaday.com/2026/10/14/tiny-e-paper-display-delivers-30-fps-of-game-boy-fun/).
+
