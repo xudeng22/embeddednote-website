@@ -1,24 +1,25 @@
 ---
 title: "Looking Beyond ESP32: GigaDevice's GD32VW553-UNIFI Wi-Fi 6 Module"
-description: "A closer look at GigaDevice's GD32VW553-UNIFI module: a 160 MHz RISC-V MCU, 2.4 GHz Wi-Fi 6, Bluetooth LE 5.2, and four antenna/temperature options."
-locale: "en"
-translationKey: "gd32vw553-unifi-wifi6-ble-module"
-pubDate: "2025-12-19"
-category: "mcu-soc"
+description: "A closer look at GigaDevice's GD32VW553-UNIFI module: a 160 MHz
+  RISC-V MCU, 2.4 GHz Wi-Fi 6, Bluetooth LE 5.2, and four antenna/temperature
+  options."
+locale: en
+translationKey: gd32vw553-unifi-wifi6-ble-module
+pubDate: 2025-12-19
+category: mcu-soc
 tags:
-  - "GD32VW553-UNIFI"
-  - "GigaDevice"
-  - "RISC-V"
-  - "Wi-Fi 6"
-  - "Bluetooth LE 5.2"
-  - "Wireless Modules"
+  - GD32VW553-UNIFI
+  - GigaDevice
+  - RISC-V
+  - Wi-Fi 6
+  - Bluetooth LE 5.2
+  - Wireless Modules
 draft: false
-author: "EmbeddedNote"
-sourceUrl: "https://www.gigadevice.com/product/mcu/wireless-mcus/gd32vw553-series/gd32vw553"
 seoTitle: "GigaDevice GD32VW553-UNIFI: A Wi-Fi 6 Alternative to Consider Alongside ESP32"
-seoDescription: "Explore GD32VW553-UNIFI specifications, module variants, 2.4 GHz Wi-Fi 6, BLE 5.2, antenna choices and the practical trade-offs for embedded designs."
+seoDescription: Explore GD32VW553-UNIFI specifications, module variants, 2.4 GHz
+  Wi-Fi 6, BLE 5.2, antenna choices and the practical trade-offs for embedded
+  designs.
 ---
-
 If you're designing a connected sensor, controller or small appliance, an ESP32 is an obvious place to start. It isn't the only option, though. GigaDevice's **GD32VW553-UNIFI** is a self-contained wireless module built around the company's GD32VW553 microcontroller. It combines **2.4 GHz Wi-Fi 6** and **Bluetooth Low Energy 5.2** with a 32-bit RISC-V CPU, giving designers another part to evaluate when an application needs both wireless connectivity and local control.
 
 ![GD32VW553-UNIFI wireless module overview and antenna options](/uploads/gd32vw553-unifi-wifi6-ble-module/gd32vw553-unifi-wifi6-ble-module-cover.webp)
@@ -49,4 +50,4 @@ The module runs from a **3.0–3.6 V supply**. Designers should use the **module
 
 What the module does **not** offer is drop-in ESP32 compatibility. A project built around ESP-IDF, Arduino-ESP32 or a particular ESP32 pinout will need a separate porting assessment. GigaDevice supplies a GD32VW55x Wi-Fi/BLE SDK and supporting development documentation, but library availability, firmware maintenance and the board's eventual certification requirements still belong on the selection checklist.
 
-For the original module specifications, see GigaDevice's [GD32VW553 product information](https://www.gigadevice.com/product/mcu/wireless-mcus/gd32vw553-series/gd32vw553) and [GD32VW553-UNIFI datasheet (Rev. 1.2)](https://www.gd32mcu.com/data/documents/datasheet/GD32VW553-UNIFI%20Datasheet%20Rev1.2.pdf). The [Rev. 1.1 datasheet](https://www.gd32mcu.com/data/documents/datasheet/GD32VW553-UNIFI%20datasheet%20Rev1.1%2020250225.pdf) cited in the source article remains useful for checking earlier documentation.
+For the original module specifications, see GigaDevice's [GD32VW553 product information](https://www.gigadevice.com/product/mcu/wireless-mcus/gd32vw553-series/gd32vw553) and [GD32VW553-UNIFI datasheet (Rev. 1.2)](https://www.gd32mcu.com/data/documents/datasheet/GD32VW553-UNIFI%20Datasheet%20Rev1.2.pdf).
