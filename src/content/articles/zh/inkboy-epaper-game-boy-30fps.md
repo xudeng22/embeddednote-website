@@ -1,32 +1,28 @@
 ---
 title: 电子纸竟能跑30 FPS？ESP32-S3把Game Boy搬上1.54英寸墨水屏
-description: InkBoy在ESP32-S3和1.54英寸200×200电子纸上演示约30次/秒的Game Boy画面更新，解析SSD1681逐像素驱动、双显示模式和面板寿命风险。
+description: InkBoy在ESP32-S3和1.54英寸200×200电子纸上演示约30次/秒的Game
+  Boy画面更新，解析SSD1681逐像素驱动、双显示模式和面板寿命风险。
 locale: zh
 translationKey: inkboy-epaper-game-boy-30fps
-pubDate: '2026-10-15'
-updatedDate: '2026-11-02'
-category: mcu-soc
+pubDate: 2026-10-15
+category: display
 tags:
-- InkBoy
-- ESP32-S3
-- 电子纸
-- Game Boy
-- SSD1681
-- 30 FPS
+  - InkBoy
+  - ESP32-S3
+  - 电子纸
+  - Game Boy
+  - SSD1681
+  - 30 FPS
 draft: false
-author: EmbeddedNote
-sourceUrl: https://hackaday.com/2026/10/14/tiny-e-paper-display-delivers-30-fps-of-game-boy-fun/
 seoTitle: ESP32-S3电子纸跑Game Boy：InkBoy如何实现约30 FPS更新
-seoDescription: 1.54英寸200×200电子纸实现约30 FPS更新？看InkBoy如何用SSD1681短波形、逐像素HOLD和ESP32-S3运行Game Boy，以及残影和寿命风险。
+seoDescription: 1.54英寸200×200电子纸实现约30
+  FPS更新？看InkBoy如何用SSD1681短波形、逐像素HOLD和ESP32-S3运行Game Boy，以及残影和寿命风险。
 ---
-
 一块 1.54 英寸电子纸，正常局部刷新要几百毫秒，拿来玩 Game Boy，听着就像故意给自己找麻烦。开发者 Bo Made It 偏偏在微雪 ESP32-S3 开发板上做出了约 **30 FPS** 的演示：画面能跟着游戏动，黑白像素和四级灰阶都能跑。项目叫 **InkBoy**，用的是 200×200 电子纸，并不是换了一块高刷 LCD。10 月 14 日，Hackaday 报道了这个实验。
 
 ![InkBoy 1.54 英寸电子纸运行 Game Boy 的专题封面](/uploads/inkboy/inkboy-cover.webp)
 
 *文章封面为编辑绘制的示意图，下面是作者项目的原始演示图片和视频。*
-
-![InkBoy 在微雪电子纸开发板上运行 Game Boy 游戏的官方演示图](https://raw.githubusercontent.com/kuslota/InkBoy/main/docs/thumbnail.png)
 
 ### 30 FPS 是怎么挤出来的
 
@@ -34,7 +30,7 @@ seoDescription: 1.54英寸200×200电子纸实现约30 FPS更新？看InkBoy如�
 
 这儿有个容易误会的数字：**Game Boy 模拟器约以 59.7 fps 运行，电子纸端每 33.3 ms 取一次最新画面，约合 30 次更新/秒**。画面忙时可能掉帧，而且像素需要多次短脉冲才能达到目标灰度，不能理解成每个像素都在 33 ms 内彻底稳定。
 
-<iframe title="InkBoy Game Boy on e-paper at 30 FPS — original developer demo" src="https://www.youtube-nocookie.com/embed/XiZmM6hwwAU" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="display:block;width:100%;max-width:900px;aspect-ratio:16/9;border:0;border-radius:8px;"></iframe>
+
 
 *作者原始演示视频：[GameBoy on E-Paper ESP32 at 30FPS](https://www.youtube.com/watch?v=XiZmM6hwwAU)。如果网页内无法播放，可点击链接在 YouTube 观看。*
 
@@ -46,4 +42,3 @@ seoDescription: 1.54英寸200×200电子纸实现约30 FPS更新？看InkBoy如�
 
 **项目资料：** [InkBoy GitHub 源码](https://github.com/kuslota/InkBoy) · [逐像素驱动说明](https://github.com/kuslota/InkBoy/blob/main/docs/how-it-works.md) · [Hackaday 原报道](https://hackaday.com/2026/10/14/tiny-e-paper-display-delivers-30-fps-of-game-boy-fun/)。
 
-*资料更新（2026 年 11 月）：Hackaday 于 10 月 14 日刊文时表示源码尚未公开；目前开发者已开放 InkBoy 仓库，故补充上述链接。*
