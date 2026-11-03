@@ -12,358 +12,347 @@ seoDescription: "All 41 builds from You Can Just Build Things, with individual l
 author: "EmbeddedNote"
 sourceUrl: "https://youcanjustbuildthings.openai.chatgpt.site/"
 ---
-Someone has turned a ten-year-old Kindle into an AI usage dashboard. Another maker has 3D-printed a magnifier that clips onto an insulin pen. An M5Stack StickS3 sits in the hot shoe of a RICOH GR camera, acting as a tiny wireless viewfinder. Keep scrolling and there are litter-picking robots, ESP32 greenhouse controls, and a pendant for talking to an agent running on a Mac. They have little in common beyond the fact that their builders used Codex somewhere along the way.
 
-OpenAI has collected these builds at [You Can Just Build Things](https://youcanjustbuildthings.openai.chatgpt.site/). The most-upvoted view showed **41 entries on November 3, 2026**. Some makers have shared source code and assembly details; others have posted a prototype or a demo. Project Tabletop even appears in two versions. We have kept the gallery order and linked each entry. The photographs come from the corresponding project pages; click one to see its original submission. This is a record of **41 showcased builds**, not a claim that all 41 have published designs or independently verified performance.
+A decade-old Kindle now displays AI usage instead of books. A maker has clipped a height-adjustable magnifier onto an insulin pen, while another has fitted a tiny M5Stack viewfinder to the hot shoe of a Ricoh GR camera. Further down the gallery are a tracked litter-picking robot, greenhouse curtains controlled by an ESP32 and a voice-agent pendant you can wear. The projects have little else in common, but each maker used Codex somewhere in the build.
 
-## 01–10: From e-paper dashboards to portable voice agents
+OpenAI has collected them at You Can Just Build Things. On November 3, 2026, the most-upvoted view contained 41 entries. Some builders shared code and build notes; others showed a finished object or an early prototype. An interactive projector game appears in two versions. We follow the gallery's order, with a photograph from the corresponding submission under each entry. Click any photograph to open the maker's page. These are 41 showcased projects, not 41 independently tested open-hardware designs.
+
+Links:
+
+https://youcanjustbuildthings.openai.chatgpt.site/
+
+https://embeddednote.com/en/articles/codex-hardware-41-projects-2026/
+
+## 01–10: From e-paper dashboards to portable voice assistants
 
 ### 01. Kindle AI Usage Display
 
-<!-- CODEX41_OFFICIAL_IMAGE_01 -->
+A Kindle that's roughly ten years old is repurposed as an always-on AI usage dashboard. It brings together usage from Codex, Claude Code, Cursor, Copilot and Gemini, showing monthly totals, estimated spending and the share attributable to each tool. About every six hours the Kindle connects to fetch a new image, refreshes its e-paper screen and goes back to sleep. The build uses a jailbroken Kindle, FBInk for drawing, a Node.js data service and scheduled collection. It's a good example of giving aging e-paper hardware a second job.
 
-A decade-old Kindle becomes a low-power dashboard for AI usage across Codex, Claude Code, Cursor, Copilot and Gemini. A host machine collects usage and renders a monochrome image; the modified Kindle wakes roughly every six hours to download it and then sleeps again. The published build explains the jailbreak and FBInk display path, while the figures are API-equivalent estimates rather than the actual subscription bills.
+[![AI usage dashboard on a Kindle e-paper display](/uploads/codex-hardware-41-projects-2026/official-01.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-8133b4dec277fe58e2c3e0a3bc317fa1a2e33b28e9035bba9bd2a73612241224)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-8133b4dec277fe58e2c3e0a3bc317fa1a2e33b28e9035bba9bd2a73612241224) · [@kuberwastaken](https://x.com/kuberwastaken)
+Creator @kuberwastaken
 
-**Code:** [Kindle AI usage repository](https://github.com/Kuberwastaken/kindle-ai-usage) (check the project card for the current repository).
+Code: kindle-ai-usage repository (refer to the project page for the current source location).
 
 ### 02. Insulin Pen Magnifier
 
-<!-- CODEX41_OFFICIAL_IMAGE_02 -->
+This clip-on magnifier makes the dose numbers on an insulin pen easier to read. The maker used Codex during the design process and printed the attachment in PETG, with an adjustable lens height to accommodate different pens and viewing distances. Fitting the clip securely and keeping the numbers in focus matter more here than adding electronics. It is a visual aid, not a device that checks or dispenses insulin doses; the listing provides no clinical validation.
 
-A PETG clip-on magnifier designed to make the dose markings on an insulin pen easier to read. Codex helped with the mechanical design, and the adjustable lens height leaves room for fitting different pen shapes. This is an accessibility-oriented accessory, not an electronic dose checker; the gallery does not provide clinical performance or device-compatibility validation.
+[![Pink clip-on magnifier fitted to an insulin pen](/uploads/codex-hardware-41-projects-2026/official-02.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-06f376b224330ddcf07278b6132c5d1879c956c0a7951d12e97ecf2253d59a6e)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-06f376b224330ddcf07278b6132c5d1879c956c0a7951d12e97ecf2253d59a6e) · [@manfye](https://x.com/manfye)
+Creator @manfye
 
 ### 03. Dream Logger
 
-<!-- CODEX41_OFFICIAL_IMAGE_03 -->
+Dream Logger sits by the bed and records a dream as soon as its owner wakes up. A spoken account becomes four illustrated scenes, saved to a calendar for later review. Voice capture, image generation and a browsable timeline are joined into one physical routine. The listing does not identify the complete microphone, processor or model setup, so there is no basis for claiming that it works offline.
 
-A bedside voice device for logging dreams. The maker describes a workflow that turns a spoken account into four illustrated scenes and files them on a calendar for later browsing. The useful design idea is the complete capture-to-archive interaction, rather than the novelty of image generation alone. The gallery does not specify a complete bill of materials or whether any model runs locally.
+[![Handheld Dream Logger with its illustrated display](/uploads/codex-hardware-41-projects-2026/official-03.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-76ded4f1a1107d49906050e4d5357c551916871062f47d2ef5f373c27271e2d8)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-76ded4f1a1107d49906050e4d5357c551916871062f47d2ef5f373c27271e2d8) · [@fedesarquis](https://x.com/fedesarquis)
+Creator @fedesarquis
 
 ### 04. Taz — Taskagotchi
 
-<!-- CODEX41_OFFICIAL_IMAGE_04 -->
+Taz is a physical digital pet whose expressions and movements respond to live voice interaction. Its character animations are hand-drawn pixel art. On a small display, the timing between speech, the system's reply and the on-screen reaction does much of the work of making a character feel responsive. The public description does not name the processor or display.
 
-Taz brings the Tamagotchi idea into a physical, voice-reactive companion. Its maker combines real-time speech interaction with hand-drawn pixel animations, so timing and expressive feedback matter as much as the conversation itself. The gallery identifies Codex as part of the build process but does not disclose the exact display or processor.
+[![Taz pixel-art companion in a transparent enclosure](/uploads/codex-hardware-41-projects-2026/official-04.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-03dbc72cda8b3d17c2e3b40a2708e8deb4b01d3183fbea3b64b55d1b8edfbaf4)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-03dbc72cda8b3d17c2e3b40a2708e8deb4b01d3183fbea3b64b55d1b8edfbaf4) · [@covacut](https://x.com/covacut)
+Creator @covacut
 
 ### 05. Fovea
 
-<!-- CODEX41_OFFICIAL_IMAGE_05 -->
+Fovea uses gaze as a pointer. Look at a region of the screen and say what you want to do; the system collects relevant text, screenshots and surrounding context. The aim is to replace the routine of capturing a screenshot and pasting it into a chat with a more direct combination of eye tracking and spoken intent. The listing does not identify the eye tracker or report measured recognition accuracy.
 
-Fovea uses gaze to select context on a computer screen. The user looks at an area and speaks a request; the system gathers relevant text, screenshots and surrounding context. It is an interesting attempt to reduce the manual steps in multimodal assistance, though the listing does not identify the eye-tracking hardware or report measurement accuracy.
+[![Fovea dual-camera gaze-tracking device](/uploads/codex-hardware-41-projects-2026/official-05.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-8287b1050903707504f8f371dc333a656e1e53444daee325b2b7a6afc23f3f6c)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-8287b1050903707504f8f371dc333a656e1e53444daee325b2b7a6afc23f3f6c) · [@maxjjiang](https://x.com/maxjjiang)
+Creator @maxjjiang
 
 ### 06. RICOH-GR-Live-View-Shooting
 
-<!-- CODEX41_OFFICIAL_IMAGE_06 -->
+An M5Stack StickS3 mounted in a RICOH GR hot shoe becomes a miniature wireless live-view monitor and remote shutter release. The maker lists the GR II, GR III and GR IV. Combining preview, shutter control and a tiny screen in one accessory is particularly interesting for anyone exploring camera control protocols. Support for a particular camera model still needs to be checked against the maker's firmware release.
 
-An M5Stack StickS3 mounted on a RICOH GR hot shoe acts as a wireless live-view screen and remote shutter. The listing names the GR II, III and IV. This is a useful example of pairing a compact display board with a camera-control interface; compatibility should still be checked against the firmware and camera model in the linked build.
+[![M5Stack wireless viewfinder alongside a Ricoh GR camera](/uploads/codex-hardware-41-projects-2026/official-06.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-c2ac6e11f54cc9e37f847dda361f3ccefde2cecb6fc800bd6c0cbddc0619cf38)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-c2ac6e11f54cc9e37f847dda361f3ccefde2cecb6fc800bd6c0cbddc0619cf38) · [@tinker_zhang](https://x.com/tinker_zhang)
+Creator @tinker_zhang
 
 ### 07. Dot gadgets for ChatGPT dots
 
-<!-- CODEX41_OFFICIAL_IMAGE_07 -->
+This small ESP32 display receives short messages from a ChatGPT Dot through an open-source MCP relay. Network services and message routing stay separate from the LCD endpoint, so the microcontroller only handles the compact information it needs to show. It's a useful pattern for passing agent output to a physical display without attempting to run a language model on the ESP32. The setup depends on the relevant Dot service and relay configuration.
 
-An open-source MCP relay forwards short messages from a ChatGPT Dot to an ESP32 gadget with an LCD. The microcontroller does not need to run the agent itself; it handles the physical display while a bridge handles the messaging path. The value here is the separation between agent transport and constrained device UI, with service availability and configuration remaining prerequisites.
+[![Compact ESP32 LCD showing an alert](/uploads/codex-hardware-41-projects-2026/official-07.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-c6afc93fd057c0d10413d4957eaa683df24ee480e9fda771f033bb470f8f2997)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-c6afc93fd057c0d10413d4957eaa683df24ee480e9fda771f033bb470f8f2997) · [@deadbeef101010](https://x.com/deadbeef101010)
+Creator @deadbeef101010
 
 ### 08. PixelTilt
 
-<!-- CODEX41_OFFICIAL_IMAGE_08 -->
+PixelTilt packs a 64 × 64 LED panel, a motion sensor and a side-mounted thumb wheel into a handheld game. Tilting the device changes the game state; the wheel provides finer control. The hardware concept is simple, but convincing play depends on motion filtering, smooth animation and input feel. The listing does not document the LED driver architecture or battery runtime.
 
-PixelTilt is a handheld game built around a 64×64 LED panel, a motion sensor and a thumb wheel. Tilting supplies the primary control, while the wheel provides another physical input channel. For embedded developers, the design raises practical questions about motion filtering, LED refresh and ergonomics; the gallery does not publish a complete driver or battery specification.
+[![PixelTilt LED handheld game menu](/uploads/codex-hardware-41-projects-2026/official-08.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-fa3ac3d72e2c4a57b08c8e88b955097a28e29e32860831d35544d27e0468a400)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-fa3ac3d72e2c4a57b08c8e88b955097a28e29e32860831d35544d27e0468a400) · [@abcdmku](https://x.com/abcdmku)
+Creator @abcdmku
 
 ### 09. Cat TV
 
-<!-- CODEX41_OFFICIAL_IMAGE_09 -->
+A Raspberry Pi feeds cat-friendly moving scenes to a Samsung Freestyle projector and controls the projector over Wi-Fi. 'Cat TV' is not a dedicated screen; it turns an existing projector into a changing play environment. The project brings device-control APIs and media together. The demo is not evidence of a measured long-term effect on animal behavior.
 
-A Raspberry Pi sends cat-oriented scenes to a Samsung Freestyle projector and controls it over Wi-Fi. Rather than building another screen, the maker repurposes a consumer projector as an interactive environment for a pet. It is a neat integration of playback and device control, although the project card makes no claims about long-term animal behavior outcomes.
+[![Cat interacting with projected colored shapes](/uploads/codex-hardware-41-projects-2026/official-09.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-b14cc8ab97aab9b9666fb63515262667de44741eb7bc92d54071095aaeafc2b4)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-b14cc8ab97aab9b9666fb63515262667de44741eb7bc92d54071095aaeafc2b4) · [@axbehr](https://x.com/axbehr)
+Creator @axbehr
 
 ### 10. Orbit Personal Voice Agent
 
-<!-- CODEX41_OFFICIAL_IMAGE_10 -->
+Orbit is a portable voice assistant described by its maker as roughly $60 in hardware. It connects over Wi-Fi and reaches calendars, email inboxes and home automation through MCP services. The design is about giving several personal services one voice interface, not training a model on the device. The $60 figure is the maker's stated hardware estimate, not an independently costed retail price.
 
-Orbit is presented as a roughly $60 portable voice-assistant device. Wi-Fi connectivity and MCP integrations give it access to calendars, inboxes and home automation, making it a physical entry point into existing services. That figure is the maker’s stated device cost, not a verified retail price or a full assessment of ongoing cloud costs.
+[![Orbit portable voice assistant held in one hand](/uploads/codex-hardware-41-projects-2026/official-10.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-25918ab207fee3b5c67caf252272b870ec0e8f0bd8ce6bbfadda36b431a97b77)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-25918ab207fee3b5c67caf252272b870ec0e8f0bd8ce6bbfadda36b431a97b77) · [@camdsmith](https://x.com/camdsmith)
+Creator @camdsmith
 
-## 11–20: Tangible agents, robots and automation
+## 11–20: Agents with hardware, robots and automation
 
 ### 11. Bokko — my agent has a body
 
-<!-- CODEX41_OFFICIAL_IMAGE_11 -->
+Bokko is a small pendant paired over Bluetooth with a Hermes agent running on a Mac. Hold a button, speak a task and read the result on the pendant after the computer processes it. That gives the wearer a practical input–processing–feedback loop while keeping the heavier computing work on the Mac. The project card does not publish a verified battery runtime or a complete screen specification.
 
-Bokko is a pendant linked by Bluetooth to a Hermes agent running on a Mac. Hold a button to issue a task, then read the reply on the pendant. Its design keeps the heavier agent work on the computer and uses the wearable as a lightweight input/output surface. Battery life and display specifications are not disclosed in the short listing.
+[![Bokko agent pendant showing a message](/uploads/codex-hardware-41-projects-2026/official-11.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-b0e263f85d614709197d92c3284492bc8dcf76b5466766a8aacefc059b0f4e00)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-b0e263f85d614709197d92c3284492bc8dcf76b5466766a8aacefc059b0f4e00) · [@patiev_blog](https://x.com/patiev_blog)
+Creator @patiev_blog
 
 ### 12. MOSS the litter-picking robot
 
-<!-- CODEX41_OFFICIAL_IMAGE_12 -->
+MOSS is a small tracked rover intended for printing and assembly at home. A bin sits on the chassis, and an arm with a parallel gripper handles objects. Moving, picking up litter and placing it in the bin are separate control problems that must work together. The maker shares a design and build direction, but the prototype demonstration should not be mistaken for a validated autonomous waste-sorting machine.
 
-MOSS combines a tracked rover, a bin and a small arm with a parallel gripper. It is designed to pick up litter rather than simply drive around, which makes the interaction between locomotion, grasping and the collection bin central to the build. The public description is a maker-scale design, not evidence of a commercially validated autonomous sanitation robot.
+[![MOSS tracked robot with a gripper arm and bin](/uploads/codex-hardware-41-projects-2026/official-12.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-3e2447ee5941f35b9a4fb53fa3fb981cea41407d491c5f6349cfc4feebea5392)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-3e2447ee5941f35b9a4fb53fa3fb981cea41407d491c5f6349cfc4feebea5392) · [@metrox_eth](https://x.com/metrox_eth)
+Creator @metrox_eth
 
 ### 13. Casey’s NYC Ride
 
-<!-- CODEX41_OFFICIAL_IMAGE_13 -->
+Casey's NYC Ride is a handheld game inspired by footage of rides through New York City. It runs on the ModRetro Chromatic, with most of the artwork drawn by hand. The distinctive part is the translation of a personal city experience into a game on retro handheld hardware, rather than a generic Game Boy emulator. The public card offers no game-engine details or performance measurements.
 
-A handheld game inspired by Casey Neistat’s rides through New York City. It runs on a ModRetro Chromatic and uses mostly hand-illustrated artwork. The appeal is the way a personal visual theme is tailored to the constraints of a retro handheld, rather than a claim of a novel emulator or graphics engine. The short gallery entry does not document performance.
+[![Cycling game running on a ModRetro Chromatic handheld](/uploads/codex-hardware-41-projects-2026/official-13.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-790a05bb8708daa088f77c1db47bbd7aad7ba6ea9632038b6a9c6d8644e8c477)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-790a05bb8708daa088f77c1db47bbd7aad7ba6ea9632038b6a9c6d8644e8c477) · [@covacut](https://x.com/covacut)
+Creator @covacut
 
 ### 14. Realtime on ESP32
 
-<!-- CODEX41_OFFICIAL_IMAGE_14 -->
+Espressif maintains this WebRTC reference demo for connecting an embedded voice device to the OpenAI Realtime API and triggering device functions by voice. It is a source-backed engineering example, not a finished consumer speaker. A working implementation must account for audio capture and playback on the device, the WebRTC session, the cloud service, API credentials and network failures.
 
-This Espressif-maintained WebRTC reference connects embedded hardware to the OpenAI Realtime API. It demonstrates real-time voice exchange and function calls that can control device behavior. Unlike a simple voice-chat demo, it exposes the practical boundary between audio hardware, transport and a remote model. It is a reference implementation, not a ready-to-ship smart speaker.
+[![Espressif ESP32 voice development board](/uploads/codex-hardware-41-projects-2026/official-14.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/official-realtime-esp32)
 
-**Link:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/official-realtime-esp32)
-
-**Reference implementation:** [Espressif esp-webrtc-solution](https://github.com/espressif/esp-webrtc-solution).
+Reference implementation: Espressif esp-webrtc-solution.
 
 ### 15. Living Art TV
 
-<!-- CODEX41_OFFICIAL_IMAGE_15 -->
+Living Art TV turns the owner's artwork into an evolving screensaver that responds to the day's weather and time. Unlike a fixed slideshow, the scenes change as those inputs change. The card does not say which TV platform or generative model it uses, or whether it can operate offline, so the available information is primarily about the experience rather than a reproducible implementation.
 
-Living Art TV turns personal artwork into a changing screensaver, adapting its visual story to the weather and time of day at home. The interesting idea is context-driven display content rather than a static photo loop. The project description does not specify the TV platform, generation model or offline behavior, so those aspects remain open questions.
+[![Generative artwork displayed on a television](/uploads/codex-hardware-41-projects-2026/official-15.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-c574fd275e4ccfb259cbce73ba52630e94745e7dca0c20fa85b45569d4216851)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-c574fd275e4ccfb259cbce73ba52630e94745e7dca0c20fa85b45569d4216851) · [@awkward_andyy](https://x.com/awkward_andyy)
+Creator @awkward_andyy
 
 ### 16. Workout Coach x Codex Voice
 
-<!-- CODEX41_OFFICIAL_IMAGE_16 -->
+A velocity sensor attached to weightlifting equipment feeds movement data into Codex Voice, allowing spoken feedback during a set. Using a measured physical signal gives the conversation more context than a description supplied by the lifter alone. The project listing does not name the sensor, explain calibration or provide evidence that the coaching improves training outcomes.
 
-A velocity sensor for weightlifting feeds a live Codex Voice coaching session. Rather than relying only on spoken descriptions of an exercise, the interaction is tied to measured movement speed. It is a compelling interface experiment, but the gallery does not publish the sensor model, calibration method or validation of its coaching recommendations.
+[![Velocity sensor attached to weightlifting equipment](/uploads/codex-hardware-41-projects-2026/official-16.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-36218fe62a49fbc58d46d778c8c1b9e69b25f97cf607dcbc1fe63564b59dd8a2)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-36218fe62a49fbc58d46d778c8c1b9e69b25f97cf607dcbc1fe63564b59dd8a2) · [@awkward_andyy](https://x.com/awkward_andyy)
+Creator @awkward_andyy
 
 ### 17. Kinform: Give Objects Lore
 
-<!-- CODEX41_OFFICIAL_IMAGE_17 -->
+Kinform gives an everyday object a continuing AI character, complete with a voice, personality and memories, using GPT Live. The goal is to make inexpensive physical objects feel like distinct companions whose identity persists across conversations. The description does not establish that memories are stored locally, and it leaves the privacy design unspecified.
 
-Kinform gives everyday objects persistent characters, voices, memories and personalities using GPT Live. Its design goal is continuity: the object should feel like the same character on the next interaction, not a disposable one-shot chatbot. The listing shows the concept of physical presence but does not say that memory or speech processing is performed locally.
+[![Kinform connected object beside its phone settings screen](/uploads/codex-hardware-41-projects-2026/official-17.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-2e8b5d907432e54a1615508b81e9638819eb074c14884294c2a2ebf13b8a75cc)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-2e8b5d907432e54a1615508b81e9638819eb074c14884294c2a2ebf13b8a75cc) · [@bonitadreama](https://x.com/bonitadreama)
+Creator @bonitadreama
 
 ### 18. Noutomation: Automate Your Way
 
-<!-- CODEX41_OFFICIAL_IMAGE_18 -->
+Noutomation lets users configure sensor readings, relay actions and Modbus device control from a browser instead of reflashing firmware every time a rule changes. That is a practical approach for farms and workshops with mixed equipment and frequently adjusted processes. The emphasis is on bringing I/O and rule configuration into one interface. The public listing does not establish industrial safety certification or suitability as a safety-rated PLC replacement.
 
-Noutomation provides browser-configured rules for sensors, relays and Modbus devices. It targets the kind of farm or workshop automation where the logic changes more often than the wiring. The engineering value is a configurable I/O layer instead of one-off firmware for each control rule. No industrial safety certification should be inferred from the gallery entry.
+[![Noutomation control hardware and wiring](/uploads/codex-hardware-41-projects-2026/official-18.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-7794785a17c92e5b671a4505767ff4fca409e57eda52b974fd0019d5ca2af809)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-7794785a17c92e5b671a4505767ff4fca409e57eda52b974fd0019d5ca2af809) · [@masubo_bio](https://x.com/masubo_bio)
+Creator @masubo_bio
 
 ### 19. Multi screen infinite artwork
 
-<!-- CODEX41_OFFICIAL_IMAGE_19 -->
+Several ESP32-based screens form a mesh network through which generative artwork flows from one display to the next. The visuals change approximately once a minute and can also react to human interaction. It is more than playing a video on one screen: frame boundaries, timing between nodes and network messages all have to line up. The maker does not provide a measured synchronization error or maximum node count.
 
-Multiple ESP32-based displays form a mesh so generative artwork appears to flow between screens. The composition changes about once a minute or when someone interacts with it. This is less about raw rendering power than coordinated state across nodes: timing, edge continuity and message delivery. The short description does not establish a maximum node count or measured synchronization accuracy.
+[![Generative art spread across several handheld screens](/uploads/codex-hardware-41-projects-2026/official-19.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-ac36c83a2196dfca18243bfb917c562bab91631a394510bf83c3bfedd897006b)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-ac36c83a2196dfca18243bfb917c562bab91631a394510bf83c3bfedd897006b) · [@msurguy](https://x.com/msurguy)
+Creator @msurguy
 
 ### 20. Codex-Built Greenhouse Winder
 
-<!-- CODEX41_OFFICIAL_IMAGE_20 -->
+A farmer used an ESP32, two 24 V motors and temperature sensing to automate greenhouse ventilation curtains. The curtains can be controlled through LINE messages or moved automatically in response to temperature. This is real outdoor equipment, where stalled motors, weather exposure and lost connectivity matter. The public demonstration does not include a complete safety design or endurance-test record.
 
-A grower used Codex to build a greenhouse curtain winder around an ESP32, two 24 V motors and temperature feedback. It can be operated through LINE messages or temperature-based automation. The build shows AI-assisted development in a working farm setting, where motor protection, weather exposure and network failures matter as much as the app. The listing is not a substitute for safety or lifetime testing.
+[![Greenhouse motor controller wiring inside an enclosure](/uploads/codex-hardware-41-projects-2026/official-20.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-e347d07c0cd0edd7a25bcfbae3fcfee78d86003917d2888d359eb167305ad1da)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-e347d07c0cd0edd7a25bcfbae3fcfee78d86003917d2888d359eb167305ad1da) · [@tomiyasu16](https://x.com/tomiyasu16)
+Creator @tomiyasu16
 
 ## 21–30: PCBs, cameras, projection and games
 
 ### 21. OpenAI inspired DEFCON badge
 
-<!-- CODEX41_OFFICIAL_IMAGE_21 -->
+This ESP32 DEFCON badge lights up and can optionally carry an OLED. Its maker says Astra assisted with the workflow from KiCad PCB routing through placing an order with JLCPCB. The interesting test here is whether AI assistance can carry useful design information across CAD, fabrication outputs and manufacturing steps. Electrical-rule checks and production constraints still need human review; independent manufacturing validation is not provided.
 
-An ESP32 badge with lighting and an optional OLED, reportedly created with extensive assistance from an agent called Astra. The maker describes work spanning KiCad routing and JLCPCB ordering. It is a useful example of AI moving beyond writing firmware into PCB production workflow, while electrical-rule checking and manufacturability review remain human engineering responsibilities.
+[![Custom ESP32 DEFCON badge PCB design](/uploads/codex-hardware-41-projects-2026/official-21.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-d167331b94c63d3cd8a861f19bf92f785aa465001b95b96453565ac1701d3423)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-d167331b94c63d3cd8a861f19bf92f785aa465001b95b96453565ac1701d3423) · [@aitelmax](https://x.com/aitelmax)
+Creator @aitelmax
 
 ### 22. ImageGenCam
 
-<!-- CODEX41_OFFICIAL_IMAGE_22 -->
+ImageGenCam is a weekend camera build with published OpenAI source code. A Raspberry Pi Zero 2 W, Display HAT Mini, camera, PiSugar power supply and 3D-printed shell make up the handheld device. Pressing the shutter starts an image-generation workflow; a phone-accessible web interface handles photos and prompts. Capture, background processing and the phone UI have distinct jobs. The large image model does not run on the Pi.
 
-OpenAI’s buildable camera uses a Raspberry Pi Zero 2 W, Display HAT Mini, camera module, PiSugar battery board and printed enclosure. A photo is captured locally and sent for image generation, while a phone web app handles prompts and the album. The reference repository documents assembly and software setup, making it more reproducible than a gallery-only demo. Large image generation is a service call, not a model running on the Pi.
+[![Raspberry Pi and other components for ImageGenCam](/uploads/codex-hardware-41-projects-2026/official-22.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/official-imagegencam)
 
-**Link:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/official-imagegencam)
-
-**Source:** [openai/imagegencam](https://github.com/openai/imagegencam).
+Source code: openai/imagegencam。
 
 ### 23. Reflect
 
-<!-- CODEX41_OFFICIAL_IMAGE_23 -->
+Reflect began as an OpenAI hackathon experiment using an M5Stack CoreS3, the Realtime API and smart lighting. Instead of leaning on a conventional chat display, it uses voice, color and lighting rhythms to respond. The project repository describes it as an experimental demo without comprehensive reliability or security review. It's a prototype to learn from, not a production-ready appliance.
 
-Reflect was built at an OpenAI hackathon using an M5Stack CoreS3, the Realtime API and connected color lighting. Instead of another on-screen chat UI, it communicates through sound and changes in light. The public repository is explicit that this is a hackathon demo supplied as-is, making it a reference for interaction design rather than a certified consumer product.
+[![Reflect interactive device with illuminated screen](/uploads/codex-hardware-41-projects-2026/official-23.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/official-reflect)
 
-**Link:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/official-reflect)
-
-**Source:** [openai/openai-reflect](https://github.com/openai/openai-reflect).
+Source code: openai/openai-reflect。
 
 ### 24. FPGA Slot Machine
 
-<!-- CODEX41_OFFICIAL_IMAGE_24 -->
+This FPGA slot-machine-style demo was developed by running Vivado in a remote Windows environment from a Mac. A custom 64 × 96 OLED presents the interface. Beyond the game itself, it demonstrates a cross-platform FPGA workflow, from remote synthesis to output on the device. The public description does not specify its random-number mechanism, and it should not be treated as a gambling product.
 
-An FPGA-based slot-machine-style game with a custom 64×96 OLED interface, developed through a remote Vivado workflow while working from a Mac. The unusual part is the cross-platform FPGA toolchain: synthesis and device programming cannot always happen on the same host. The gallery supplies no basis for treating this as a regulated gambling product or specifying its randomization design.
+[![FPGA slot machine demonstration and toolchain](/uploads/codex-hardware-41-projects-2026/official-24.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-5bb2f0d7a1110b62c833006dc731576c3505620738668aff788625e504ead672)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-5bb2f0d7a1110b62c833006dc731576c3505620738668aff788625e504ead672) · [@itsarnz](https://x.com/itsarnz)
+Creator @itsarnz
 
 ### 25. Project Tabletop
 
-<!-- CODEX41_OFFICIAL_IMAGE_25 -->
+A projector and camera turn a floor into a virtual soccer field. Players move physical markers to steer vehicles and compete with friends or the computer. The camera tracks the markers while the projector supplies the changing scene, so each game piece does not need its own radio or processor. The concept combines computer vision with spatial display, but the listing gives no tracking-accuracy or ambient-light specifications.
 
-Project Tabletop turns a floor into an interactive football pitch with a projector and camera. Players move a physical marker to control on-screen vehicles against friends or a computer. Its notable trick is using vision to connect ordinary objects with projected graphics, avoiding electronics in every token. Tracking accuracy and lighting requirements are not specified in the gallery.
-
-**Link:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-3ccbfc5367ce49fc8fc2fcfda105ccaf9711a8609f4db8beaa74addbecfc6abb)
+[![Interactive projected soccer field](/uploads/codex-hardware-41-projects-2026/official-25.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-3ccbfc5367ce49fc8fc2fcfda105ccaf9711a8609f4db8beaa74addbecfc6abb)
 
 ### 26. El Tucu — Rent a Shell
 
-<!-- CODEX41_OFFICIAL_IMAGE_26 -->
+El Tucu is a small four-servo robot arm that people—or AI agents—can rent by the minute. In the maker's demonstration, Codex uses an x402 payment to access the arm, linking task requests, payment and physical movement. The experiment is about machine-mediated access to hardware services, not proof of advanced autonomous grasping.
 
-El Tucu is a four-servo robotic arm offered for rent by the minute to people or AI agents. The builder describes Codex paying through x402 before moving the arm. It tests a provocative interface between digital payments and access to physical actuators, but the card does not imply advanced perception, autonomous grasping or industrial-grade motion control.
+[![Four-servo El Tucu robot arm](/uploads/codex-hardware-41-projects-2026/official-26.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-8ae093885312a273f1bcf61bf19f43c3c06013d58a6370f58bf456dbd88ba69c)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-8ae093885312a273f1bcf61bf19f43c3c06013d58a6370f58bf456dbd88ba69c) · [@crypto_dev_1](https://x.com/crypto_dev_1)
+Creator @crypto_dev_1
 
 ### 27. Purble Palace — Built with Codex
 
-<!-- CODEX41_OFFICIAL_IMAGE_27 -->
+Motivated by nostalgia for older PC games, the maker used Codex to build a Purble Palace-style game for the ModRetro Chromatic. The work is in fitting a desktop interaction to a small handheld display and physical buttons, not adding sensors. The gallery provides too little detail to judge how faithfully the original game's features have been reproduced.
 
-A nostalgic recreation of Purble Palace for the ModRetro Chromatic handheld, made with help from Codex. Porting a desktop-style game to a small fixed-button device requires a different interface and presentation, even when the mechanics are familiar. The gallery does not establish exact feature parity with the original game.
+[![Retro game running on a ModRetro Chromatic handheld](/uploads/codex-hardware-41-projects-2026/official-27.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-4c5c85dc0d18277ef4f93efd87ed3dfcca142f47eef2470b41a88149455edb6b)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-4c5c85dc0d18277ef4f93efd87ed3dfcca142f47eef2470b41a88149455edb6b) · [@haimantikam](https://x.com/haimantikam)
+Creator @haimantikam
 
 ### 28. 62 BAR — Mini DJ Instrument
 
-<!-- CODEX41_OFFICIAL_IMAGE_28 -->
+62 BAR is a Raspberry Pi-based miniature DJ instrument with a motorized platter, touchscreen, physical controls and a custom enclosure. Its maker used Codex across CAD, firmware and mechanical assembly. What makes it different from a music player is the tactile control surface. Complete measurements of audio latency or motor-control accuracy have not been published in the project listing.
 
-62 BAR is a Raspberry Pi-based mini DJ instrument with a motorized platter, touch display and physical controls. The maker credits Codex across CAD and firmware work as well as the overall assembly. It stands out because the interface is deliberately tactile rather than a software-only DJ deck; end-to-end audio latency and motor-control accuracy are not documented in the short listing.
+[![CAD view of the 62 BAR mini DJ instrument](/uploads/codex-hardware-41-projects-2026/official-28.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-61f7edd92afacdf02d4f2ce9775bc6754d592451748cb2476cbd6725c03624b0)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-61f7edd92afacdf02d4f2ce9775bc6754d592451748cb2476cbd6725c03624b0) · [@eminimnim](https://x.com/eminimnim)
+Source: project page · Creator @eminimnim
 
 ### 29. Hasselblad X2D: DOOM & Beyond
 
-<!-- CODEX41_OFFICIAL_IMAGE_29 -->
+Codex helped explore unofficial capabilities on a Hasselblad X2D, including running DOOM and using the shutter release as the fire button. The maker also experiments with autofocus, pixel-shift capture and custom startup graphics. This is firmware research and a creative reuse of a camera's controls, not a list of supported factory features. Such changes can affect reliability and warranty coverage; the public material does not establish a safe flashing procedure.
 
-An unofficial exploration of the Hasselblad X2D using Codex: running DOOM, mapping the shutter button to fire, and experimenting with autofocus, pixel-shift capture and custom boot graphics. It is interesting as camera-firmware research and input repurposing, not as an official feature release. Firmware experiments can carry real recovery and warranty risks.
-
-**Link:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-fb627402781dcf89f55b7d1bcf38395ded1bc29539cbd21281826a15bfed0f9e)
+[![DOOM running on a Hasselblad X2D camera](/uploads/codex-hardware-41-projects-2026/official-29.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-fb627402781dcf89f55b7d1bcf38395ded1bc29539cbd21281826a15bfed0f9e)
 
 ### 30. 512-LED Music-Reactive Cube
 
-<!-- CODEX41_OFFICIAL_IMAGE_30 -->
+An 8 × 8 × 8 array of 512 LEDs turns nearby sound into three-dimensional patterns using FFT-based analysis. The maker describes a custom PCB, hand-soldered LED assembly and dedicated spectrum-processing firmware. Compared with a two-dimensional strip, the cube adds scanning, voltage-drop and physical alignment challenges. Measured brightness and power consumption are not supplied.
 
-An 8×8×8 cube of 512 LEDs responds to nearby audio with patterns derived from FFT-based firmware. The builder mentions a custom PCB and hand assembly. A three-dimensional LED matrix makes driving, power distribution and physical alignment more involved than with an ordinary light strip, although brightness and power-consumption measurements are not provided in the gallery.
+[![Three-dimensional array of 512 illuminated LEDs](/uploads/codex-hardware-41-projects-2026/official-30.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-eae7d60f950fbd72de230fca0a9421fe8b24080d2592d977a515c3b7bc27cbd6)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-eae7d60f950fbd72de230fca0a9421fe8b24080d2592d977a515c3b7bc27cbd6) · [@tttorynnn](https://x.com/tttorynnn)
+Creator @tttorynnn
 
 ## 31–41: Photo frames, hardware hacks and visual feedback
 
 ### 31. Keep — E-Paper Photo Frame
 
-<!-- CODEX41_OFFICIAL_IMAGE_31 -->
+Keep is an e-paper photo frame made as a gift for the maker's fiancée. Photos taken in Edinburgh can be sent to the screen on her desk, creating a simple chain from the camera through a network service to a low-power display. The gallery focuses on the personal use case and gives no panel model, transport protocol or standby-time figure.
 
-A personal e-paper photo frame built so the maker can send pictures from Edinburgh to a partner’s desk. The project is about a small, meaningful remote-display workflow rather than complex interaction: capture a photo, deliver it and show it persistently. The gallery does not specify the panel, transport protocol or battery life.
+[![E-paper photo frame showing a shared photograph](/uploads/codex-hardware-41-projects-2026/official-31.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-0ddf7261982e37359f642e967431d4c2d0f15a42e52246b10dcc5894b9e8042a)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-0ddf7261982e37359f642e967431d4c2d0f15a42e52246b10dcc5894b9e8042a) · [@tarat_211](https://x.com/tarat_211)
+Creator @tarat_211
 
 ### 32. Watch Kaleidoscope
 
-<!-- CODEX41_OFFICIAL_IMAGE_32 -->
+This M5Stack watch becomes a pocket kaleidoscope. Tilt or swipe and glass-like shapes tumble, collide and make sounds under a physics simulation. Rendering, inertial input and audio feedback all have to fit on a small screen. The listing does not identify the graphics engine or display driver.
 
-A pocket kaleidoscope on an M5Stack watch. Tilt or swipe and simulated glass fragments tumble, collide and produce little sound cues. It brings motion input, simple physics and audio feedback together on a very small screen. The short description does not identify the rendering engine or display driver.
+[![Kaleidoscope artwork on an M5Stack watch](/uploads/codex-hardware-41-projects-2026/official-32.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-3f2cb8bdf24e11f6f8c3a86872e376303f91f4695f88d15d07cae36ad49a1041)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-3f2cb8bdf24e11f6f8c3a86872e376303f91f4695f88d15d07cae36ad49a1041) · [@realtr2e](https://x.com/realtr2e)
+Creator @realtr2e
 
 ### 33. Hands-On AI: ESP32 iPhone Agent
 
-<!-- CODEX41_OFFICIAL_IMAGE_33 -->
+The maker claims a tiny ESP32-S3 board lets an AI agent observe and operate a real iPhone without jailbreaking, a Mac or a cable. Wireless screen mirroring and Bluetooth touch input are the stated ingredients. The engineering question is how screen capture and HID-style input are paired, but the demo does not establish reliable support across iOS versions or imply that operating-system authorization can be bypassed.
 
-The maker presents an ESP32-S3-based bridge that lets an AI observe and control a real iPhone, claiming no jailbreak, Mac or cable is needed. Screen mirroring and Bluetooth touch input are the advertised pieces. It is an ambitious bridge between perception and physical-device interaction, but the claim should not be generalized to every iOS version or permission state.
+[![Compact ESP32-S3 iPhone agent device](/uploads/codex-hardware-41-projects-2026/official-33.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-aad932dd2f447aaa8122d47132efca6bf5913f3d5089b2e2f99997adb69f76ea)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-aad932dd2f447aaa8122d47132efca6bf5913f3d5089b2e2f99997adb69f76ea) · [@iamhenryyuan](https://x.com/iamhenryyuan)
+Creator @iamhenryyuan
 
 ### 34. Robbi: Your Emotional AI Companion
 
-<!-- CODEX41_OFFICIAL_IMAGE_34 -->
+Robbi is a Raspberry Pi-powered desktop robot with 3D-printed parts. Voice, vision, memory and expressive responses give it a character beyond a standard question-and-answer speaker. Its physical form is part of the interaction. The card does not include a complete hardware bill of materials or long-term reliability data, making it best read as an interaction prototype.
 
-Robbi is a small companion robot made with a Raspberry Pi, printed parts and Codex-assisted development. It combines voice, vision, memory and expressive behavior in an attempt to give the object a recognizable personality. The gallery makes it a promising interaction prototype, not evidence of a fully documented production hardware stack.
-
-**Link:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-740858b4fae95982b3ebe82974f3a454bf1f0c568cc2fc8b1b886db1ac207d2e)
+[![Robbi companion robot in a demonstration video](/uploads/codex-hardware-41-projects-2026/official-34.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-740858b4fae95982b3ebe82974f3a454bf1f0c568cc2fc8b1b886db1ac207d2e)
 
 ### 35. Greenhouse Robot Prototype
 
-<!-- CODEX41_OFFICIAL_IMAGE_35 -->
+This greenhouse robot is an early prototype intended to combine environmental sensing, decision-making and actuation to improve greenhouse work. The listing outlines that ambition without specifying the mobile base, sensors or navigation algorithms. It would be premature to describe capabilities such as autonomous harvesting or precise localization that the maker has not demonstrated.
 
-A greenhouse robotics prototype intended to make greenhouse operations more efficient through perception, autonomy and actuation. At this stage the showcase description is intentionally high-level. It does not identify the base platform, sensors or navigation algorithm, and should not be described as a validated harvesting robot.
+[![Greenhouse robot prototype](/uploads/codex-hardware-41-projects-2026/official-35.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-e03ad8c797ef36ff013b54b727c1e7e4de0b189cd40ebbf6e7bb634c1528b302)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-e03ad8c797ef36ff013b54b727c1e7e4de0b189cd40ebbf6e7bb634c1528b302) · [@ihwylie](https://x.com/ihwylie)
+Creator @ihwylie
 
 ### 36. Ricoh GR IV: Beyond Stock
 
-<!-- CODEX41_OFFICIAL_IMAGE_36 -->
+The Ricoh GR IV project explores unofficial camera firmware modifications. The maker has demonstrated a custom shutdown screen and published scripts aimed at the model. This is limited, reproducible work on a closed consumer device—not evidence of complete firmware control. Backups, recovery options and warranty restrictions should be considered before experimenting.
 
-An exploration of RICOH GR IV firmware that includes a customized power-off screen and model-specific research scripts. Its contribution is targeted tooling for investigating a closed consumer device, rather than proof of general-purpose firmware control. Backups, recovery access and warranty considerations matter before reproducing these experiments.
-
-**Link:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-8f79d3b2973c34d916db32d50143ead2ab5a86eb8641dcfe1cb72df8c6496467)
+[![Modified screen on a Ricoh GR IV camera](/uploads/codex-hardware-41-projects-2026/official-36.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-8f79d3b2973c34d916db32d50143ead2ab5a86eb8641dcfe1cb72df8c6496467)
 
 ### 37. Project Tabletop (v1.3)
 
-<!-- CODEX41_OFFICIAL_IMAGE_37 -->
+Project Tabletop v1.3 develops the same camera-and-projector interaction into a tabletop playground. The projector draws the scene and a camera recognizes physical markers; the maker demonstrates arcade-style games, drawing and exploring the globe. It is a separate gallery entry from the earlier floor-soccer build, but appears related rather than an entirely different platform. A complete version changelog is not available.
 
-A later Tabletop entry expands the camera-and-projector idea into an interactive desk. Physical markers can steer arcade play, support drawing and help explore a projected globe. It belongs to the same broader project family as the earlier floor-football entry, so two gallery cards should not automatically be counted as two independent software platforms.
-
-**Link:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-16072b5be9929c4cf63781d83a8f447919a487bbcaff1cdd9b1d475239c54fc2)
+[![Project Tabletop projected interactive scene](/uploads/codex-hardware-41-projects-2026/official-37.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-16072b5be9929c4cf63781d83a8f447919a487bbcaff1cdd9b1d475239c54fc2)
 
 ### 38. Nikko R2D2 Modern OS App
 
-<!-- CODEX41_OFFICIAL_IMAGE_38 -->
+The aim is to build a Windows application capable of controlling an older Nikko R2D2 remote-control and network-camera robot. Much of the work concerns restoring protocol and driver compatibility as operating systems change. Hardware that still works need not be discarded simply because its original software has aged. The gallery describes an attempt; it does not confirm that every feature has been recovered.
 
-An attempt to build a modern Windows application for an older Nikko R2D2 remote-controlled webcam robot. The challenge is largely compatibility: recovering usable control of aging hardware when the original software no longer fits current operating systems. The listing calls it an attempt, not a verified full restoration of every original feature.
+[![Nikko R2D2 robot beside a laptop](/uploads/codex-hardware-41-projects-2026/official-38.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-d24ce5b5d0eaab1154d5979941696fc50f4008beb4765cb69af5982a77c2e717)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-d24ce5b5d0eaab1154d5979941696fc50f4008beb4765cb69af5982a77c2e717) · [@pablopoo](https://x.com/pablopoo)
+Creator @pablopoo
 
 ### 39. Project Piko
 
-<!-- CODEX41_OFFICIAL_IMAGE_39 -->
+Project Piko turns a Raspberry Pi into a conversational personal assistant that can take tasks and help manage a Linux computer. It is closer to a physical entry point for a system-administration agent than a speaker that reads the weather. That level of access calls for restricted command permissions and clear activity logs; the public description does not explain how the project isolates privileges.
 
-Project Piko turns a Raspberry Pi into a conversational personal assistant that can receive tasks and help manage a Linux machine. This shifts the device from passive Q&A into system administration. Permission boundaries and command auditing are important engineering considerations, although the short project card does not document its privilege model.
+[![Project Piko Raspberry Pi AI assistant display](/uploads/codex-hardware-41-projects-2026/official-39.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-0a9ce28248c654130b4ae0e4f80894f93243bfe5e623bc3756e445d839fd1ce5)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-0a9ce28248c654130b4ae0e4f80894f93243bfe5e623bc3756e445d839fd1ce5) · [@blackie_360](https://x.com/blackie_360)
+Creator @blackie_360
 
 ### 40. Codex Pet Badge
 
-<!-- CODEX41_OFFICIAL_IMAGE_40 -->
+This interactive M5Stack badge responds to tilts, shakes and touch, displays battery status and can bring up the maker's LinkedIn QR code. It turns a conference badge into a small animated gadget, sharing hardware between playful input and identity display. The specific M5Stack model is not identified, and the listing does not describe a full wireless digital-business-card system.
 
-An interactive M5Stack badge with tilt, shake and touch reactions, a battery indicator and a LinkedIn QR code. It extends the conventional conference badge with a small digital-pet interaction, blending identity display and playful controls. The gallery does not specify the exact M5Stack model or a complete contact-sharing protocol.
+[![Codex interactive pet badge](/uploads/codex-hardware-41-projects-2026/official-40.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-15b148cc94a3ce050e840a5302e1824396ae5cb2892d9e60ce04a435f8fb5070)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-15b148cc94a3ce050e840a5302e1824396ae5cb2892d9e60ce04a435f8fb5070) · [@naveenmanwani17](https://x.com/naveenmanwani17)
+Creator @naveenmanwani17
 
 ### 41. AC Remote with Visual Feedback
 
-<!-- CODEX41_OFFICIAL_IMAGE_41 -->
+A Raspberry Pi 5 and an iPhone interface control an air conditioner over infrared. After a command is sent, an AI-assisted camera checks the position of the unit's airflow flap. That closes the loop in a way an ordinary IR remote cannot: there is an attempt to verify that the unit responded. Supported AC models, recognition accuracy and safety interlocks are not fully documented, so compatibility should not be assumed.
 
-A Raspberry Pi 5-based air-conditioner controller combines an iPhone interface, infrared commands and a camera check of the unit’s flap position. The closed-loop element matters: instead of assuming a transmitted IR command worked, the system tries to observe the result. Supported air-conditioner models and vision reliability are not fully documented in the public card.
+[![Air-conditioner on-off interface with camera feedback](/uploads/codex-hardware-41-projects-2026/official-41.webp)](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-edea2dffa1a7b0152eaa552435b98b5681a257a5f2b6dfda1ceba433217901dd)
 
-**Links:** [Project card](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-edea2dffa1a7b0152eaa552435b98b5681a257a5f2b6dfda1ceba433217901dd) · [@swhan0329](https://x.com/swhan0329)
+Creator @swhan0329
 
-## What is worth borrowing from these builds
+Across the 41 entries, the most convincing starting points are small problems with something you can measure, control and check. A greenhouse curtain has a temperature reading and a motor position; a Kindle has a known refresh cycle; a camera needs a shutter that actually fires; an air-conditioner remote ought to check whether the vent moved. A clear physical feedback loop is often a better first hardware project than a box built solely to host an AI chat interface.
 
-The strongest projects begin with a problem that has a measurable state and a clear physical response. A greenhouse motor has to move a curtain; an e-paper dashboard needs a reliable refresh schedule; a camera remote has to trigger a shutter; an air-conditioner controller should check whether the vent actually moved. Those are good problems for AI-assisted engineering because success can be observed and tested. A chatbot in a box is not a complete product specification.
+Coding agents do not make analog circuits, power supplies, optics, thermal design or mechanical tolerances disappear. They can help write drivers, organize tests, search documentation, build interfaces and even assist with PCB work. Someone still has to verify motor stops, camera recovery paths and the fit of a medical-accessibility attachment. Before attempting any of these builds, check the individual project for available code, BOMs, licenses and hardware revisions.
 
-Nor does a coding agent remove the less glamorous work. Power design, mechanics, optics, motor safety, update recovery and firmware compatibility still require engineering judgment. AI tools can help write drivers, inspect documentation and shorten the path between a prototype and a test. Whether a reader can reproduce a particular build depends on what its maker has actually released: code, mechanical files, a bill of materials, licensing and revision information. A compelling video and a maintainable project repository are not interchangeable.
-
-**Sources and scope:** [You Can Just Build Things gallery](https://youcanjustbuildthings.openai.chatgpt.site/) (snapshot reviewed November 3, 2026); [Kindle project detail](https://youcanjustbuildthings.openai.chatgpt.site/projects/submission-8133b4dec277fe58e2c3e0a3bc317fa1a2e33b28e9035bba9bd2a73612241224); [ImageGenCam repository](https://github.com/openai/imagegencam); [Reflect repository](https://github.com/openai/openai-reflect); and [Espressif's WebRTC solution](https://github.com/espressif/esp-webrtc-solution). Listings, votes and ordering can change. Each entry above links to its own source card; claims that require unpublished design files or performance data have deliberately been left open.
+For more embedded engineering projects, follow the Embedded Notes WeChat account. Feedback and comments are always welcome.
