@@ -1,0 +1,15 @@
+---
+import Base from '../../../layouts/Base.astro';
+import BleTransferPlanner from '../../../components/BleTransferPlanner.astro';
+export function getStaticPaths(){return [{params:{lang:'en'}},{params:{lang:'zh'}}];}
+const lang=Astro.params.lang==='zh'?'zh':'en';
+const zh=lang==='zh';
+const translations={en:'/en/tools/ble-throughput-calculator/',zh:'/zh/tools/ble-throughput-calculator/'};
+const title=zh?'BLE 吞吐率与传输时间计算器':'BLE Throughput & Transfer Planner';
+const description=zh?'专业 BLE 传输规划工具：ATT MTU、LE 1M/2M PHY、DLE、L2CAP 分片、连接事件、iOS/Android 注意事项与传输时间估算。':'Estimate BLE GATT throughput and transfer time using negotiated ATT MTU, PHY, DLE, L2CAP fragmentation and connection-event limits. Includes iOS and Android considerations.';
+const schema={'@context':'https://schema.org','@type':'SoftwareApplication',name:title,applicationCategory:'DeveloperApplication',operatingSystem:'Web',isAccessibleForFree:true,description,url:`https://embeddednote.com/${lang}/tools/ble-throughput-calculator/`,publisher:{'@id':'https://embeddednote.com/#publisher'}};
+---
+<Base lang={lang} title={title} description={description} translations={translations}>
+  <BleTransferPlanner lang={lang}/>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</Base>

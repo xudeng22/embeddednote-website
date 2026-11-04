@@ -82,6 +82,11 @@ const siteIdentity = {
       <div class="shell en-footer-inner">
         <a href={`/${lang}/`} class="en-footer-brand" aria-label="EmbeddedNote homepage">Embedded<span>Note</span></a>
         <nav class="en-footer-links" aria-label={lang === 'zh' ? '页脚链接' : 'Footer links'}>
+          <!-- embeddednote-ble-planner-link -->
+          <a href={`/${lang}/tools/ble-throughput-calculator/`}>
+            {lang === 'zh' ? 'BLE 传输计算器' : 'BLE Transfer Planner'}
+          </a>
+          <span aria-hidden="true">|</span>
           <a href={`/${lang}/contact/`}>{lang === 'zh' ? '联系我们' : 'Contact'}</a>
           <span aria-hidden="true">|</span>
           <a href={`/${lang}/about/`}>{dict.about}</a>

@@ -1,0 +1,109 @@
+/** BLE GATT transfer planning model, v1.0. No hardware-specific performance promise.
+ * References: Bluetooth Core LL packet format, Nordic throughput note, Android BluetoothGatt.
+ */
+export const DEFAULTS = Object.freeze({
+  dataBytes: 240000, mtu: 247, chunkBytes: 244, appHeader: 0,
+  phy: '2M', llPayload: 251, intervalMs: 30, eventMs: 15,
+  maxWritesPerEvent: 4, method: 'command', responseIntervals: 2,
+  encryption: true, retryPercent: 0, setupMs: 0, processingMs: 0,
+  platform: 'ios'
+});
+export const PHYS = Object.freeze(['1M','2M']);
+export const METHODS = Object.freeze(['command','request','notification']);
+export function calculateBlePlan(raw = {}) {
+  const c = {...DEFAULTS, ...raw};
+  const errors = [], warnings = [];
+  const ranges = {
+    dataBytes:[1,100000000], mtu:[23,517], chunkBytes:[1,514],
+    appHeader:[0,64], llPayload:[27,251], intervalMs:[7.5,4000],
+    eventMs:[0.5,4000], maxWritesPerEvent:[1,1000],
+    responseIntervals:[1,10], retryPercent:[0,80],
+    setupMs:[0,3600000],processingMs:[0,3600000]
+  };
+  for (const [key,[lo,hi]] of Object.entries(ranges)) {
+    if (!Number.isFinite(Number(c[key])) || Number(c[key])<lo || Number(c[key])>hi) errors.push(`${key}: outside ${lo}–${hi}`);
+    else c[key] = Number(c[key]);
+  }
+  if (!Number.isInteger(c.dataBytes)) errors.push('dataBytes must be an integer');
+  for(const k of ['mtu','chunkBytes','appHeader','llPayload','maxWritesPerEvent','responseIntervals']) if(!Number.isInteger(c[k])) errors.push(`${k} must be an integer`);
+  if(!PHYS.includes(c.phy)) errors.push('Unsupported PHY: only LE 1M / LE 2M');
+  if(!METHODS.includes(c.method)) errors.push('Unsupported GATT method');
+  if(!['ios','android','embedded'].includes(c.platform)) errors.push('Unsupported platform');
+  if(c.intervalMs/1.25!==Math.round(c.intervalMs/1.25)) errors.push('Connection interval must be a multiple of 1.25 ms');
+  if(Number(c.eventMs)>Number(c.intervalMs)) errors.push('eventMs cannot exceed connection interval');
+  if(errors.length) return {ok:false,errors,warnings};
+
+  // ATT opcode/handle: 3 B. L2CAP basic header: 4 B.
+  // 'chunkBytes' bounds the GATT value, including any application header.
+  const valueBytes=Math.min(c.mtu-3,c.chunkBytes);
+  const netBytes=valueBytes-c.appHeader;
+  if(netBytes<1) return {ok:false,errors:['No application payload: reduce appHeader or increase chunkBytes / MTU'],warnings};
+  // The 4-byte MIC is an additional field after the LL payload, not deducted from
+  // the negotiated 27/251-byte LL Data PDU payload size (Bluetooth SIG).
+  const mic=c.encryption?4:0;
+  const llDataCapacity=c.llPayload;
+  if(llDataCapacity<=0) return {ok:false,errors:['Invalid LL payload capacity'],warnings};
+  const writes=Math.ceil(c.dataBytes/netBytes);
+  const lastNetBytes=c.dataBytes-(writes-1)*netBytes;
+  const rate=c.phy==='2M'?2:1; // bits per microsecond
+  const preamble=c.phy==='2M'?2:1;
+  const radioHeader=preamble+4+2+3; // preamble + access address + LL header + CRC
+  const emptyAckUs=radioHeader*8/rate; // simplified empty LL response, without MIC
+  const fragments=(dataSize)=> {
+    let remaining=3 + c.appHeader + dataSize + 4; // ATT opcode & handle + GATT value + L2CAP header
+    let count=0, onAirUs=0, payloadOnAir=0;
+    while(remaining>0){
+      const used=Math.min(remaining,llDataCapacity);
+      remaining-=used;
+      payloadOnAir+=used;
+      count++;
+      // Model one LL data PDU and empty LL acknowledgment plus 2 x 150µs IFS.
+      // This is a planning approximation: scheduler/connection-event packing differs by controller.
+      onAirUs+=((radioHeader+used+mic)*8/rate)+emptyAckUs+300;
+    }
+    return {count,onAirUs,payloadOnAir};
+  };
+  const full=fragments(netBytes), last=fragments(lastNetBytes);
+  const maxByAir=Math.floor(c.eventMs*1000/full.onAirUs);
+  if(maxByAir<1) return {ok:false,errors:[`A full ATT operation needs about ${(full.onAirUs/1000).toFixed(3)} ms in this model, exceeding event length ${c.eventMs} ms. Fragmentation across connection events is not modeled; increase event length, reduce chunk size, or increase LL data length.`],warnings};
+  const perEvent=Math.min(maxByAir,c.maxWritesPerEvent);
+  const eventsUnadjusted=Math.ceil(writes/perEvent);
+  const retransmissionScale=1/(1-c.retryPercent/100);
+  const retryEvents=Math.ceil(eventsUnadjusted*retransmissionScale);
+  // Write Request is sequential here; the response may require >= 1 connection interval.
+  const requestEvents=c.method==='request'?Math.ceil(writes*c.responseIntervals*retransmissionScale):0;
+  const events=Math.max(retryEvents,requestEvents);
+  const transferMs=events*c.intervalMs;
+  const totalMs=transferMs+c.setupMs+c.processingMs;
+  const airtimeUs=(writes-1)*full.onAirUs+last.onAirUs;
+  const llPackets=(writes-1)*full.count+last.count;
+  const totalAttBytes=c.dataBytes+writes*c.appHeader+writes*3;
+  const totalL2capBytes=totalAttBytes+writes*4;
+  const llPayloadBytes=totalL2capBytes;
+  const airEfficiency=(c.dataBytes*8)/Math.max(1,airtimeUs); // user bits / total radio bits-equivalent time
+  if(c.platform==='ios') warnings.push('iOS: use CBPeripheral.maximumWriteValueLength(for:) and canSendWriteWithoutResponse; do not assume MTU is configurable by the app.');
+  if(c.platform==='android') warnings.push('Android 14+: the first GATT MTU request asks for 517; the negotiated MTU still depends on the peer.');
+  if(valueBytes+7>c.llPayload) warnings.push('ATT value spans multiple Link Layer packets (L2CAP fragmentation). MTU is not LL PDU size.');
+  if(c.method==='request') warnings.push('Write Request throughput is limited by ATT responses; the responseIntervals value is a conservative scheduling assumption.');
+  if(c.retryPercent>0) warnings.push('Retries use an assumed event-capacity penalty; not a packet error probability model.');
+  if(c.phy==='2M') warnings.push('LE 2M is optional and requires both controllers to negotiate it.');
+  if(c.method==='notification') warnings.push('Notifications run peripheral to central. Peripheral scheduling and confirmation/indication semantics are not modeled.');
+  if(c.eventMs===c.intervalMs) warnings.push('Full-interval event occupancy is an optimistic scheduling assumption, especially with multiple links.');
+  if(c.chunkBytes>c.mtu-3) warnings.push('Configured chunk is capped by ATT_MTU − 3.');
+  if(c.method==='command' && c.platform==='ios') warnings.push('iOS flow control can reduce event utilization; wait for peripheralIsReady(toSendWriteWithoutResponse:) before continuing.');
+  if(c.maxWritesPerEvent>maxByAir) warnings.push('Requested writes per event exceed the modeled radio time budget; automatically capped.');
+  return {
+    ok:true,config:c,warnings,errors:[],netBytes,valueBytes,writes,lastNetBytes,
+    fragmentsPerFullWrite:full.count,llPackets,perEvent,maxByAir,events,estimatedEventOccupancyMs: full.onAirUs*perEvent/1000,
+    appBytes:c.dataBytes,appHeaderBytes:writes*c.appHeader,
+    attHeaderBytes:writes*3,l2capHeaderBytes:writes*4,
+    totalAttBytes,totalL2capBytes,llPayloadBytes,
+    airtimeMs:airtimeUs/1000,airEfficiency,
+    transferMs,totalMs,
+    throughputBps:totalMs?c.dataBytes*8/(totalMs/1000):0,
+    throughputKiBps:totalMs?c.dataBytes/1024/(totalMs/1000):0,
+    radioCeilingBps:airtimeUs?c.dataBytes*8/(airtimeUs/1e6):0,
+    intervalsWithoutRetry:eventsUnadjusted,
+    model:'Connection-interval budget model (N × interval), not measured elapsed time; ideal airtime excludes RF errors and startup/end-of-event offsets'
+  };
+}

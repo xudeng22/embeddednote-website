@@ -1,0 +1,186 @@
+---
+const {lang='en'}=Astro.props;
+const zh=lang==='zh';
+const labels = zh ? {
+ title:'BLE 吞吐率与传输规划工具',lead:'按 ATT、L2CAP、链路层分片与连接事件估算 GATT 数据传输。所有计算在浏览器本地完成。',
+ profiles:'常用场景',image:'电子纸图像 24,400 B',raw:'四色电子纸 108,000 B',tiny:'小型传感器数据 1,024 B',
+ configuration:'链路配置',dataBytes:'应用数据大小（字节）',mtu:'实际协商 ATT MTU（字节）',chunkBytes:'每次 GATT Value 上限（字节）',appHeader:'应用协议头（每包，字节）',phy:'数据 PHY',llPayload:'链路层 Data PDU 上限（字节）',intervalMs:'连接间隔（毫秒）',eventMs:'每次连接事件可用时长（毫秒）',maxWritesPerEvent:'每事件最多 ATT 写入次数',method:'GATT 传输方式',responseIntervals:'Write Request 响应间隔（连接间隔数）',encryption:'链路加密（估算 4 字节 MIC）',retryPercent:'重试/拥塞容量损失（%）',setupMs:'准备/握手耗时（毫秒）',processingMs:'设备处理/刷屏耗时（毫秒）',platform:'手机平台',
+ command:'Write Without Response',request:'Write With Response',notification:'Notification（设备→主机）',
+ results:'估算结果',total:'总耗时',transfer:'仅数据传输',throughput:'有效应用吞吐率',writes:'ATT 操作次数',perEvent:'每连接事件可容纳操作',llPackets:'链路层数据包数',airtime:'估算无线电占用',attOverhead:'ATT 头部总开销',l2capOverhead:'L2CAP 头部总开销',appOverhead:'应用头部总开销',payload:'每次操作有效载荷',compare:'模型说明',copy:'复制报告',reset:'恢复默认',errors:'参数错误',notes:'限制和兼容提示',sources:'协议与平台参考',footer:'这是可调参的工程规划模型，不是实测吞吐率或硬件认证结论；不包含 PHY 切换、连接建立、方向竞争、真实调度、链路层重传细节和无线环境。',noStorage:'计算完全在本地进行，不上传数据。'
+} : {
+ title:'BLE Throughput & Transfer Planner',lead:'Plan GATT transfers using ATT/L2CAP overhead, link-layer fragmentation, PHY airtime and connection-event scheduling. Calculated locally in your browser.',
+ profiles:'Example payloads',image:'E-paper image · 24,400 B',raw:'Four-color image · 108,000 B',tiny:'Sensor payload · 1,024 B',
+ configuration:'Link configuration',dataBytes:'Application payload (bytes)',mtu:'Negotiated ATT MTU (bytes)',chunkBytes:'GATT value cap per operation (bytes)',appHeader:'Application header per operation (bytes)',phy:'Data PHY',llPayload:'Link Layer Data PDU max (bytes)',intervalMs:'Connection interval (ms)',eventMs:'Available connection event time (ms)',maxWritesPerEvent:'Maximum ATT operations per event',method:'GATT operation',responseIntervals:'Write Request response delay (intervals)',encryption:'Encrypted link (model 4-byte MIC)',retryPercent:'Assumed retry/congestion capacity loss (%)',setupMs:'Setup / handshake time (ms)',processingMs:'Device processing / display time (ms)',platform:'Mobile platform',
+ command:'Write Without Response',request:'Write With Response',notification:'Notification (peripheral → central)',
+ results:'Estimated transfer',total:'Total elapsed',transfer:'Data transfer only',throughput:'Application throughput',writes:'ATT operations',perEvent:'Ops / connection event',llPackets:'Link-layer data PDUs',airtime:'Modeled radio occupancy',attOverhead:'ATT headers total',l2capOverhead:'L2CAP headers total',appOverhead:'Application headers total',payload:'Usable payload per operation',compare:'Model assumptions',copy:'Copy technical report',reset:'Reset defaults',errors:'Invalid configuration',notes:'Caveats and platform guidance',sources:'Protocol and platform references',footer:'Engineering planning model, not measured throughput or a hardware certification. Connection establishment, real radio scheduler, competition with other links, RF conditions and detailed LL retransmissions are not simulated.',noStorage:'Calculations run entirely in your browser; no payload is uploaded.'
+};
+---
+<section class="ble-shell" data-ble-lang={lang}>
+ <p class="ble-eyebrow">EMBEDDEDNOTE / ENGINEERING TOOLS / BLE</p>
+ <h1>{labels.title}</h1>
+ <p class="ble-lead">{labels.lead}</p>
+ <div class="ble-intro-note">{labels.noStorage}</div>
+ <div class="ble-card ble-presets">
+  <h2>{labels.profiles}</h2>
+  <div class="ble-preset-row">
+   <button type="button" data-preset="24400">{labels.image}</button>
+   <button type="button" data-preset="108000">{labels.raw}</button>
+   <button type="button" data-preset="1024">{labels.tiny}</button>
+  </div>
+ </div>
+ <div class="ble-grid">
+  <form class="ble-card ble-config" id="ble-config" novalidate>
+   <h2>{labels.configuration}</h2>
+   <div class="ble-fields">
+    <label>{labels.dataBytes}<input name="dataBytes" type="number" min="1" max="100000000" step="1" value="24400" required /></label>
+    <label>{labels.platform}<select name="platform"><option value="ios">iOS (CoreBluetooth)</option><option value="android">Android (BluetoothGatt)</option><option value="embedded">Embedded / desktop</option></select></label>
+    <label>{labels.method}<select name="method"><option value="command">{labels.command}</option><option value="request">{labels.request}</option><option value="notification">{labels.notification}</option></select></label>
+    <label>{labels.phy}<select name="phy"><option value="2M">LE 2M</option><option value="1M">LE 1M</option></select></label>
+    <label>{labels.mtu}<input name="mtu" type="number" min="23" max="517" step="1" value="247" required /></label>
+    <label>{labels.llPayload}<select name="llPayload"><option value="251">251 (DLE)</option><option value="27">27 (legacy)</option></select></label>
+    <label>{labels.chunkBytes}<input name="chunkBytes" type="number" min="1" max="514" step="1" value="244" required /></label>
+    <label>{labels.appHeader}<input name="appHeader" type="number" min="0" max="64" step="1" value="0" required /></label>
+    <label>{labels.intervalMs}<input name="intervalMs" type="number" min="7.5" max="4000" step="1.25" value="30" required /></label>
+    <label>{labels.eventMs}<input name="eventMs" type="number" min="0.5" max="4000" step="0.5" value="15" required /></label>
+    <label>{labels.maxWritesPerEvent}<input name="maxWritesPerEvent" type="number" min="1" max="1000" step="1" value="4" required /></label>
+    <label data-request-setting hidden>{labels.responseIntervals}<select name="responseIntervals"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option></select></label>
+    <label>{labels.retryPercent}<input name="retryPercent" type="number" min="0" max="80" step="1" value="0" required /></label>
+    <label>{labels.setupMs}<input name="setupMs" type="number" min="0" max="3600000" step="1" value="0" required /></label>
+    <label>{labels.processingMs}<input name="processingMs" type="number" min="0" max="3600000" step="1" value="0" required /></label>
+    <label class="ble-check">{labels.encryption}<input name="encryption" type="checkbox" checked /></label>
+   </div>
+   <div class="ble-actions"><button type="reset" class="ble-muted">{labels.reset}</button><button type="button" id="ble-copy">{labels.copy}</button></div>
+  </form>
+  <div class="ble-card ble-results" aria-live="polite" aria-atomic="false">
+   <h2>{labels.results}</h2>
+   <div id="ble-errors" class="ble-errors" role="alert" hidden></div>
+   <div id="ble-output">
+    <div class="ble-metrics">
+      <div class="ble-big"><small>{labels.total}</small><strong id="ble-total">—</strong></div>
+      <div class="ble-big"><small>{labels.throughput}</small><strong id="ble-throughput">—</strong></div>
+    </div>
+    <dl class="ble-facts">
+      <div><dt>{labels.transfer}</dt><dd id="ble-transfer">—</dd></div>
+      <div><dt>{labels.payload}</dt><dd id="ble-payload">—</dd></div>
+      <div><dt>{labels.writes}</dt><dd id="ble-writes">—</dd></div>
+      <div><dt>{labels.perEvent}</dt><dd id="ble-per-event">—</dd></div>
+      <div><dt>{labels.llPackets}</dt><dd id="ble-ll">—</dd></div>
+      <div><dt>{labels.airtime}</dt><dd id="ble-airtime">—</dd></div>
+      <div><dt>{labels.attOverhead}</dt><dd id="ble-att">—</dd></div>
+      <div><dt>{labels.l2capOverhead}</dt><dd id="ble-l2cap">—</dd></div>
+      <div><dt>{labels.appOverhead}</dt><dd id="ble-app">—</dd></div>
+    </dl>
+    <div class="ble-note"><h3>{labels.notes}</h3><ul id="ble-warnings"></ul></div>
+   </div>
+  </div>
+ </div>
+ <aside class="ble-methodology">
+  <h2>{labels.compare}</h2>
+  {zh ? <p>应用有效载荷 = min(协商 MTU − 3, GATT 单次 Value 限制) − 自定义协议头。每次操作计入 3 字节 ATT 头部与 4 字节 L2CAP 头部；按照配置的 LL PDU 上限分片。针对 LE 1M/2M 估算空中收发耗时，结合事件长度、每事件操作上限和连接间隔计算传输时间。Write Request 单独施加请求/响应时序约束。重试损失和设备处理时间由用户输入，不作为设备实测值。</p> : <p>Application bytes per operation = min(negotiated ATT MTU − 3, configured GATT value cap) − application header. Each operation includes 3 ATT header bytes plus 4 L2CAP header bytes and fragments into LL data PDUs. The model estimates LE 1M/2M airtime, applies connection-event budget and per-event scheduling caps, and limits Write Request via a configurable response delay. Retry loss and processing latency are user assumptions—not measurements.</p>}
+  <p>{labels.footer}</p>
+  <h2>{labels.sources}</h2>
+  <ul>
+    <li><a href="https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core_v6.3/out/en/low-energy-controller/link-layer-specification.html" target="_blank" rel="noopener noreferrer">Bluetooth Core Specification — Link Layer</a></li>
+    <li><a href="https://docs.nordicsemi.com/r/bundle/sds_s145/page/sds/s1xx/ble_data_throughput/ble_data_throughput.html" target="_blank" rel="noopener noreferrer">Nordic Semiconductor — BLE Data Throughput</a></li>
+    <li><a href="https://developer.android.com/reference/android/bluetooth/BluetoothGatt" target="_blank" rel="noopener noreferrer">Android — BluetoothGatt.requestMtu</a></li>
+    <li><a href="https://developer.apple.com/documentation/corebluetooth/cbperipheral" target="_blank" rel="noopener noreferrer">Apple — CBPeripheral API</a></li>
+  </ul>
+ </aside>
+</section>
+<script>
+ import {calculateBlePlan,DEFAULTS} from '../lib/ble-planner.mjs';
+ const section=document.querySelector('.ble-shell');
+ if(section){
+ const form=section.querySelector('#ble-config');
+ const locale=section.dataset.bleLang==='zh'?'zh-CN':'en-US';
+ const warningZh={
+  'iOS: use CBPeripheral.maximumWriteValueLength(for:) and canSendWriteWithoutResponse; do not assume MTU is configurable by the app.':'iOS：读取 CBPeripheral.maximumWriteValueLength(for:) 并遵守 canSendWriteWithoutResponse；应用不能假定可主动设置 MTU。',
+  'Android 14+: the first GATT MTU request asks for 517; the negotiated MTU still depends on the peer.':'Android 14 及以上：首次 GATT MTU 请求会申请 517，实际协商结果仍受外设支持情况限制。',
+  'ATT value spans multiple Link Layer packets (L2CAP fragmentation). MTU is not LL PDU size.':'ATT 数据可能跨多个链路层数据包，需要 L2CAP 分片；ATT MTU 不等于 LL PDU 大小。',
+  'Write Request throughput is limited by ATT responses; the responseIntervals value is a conservative scheduling assumption.':'Write Request 会受到 ATT 响应时序限制；响应间隔是模型的保守假设。',
+  'Retries use an assumed event-capacity penalty; not a packet error probability model.':'重试参数表示连接事件容量损失假设，不是物理层误包率模型。',
+  'LE 2M is optional and requires both controllers to negotiate it.':'LE 2M 是可选能力，必须由双方控制器支持并完成协商。',
+  'Full-interval event occupancy is an optimistic scheduling assumption, especially with multiple links.':'连接事件占满整个连接间隔属于偏乐观的调度假设，尤其是多连接场景。',
+  'Configured chunk is capped by ATT_MTU − 3.':'单包 GATT Value 已按 ATT MTU − 3 限制。',
+  'Requested writes per event exceed the modeled radio time budget; automatically capped.':'配置的每事件写入次数超过空中时间预算，已自动限制。'
+ };
+ const localizedWarning=(w)=>locale==='zh-CN'?(warningZh[w]||w):w;
+ let latest=null;
+ const put=(id,value)=>{const el=section.querySelector('#'+id);if(el)el.textContent=value;};
+ const fmt=(v,d=0)=>Number(v).toLocaleString(locale,{maximumFractionDigits:d});
+ const ms=(v)=>v>=1000?fmt(v/1000,3)+' s':fmt(v,2)+' ms';
+ function read(){const out={};for(const el of form.querySelectorAll('[name]'))out[el.name]=el.type==='checkbox'?el.checked:el.type==='number'?Number(el.value):el.value;return out;}
+ function render(){
+  const config=read();const requestLabel=section.querySelector('[data-request-setting]');requestLabel.hidden=config.method!=='request';
+  latest=calculateBlePlan(config);
+  const errorBox=section.querySelector('#ble-errors'),output=section.querySelector('#ble-output');
+  errorBox.hidden=latest.ok;output.hidden=!latest.ok;
+  if(!latest.ok){errorBox.textContent=latest.errors.join('; ');return;}
+  put('ble-total',ms(latest.totalMs));put('ble-transfer',ms(latest.transferMs));
+  put('ble-throughput',fmt(latest.throughputKiBps,2)+' KiB/s');
+  put('ble-payload',fmt(latest.netBytes)+' B');put('ble-writes',fmt(latest.writes));
+  put('ble-per-event',fmt(latest.perEvent));put('ble-ll',fmt(latest.llPackets));
+  put('ble-airtime',ms(latest.airtimeMs));put('ble-att',fmt(latest.attHeaderBytes)+' B');
+  put('ble-l2cap',fmt(latest.l2capHeaderBytes)+' B');put('ble-app',fmt(latest.appHeaderBytes)+' B');
+  const ul=section.querySelector('#ble-warnings');ul.replaceChildren();
+  for(const warning of latest.warnings){const li=document.createElement('li');li.textContent=localizedWarning(warning);ul.append(li);}
+ }
+ form.addEventListener('input',render);form.addEventListener('change',render);
+ form.addEventListener('reset',()=>setTimeout(render,0));
+ section.querySelectorAll('[data-preset]').forEach(btn=>btn.addEventListener('click',()=>{form.elements.namedItem('dataBytes').value=btn.dataset.preset;render();}));
+ section.querySelector('#ble-copy').addEventListener('click',async()=>{
+  if(!latest?.ok)return;
+  const report=['EmbeddedNote BLE Transfer Planner','Inputs: '+JSON.stringify(latest.config),
+   'Application payload per operation: '+latest.netBytes+' B','ATT operations: '+latest.writes,
+   'LL data PDUs: '+latest.llPackets,'Estimated transfer: '+latest.transferMs+' ms',
+   'Estimated total: '+latest.totalMs+' ms','Application throughput: '+latest.throughputKiBps.toFixed(2)+' KiB/s',
+   'Notes: '+latest.warnings.join(' | '),'Planning model, not measured throughput.'].join('\n');
+  try{await navigator.clipboard.writeText(report);}catch{const t=document.createElement('textarea');t.value=report;document.body.append(t);t.select();document.execCommand('copy');t.remove();}
+ });
+ render();
+ }
+</script>
+<style>
+.ble-shell{color:#17211e;max-width:1160px;margin:auto;padding:32px 0 75px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
+.ble-shell h1,.ble-shell h2,.ble-shell h3{font-family:Georgia,'Noto Serif SC',serif;color:#17211e}
+.ble-shell h1{font-size:clamp(30px,4vw,49px);line-height:1.15;letter-spacing:-.025em;margin:10px 0 12px}
+.ble-eyebrow{font:700 11px/1.4 system-ui,sans-serif;letter-spacing:.14em;color:#b94530;margin:0}
+.ble-lead{max-width:850px;font-size:16px;line-height:1.7;color:#53605a;margin:0 0 8px}
+.ble-intro-note{font-size:13px;color:#64716a;margin-bottom:22px}
+.ble-grid{display:grid;grid-template-columns:minmax(0,1.17fr) minmax(0,.83fr);gap:20px;align-items:start}
+.ble-card{background:#fbf8f2;border:1px solid #d0c8bb;border-radius:7px;padding:clamp(18px,2vw,26px);margin-bottom:18px;box-shadow:0 2px 12px rgba(37,41,32,.025)}
+.ble-card h2{font-size:23px;margin:0 0 18px}
+.ble-preset-row{display:flex;flex-wrap:wrap;gap:10px}
+.ble-shell button{appearance:none;background:#b94530;color:#fff;border:1px solid #b94530;border-radius:4px;font:600 13px/1.3 system-ui;padding:11px 15px;cursor:pointer;transition:background .15s}
+.ble-shell button:hover{background:#8b3022;color:white}
+.ble-preset-row button,.ble-shell button.ble-muted{background:transparent;color:#933b2c}
+.ble-preset-row button:hover,.ble-shell button.ble-muted:hover{background:#f2e5d9;color:#842e21}
+.ble-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 14px}
+.ble-fields label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:650;line-height:1.45;color:#435048;min-width:0}
+.ble-fields input:not([type=checkbox]),.ble-fields select{width:100%;min-width:0;height:42px;padding:9px 11px;color:#17211e;background:#fff;border:1px solid #c7c1b8;border-radius:4px;font:500 15px system-ui;box-sizing:border-box}
+.ble-fields input:focus-visible,.ble-fields select:focus-visible,.ble-shell button:focus-visible{outline:2px solid #b94530;outline-offset:2px}
+.ble-fields .ble-check{flex-direction:row;align-items:center;gap:10px;grid-column:1/-1;padding:6px 0}
+.ble-check input{width:17px;height:17px;accent-color:#b94530;order:-1}
+.ble-actions{margin-top:22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ble-metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ble-big{background:#f1ece2;padding:17px 12px;border-radius:4px;min-width:0}
+.ble-big small{display:block;font-size:12px;color:#59645d;margin-bottom:9px}
+.ble-big strong{font:700 clamp(20px,2.6vw,29px)/1.2 Georgia,serif;color:#a83e2b;overflow-wrap:anywhere}
+.ble-facts{margin:22px 0 0}
+.ble-facts div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid #e3dcd1;padding:11px 0}
+.ble-facts dt{font-size:13px;line-height:1.4;color:#59645d}
+.ble-facts dd{font-size:14px;margin:0;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:700}
+.ble-note{margin-top:25px;background:#f3eee5;padding:16px;border-radius:5px;border-left:3px solid #b94530}
+.ble-note h3{font-size:17px;margin:0 0 10px}
+.ble-note ul{padding-left:18px;margin:0;font-size:12.5px;line-height:1.75;color:#45534a}
+.ble-note li+li{margin-top:7px}
+.ble-errors{color:#8b231b;background:#fff0ee;border:1px solid #d49f96;border-radius:4px;padding:15px;line-height:1.65}
+.ble-methodology{border-top:1px solid #d0c8bb;margin-top:26px;padding-top:26px;max-width:950px}
+.ble-methodology h2{font-size:23px;margin:12px 0}
+.ble-methodology p,.ble-methodology li{font-size:14px;line-height:1.75;color:#445149}
+.ble-methodology ul{padding-left:19px}
+.ble-methodology a{color:#a33e2b;text-underline-offset:3px;overflow-wrap:anywhere}
+[hidden]{display:none!important}
+@media(max-width:900px){.ble-grid{grid-template-columns:1fr}.ble-results{order:-1}}
+@media(max-width:600px){.ble-shell{padding-top:24px}.ble-fields{grid-template-columns:1fr}.ble-metrics{grid-template-columns:1fr 1fr}.ble-card{padding:17px}.ble-preset-row button{flex:1 1 100%}}
+</style>

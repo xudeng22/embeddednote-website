@@ -5,7 +5,7 @@ export const channels = [
   { slug: 'hardware', en: 'Hardware Design', zh: '硬件设计', enDesc: 'PCB, power and circuits', zhDesc: 'PCB、电源、接口电路' },
   { slug: 'connectivity', en: 'Connectivity', zh: '通信技术', enDesc: 'BLE, Wi-Fi, NFC and CAN', zhDesc: 'BLE、Wi-Fi、NFC、CAN' },
   { slug: 'display', en: 'Display Technology', zh: '显示技术', enDesc: 'E-paper, TFT and Mini LED', zhDesc: '电子纸、TFT、Mini LED' },
-  { slug: 'tools', en: 'Development Tools', zh: '开发工具', enDesc: 'IDEs, debugging and testing', zhDesc: 'IDE、调试、仿真与测试' }
+  { slug: 'tools', en: 'Development Tools', zh: '开发工具', enDesc: 'IDEs, debugging, simulation, testing, and BLE, e-paper & NFC tools.', zhDesc: 'IDE、调试、仿真与测试，以及 BLE、电子纸和 NFC 工程工具。' }
 ] as const;
 export const ui = {
   en: {title:'Embedded engineering, made practical', description:'Chips, hardware, open source and hands-on engineering.', latest:'Latest articles', topics:'Six technical channels', about:'About', discussion:'Discussion', empty:'No articles yet.', read:'Read article', langLabel:'中文', search:'Search chips, protocols, projects or keywords'},
