@@ -28,7 +28,8 @@ const translations = { en: '/en/contact/', zh: '/zh/contact/' };
         ? '欢迎向我们推荐项目、反馈技术错误，或就编辑及合作事宜与我们联系。'
         : 'We welcome project suggestions, technical corrections, and relevant editorial or partnership enquiries.'}
     </p>
-    <p class="en-contact-email">
+        <p><a href={`/${lang}/partner/`} data-en-event="partner_link_click" data-en-placement="contact">{zh ? '商业合作与品牌赞助 →' : 'Brand Partnerships & Sponsorships →'}</a></p>
+<p class="en-contact-email">
       <strong>{zh ? '邮箱：' : 'Email:'}</strong>
       <a href="mailto:xden2019@gmail.com">xden2019@gmail.com</a>
     </p>

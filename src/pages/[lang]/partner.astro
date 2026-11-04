@@ -1,0 +1,45 @@
+---
+import Base from '../../layouts/Base.astro';
+export function getStaticPaths(){return ['en','zh'].map(lang=>({params:{lang}}));}
+const lang=Astro.params.lang==='zh'?'zh':'en';
+const zh=lang==='zh';
+const types=zh?['品牌赞助','产品评测与工程分析','联盟合作','工程咨询']:['Brand Sponsorship','Product Review & Engineering Analysis','Affiliate Partnership','Engineering Consulting'];
+---
+<Base lang={lang} title={zh?'合作与赞助':'Partnerships & Sponsorships'} description={zh?'与 EmbeddedNote 合作：嵌入式硬件品牌赞助、产品技术评测、联盟合作及工程咨询。':'Partner with EmbeddedNote on technical sponsorships, embedded hardware reviews, affiliate programs, and engineering services.'} translations={{en:'/en/partner/',zh:'/zh/partner/'}}>
+<section class="en-partner" data-pagefind-body>
+  <p class="eyebrow">EMBEDDEDNOTE / {zh?'商务合作':'PARTNERSHIPS'}</p>
+  <h1>{zh?'面向工程师的技术合作':'Reach Engineers Through Useful Technical Content'}</h1>
+  <p class="lead">{zh?'EmbeddedNote 聚焦嵌入式系统、开发板、电子纸、通信技术及开源硬件。我们欢迎与产品及读者需求相关的合作。':'EmbeddedNote covers embedded systems, development boards, e-paper, connectivity, and open-source hardware. We welcome relevant partnerships that are useful to engineering readers.'}</p>
+  <div class="partner-grid">
+    {types.map((t,i)=><article><span>0{i+1}</span><h2>{t}</h2><p>{(zh?['技术文章赞助及适合读者的品牌展示。','基于可核查资料及实际测试的产品分析。','透明披露的产品推荐与联盟链接。','针对具体工程问题的技术讨论与方案评估。']:['Relevant sponsored editorial placements and brand visibility.','Evidence-based coverage with clearly stated testing scope.','Disclosed product recommendations and affiliate links.','Technical discussions and practical engineering assessments.'])[i]}</p></article>)}
+  </div>
+  <div class="partner-contact">
+    <h2>{zh?'介绍你的合作项目':'Tell us about your project'}</h2>
+    <p>{zh?'填写以下信息后，点击按钮将使用你的邮箱应用生成邮件；不会自动将信息上传到网站。':'Complete the fields below to compose an email in your mail app. This form does not upload your information to our website.'}</p>
+    <form id="en-partner-form">
+      <label>{zh?'合作类型':'Partnership type'}<select name="type">{types.map(t=><option>{t}</option>)}</select></label>
+      <label>{zh?'公司 / 品牌':'Company / brand'}<input name="company" maxlength="120" required autocomplete="organization"/></label>
+      <label>{zh?'联系邮箱':'Contact email'}<input name="email" type="email" maxlength="160" required autocomplete="email"/></label>
+      <label class="full">{zh?'产品或合作需求':'Product or partnership brief'}<textarea name="brief" rows="5" maxlength="2000" required></textarea></label>
+      <button type="submit">{zh?'用邮箱发送合作咨询':'Compose partnership email'}</button>
+      <p class="full note">{zh?'也可直接发送邮件至':'Or email us directly at'} <a href="mailto:xden2019@gmail.com" data-en-event="partner_email_click" data-en-placement="partner">xden2019@gmail.com</a></p>
+    </form>
+    <p class="note">{zh?'合作内容将明确标注商业关系；编辑判断不以付费换取正面评价。':'Commercial relationships will be disclosed. Payment does not guarantee positive coverage.'}</p>
+  </div>
+</section>
+</Base>
+<script>
+  const f=document.querySelector<HTMLFormElement>('#en-partner-form');
+  f?.addEventListener('submit',event=>{
+    event.preventDefault();if(!f.reportValidity())return;
+    const data=new FormData(f);
+    const val=(key:string)=>String(data.get(key)||'').trim();
+    const subject=`EmbeddedNote partnership inquiry - ${val('type')}`;
+    const body=`Company: ${val('company')}\nEmail: ${val('email')}\nPartnership: ${val('type')}\n\n${val('brief')}`;
+    (window as any).embeddednoteAnalytics?.capture?.('partner_email_compose',{type:val('type'),page:location.pathname});
+    location.href=`mailto:xden2019@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+</script>
+<style>
+.en-partner{max-width:1050px;margin:0 auto;padding:40px 0 90px;color:#17211e}.en-partner h1{font:700 clamp(32px,4.5vw,54px)/1.12 Georgia,'Noto Serif SC',serif;max-width:900px;letter-spacing:-.025em}.en-partner .lead{font:clamp(16px,1.7vw,19px)/1.8 system-ui,sans-serif;max-width:800px;color:#58625c;margin:18px 0 34px}.partner-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.partner-grid article{background:#faf7f0;border:1px solid #d0c8bb;border-radius:5px;padding:23px}.partner-grid span{font:700 12px system-ui;color:#b94530;letter-spacing:.1em}.partner-grid h2,.partner-contact h2{font:700 clamp(21px,2.3vw,29px)/1.25 Georgia,'Noto Serif SC',serif;margin:12px 0}.partner-grid p,.partner-contact p{line-height:1.75;color:#59645e}.partner-contact{margin-top:36px;padding:25px;border:1px solid #d0c8bb;background:#faf7f0;border-radius:5px}.partner-contact form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.partner-contact label{display:grid;gap:6px;font:600 13px system-ui,sans-serif}.partner-contact .full{grid-column:1/-1}.partner-contact input,.partner-contact select,.partner-contact textarea{font:15px system-ui,sans-serif;padding:12px;border:1px solid #bcb4a8;border-radius:3px;min-width:0;background:#fff;color:#17211e}.partner-contact button{background:#b94530;color:white;border:0;border-radius:3px;padding:12px 18px;font:600 14px system-ui;cursor:pointer;justify-self:start}.partner-contact button:hover{background:#923322}.partner-contact .note{font-size:13px;margin:0}.partner-contact a{color:#b94530}@media(max-width:650px){.partner-grid,.partner-contact form{grid-template-columns:1fr}.en-partner{padding-top:25px}.partner-contact{padding:17px}}
+</style>

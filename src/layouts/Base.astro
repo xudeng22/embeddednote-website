@@ -3,6 +3,7 @@ import '../styles/global.css';
 import '../styles/v2-mobile-seo.css';
 import '../styles/v28-journal.css';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import AnalyticsConsent from '../components/AnalyticsConsent.astro';
 import { channels, ui } from '../i18n/ui';
 
 const { lang = 'en', title, description, translations = {}, switchLinks = translations, article = false, homepage = false, activeCategory = null } = Astro.props;
@@ -87,6 +88,10 @@ const siteIdentity = {
             {lang === 'zh' ? 'BLE 传输计算器' : 'BLE Transfer Planner'}
           </a>
           <span aria-hidden="true">|</span>
+          <!-- embeddednote-growth-v1:start -->
+          <a href={`/${lang}/partner/`} data-en-event="partner_link_click" data-en-placement="footer">{lang === 'zh' ? '商务合作' : 'Partner With Us'}</a>
+          <span aria-hidden="true">|</span>
+          <!-- embeddednote-growth-v1:end -->
           <a href={`/${lang}/contact/`}>{lang === 'zh' ? '联系我们' : 'Contact'}</a>
           <span aria-hidden="true">|</span>
           <a href={`/${lang}/about/`}>{dict.about}</a>
@@ -96,5 +101,6 @@ const siteIdentity = {
         <p class="en-footer-copyright">© {new Date().getFullYear()} EmbeddedNote. {lang === 'zh' ? '保留所有权利。' : 'All rights reserved.'}</p>
       </div>
     </footer>
+    <AnalyticsConsent />
   </body>
 </html>

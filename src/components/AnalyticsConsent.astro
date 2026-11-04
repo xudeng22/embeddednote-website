@@ -1,0 +1,44 @@
+---
+const clarityId = import.meta.env.PUBLIC_CLARITY_PROJECT_ID || '';
+const posthogKey = import.meta.env.PUBLIC_POSTHOG_KEY || '';
+const posthogHost = import.meta.env.PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com';
+---
+{(clarityId || posthogKey) && (
+  <div id="en-analytics-consent" class="en-consent" hidden role="region" aria-label="Analytics preferences">
+    <p id="en-consent-text">Optional analytics help us improve EmbeddedNote. You can decline or accept. No optional analytics are loaded before acceptance.</p>
+    <div><button type="button" data-choice="deny">Decline</button><button type="button" data-choice="allow">Allow analytics</button></div>
+  </div>
+)}
+<style>
+  .en-consent{position:fixed;z-index:2000;inset:auto 12px 12px auto;max-width:min(430px,calc(100vw - 24px));padding:16px;background:#fbf7ef;border:1px solid #cfc4b3;box-shadow:0 5px 22px #1113;border-radius:5px;font:14px/1.5 system-ui,sans-serif;color:#17211e}
+  .en-consent[hidden]{display:none}.en-consent p{margin:0 0 12px}.en-consent div{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}.en-consent button{cursor:pointer;border:1px solid #b94530;border-radius:3px;background:transparent;color:#9a3525;padding:8px 12px}.en-consent button[data-choice="allow"]{color:#fff;background:#b94530}
+</style>
+<script is:inline define:vars={{ clarityId, posthogKey, posthogHost }}>
+(function(){
+  const root=document.getElementById('en-analytics-consent');
+  const key='embeddednote_analytics_choice_v1';
+  const isZH=document.documentElement.lang.startsWith('zh');
+  if(root && isZH){document.getElementById('en-consent-text').textContent='可选分析服务帮助我们改善网站。选择同意前，不会加载 Clarity 或 PostHog。';root.querySelector('[data-choice="deny"]').textContent='拒绝';root.querySelector('[data-choice="allow"]').textContent='同意分析';}
+  function start(){
+    if(window.__enAnalyticsStarted)return;window.__enAnalyticsStarted=true;
+    if(clarityId && /^[a-z0-9]+$/i.test(clarityId)){
+      window.clarity=window.clarity||function(){(window.clarity.q=window.clarity.q||[]).push(arguments)};
+      const s=document.createElement('script');s.async=true;s.src='https://www.clarity.ms/tag/'+encodeURIComponent(clarityId);document.head.appendChild(s);
+    }
+    if(posthogKey && /^https:\/\/(us|eu)\.i\.posthog\.com$/.test(posthogHost)){
+      // Queue compatible with the official PostHog browser loader.
+      const ph=window.posthog=window.posthog||[];
+      ph._i=ph._i||[];
+      ph.init=function(key,options,instance){const target=instance?ph[instance]:ph;for(const method of ['capture','identify','opt_in_capturing','opt_out_capturing'])target[method]=function(){target.push([method].concat([].slice.call(arguments)));};ph._i.push([key,options,instance]);};
+      ph.init(posthogKey,{api_host:posthogHost,autocapture:false,capture_pageview:false,disable_session_recording:true,person_profiles:'identified_only',persistence:'memory'});
+      const script=document.createElement('script');script.async=true;script.crossOrigin='anonymous';script.src=posthogHost.replace('.i.posthog.com','-assets.i.posthog.com')+'/static/array.js';
+      document.head.appendChild(script);
+    }
+  }
+  const current=localStorage.getItem(key);
+  if(current==='allow')start(); else if(!current && root)root.hidden=false;
+  root?.addEventListener('click',function(e){const val=e.target?.dataset?.choice;if(!val)return;localStorage.setItem(key,val);root.hidden=true;if(val==='allow')start();});
+  window.embeddednoteAnalytics={capture:function(name,props){if(localStorage.getItem(key)!=='allow')return;if(window.posthog&&typeof window.posthog.capture==='function')window.posthog.capture(name,props||{});}};
+  document.addEventListener('click',function(e){const a=e.target.closest?.('a[data-en-event]');if(!a)return;window.embeddednoteAnalytics.capture(a.dataset.enEvent,{destination_domain:(function(){try{return new URL(a.href).hostname}catch{return ''}})(),placement:a.dataset.enPlacement||'unknown',page:location.pathname});},true);
+})();
+</script>
