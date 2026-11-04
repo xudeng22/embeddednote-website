@@ -54,12 +54,23 @@ const seoDescription = page > 1
     <p class="eyebrow">EMBEDDED NOTES / {slug.toUpperCase()}</p>
     <h1>{headline}</h1>
     <p class="category-intro">{lang === 'zh' ? c.zhDesc : c.enDesc}</p>
-    <!-- ble-planner-category-entry -->
-    {slug === 'tools' && <a class="ble-tool-feature" href={`/${lang}/tools/ble-throughput-calculator/`}>
-      <span class="ble-tool-feature-label">INTERACTIVE ENGINEERING TOOL</span>
-      <strong>BLE Throughput &amp; Transfer Planner</strong>
-      <span>{lang === 'zh' ? '估算 BLE 吞吐率、ATT/L2CAP 开销与传输时间，支持 MTU、DLE、PHY 和 iOS/Android 参数。' : 'Estimate BLE throughput, ATT/L2CAP overhead, DLE/PHY airtime and transfer budgets.'}</span>
-    </a>}
+        <!-- embeddednote-tools-hub-v1.3:start -->
+    {slug === 'tools' && page === 1 && (
+      <section class="en-tools-hub" aria-label="Interactive engineering tools">
+        <div class="en-tools-hub-topline"><span class="en-tools-hub-kicker">INTERACTIVE ENGINEERING TOOLS</span><span class="en-tools-hub-count">02 TOOLS</span></div>
+        <div class="en-tools-hub-grid">
+          <a class="en-tools-hub-card" href={`/${lang}/tools/ble-throughput-calculator/`} aria-label="Open BLE Throughput & Transfer Planner">
+            <span class="en-tools-hub-card-main"><strong>BLE Throughput &amp; Transfer Planner</strong><span class="en-tools-hub-description">Estimate BLE throughput, ATT/L2CAP overhead, DLE/PHY airtime and transfer budgets.</span></span>
+            <span class="en-tools-hub-cta" aria-hidden="true">Open Tool <span class="en-tools-hub-arrow">→</span></span>
+          </a>
+          <a class="en-tools-hub-card" href={`/${lang}/tools/epaper-image-converter/`} aria-label="Open E-Paper Image Converter">
+            <span class="en-tools-hub-card-main"><strong>E-Paper Image Converter</strong><span class="en-tools-hub-description">Convert photos to 4-, 6- and 8-color e-paper palettes. Preview dithering and export pixel data.</span></span>
+            <span class="en-tools-hub-cta" aria-hidden="true">Open Tool <span class="en-tools-hub-arrow">→</span></span>
+          </a>
+        </div>
+      </section>
+    )}
+    <!-- embeddednote-tools-hub-v1.3:end -->
     {visible.length ? <ArticleFeed entries={visible} lang={lang} headingLevel={2} showCategory={false} /> : <p>{ui[lang].empty}</p>}
     <Pagination lang={lang} basePath={`/${lang}/category/${slug}/`} page={page} pageCount={pageCount} total={entries.length} perPage={perPage}/>
   </section>
@@ -69,12 +80,23 @@ const seoDescription = page > 1
 .category-intro{margin:0 0 20px;color:#64716a;font-size:clamp(15px,2vw,18px)}
 .category-page h1{margin:13px 0 14px}
 @media(max-width:700px){.category-page{padding-top:24px}}
-</style>
 
-<style>
-.ble-tool-feature{display:flex;flex-direction:column;gap:7px;padding:19px 22px;margin:20px 0 26px;background:#fbf8f2;border:1px solid #d0c8bb;border-left:3px solid #b94530;border-radius:5px;text-decoration:none;color:#17211e}
-.ble-tool-feature:hover{border-color:#b94530}
-.ble-tool-feature strong{font:700 clamp(18px,2vw,24px)/1.3 Georgia,serif;color:#17211e}
-.ble-tool-feature span{font-size:13px;line-height:1.6;color:#59645d}
-.ble-tool-feature .ble-tool-feature-label{color:#b94530;font-size:10px;font-weight:700;letter-spacing:.12em}
+/* embeddednote-tools-hub-v1.3:start */
+.en-tools-hub{margin:24px 0 36px;min-width:0}
+.en-tools-hub-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 11px}
+.en-tools-hub-kicker{font:700 11px/1.5 system-ui,sans-serif;letter-spacing:.11em;color:#a63927}
+.en-tools-hub-count{font:600 11px/1.5 system-ui,sans-serif;color:#64716a;white-space:nowrap}
+.en-tools-hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.en-tools-hub-card{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;gap:22px;min-width:0;min-height:206px;padding:23px 25px;background:#fbf8f2;border:1px solid #d0c8bb;border-left:4px solid #b94530;border-radius:5px;text-decoration:none!important;color:#17211e!important;transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease}
+.en-tools-hub-card:hover,.en-tools-hub-card:focus-visible{border-color:#b94530;box-shadow:0 5px 18px rgba(45,31,17,.1);transform:translateY(-2px)}
+.en-tools-hub-card:focus-visible{outline:3px solid #b94530;outline-offset:3px}
+.en-tools-hub-card-main{display:flex;flex-direction:column;gap:10px;min-width:0}
+.en-tools-hub-card strong{display:block;font:700 clamp(19px,2vw,26px)/1.22 Georgia,'Noto Serif',serif;color:#17211e}
+.en-tools-hub-description{display:block;font:14px/1.65 system-ui,sans-serif;color:#58635e}
+.en-tools-hub-cta{display:inline-flex;align-items:center;justify-content:center;gap:15px;min-height:43px;padding:10px 17px;border-radius:4px;background:#b94530;color:#fff;font:700 14px/1.2 system-ui,sans-serif;white-space:nowrap;transition:background-color .15s ease}
+.en-tools-hub-arrow{font-size:19px;line-height:1}
+.en-tools-hub-card:hover .en-tools-hub-cta,.en-tools-hub-card:focus-visible .en-tools-hub-cta{background:#933421}
+@media(max-width:760px){.en-tools-hub-grid{grid-template-columns:1fr}.en-tools-hub-card{min-height:0;padding:19px 20px;gap:19px}.en-tools-hub{margin:20px 0 30px}}
+@media(prefers-reduced-motion:reduce){.en-tools-hub-card,.en-tools-hub-cta{transition:none}.en-tools-hub-card:hover,.en-tools-hub-card:focus-visible{transform:none}}
+/* embeddednote-tools-hub-v1.3:end */
 </style>

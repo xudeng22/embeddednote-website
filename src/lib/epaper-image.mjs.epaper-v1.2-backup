@@ -1,0 +1,187 @@
+/** EmbeddedNote E-Paper Image Converter v1.0.
+ * Portable, dependency-free color quantization kernel.
+ * All palettes are reference RGB swatches; never assume a controller's native wire codes.
+ */
+export const PRESETS = Object.freeze({
+  four: { label: '4-color BWRY (generic)', colors: [
+    { name: 'Black', hex: '#000000' }, { name: 'White', hex: '#FFFFFF' },
+    { name: 'Red', hex: '#FF0000' }, { name: 'Yellow', hex: '#FFFF00' },
+  ] },
+  six: { label: '6-color Spectra 6 reference', colors: [
+    { name: 'Black', hex: '#000000' }, { name: 'White', hex: '#FFFFFF' },
+    { name: 'Yellow', hex: '#FFFF00' }, { name: 'Red', hex: '#FF0000' },
+    { name: 'Blue', hex: '#0000FF' }, { name: 'Green', hex: '#00FF00' },
+  ] },
+  eight: { label: '8-color illustrative (not device-certified)', colors: [
+    { name: 'Black', hex: '#000000' }, { name: 'White', hex: '#FFFFFF' },
+    { name: 'Yellow', hex: '#FFFF00' }, { name: 'Red', hex: '#FF0000' },
+    { name: 'Blue', hex: '#0000FF' }, { name: 'Green', hex: '#00FF00' },
+    { name: 'Cyan', hex: '#00FFFF' }, { name: 'Magenta', hex: '#FF00FF' },
+  ] },
+});
+
+/** Device profiles keep native logical ink IDs and measured output distinct.
+ * The bundled profiles are reference RGB only, NOT spectrophotometer measurements.
+ * Calibrated profiles may supply measuredHex for quantization & visual preview.
+ */
+export const PROFILE_SCHEMA_VERSION = 1;
+export function createProfile(id, name, colors, measured=false) {
+  return { schemaVersion: PROFILE_SCHEMA_VERSION, id, name, measured,
+    measurement: measured ? { illuminant: 'D65', notes: '' } : null,
+    colors: colors.map((color, index) => ({
+      name: color.name, hex: color.hex, measuredHex: color.measuredHex || color.hex,
+      code: index,
+    })) };
+}
+export const DISPLAY_PROFILES = Object.freeze({
+  four: createProfile('generic-4-bwry', '4-color BWRY · reference', PRESETS.four.colors),
+  six: createProfile('generic-6-spectra', '6-color Spectra 6 · reference', PRESETS.six.colors),
+  eight: createProfile('generic-8', '8-color · illustrative reference', PRESETS.eight.colors),
+});
+export function validateProfile(profile) {
+  if (!profile || typeof profile !== 'object' || Array.isArray(profile)) throw new Error('Invalid display profile.');
+  if (profile.schemaVersion !== 1) throw new Error('Unsupported profile schemaVersion.');
+  if (typeof profile.id !== 'string' || !/^[a-zA-Z0-9_.-]{1,64}$/.test(profile.id)) throw new Error('Invalid profile id.');
+  if (typeof profile.name !== 'string' || profile.name.length < 1 || profile.name.length > 120) throw new Error('Invalid profile name.');
+  if (typeof profile.measured !== 'boolean') throw new Error('measured must be a boolean.');
+  if (![4,6,8].includes(profile.colors?.length)) throw new Error('Profile must have 4, 6 or 8 colors.');
+  const colors = profile.colors.map((c, i) => {
+    if (typeof c.name !== 'string' || c.name.length > 50 || !c.name.length) throw new Error(`Invalid color name at ${i}.`);
+    if (typeof c.hex !== 'string' || !/^#[0-9a-fA-F]{6}$/.test(c.hex)) throw new Error(`Invalid native hex at ${i}.`);
+    if (typeof c.measuredHex !== 'string' || !/^#[0-9a-fA-F]{6}$/.test(c.measuredHex)) throw new Error(`Invalid measured hex at ${i}.`);
+    if (!Number.isInteger(c.code) || c.code < 0 || c.code > 255) throw new Error(`Invalid native code at ${i}.`);
+    return {name:c.name,hex:c.hex.toUpperCase(),measuredHex:c.measuredHex.toUpperCase(),code:c.code};
+  });
+  if (new Set(colors.map(x=>x.code)).size!==colors.length) throw new Error('Native codes must be unique.');
+  return {schemaVersion:1,id:profile.id,name:profile.name,measured:profile.measured,
+    measurement: profile.measurement && typeof profile.measurement==='object' ?
+      { illuminant:String(profile.measurement.illuminant||'D65').slice(0,30), notes:String(profile.measurement.notes||'').slice(0,250) } : null,colors};
+}
+export function profilePalette(profile) {
+  const p=validateProfile(profile);
+  return p.colors.map(c=>({name:c.name,hex:p.measured?c.measuredHex:c.hex, nativeHex:c.hex, nativeCode:c.code}));
+}
+
+// sRGB D65 reference white and the CIE 1976 Lab conversion.
+export function rgbToLab(r,g,b) {
+  const linear=v=> {v/=255;return v<=0.04045?v/12.92:((v+0.055)/1.055)**2.4;};
+  r=linear(r);g=linear(g);b=linear(b);
+  const x=(r*0.4124564+g*0.3575761+b*0.1804375)/0.95047;
+  const y=(r*0.2126729+g*0.7151522+b*0.0721750);
+  const z=(r*0.0193339+g*0.1191920+b*0.9503041)/1.08883;
+  const ff=v=>v>216/24389?Math.cbrt(v):(24389/27*v+16)/116;
+  const fx=ff(x),fy=ff(y),fz=ff(z);
+  return [116*fy-16,500*(fx-fy),200*(fy-fz)];
+}
+export function deltaE76(a,b){return Math.hypot(a[0]-b[0],a[1]-b[1],a[2]-b[2]);}
+
+export const MAX_PIXELS = 6_000_000;
+export function parsePalette(colors) {
+  if (!Array.isArray(colors) || colors.length < 2 || colors.length > 16) throw new Error('Palette must contain 2–16 colors.');
+  return colors.map((entry, i) => {
+    const hex = String(entry.hex || '').toUpperCase();
+    if (!/^#[0-9A-F]{6}$/.test(hex)) throw new Error(`Invalid color #${i}: ${hex}`);
+    return { name: String(entry.name || `Color ${i}`), hex, rgb: [1, 3, 5].map(n => parseInt(hex.slice(n,n+2),16)), nativeHex: entry.nativeHex || hex, nativeCode: entry.nativeCode ?? i };
+  });
+}
+export function packed4(indices) {
+  const output = new Uint8Array(Math.ceil(indices.length/2));
+  for (let i=0; i<indices.length; i++) {
+    if (indices[i] > 15) throw new Error('Packed 4-bit indices support up to 16 colors.');
+    output[i>>1] |= (i&1) ? indices[i] : indices[i]<<4;
+  }
+  return output;
+}
+export function unpacked8(indices) { return Uint8Array.from(indices); }
+export function validateOptions({width,height,palette,method,contrast=1,saturation=1,brightness=0,matching='rgb',edgeProtection=false,edgeThreshold=55}) {
+  if (!Number.isInteger(width) || !Number.isInteger(height) || width<1 || height<1 || width*height>MAX_PIXELS) throw new Error(`Output must be 1–${MAX_PIXELS.toLocaleString()} pixels.`);
+  if (!['nearest','floyd','atkinson','bayer'].includes(method)) throw new Error('Unsupported dithering method.');
+  if (![contrast,saturation,brightness].every(Number.isFinite) || contrast<0.3 || contrast>2.5 || saturation<0 || saturation>2.5 || brightness < -100 || brightness >100) throw new Error('Invalid image adjustments.');
+  if (!['rgb','lab'].includes(matching)) throw new Error('Unsupported color matching mode.');
+  if (typeof edgeProtection !== 'boolean' || !Number.isFinite(edgeThreshold) || edgeThreshold < 10 || edgeThreshold > 150) throw new Error('Invalid edge protection parameters.');
+  return parsePalette(palette);
+}
+const clamp = x => Math.max(0, Math.min(255,x));
+const BAYER = [0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];
+function nearest(r,g,b,palette,matching='rgb', labCache=null) {
+  let best = 0, min = Infinity;
+  for(let k=0;k<palette.length;k++){
+    const c=palette[k].rgb;
+    // Weighted RGB approximation with emphasis on visible green differences.
+    const dr=r-c[0], dg=g-c[1], db=b-c[2];
+    let distance;
+    if(matching==='lab'){
+      // 5-bit/channel bounded LUT minimizes repeated nonlinear RGB->Lab conversions.
+      const key=((r|0)>>3)<<10 | ((g|0)>>3)<<5 | ((b|0)>>3);
+      let lab=labCache.get(key);
+      if(!lab){lab=rgbToLab((key>>10)*8+4,((key>>5)&31)*8+4,(key&31)*8+4);labCache.set(key,lab);}
+      const q=palette[k].lab;
+      distance=(lab[0]-q[0])**2+(lab[1]-q[1])**2+(lab[2]-q[2])**2;
+    }else distance=0.30*dr*dr + 0.59*dg*dg + 0.11*db*db;
+    if(distance < min){min=distance;best=k;}
+  }
+  return best;
+}
+export function convertRGBA(rgba, opts) {
+  const {width,height,method='floyd',contrast=1,saturation=1,brightness=0,matching='rgb',edgeProtection=false,edgeThreshold=55} = opts;
+  const palette=validateOptions({...opts,method});
+  if(!(rgba instanceof Uint8Array || rgba instanceof Uint8ClampedArray) || rgba.length !== width*height*4) throw new Error('Invalid RGBA buffer length.');
+  if(matching==='lab') for(const c of palette)c.lab=rgbToLab(...c.rgb);
+  const labCache=matching==='lab'?new Map():null;
+  const pixels=width*height;
+  const luma=(index)=> {const a=rgba[index+3]/255;return (0.2126*rgba[index]+0.7152*rgba[index+1]+0.0722*rgba[index+2])*a+255*(1-a);};
+  function isEdge(x,y,p){
+    if(!edgeProtection)return false;
+    const here=luma(p);
+    // Only near-neutral high-contrast strokes are treated as text/line art.
+    const spread=Math.max(rgba[p],rgba[p+1],rgba[p+2])-Math.min(rgba[p],rgba[p+1],rgba[p+2]);
+    if(spread>36)return false;
+    const l=x>0?luma(p-4):here, r=x+1<width?luma(p+4):here;
+    const t=y>0?luma(p-width*4):here, b=y+1<height?luma(p+width*4):here;
+    return Math.max(Math.abs(here-l),Math.abs(here-r),Math.abs(here-t),Math.abs(here-b))>=edgeThreshold;
+  }
+  const indices=new Uint8Array(pixels), result=new Uint8ClampedArray(rgba.length), hist=new Uint32Array(palette.length);
+  // Two rows only: avoid a second full-size Float32 RGB buffer at large resolutions.
+  let row=new Float32Array((width+2)*3), next=new Float32Array((width+2)*3), after=new Float32Array((width+2)*3);
+  function add(target,x,e,weight){ if(x<0||x>=width)return; const o=(x+1)*3; target[o]+=e[0]*weight; target[o+1]+=e[1]*weight; target[o+2]+=e[2]*weight; }
+  for(let y=0;y<height;y++){
+    const reverse=method==='floyd' && y%2===1;
+    for(let z=0;z<width;z++){
+      const x=reverse?width-1-z:z, i=y*width+x, p=i*4;
+      const a=rgba[p+3]/255;
+      // Flatten transparent pixels against white (the canvas itself also uses white).
+      let r=rgba[p]*a+255*(1-a),g=rgba[p+1]*a+255*(1-a),b=rgba[p+2]*a+255*(1-a);
+      r=clamp((r-127.5)*contrast+127.5+brightness);
+      g=clamp((g-127.5)*contrast+127.5+brightness);
+      b=clamp((b-127.5)*contrast+127.5+brightness);
+      const gray=0.2126*r+0.7152*g+0.0722*b;
+      r=clamp(gray+(r-gray)*saturation);g=clamp(gray+(g-gray)*saturation);b=clamp(gray+(b-gray)*saturation);
+      const edge=isEdge(x,y,p);
+      // On sharp text boundaries disable diffusion noise locally.
+      if(edge){r=clamp(r-row[(x+1)*3]);g=clamp(g-row[(x+1)*3+1]);b=clamp(b-row[(x+1)*3+2]);}
+      const q=(x+1)*3;
+      if(method==='floyd'||method==='atkinson') {r=clamp(r+row[q]);g=clamp(g+row[q+1]);b=clamp(b+row[q+2]);}
+      if(method==='bayer' && !edge) {const perturb=(BAYER[(y&3)*4+(x&3)]-7.5)*6;r=clamp(r+perturb);g=clamp(g+perturb);b=clamp(b+perturb);}
+      let idx;
+      if(edge){
+        const black=palette.findIndex(c=>c.name.toLowerCase()==='black');
+        const white=palette.findIndex(c=>c.name.toLowerCase()==='white');
+        // Preserve neutral text ink as black/white where the detected stroke is dark/light.
+        idx=(black>=0&&white>=0)?(0.2126*r+0.7152*g+0.0722*b<127.5?black:white):nearest(r,g,b,palette,matching,labCache);
+      }else idx=nearest(r,g,b,palette,matching,labCache);
+      const rgb=palette[idx].rgb; indices[i]=idx;hist[idx]++;
+      result[p]=rgb[0];result[p+1]=rgb[1];result[p+2]=rgb[2];result[p+3]=255;
+      if(method==='floyd' && !edge){
+        const e=[r-rgb[0],g-rgb[1],b-rgb[2]], step=reverse?-1:1;
+        add(row,x+step,e,7/16);add(next,x-step,e,3/16);add(next,x,e,5/16);add(next,x+step,e,1/16);
+      } else if(method==='atkinson' && !edge){
+        const e=[r-rgb[0],g-rgb[1],b-rgb[2]];
+        add(row,x+1,e,1/8);add(row,x+2,e,1/8);
+        add(next,x-1,e,1/8);add(next,x,e,1/8);add(next,x+1,e,1/8);
+        add(after,x,e,1/8);
+      }
+    }
+    const temp=row;row=next;next=after;after=temp;after.fill(0);
+  }
+  return {indices,rgba:result,histogram:Array.from(hist),palette};
+}
