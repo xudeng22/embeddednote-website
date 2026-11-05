@@ -3,7 +3,7 @@ title: Turn a Raspberry Pi Pico W into a USB Wi-Fi Adapter—No Custom Drivers N
 description: pico-usb-wifi turns a Raspberry Pi Pico W into a USB CDC-NCM network adapter. Explore its Layer 2 bridge, setup model, performance and trade-offs.
 locale: en
 translationKey: pico-usb-wifi
-pubDate: '2026-11-06'
+pubDate: '2026-11-03'
 category: open-source
 tags:
 - Raspberry Pi Pico W
@@ -11,7 +11,7 @@ tags:
 - USB CDC-NCM
 - Wi-Fi
 - Open Source
-draft: true
+draft: false
 sourceUrl: https://gitlab.com/baiyibai/pico-usb-wifi
 author: EmbeddedNote
 seoTitle: Turn a Raspberry Pi Pico W into a USB Wi-Fi Adapter—No Custom Drivers Needed | EmbeddedNote

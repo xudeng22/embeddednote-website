@@ -3,7 +3,7 @@ title: Make Your Old Bench Power Supply Programmable with This ESP32-S3 Project
 description: PSU-EXT adds SCPI, current and voltage monitoring, relay control and a web dashboard to a bench PSU. Explore the hardware, isolation and limitations.
 locale: en
 translationKey: psu-ext
-pubDate: '2026-11-11'
+pubDate: '2026-11-05'
 category: hardware
 tags:
 - ESP32-S3
@@ -11,7 +11,7 @@ tags:
 - SCPI
 - Test Automation
 - Open Source Hardware
-draft: true
+draft: false
 sourceUrl: https://github.com/PSU-Ext-Org
 author: EmbeddedNote
 seoTitle: Make Your Old Bench Power Supply Programmable with This ESP32-S3 Project | EmbeddedNote

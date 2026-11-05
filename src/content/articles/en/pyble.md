@@ -3,7 +3,7 @@ title: PyBLE Turns Your iPad into a Wireless MicroPython IDE for ESP32
 description: PyBLE is an open-source tablet-first MicroPython IDE over BLE. See how PBLE/1 handles editing, files, console, firmware targets and recovery.
 locale: en
 translationKey: pyble
-pubDate: '2026-11-09'
+pubDate: '2026-11-04'
 category: open-source
 tags:
 - PyBLE
@@ -11,7 +11,7 @@ tags:
 - ESP32
 - BLE
 - Flutter
-draft: true
+draft: false
 sourceUrl: https://github.com/PyBLE-dev/PyBLE
 author: EmbeddedNote
 seoTitle: PyBLE Turns Your iPad into a Wireless MicroPython IDE for ESP32 | EmbeddedNote
