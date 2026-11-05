@@ -1,5 +1,5 @@
 ---
-title: 不用插数据线也能调试 ESP32：PyBLE 把平板变成 MicroPython IDE
+title: Github 上超实用嵌入式项目——拿起平板通过 BLE 就能调试 ESP32 的 IDE（PyBLE）
 description: PyBLE 通过 BLE 和 PBLE/1 协议，将代码编辑、文件传输、运行控制和 Blockly 编程带到平板端，并提供板端 Agent 与刷机工具。
 locale: zh
 translationKey: pyble
@@ -14,7 +14,7 @@ tags:
 draft: false
 sourceUrl: https://github.com/PyBLE-dev/PyBLE
 author: EmbeddedNote
-seoTitle: 不用插数据线也能调试 ESP32：PyBLE 把平板变成 MicroPython IDE | EmbeddedNote
+seoTitle: Github 上超实用嵌入式项目——拿起平板通过 BLE 就能调试 ESP32 的 IDE（PyBLE） | EmbeddedNote
 seoDescription: PyBLE 通过 BLE 和 PBLE/1 协议，将代码编辑、文件传输、运行控制和 Blockly 编程带到平板端，并提供板端 Agent 与刷机工具。
 ---
 

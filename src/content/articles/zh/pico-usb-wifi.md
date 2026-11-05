@@ -1,5 +1,5 @@
 ---
-title: 树莓派 Pico W 变身 USB Wi-Fi 网卡：pico-usb-wifi 开源项目
+title: Gitlab 上实用嵌入式项目——将树莓派 Pico W 变 USB Wi-Fi 网卡（pico-usb-wifi）
 description: pico-usb-wifi 利用 Raspberry Pi Pico W、USB CDC-NCM 与二层桥接，为主机提供无需厂商专用 Wi-Fi 驱动的联网方案，并支持 CDC-ACM 管理。
 locale: zh
 translationKey: pico-usb-wifi
@@ -14,7 +14,7 @@ tags:
 draft: false
 sourceUrl: https://gitlab.com/baiyibai/pico-usb-wifi
 author: EmbeddedNote
-seoTitle: 树莓派 Pico W 变身 USB Wi-Fi 网卡：pico-usb-wifi 开源项目 | EmbeddedNote
+seoTitle: Gitlab 上实用嵌入式项目——将树莓派 Pico W 变 USB Wi-Fi 网卡（pico-usb-wifi） | EmbeddedNote
 seoDescription: pico-usb-wifi 利用 Raspberry Pi Pico W、USB CDC-NCM 与二层桥接，为主机提供无需厂商专用 Wi-Fi 驱动的联网方案，并支持 CDC-ACM 管理。
 ---
 

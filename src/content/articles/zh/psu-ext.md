@@ -1,5 +1,5 @@
 ---
-title: 普通台式电源也能接入自动化测试：ESP32-S3 开源项目 PSU-EXT
+title: Github 上超实用嵌入式项目——给普通台式电源外挂一个可编程控制盒 PSU-EXT
 description: PSU-EXT 串联在台式电源与负载之间，增加电压电流监测、继电器控制、SCPI 接口及 Web 控制台，适用于实验室自动化原型。
 locale: zh
 translationKey: psu-ext
@@ -14,7 +14,7 @@ tags:
 draft: false
 sourceUrl: https://github.com/PSU-Ext-Org
 author: EmbeddedNote
-seoTitle: 普通台式电源也能接入自动化测试：ESP32-S3 开源项目 PSU-EXT | EmbeddedNote
+seoTitle: Github 上超实用嵌入式项目——给普通台式电源外挂一个可编程控制盒 PSU-EXT | EmbeddedNote
 seoDescription: PSU-EXT 串联在台式电源与负载之间，增加电压电流监测、继电器控制、SCPI 接口及 Web 控制台，适用于实验室自动化原型。
 ---
 
