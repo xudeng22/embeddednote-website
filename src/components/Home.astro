@@ -41,6 +41,30 @@ const seoDescription = page > 1
     </div>
   </section>}
   {page > 1 && <header class="en-feed-page-heading"><h1 class="visually-hidden">{t.latest} — {lang === 'zh' ? `第 ${page} 页` : `Page ${page}`}</h1></header>}
+  {page === 1 && <section class="en-p0-original" aria-label={lang === 'zh' ? '原创工程分析与在线工具' : 'Original engineering analysis and tools'}>
+    <div class="en-p0-kicker">{lang === 'zh' ? '原创工程分析 / OPEN TOOLS' : 'ORIGINAL ENGINEERING / OPEN TOOLS'}</div>
+    <h2>{lang === 'zh' ? '从工程原理到可复算的实用工具' : 'Engineering methods you can verify'}</h2>
+    <p class="en-p0-deck">{lang === 'zh' ? '公开公式、测试向量和设计边界。工具结果是模型估算，不冒充设备实测。' : 'Reproducible calculations, binary test vectors and clear evidence boundaries—not invented benchmarks.'}</p>
+    <div class="en-p0-grid">
+      <a href={`/${lang}/tools/ble-throughput-calculator/`} class="en-p0-tile">
+        <span class="en-p0-tag">OPEN TOOL · BLE</span>
+        <strong>BLE Throughput &amp; Transfer Planner</strong>
+        <small>{lang === 'zh' ? '估算 MTU、连接事件与应用层传输预算' : 'Estimate MTU, event scheduling and transfer budgets'}</small>
+      </a>
+      <a href={`/${lang}/tools/epaper-image-converter/`} class="en-p0-tile">
+        <span class="en-p0-tag">OPEN TOOL · DISPLAY</span>
+        <strong>E-Paper Image Converter</strong>
+        <small>{lang === 'zh' ? '图片量化、RAW4 索引导出与色板测试' : 'Palette conversion, RAW4 export and test patterns'}</small>
+      </a>
+    </div>
+    <div class="en-p0-reading">
+      <span>{lang === 'zh' ? '从这里开始' : 'START HERE'}</span>
+      <a class="en-p0-pillar-link" href={`/${lang}/articles/epaper-engineering-field-guide/`}>{lang === 'zh' ? '电子纸完整工程指南——从图像到刷新' : 'E-paper engineering: from image to verified refresh'}</a>
+      <a href={`/${lang}/articles/ble-transfer-budget-from-mtu-to-time/`}>{lang === 'zh' ? 'BLE 分包与传输时间' : 'BLE packet and timing budget'}</a>
+      <a href={`/${lang}/articles/epaper-palette-raw4-packing-guide/`}>{lang === 'zh' ? '电子纸 RAW4 校验' : 'E-paper RAW4 verification'}</a>
+      <a href={`/${lang}/articles/epaper-refresh-timing-pipeline/`}>{lang === 'zh' ? '刷新时序测量' : 'Refresh timing breakdown'}</a>
+    </div>
+  </section>}
   <SearchBox lang={lang} />
   <section id="latest" class="en-journal-feed" data-pagefind-ignore>
     <h2 class="visually-hidden">{t.latest}</h2>
@@ -56,4 +80,21 @@ const seoDescription = page > 1
   .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
   .en-feed-page-heading{height:clamp(20px,3vw,32px);}
   @media(max-width:700px){.editorial-hero{grid-template-columns:minmax(0,1fr)}.hero-visual{max-width:100%;margin:0 auto}.hero-copy h1{overflow-wrap:anywhere}}
+
+  /* EmbeddedNote P0 original engineering feature */
+  .en-p0-original{padding:28px 0 30px;border-top:1px solid #ded8ce;border-bottom:1px solid #ded8ce;margin:18px 0 30px}
+  .en-p0-kicker{font:700 12px/1.5 system-ui,sans-serif;letter-spacing:.12em;color:#ac4d39}
+  .en-p0-original h2{font:700 clamp(22px,2.6vw,32px)/1.24 Georgia,'Noto Serif SC',serif;margin:8px 0 10px;color:#212b27}
+  .en-p0-deck{color:#637067;font:15px/1.65 system-ui,sans-serif;max-width:830px;margin:0 0 19px}
+  .en-p0-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .en-p0-tile{display:flex;flex-direction:column;gap:8px;padding:19px 21px;border:1px solid #d8d1c6;background:#fffdf9;border-radius:7px;color:#24312b;text-decoration:none;transition:border-color .2s,transform .2s}
+  .en-p0-tile:hover,.en-p0-tile:focus-visible{border-color:#b94530;transform:translateY(-1px)}
+  .en-p0-tag{font:700 11px/1.35 system-ui,sans-serif;color:#b34d38;letter-spacing:.075em}
+  .en-p0-tile strong{font:700 clamp(17px,2vw,22px)/1.3 Georgia,'Noto Serif SC',serif}
+  .en-p0-tile small{font:13px/1.55 system-ui,sans-serif;color:#58665f}
+  .en-p0-reading{display:flex;flex-wrap:wrap;gap:9px 17px;align-items:center;margin-top:19px;font:13px/1.45 system-ui,sans-serif}
+  .en-p0-reading span{color:#8a766f;letter-spacing:.08em;font-weight:700;font-size:11px}
+  .en-p0-reading a{color:#8f3c2c;text-underline-offset:3px}
+  .en-p0-reading .en-p0-pillar-link{font-weight:700}
+  @media(max-width:680px){.en-p0-grid{grid-template-columns:1fr}.en-p0-original{padding:23px 0}.en-p0-tile{padding:16px}}
 </style>

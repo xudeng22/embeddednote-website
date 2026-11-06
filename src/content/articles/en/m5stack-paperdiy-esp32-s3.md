@@ -14,6 +14,7 @@ tags:
 draft: false
 seoTitle: 'M5Stack PaperDIY: $25 ESP32-S3 E-Paper Kit and Schematics'
 seoDescription: 'Inside M5Stack PaperDIY: a 4.7-inch, 960 × 540 e-paper display, ESP32-S3, parallel data interface, power management and ESP-IDF firmware.'
+updatedDate: '2026-11-06'
 ---
 
 M5Stack sells its PaperDIY e-paper development platform in two versions. The $25 Assembly Kit includes a 4.7-inch display, controller board, 140 mAh battery and acrylic retaining plate for user assembly. The $29.90 Complete Kit uses the same core electronics, preassembled in a 3D-printed enclosure. Either version provides a practical starting point for a desk calendar, status display or other device that updates only occasionally. The display connection, power circuitry and basic mounting hardware are already part of the design.
@@ -73,3 +74,16 @@ M5Stack's official store listed the Assembly Kit (K159) at **US$25.00** and the 
 *Rear of the Complete Kit enclosure with the mounting points. Image: M5Stack.*
 
 **Hardware and software references:** [Assembly Kit documentation](https://docs.m5stack.com/en/core/PaperDIY_Assembly_Kit) · [Complete Kit documentation](https://docs.m5stack.com/en/core/PaperDIY_Complete_Kit) · [Full schematics (PDF)](https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1288/K159-B_PaperDIY_sche.pdf) · [ESP-IDF factory test source](https://github.com/m5stack/M5PaperDIY-UserDemo) · [Assembly Kit store listing](https://shop.m5stack.com/products/paperdiy-assembly-kit-esp32-s3) · [Complete Kit store listing](https://shop.m5stack.com/products/paperdiy-complete-kit-esp32-s3)
+
+<!-- embeddednote-p0-20261106:start -->
+
+## Engineering check: memory size, power gating and first bring-up
+
+The 960 × 540 display has **518,400 pixels**. A hypothetical 1-bit packed image is **64,800 bytes**; a hypothetical 4-bit indexed buffer is **259,200 bytes**. These are straightforward framebuffer-size calculations, **not** a statement that PaperDIY's shipping driver uses either format. Check the actual driver data path before deciding how many buffers can coexist with fonts, network stacks and image decoders.
+
+For a low-duty-cycle dashboard, three different power states matter: the MCU in sleep, the display controller/PMIC with its power rails enabled, and the panel actively updating. E-paper image persistence does not mean the entire development board consumes zero power while idle. Measure board current in each state, including the battery measurement path, pull-ups, and any accessories. In an ESP32-S3 product, the power-management design can matter more to battery life than a small difference in framebuffer-copy speed.
+
+A reproducible first-bring-up sequence is to flash the **manufacturer's matching factory demo**, verify display activity and SD/battery features if fitted, then record the exact ESP-IDF revision, board SKU, firmware commit and observed current in sleep and refresh. M5Stack's [PaperDIY demo repository](https://github.com/m5stack/M5PaperDIY-UserDemo) specifies an ESP-IDF build flow with pinned components. Preserve this baseline before changing drivers or display waveforms. The original article's listed prices refer to its publication date and should not be treated as current offers.
+
+For pixel-format debugging, see our [RAW4 and palette test-vector guide](/en/articles/epaper-palette-raw4-packing-guide/); for refresh latency, see the [SPI vs. BUSY timing breakdown](/en/articles/epaper-refresh-timing-pipeline/).
+<!-- embeddednote-p0-20261106:end -->

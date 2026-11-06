@@ -15,6 +15,7 @@ seoTitle: 'I²C Doctor: ESP32-Based Bus Debugging Tool'
 seoDescription: 'I²C Doctor uses an ESP32, address scanning, rise-time measurements and switchable pull-ups to help trace wiring and signal-integrity faults.'
 author: 'EmbeddedNote'
 sourceUrl: 'https://i2c-doctor.com/docs.html#downloads'
+updatedDate: '2026-11-06'
 ---
 
 I²C Doctor is a compact, standalone diagnostic instrument built around a 1.3-inch color TFT display. It can scan, analyze, debug, and test an I²C bus in real time. Rather than requiring you to spend hours interpreting oscilloscope traces, it presents a bus health score from 0 to 100% along with specific suggestions for what to check.
@@ -61,3 +62,14 @@ The price is less appealing than the feature list: the article lists I²C Doctor
 <!-- embeddednote-seo-p2:internal-links:start -->
 For a different kind of open-hardware bench instrument, [ArbWave30](/en/articles/arbwave30-waveform-generator/) covers an FPGA-based 30 MHz waveform generator rather than a bus fault finder.
 <!-- embeddednote-seo-p2:internal-links:end -->
+
+<!-- embeddednote-p0-20261106:start -->
+
+## Engineering check: turn a bus-health score into a testable hypothesis
+
+A score is convenient for triage, but a physical bus needs measurable timing margins. As a first approximation, the **30–70% rise time** of an RC pull-up is `t_r ≈ 0.8473 × R_pull-up × C_bus`. For a *hypothetical* 4.7 kΩ effective pull-up and 200 pF bus capacitance, this gives **approximately 796 ns**. That is within the **1,000 ns Standard-mode** limit but exceeds the **300 ns Fast-mode** rise-time limit in NXP's [UM10204 I²C-bus specification](https://www.nxp.com/docs/en/user-guide/UM10204.pdf). This is a design calculation, not a measurement made with I²C Doctor.
+
+Before changing components, check the actual operating voltage, whether multiple board pull-ups are in parallel, the aggregate cable/device capacitance, and the sink-current capability of the lowest-power attached IC. Lowering resistance improves rising edges but increases the current every device must sink when pulling LOW. A nominal 3.3 V bus with 1 kΩ pull-up, for instance, implies approximately 3.3 mA through the resistor at an ideal 0 V LOW level, excluding additional pull-ups. Verify electrical limits before enabling the tool's selectable pull-ups.
+
+**Repeatable verification plan:** save SCL/SDA waveforms, measure 30–70% rise time at the farthest device, record clock frequency, pull-up state and cable length, then compare scan results at 100 kHz and 400 kHz. An address scan alone cannot prove that sustained transactions or clock stretching are reliable. The original article describes the vendor's stated features; the arithmetic above is an independent engineering check, not a product certification.
+<!-- embeddednote-p0-20261106:end -->

@@ -14,6 +14,7 @@ tags:
 draft: false
 seoTitle: 'M5Stack PaperDIY：4.7 英寸电子纸 DIY 套件与完整原理图'
 seoDescription: 'M5Stack PaperDIY 的 4.7 英寸电子纸、ESP32-S3、8 位并口、电源管理和开放原理图解析。Assembly Kit 售价 25 美元，Complete Kit 29.90 美元。'
+updatedDate: '2026-11-06'
 ---
 
 M5Stack 最近上架的 PaperDIY，第一眼看着像一块普通的电子纸开发板。点开套件清单，才发现它把屏、主板、电池、亚克力板甚至外壳都拆开卖了。Assembly Kit 给的是屏幕、主板、电池和亚克力压板，得自己装；Complete Kit 已经装进 3D 打印外壳，到手可以直接写程序。两者核心电路相同，区别主要在结构。想做桌面日历、低功耗信息牌，或者给自己的设备换一块像样的显示屏，这套东西比从零画板省事得多。尤其是电子纸的排线、电源时序和固定方式，一开始就有人替你处理好了。
@@ -65,3 +66,16 @@ M5Stack 官方商城 2026 年 10 月 21 日的标价是：Assembly Kit（K159）
 *Complete Kit 背面与安装孔。图片：M5Stack。*
 
 **资料链接：**[Assembly Kit 官方资料](https://docs.m5stack.com/en/core/PaperDIY_Assembly_Kit) · [Complete Kit 官方资料](https://docs.m5stack.com/en/core/PaperDIY_Complete_Kit) · [完整原理图（PDF）](https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1288/K159-B_PaperDIY_sche.pdf) · [ESP-IDF 出厂测试源码](https://github.com/m5stack/M5PaperDIY-UserDemo) · [Assembly Kit 官方售价](https://shop.m5stack.com/products/paperdiy-assembly-kit-esp32-s3) · [Complete Kit 官方售价](https://shop.m5stack.com/products/paperdiy-complete-kit-esp32-s3)
+
+<!-- embeddednote-p0-20261106:start -->
+
+## 工程补充：先算显存，再验证低功耗
+
+PaperDIY 的 960×540 像素一共是 **518,400 点**。如果假设每像素打包成 1 bit，则一帧为 **64,800 B**；如果用连续 4 bit 索引，则是 **259,200 B**。这仅仅是存储量计算，**不能据此认定官方固件实际采用这两种格式**。真正做产品前，要对照驱动接口核实图像缓冲、字库缓存和解码时的内存峰值。
+
+电子纸能保持静态图像，不意味着整块 ESP32-S3 开发板待机时不耗电。至少分开测 MCU 休眠、显示电源使能、屏幕刷新三种状态，留意 PMIC、分压采样电路、外设和上拉电阻。实际电池续航常常更受系统级电源设计影响。
+
+建议首次上电先刷与硬件 SKU 匹配的**官方出厂 Demo**，确认显示、按键、电池与存储功能，再记录 ESP-IDF 版本、固件提交号和各状态电流。官方 [PaperDIY Demo 仓库](https://github.com/m5stack/M5PaperDIY-UserDemo) 给出了 ESP-IDF 构建流程与依赖固定方式。先留下可恢复的工作基线，再去改显示驱动或波形。原文美元售价是当时记录，不代表现价。
+
+继续阅读：[RAW4 与调色板校验](/zh/articles/epaper-palette-raw4-packing-guide/) · [SPI 与 BUSY 刷新时序](/zh/articles/epaper-refresh-timing-pipeline/)。
+<!-- embeddednote-p0-20261106:end -->

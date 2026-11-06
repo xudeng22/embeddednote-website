@@ -11,5 +11,18 @@ const schema={'@context':'https://schema.org','@type':'SoftwareApplication',name
 ---
 <Base lang={lang} title={title} description={description} translations={translations}>
   <BleTransferPlanner lang={lang}/>
+  <!-- embeddednote-p0-20261106 -->
+  <article class="p0-ble-guide prose" data-pagefind-body>
+    <h2>{zh ? '工程实例：24,400 字节的 BLE 传输预算' : 'Worked example: a 24,400-byte BLE transfer budget'}</h2>
+    <p>{zh ? '假设每包有 2 字节应用层头，ATT MTU 为 247，则单次 Write Command 可承载 247−3−2＝242 字节文件数据。24,400 字节需要 101 次操作。若假设每 20 ms 连接事件稳定支持 4 次操作，预算为 26 个事件槽，即 0.52 秒；这不是任何设备的实测结果。' : 'Assume a two-byte application header, ATT MTU 247 and no smaller API cap. Each Write Command then carries 247−3−2 = 242 file bytes. A 24,400-byte payload needs 101 operations. At an assumed four operations per 20 ms event, it occupies 26 full event slots, or a 0.52-second scheduling budget—not a device benchmark.'}</p>
+    <p>{zh ? '同样假设下，MTU 23 的单包有效文件数据只有 18 字节，所需 1,356 次操作、339 个事件槽，即 6.78 秒。实际速度可能受平台写入队列、射频条件、接收缓存和确认策略限制。' : 'At MTU 23, only 18 file bytes fit in each operation: 1,356 operations, 339 event slots and a 6.78-second modeled budget under the same assumptions. API queues, RF conditions, receiver buffers and acknowledgments may change actual elapsed time.'}</p>
+    <h3>{zh ? '怎样验证模型' : 'Verify the model on target hardware'}</h3>
+    <p>{zh ? '至少记录手机与固件版本、已协商 MTU、PHY、连接间隔、设备端文件校验成功时刻。手机写入回调不一定等于接收端保存完成。明确区分模型推算和实际测试。' : 'Record phone and firmware versions, negotiated MTU, PHY, interval and the receiver-side hash-verification timestamp. A phone write callback does not necessarily mean the entire file has been committed by the peripheral.'}</p>
+    <p><a href={`/${lang}/articles/ble-transfer-budget-from-mtu-to-time/`}>{zh ? '阅读完整的公式、Python 脚本与测试清单' : 'Read the full calculations, Python code and measurement checklist'}</a></p>
+  </article>
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 </Base>
+<style>
+  .p0-ble-guide{max-width:940px;margin:30px auto 55px;padding:25px 0 0;border-top:1px solid #d7d1c7}
+  .p0-ble-guide h2{font-family:Georgia,'Noto Serif SC',serif}
+</style>

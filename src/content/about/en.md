@@ -34,6 +34,28 @@ We credit original projects and source materials wherever practicable and respec
 
 If you spot a technical error, broken reference, or attribution issue, please let us know so we can review and correct it.
 
+## Who writes and edits EmbeddedNote
+
+**Publisher and byline:** EmbeddedNote is an independently operated technical publication. “EmbeddedNote” is the editorial byline used when no individual writer is identified on an article. It is **not** a claim that a named engineer personally built or tested every featured project. We do not display invented personal profiles, certificates, awards or photographs to suggest otherwise.
+
+We publish in English and Chinese for people who need usable details rather than just announcements. Our core subjects include embedded firmware, BLE/Wi-Fi/NFC connectivity, microcontroller selection, display interfaces and open-source hardware. Readers can inspect our calculations and approach through the [e-paper engineering field guide](/en/articles/epaper-engineering-field-guide/), [BLE Transfer Planner](/en/tools/ble-throughput-calculator/) and [E-Paper Image Converter](/en/tools/epaper-image-converter/).
+
+## Our editorial method and evidence labels
+
+We distinguish **three types of technical evidence**:
+
+1. **Primary-source reporting:** manufacturer documentation, repository source files, openly published hardware drawings or project-owner claims. We identify the original source and avoid implying that its claims have been independently tested by us.
+2. **Derived analysis:** calculations, protocol budgets, trade-off tables and example scripts. Inputs, formulas and assumptions should be visible so another engineer can check the result. A calculated throughput is not a measured throughput.
+3. **Bench-verified findings:** actual hardware tests. Such findings should identify the device, firmware, method, conditions and result. If those details are absent, do not read the article as a hardware benchmark.
+
+We sometimes use automated and AI-assisted tools during research organization, translation and drafting. These tools are not primary sources or test equipment. When a statement depends on a device measurement, a generated explanation is no substitute for a reproducible test record. Our target is useful, readable engineering coverage, not content produced to meet an arbitrary word count or publishing quota.
+
+## Corrections, sourcing and commercial transparency
+
+If an error is confirmed, we aim to update the affected page, preserve its original publication date and show a revised date for material changes. To report an error, send the article URL, the disputed passage and supporting evidence to **[xden2019@gmail.com](mailto:xden2019@gmail.com)**. Licensing and image-credit issues can be reported the same way.
+
+Editorial coverage does not imply endorsement by manufacturers. When a page contains an affiliate relationship, paid placement or sponsored material, the relationship should be clearly disclosed on that page. Recommendations should not be presented as hands-on testing when they are based only on public documentation.
+
 ## Contact
 
 We welcome project suggestions, technical corrections, and relevant editorial or partnership enquiries.

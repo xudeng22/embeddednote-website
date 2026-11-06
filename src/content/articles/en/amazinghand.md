@@ -18,6 +18,7 @@ author: EmbeddedNote
 seoTitle: 'Amazing Hand: Open-Source 8-DOF Robotic Hand | EmbeddedNote'
 seoDescription: 'Inside Pollen Robotics’ Amazing Hand: eight Feetech SCS0009 servos, parallel finger linkages, 3D-printed
   parts, TTL control and Reachy 2 compatibility.'
+updatedDate: '2026-11-06'
 ---
 
 Many dexterous robotic hands mount their motors in the forearm and run tendons through the wrist. Pollen Robotics, the team behind Reachy 2, has packaged a different mechanism into **Amazing Hand**: four fingers driven by eight compact servos, all mounted inside the hand. The assembly weighs about **400 g**. Pollen estimates that a basic build can be assembled for less than **€200 in parts**.
@@ -105,3 +106,14 @@ The SCS0009's position and load-related feedback provides a starting point for b
 <!-- embeddednote-seo-p2:internal-links:start -->
 For a different use of robotic grippers, [Jumper's 22-DoF platform](/en/articles/a-hardcore-new-open-source-project-on-github-jumper-the-22-dof-crab-robot-fully-open-source-from-training-to-on-device-deployment/) combines two claws with four walking legs and a MuJoCo-based training pipeline.
 <!-- embeddednote-seo-p2:internal-links:end -->
+
+<!-- embeddednote-p0-20261106:start -->
+
+## Engineering check: servo torque does not equal fingertip grip force
+
+A servo's quoted **stall torque** is not a guarantee of continuous fingertip force. Force at the contact point depends on joint angles, linkage geometry, moment arms, friction, print tolerances and how the object is supported. Even a back-of-envelope `force ≈ joint torque / effective moment arm` estimate requires a meaningful mechanical model. With coupled parallel linkages, two motors do not simply contribute twice the datasheet torque at every finger pose.
+
+A practical validation set should include: (1) unloaded position-repeatability traces for each of the eight servo IDs; (2) current draw when moving one finger and all four fingers; (3) repeatable grasp tests on objects of known mass and surface material; (4) monitored servo temperature and supply-voltage drop; and (5) checks for rod-end binding or mechanical collisions near the joint limits. Record supply voltage and measurement conditions. The article's quoted minimum supply recommendation is **not** a verified worst-case current budget for simultaneous stalls.
+
+For reproducibility, identify the exact [Amazing Hand repository](https://github.com/pollen-robotics/AmazingHand) revision, purchased servo SKU and calibration profile, and make the original CAD/BOM links accessible alongside any derivative design. The project is a promising research platform; that is different from demonstrating a safe, industrial-rated gripper. We have not performed physical grip-force or lifetime tests for this editorial review.
+<!-- embeddednote-p0-20261106:end -->

@@ -15,6 +15,7 @@ tags:
 - Embedded Systems
 seoTitle: 'TICKEY: ESP32-S3 Color E-Paper Card Raises $850K'
 seoDescription: 'Inside TICKEY: a 3.7-inch color e-paper display, ESP32-S3, wireless connectivity, NFC, refresh modes, and room for custom firmware.'
+updatedDate: '2026-11-06'
 ---
 
 Color e-paper has made its way into plenty of products over the past couple of years: desktop calendars, digital photo frames, electronic shelf labels, and information displays. Most follow the same idea—put a low-power screen in a fixed location. TICKEY takes a different route. It packs a 3.7-inch color e-paper display into an aluminum body only slightly larger than a credit card, then adds a keyring, magnetic mounting, and a desktop stand.
@@ -84,3 +85,16 @@ A sensible division of work is to let the phone handle editing and some of the p
 One of TICKEY’s strengths is that it is light enough to carry without closing off the hardware to developers. At 45 g, it can genuinely hang from a bag, while the magnets and stand let the same device move onto a refrigerator or desk. The ESP32-S3, open firmware, and extra storage in the Developer Edition also leave room to use it independently of the official app.
 
 A custom project need not be complicated. The card could fetch a daily calendar image from a local server each morning, switch to a desk-availability sign at the office, display a name and QR code during a meeting, and show transit arrivals or the weather on the way home. None of these jobs calls for constant updates. In fact, their slower pace suits e-paper rather well.
+
+<!-- embeddednote-p0-20261106:start -->
+
+## Engineering check: separate image storage, transfer and refresh claims
+
+A 720 × 480 image contains **345,600 pixels**. Uncompressed RGB888 occupies **1,036,800 bytes** (roughly 0.99 MiB), while a hypothetical tightly packed 4-bit indexed representation would occupy **172,800 bytes**. That does **not** establish TICKEY's actual internal encoding: a palette with more than 16 indexes, controller-specific planes, or compressed assets changes the calculation.
+
+The original article cites manufacturer/project claims for a fast refresh mode and a higher-quality full update. To assess such claims, define the start and end events first. Is the stated refresh time measured from the phone pressing Send, from the last BLE packet, from the refresh command, or to the visually stable final image? These are very different numbers. A fair comparison also fixes the panel temperature, previous image, test pattern and selected waveform. See the [refresh timing measurement plan](/en/articles/epaper-refresh-timing-pipeline/).
+
+A developer edition's storage capacity is not the same as usable heap or contiguous image-decode memory. An ESP32-S3 implementation should account separately for raw assets, active framebuffers, temporary dithering buffers and flash/filesystem reservations. Before claiming that a phone upload can be completed within a particular time, instrument GATT negotiated values and receiver-side checksum completion using a documented workflow such as our [BLE transfer budget](/en/articles/ble-transfer-budget-from-mtu-to-time/).
+
+**Evidence boundary:** The byte counts are independently calculated. This is an engineering method to verify the product's publicly described features, not an assertion that we disassembled or benchmarked the production unit.
+<!-- embeddednote-p0-20261106:end -->

@@ -91,9 +91,21 @@ const jsonld = {
         {article.data.pubDate.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'})}
       </time>
       {' · '}
-      <span>{lang === 'zh' ? '作者：' : 'By '}{article.data.author}</span>
+      <!-- embeddednote-p0-v2:editorial -->
+      <span>{lang === 'zh' ? '作者：' : 'By '}{article.data.author === 'EmbeddedNote'
+        ? <a href={`/${lang}/about/`}>EmbeddedNote</a>
+        : article.data.author}</span>
+      {article.data.updatedDate && article.data.updatedDate > article.data.pubDate && (
+        <span> · {lang === 'zh' ? '更新：' : 'Updated '}
+          <time datetime={article.data.updatedDate.toISOString().slice(0, 10)}>
+            {article.data.updatedDate.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'})}
+          </time>
+        </span>
+      )}
       {' · '}
       {article.data.tags.join(' / ')}
+      {' · '}
+      <a href={`/${lang}/about/`}>{lang === 'zh' ? '编辑与证据说明' : 'Editorial method'}</a>
     </p>
 
     <Content />

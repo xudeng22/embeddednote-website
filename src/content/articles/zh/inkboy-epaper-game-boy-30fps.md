@@ -17,6 +17,7 @@ draft: false
 seoTitle: ESP32-S3电子纸跑Game Boy：InkBoy如何实现约30 FPS更新
 seoDescription: 1.54英寸200×200电子纸实现约30
   FPS更新？看InkBoy如何用SSD1681短波形、逐像素HOLD和ESP32-S3运行Game Boy，以及残影和寿命风险。
+updatedDate: '2026-11-06'
 ---
 一块 1.54 英寸电子纸，正常局部刷新要几百毫秒，拿来玩 Game Boy，听着就像故意给自己找麻烦。开发者 Bo Made It 偏偏在微雪 ESP32-S3 开发板上做出了约 **30 FPS** 的演示：画面能跟着游戏动，黑白像素和四级灰阶都能跑。项目叫 **InkBoy**，用的是 200×200 电子纸，并不是换了一块高刷 LCD。10 月 14 日，Hackaday 报道了这个实验。
 
@@ -50,3 +51,15 @@ seoDescription: 1.54英寸200×200电子纸实现约30
 
 **项目资料：** [InkBoy GitHub 源码](https://github.com/kuslota/InkBoy) · [逐像素驱动说明](https://github.com/kuslota/InkBoy/blob/main/docs/how-it-works.md) · [Hackaday 原报道](https://hackaday.com/2026/10/14/tiny-e-paper-display-delivers-30-fps-of-game-boy-fun/)。
 
+<!-- embeddednote-p0-20261106:start -->
+
+## 工程补充：每秒更新 30 次，不等于面板寿命也能按 30 FPS 设计
+
+200×200 的单色 1 bpp 位平面是 **5,000 B**，两路各一帧总共 **10,000 B**。假定 SPI 持续运行在理想 20 MHz，纯时钟传出这 10 KB 约需 **4.0 ms**；30 次/秒的更新间隔则是 **33.3 ms**。从带宽角度看并不矛盾，但这**不能解释全部驱动时序，更不能证明长期使用安全**。命令开销、供电和粒子运动都不包含在 4.0 ms 之内。
+
+还要分清“控制器每秒接受 30 次更新指令”与“像 LCD 一样每帧完全达到稳定对比度”。快速动画可能靠短脉冲反复推动像素，静态残影、灰阶一致性和长期可靠性需要另行评估。
+
+如果准备复现，至少记录 SSD1681 板卡版本、固件提交号、自定义波形、环境温度、前后画面内容与供电波形，并在实验后用厂家允许的完整刷新检测残影。项目的 [逐像素驱动说明](https://github.com/kuslota/InkBoy/blob/main/docs/how-it-works.md) 有相关实验方法，但不能替代生产可靠性验证。**不建议把这种未经寿命确认的高速波形直接用于量产面板。**
+
+相关：[SPI 与电子纸刷新时序](/zh/articles/epaper-refresh-timing-pipeline/)。
+<!-- embeddednote-p0-20261106:end -->

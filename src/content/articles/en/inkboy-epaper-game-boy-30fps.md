@@ -19,6 +19,7 @@ seoTitle: "InkBoy: Game Boy at 30 FPS on a 1.54-Inch E-Paper Display"
 seoDescription: An ESP32-S3, SSD1681 controller and selective pixel-driving
   scheme bring Game Boy to a 200×200 e-paper display at roughly 30 fps.
   Understand the trade-offs.
+updatedDate: '2026-11-06'
 ---
 E-paper is an unlikely choice for a Game Boy display. Even a partial refresh on a small panel can take hundreds of milliseconds, which is fine for a price tag but disastrous for a scrolling game. Developer Bo Made It has demonstrated something rather different: an ESP32-S3 board running Game Boy games on a **1.54-inch, 200 × 200 e-paper panel**, with roughly **30 display updates per second**. Hackaday covered the experiment on October 14, 2026.
 
@@ -54,3 +55,15 @@ One warning deserves more attention than the frame-rate number: these are **expe
 
 **Further reading:** [InkBoy source and build instructions](https://github.com/kuslota/InkBoy) · [Per-pixel drive explanation](https://github.com/kuslota/InkBoy/blob/main/docs/how-it-works.md) · [Hackaday's original report](https://hackaday.com/2026/10/14/tiny-e-paper-display-delivers-30-fps-of-game-boy-fun/).
 
+<!-- embeddednote-p0-20261106:start -->
+
+## Engineering check: 30 updates per second is not a 30 FPS lifetime rating
+
+At 200 × 200 monochrome pixels, one packed 1-bit plane takes **5,000 bytes**. Two such planes take **10,000 bytes**. At an *ideal* 20 MHz SPI clock, serializing 10,000 bytes consumes **4.0 ms** of wire time before command bytes, chip-select overhead, memory copies and panel drive. A 30-update-per-second target has **33.3 ms** per interval. Thus the wire time alone does not make the demonstration impossible—but neither does this arithmetic explain the author's shortened waveforms or validate panel longevity.
+
+The crucial distinction is **display update cadence versus fully settled optical frames**. The controller can be commanded at a roughly 30 Hz cadence while individual pigment transitions are incomplete or require repeated impulses. Fast-looking moving content does not mean the panel has achieved the contrast and stability of a conventional fully refreshed image each frame.
+
+For a reproducibility audit, record the SSD1681 board revision, exact firmware commit, waveform lookup tables, ambient temperature, previous image sequence, power-rail behavior and an uncut controller trace. Compare image retention after a standard manufacturer-supported refresh, not just at the end of the experimental animation. The [project's per-pixel drive documentation](https://github.com/kuslota/InkBoy/blob/main/docs/how-it-works.md) explicitly explains the experimental approach. Do **not** deploy modified high-speed waveforms on production panels without manufacturer guidance and life testing.
+
+See also [SPI transport versus E-Paper waveform time](/en/articles/epaper-refresh-timing-pipeline/).
+<!-- embeddednote-p0-20261106:end -->
