@@ -97,4 +97,19 @@ const seoDescription = page > 1
   .en-p0-reading a{color:#8f3c2c;text-underline-offset:3px}
   .en-p0-reading .en-p0-pillar-link{font-weight:700}
   @media(max-width:680px){.en-p0-grid{grid-template-columns:1fr}.en-p0-original{padding:23px 0}.en-p0-tile{padding:16px}}
+
+  /* embeddednote-v3-uniform-reading-links */
+  .en-p0-reading a,
+  .en-p0-reading a:visited,
+  .en-p0-reading a.en-p0-pillar-link,
+  .en-p0-reading a.en-p0-pillar-link:visited {
+    color:#a43f2e !important;
+    font:600 13px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif !important;
+    text-decoration:none;
+    text-underline-offset:3px;
+  }
+  .en-p0-reading a:hover,
+  .en-p0-reading a.en-p0-pillar-link:hover {color:#842d21 !important;text-decoration:underline;}
+  .en-p0-reading a:focus-visible {outline:2px solid #a43f2e;outline-offset:3px;}
+  @media(max-width:680px){.en-p0-reading{gap:9px 15px}}
 </style>

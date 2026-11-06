@@ -16,7 +16,7 @@ A BLE link showing **2 Mbps PHY** does not move a 24 KB image at 250 kB/s. The P
 
 This article builds a transfer budget from first principles. The numbers below are **calculated scenarios, not benchmark results**. They help decide what to instrument before promising an update time for an e-paper product, sensor logger, or firmware updater.
 
-![BLE transfer layers and scheduling diagram](/images/p0/ble-transfer-layers.svg)
+![BLE transfer layers and scheduling diagram](/images/p0/ble-transfer-budget-from-mtu-to-time-cover.webp)
 
 ## Start with useful bytes, not headline speed
 

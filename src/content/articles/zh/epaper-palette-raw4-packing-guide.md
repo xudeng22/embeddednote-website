@@ -16,7 +16,7 @@ seoDescription: '详解四色、六色与八色电子纸的色板、RGB 与 Lab 
 
 本文把这几层拆开，并给出可复算的 RAW4 测试样例。**所有示例是软件计算，不冒充屏幕实测。**
 
-![电子纸图片转换流程——颜色量化与字节编码分开处理](/images/p0/epaper-image-pipeline.svg)
+![RAW4 五列两行像素打包——连续五字节，无行填充](/images/p0/epaper-palette-raw4-packing-guide-cover.webp)
 
 ## 先认清目标屏幕的数据要求
 
@@ -60,7 +60,7 @@ seoDescription: '详解四色、六色与八色电子纸的色板、RGB 与 Lab 
 共 5 字节
 ```
 
-![RAW4 奇数宽度跨行打包与逐行填充格式对照](/images/p0/raw4-odd-width.svg)
+[查看 RAW4 原始矢量示意图（SVG）](/images/p0/raw4-odd-width.svg)
 
 注意第三个字节 `0x45`：高半字节是第 0 行最后一个像素，低半字节已经是第 1 行第一个像素。**如果固件要求每行补齐为整字节，这幅图就应占 6 字节，而不是 5 字节。** 两种格式一旦混用，后续每一行都会逐渐错位。
 

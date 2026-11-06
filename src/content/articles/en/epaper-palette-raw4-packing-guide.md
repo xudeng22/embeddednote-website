@@ -16,7 +16,7 @@ A photograph can look convincing in an RGB browser preview and still appear wron
 
 This guide treats each mapping separately. Its sample data is **synthetic and reproducible**; no device-specific color fidelity or reflective-panel measurement is claimed.
 
-![E-paper image conversion pipeline showing color and binary stages](/images/p0/epaper-image-pipeline.svg)
+![5×2 RAW4 nibble packing: five bytes with no row padding](/images/p0/epaper-palette-raw4-packing-guide-cover.webp)
 
 ## 1. Establish the target before choosing a dithering algorithm
 
@@ -64,7 +64,7 @@ Packed bytes (hex): 01 23 45 01 23
 File length: 5 bytes
 ```
 
-![Odd-width RAW4 nibble packing versus row-aligned format](/images/p0/raw4-odd-width.svg)
+[Open the complete RAW4 byte-layout diagram (SVG)](/images/p0/raw4-odd-width.svg)
 
 The third byte, `0x45`, crosses the row boundary: its high nibble is the last pixel of row 0, and its low nibble is the first pixel of row 1. A row-aligned encoder would instead emit six bytes for this 5 × 2 sample, assuming it pads each odd-length row. Mixing these formats produces a progressively shifted picture.
 

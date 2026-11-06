@@ -16,7 +16,7 @@ A display can accept its pixel data over SPI in a fraction of a second and still
 
 A useful performance report should answer **three distinct questions**: How long did it take to *send the image*? How long was the controller *busy driving the panel*? When did the *visible image become stable enough for the application*? One “refresh time” number hides the distinction.
 
-![Timing stages of an e-paper refresh](/images/p0/epaper-refresh-timeline.svg)
+![Timing stages of an e-paper refresh](/images/p0/epaper-refresh-timing-pipeline-cover.webp)
 
 ## A timing equation with explicit boundaries
 

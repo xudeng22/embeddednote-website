@@ -29,7 +29,7 @@ Before selecting an MCU or wireless protocol, write down the exact start and fin
 
 An honest specification might promise “image received and verified within X seconds under conditions Y” and separately state the supported refresh mode's completion time. Those are testable statements. “3-second refresh,” without defining its endpoints, is not.
 
-![Four stages in a practical e-paper image pipeline](/images/p0/epaper-image-pipeline.svg)
+![Four stages in a practical e-paper image pipeline](/images/p0/epaper-engineering-field-guide-cover.webp)
 
 ## 2. Begin with pixels and actual wire format
 

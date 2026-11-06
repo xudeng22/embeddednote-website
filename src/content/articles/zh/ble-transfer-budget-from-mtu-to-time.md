@@ -16,7 +16,7 @@ BLE 链路协商成 2 Mbps PHY，并不等于 24 KB 图片就能按 250 kB/s 送
 
 下面用一组**明确假设的计算案例**把事情算清楚。请注意，本文没有把模型数据包装成手机和 ESP32 的实测结果。
 
-![BLE 协议分层与连接事件时序示意](/images/p0/ble-transfer-layers.svg)
+![BLE 协议分层与连接事件时序示意](/images/p0/ble-transfer-budget-from-mtu-to-time-cover.webp)
 
 ## 第一笔账：每次写入真正能装多少文件字节
 

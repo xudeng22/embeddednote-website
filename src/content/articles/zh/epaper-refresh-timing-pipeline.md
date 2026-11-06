@@ -16,7 +16,7 @@ seoDescription: '以 800×540 电子纸数据为例计算 SPI 传输下限，拆
 
 讨论刷新速度前，最好先明确三个指标：传完数据花多久、控制器 BUSY 持续多久、用户肉眼看到画面稳定又是什么时间。
 
-![电子纸刷新阶段时序图](/images/p0/epaper-refresh-timeline.svg)
+![电子纸刷新阶段时序图](/images/p0/epaper-refresh-timing-pipeline-cover.webp)
 
 ## 把总时间拆开，不要只报一个刷新秒数
 
