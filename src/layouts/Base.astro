@@ -28,7 +28,7 @@ const siteIdentity = {
   '@context': 'https://schema.org',
   '@graph': [
     {'@type':'Organization','@id':`${origin}/#publisher`,name:'EmbeddedNote',url:`${origin}/`,contactPoint:{'@type':'ContactPoint',email:'xden2019@gmail.com',contactType:'editorial inquiries'},logo:{'@type':'ImageObject',url:`${origin}/images/embeddednote-logo.webp`}},
-    {'@type':'WebSite','@id':`${origin}/#website`,name:'EmbeddedNote',url:`${origin}/`,inLanguage:['en','zh-CN'],publisher:{'@id':`${origin}/#publisher`},description:'A bilingual publication on practical embedded engineering and open-source projects.'}
+    {'@type':'WebSite','@id':`${origin}/#website`,name:'EmbeddedNote',url:`${origin}/`,inLanguage:['en','zh-CN'],publisher:{'@id':`${origin}/#publisher`},description:'An independent bilingual engineering blog with free tools, covering embedded systems, connectivity, displays and open-source hardware.'}
   ]
 };
 ---

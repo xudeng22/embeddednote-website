@@ -55,7 +55,10 @@ const jsonld = {
   '@type': 'TechArticle',
   headline: article.data.title,
   description: article.data.description,
-  author: { '@type': 'Organization', '@id': 'https://embeddednote.com/#publisher', name: article.data.author },
+  // An EmbeddedNote byline describes the site; a named writer is a Person.
+  author: article.data.author === 'EmbeddedNote'
+    ? { '@type': 'Organization', '@id': 'https://embeddednote.com/#publisher', name: 'EmbeddedNote' }
+    : { '@type': 'Person', name: article.data.author },
   publisher: { '@id': 'https://embeddednote.com/#publisher' },
   datePublished: article.data.pubDate.toISOString(),
   dateModified: (

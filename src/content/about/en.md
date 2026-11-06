@@ -1,63 +1,44 @@
 ---
 title: About EmbeddedNote
-description: Learn about EmbeddedNote's technical coverage, editorial approach, source attribution, and contact information.
+description: EmbeddedNote is an independent bilingual engineering blog with practical tools for embedded developers, covering MCUs, hardware, connectivity and displays.
 locale: en
 ---
 # About EmbeddedNote
 
-Welcome to **EmbeddedNote**, a bilingual publication for engineers, developers, and curious makers working with embedded systems and electronics.
+**EmbeddedNote is an independent engineering blog and a collection of free tools for embedded developers.** We publish in English and Chinese, focusing on microcontrollers, board design, wireless connectivity, displays and open-source hardware.
 
-We cover the details behind real hardware and open-source projects: the chips they use, the schematics and software that make them work, and the design decisions worth understanding. Our goal is to make useful engineering information easier to find, read, and put into practice.
+A project video can tell you what a device does. It rarely tells you which files are worth reading first, how its hardware is connected, or what might go wrong when you try to build something similar. Those are the details we try to bring into the articles.
 
-## What we cover
+## What you'll find here
 
-Our six technical sections are:
+We cover six areas: [open-source projects](/en/category/open-source/), [MCUs and SoCs](/en/category/mcu-soc/), [hardware design](/en/category/hardware/), [connectivity](/en/category/connectivity/), [displays](/en/category/display/) and [development tools](/en/category/tools/).
 
-- **Open Source Projects** — GitHub projects, firmware, schematics, bills of materials, and implementation details.
-- **MCU & SoC** — Microcontrollers, processors, development platforms, and their software ecosystems.
-- **Hardware Design** — Circuit design, PCBs, power supplies, interfaces, and component selection.
-- **Connectivity** — BLE, Wi-Fi, NFC, CAN, and related embedded communication technologies.
-- **Display Technology** — E-paper, TFT, Mini LED, and display driving systems.
-- **Development Tools** — Debugging hardware, test equipment, simulators, and engineering workflows.
+Some posts work through a schematic, repository or datasheet. Others explain a communication budget, a display-data format or a debugging method. The goal is to leave readers with something they can check or use, not just a list of specifications.
 
-Rather than stopping at a project's headline features, we try to explain **how it works, which components matter, what trade-offs were made, and where the limitations lie**.
+The tools are part of that approach. You can use the [BLE Throughput & Transfer Planner](/en/tools/ble-throughput-calculator/) to explore packet and connection-event assumptions, or the [E-Paper Image Converter](/en/tools/epaper-image-converter/) to examine color mapping and indexed pixel data. Our [e-paper engineering guide](/en/articles/epaper-engineering-field-guide/) brings several of these problems together.
 
-## Editorial approach
+## Who runs EmbeddedNote?
 
-Technical accuracy comes first. Where possible, our articles draw on original repositories, manufacturer documentation, datasheets, and other primary sources. We distinguish a project's stated specifications from independently verified results and from our own analysis.
+EmbeddedNote is maintained independently, with an engineering focus shaped by work on embedded firmware, BLE/NFC communication and e-paper integration.
 
-Our Chinese and English editions aim to preserve the same technical meaning while using clear, natural language for each readership. Component names, numerical specifications, and implementation details should not change in translation.
+The person behind the site also writes about embedded systems on the WeChat public account **嵌入式杂谈** and on **Zhihu**. As of November 2026, the two accounts had approximately **55,000 followers combined**. This is the sum of the follower counts on the two platforms, not a count of unique readers. The blog is a place to keep the technical notes, source references and calculations accessible beyond a social feed.
 
-## Sources, rights, and corrections
+When an article has no named individual author, it carries the **EmbeddedNote** byline. That identifies the site's editorial work; it does not mean every featured device has been built or tested by us.
 
-We credit original projects and source materials wherever practicable and respect applicable licenses. Open-source availability does not, by itself, grant unrestricted rights to every image, document, or brand. Third-party names and trademarks belong to their respective owners, and our coverage does not imply endorsement by project maintainers or manufacturers.
+## How we handle technical claims
 
-If you spot a technical error, broken reference, or attribution issue, please let us know so we can review and correct it.
+We use three kinds of evidence, and they should not be confused:
 
-## Who writes and edits EmbeddedNote
+- **Published sources:** manufacturer documentation, project repositories, schematics and statements from project maintainers. We link to the original material where possible and identify claims that come from it.
+- **Our calculations:** packet counts, memory budgets, example code and engineering comparisons. These should include enough assumptions and working for another developer to reproduce the result.
+- **Hardware measurements:** results obtained from physical devices. We only describe something as tested when there are actual observations and a stated setup or method. A simulation or calculated estimate is not a bench test.
 
-**Publisher and byline:** EmbeddedNote is an independently operated technical publication. “EmbeddedNote” is the editorial byline used when no individual writer is identified on an article. It is **not** a claim that a named engineer personally built or tested every featured project. We do not display invented personal profiles, certificates, awards or photographs to suggest otherwise.
+AI-assisted tools may be used for drafting, translation or editing. They are not technical evidence; source material and reproducible calculations take precedence. The English and Chinese versions are edited for readability rather than translated word for word.
 
-We publish in English and Chinese for people who need usable details rather than just announcements. Our core subjects include embedded firmware, BLE/Wi-Fi/NFC connectivity, microcontroller selection, display interfaces and open-source hardware. Readers can inspect our calculations and approach through the [e-paper engineering field guide](/en/articles/epaper-engineering-field-guide/), [BLE Transfer Planner](/en/tools/ble-throughput-calculator/) and [E-Paper Image Converter](/en/tools/epaper-image-converter/).
+## Corrections, attribution and partnerships
 
-## Our editorial method and evidence labels
+If you find an incorrect specification, broken reference or image-credit problem, email [xden2019@gmail.com](mailto:xden2019@gmail.com) with the page link and the part that needs checking. For substantial corrections, we aim to update the page while keeping its original publication date and identifying the revision.
 
-We distinguish **three types of technical evidence**:
+Third-party projects and trademarks remain the property of their respective owners. Coverage does not imply a manufacturer's endorsement. Affiliate links, sponsored material or paid placements should be identified where they appear.
 
-1. **Primary-source reporting:** manufacturer documentation, repository source files, openly published hardware drawings or project-owner claims. We identify the original source and avoid implying that its claims have been independently tested by us.
-2. **Derived analysis:** calculations, protocol budgets, trade-off tables and example scripts. Inputs, formulas and assumptions should be visible so another engineer can check the result. A calculated throughput is not a measured throughput.
-3. **Bench-verified findings:** actual hardware tests. Such findings should identify the device, firmware, method, conditions and result. If those details are absent, do not read the article as a hardware benchmark.
-
-We sometimes use automated and AI-assisted tools during research organization, translation and drafting. These tools are not primary sources or test equipment. When a statement depends on a device measurement, a generated explanation is no substitute for a reproducible test record. Our target is useful, readable engineering coverage, not content produced to meet an arbitrary word count or publishing quota.
-
-## Corrections, sourcing and commercial transparency
-
-If an error is confirmed, we aim to update the affected page, preserve its original publication date and show a revised date for material changes. To report an error, send the article URL, the disputed passage and supporting evidence to **[xden2019@gmail.com](mailto:xden2019@gmail.com)**. Licensing and image-credit issues can be reported the same way.
-
-Editorial coverage does not imply endorsement by manufacturers. When a page contains an affiliate relationship, paid placement or sponsored material, the relationship should be clearly disclosed on that page. Recommendations should not be presented as hands-on testing when they are based only on public documentation.
-
-## Contact
-
-We welcome project suggestions, technical corrections, and relevant editorial or partnership enquiries.
-
-**Email:** [xden2019@gmail.com](mailto:xden2019@gmail.com)
+We also welcome open-source project suggestions and relevant engineering collaboration enquiries at **[xden2019@gmail.com](mailto:xden2019@gmail.com)**.

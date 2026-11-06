@@ -17,8 +17,8 @@ const visible = articles.slice((page-1)*perPage, page*perPage);
 // Search snippets are intentionally richer than the short, visible Hero subtitle.
 // This changes the HTML meta description, not the typography or homepage copy.
 const seoDescriptions = {
-  en: 'EmbeddedNote covers MCUs, PCB design, wireless connectivity, displays, and open-source hardware with practical engineering insights.',
-  zh: 'EmbeddedNote（嵌入式杂谈）面向嵌入式与硬件工程师，分享 MCU、SoC、PCB 设计、BLE、Wi-Fi、电子纸及 GitHub 开源项目的技术解析、原理图和工程实践经验.'
+  en: 'EmbeddedNote is an independent bilingual engineering blog with free tools for embedded developers. Explore MCUs, PCB design, BLE, NFC, e-paper and open-source hardware.',
+  zh: 'EmbeddedNote（嵌入式杂谈）是独立运营的中英双语嵌入式技术博客，分享 MCU、硬件设计、BLE、NFC、电子纸、开源项目与免费在线工具。'
 };
 const seoDescription = page > 1
   ? (lang === 'zh'
@@ -33,6 +33,7 @@ const seoDescription = page > 1
       <h1>{t.title}</h1>
       <div class="hero-accent" aria-hidden="true"></div>
       <p>{t.description}</p>
+      <p class="hero-site-type">{lang === 'zh' ? '独立嵌入式技术博客 · 免费在线工程工具' : 'Independent engineering blog · Free tools for embedded developers'}</p>
     </div>
     <div class="hero-visual">
       <img src="/images/embeddednote-hero.webp"
@@ -44,7 +45,7 @@ const seoDescription = page > 1
   {page === 1 && <section class="en-p0-original" aria-label={lang === 'zh' ? '原创工程分析与在线工具' : 'Original engineering analysis and tools'}>
     <div class="en-p0-kicker">{lang === 'zh' ? '原创工程分析 / OPEN TOOLS' : 'ORIGINAL ENGINEERING / OPEN TOOLS'}</div>
     <h2>{lang === 'zh' ? '从工程原理到可复算的实用工具' : 'Engineering methods you can verify'}</h2>
-    <p class="en-p0-deck">{lang === 'zh' ? '公开公式、测试向量和设计边界。工具结果是模型估算，不冒充设备实测。' : 'Reproducible calculations, binary test vectors and clear evidence boundaries—not invented benchmarks.'}</p>
+    <p class="en-p0-deck">{lang === 'zh' ? '从分包计算到图像索引和刷新时序，把假设、方法和适用范围讲清楚。' : 'Calculations, test vectors and practical limits you can check against your own hardware.'}</p>
     <div class="en-p0-grid">
       <a href={`/${lang}/tools/ble-throughput-calculator/`} class="en-p0-tile">
         <span class="en-p0-tag">OPEN TOOL · BLE</span>
@@ -112,4 +113,11 @@ const seoDescription = page > 1
   .en-p0-reading a.en-p0-pillar-link:hover {color:#842d21 !important;text-decoration:underline;}
   .en-p0-reading a:focus-visible {outline:2px solid #a43f2e;outline-offset:3px;}
   @media(max-width:680px){.en-p0-reading{gap:9px 15px}}
+  /* embeddednote-v4-1-independent-engineering-blog */
+  .hero-copy .hero-site-type {
+    margin:10px 0 0;
+    color:#6e726c;
+    font:500 12px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;
+    letter-spacing:.01em;
+  }
 </style>
