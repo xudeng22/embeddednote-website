@@ -1,6 +1,6 @@
 ---
-title: ST Reportedly Plans Price Increases for Selected Products from January 1, 2027
-description: A price-adjustment notice dated November 4, 2026, and attributed to STMicroelectronics says prices for selected products will rise from January 1, 2027. The affected products and adjustment levels are not specified.
+title: "ST's Reported 2027 Price Hike: No Product List, No Percentages"
+description: "A notice attributed to ST says selected products will cost more from January 1, 2027. It cites inflation and supply costs, but names no parts or percentages."
 locale: en
 translationKey: st-price-increase-2027
 pubDate: '2026-11-10'
@@ -14,32 +14,56 @@ tags:
   - Supply Chain
 draft: false
 author: EmbeddedNote
-seoTitle: ST Price Adjustment Notice: Selected Products to Increase from January 1, 2027 | EmbeddedNote
-seoDescription: A notice dated November 4, 2026, attributed to STMicroelectronics says selected product prices will rise from January 1, 2027. Product scope and adjustment levels remain unspecified.
+seoTitle: "ST 2027 Price Increase: No Product List, No Percentages"
+seoDescription: "An ST notice dated November 4, 2026 says selected products will rise on January 1, 2027. No categories or percentages were disclosed."
 ---
 
-A price-adjustment notice dated **November 4, 2026**, and attributed to **STMicroelectronics International N.V. (ST)**, states that prices for selected products will increase from **January 1, 2027**.
+A price-adjustment notice attributed to **STMicroelectronics** is circulating in the market. It says some ST products will cost more from **January 1, 2027** — but which products are affected, and by how much, is left for account representatives to explain.
 
-![STMicroelectronics price adjustment notice dated November 4, 2026, addressed to business partners](/uploads/st-price-adjustment-notice-2026.png)
+The notice is dated **November 4, 2026** and carries the letterhead of STMicroelectronics International N.V. It cites continued inflation and rising operating and supply costs across the industry. It does not name affected product families or give an increase percentage.
 
-*The notice is dated 4 November 2026 and signed by Jerome Roux, President, Sales & Marketing. Image supplied to EmbeddedNote; its authenticity has not been independently verified.*
+![STMicroelectronics price-adjustment notice dated November 4, 2026, addressed to business partners](/uploads/st-price-adjustment-notice-2026.png)
 
-The letter cites continued inflationary pressure and sustained increases in operating and supply costs across the industry during 2026. It says that, despite ongoing efforts to mitigate these pressures through efficiency and cost-optimization measures, costs associated with raw materials, transportation, labor and other operational inputs continue to rise. The notice states that a further price adjustment has therefore become necessary.
+*The one-page notice is signed by Jerome Roux, President, Sales & Marketing. EmbeddedNote has not independently verified the document with ST.*
 
-The notice does not identify the affected product categories or specify the size of the increases. It says that account representatives will contact customers to provide further details and discuss the specific impact on their businesses.
+## What the letter says — and what it leaves out
 
-## Why the January 1 date matters
+The letter's stated case is cost pressure. It says 2026 brought sustained increases in operating and supply costs, and that despite efficiency and cost-optimization efforts, costs for raw materials, transportation, labor and other inputs continue to rise. A further price adjustment, it says, "has become necessary."
 
-The proposed effective date is worth watching. A January 1 adjustment aligns with the start of a new calendar year and the annual contract cycle. For customers, that makes the fourth quarter an important window for price negotiations, annual purchasing plans and discussions about supply agreements for 2027.
+The omissions are just as notable. There is no list of affected part numbers, no percentage range and no guidance on orders already placed. The letter's only next step is a conversation with an account representative.
 
-The wording also leaves important details open: the notice refers only to **“selected products”** and gives no across-the-board percentage increase. The scope and commercial impact may therefore depend on the specific products, order volumes and existing customer agreements. The letter itself does not provide enough information to determine those details.
+| Question | What the notice says |
+| --- | --- |
+| Effective date | January 1, 2027 |
+| Scope | "Selected products" — no categories named |
+| Increase | Not disclosed |
+| Stated reason | Inflation and higher operating, supply, material, transport and labor costs |
+| Next step | Account representatives will contact customers |
 
-## What it could mean for component buyers
+## Why January 1 matters
 
-ST's portfolio spans major semiconductor categories, including **microcontrollers (MCUs), power semiconductors and sensors**. These components are used across industrial, automotive, consumer and embedded applications, so any confirmed adjustment could matter to OEMs and electronics manufacturers that rely on ST devices.
+A January 1 effective date lines up with the calendar year and, for many customers, with annual contract and budget cycles. That makes the fourth quarter the real negotiation window: 2027 volume commitments, price locks and supply agreements will be discussed while the scope of the increase is still undefined.
 
-For now, buyers should not assume that every ST product will become more expensive, or estimate a percentage that has not been disclosed. Customers should confirm the affected part numbers, revised prices, effective dates, order cut-off rules and treatment of existing purchase orders directly with their ST account representatives.
+The wording also leaves room to negotiate. By saying "selected products" instead of announcing an across-the-board increase, the letter keeps the conversation at the level of individual customers, product families and volumes. The public notice sets an expectation; the commercial details will be settled account by account.
 
-After price increases across memory and passive components, this notice adds another supply-chain issue to watch in 2027: whether higher operating costs will continue to feed through to semiconductor pricing, and which product families will be affected.
+## What buyers should ask
 
-**Verification note:** EmbeddedNote has not independently authenticated the supplied notice with STMicroelectronics. The document shown above is presented as received. The affected products, adjustment levels and customer-specific terms remain unconfirmed.
+ST's portfolio spans microcontrollers, power semiconductors and sensors, and its parts appear in industrial, automotive, consumer and embedded designs. For an OEM, the useful question is not whether "ST" is raising prices, but which part numbers on the bill of materials (BOM) are affected, and when.
+
+Buyers should press their ST representative for:
+
+- The affected part numbers and product families
+- The revised price and any volume conditions
+- The exact effective date and order cut-off
+- Whether existing orders and backlog will be repriced
+- How the change interacts with existing contracts and distributor agreements
+
+Until those answers arrive, treat the notice as a signal of direction, not a percentage to apply across a BOM.
+
+## The bigger pricing picture
+
+Memory and passive components have already had their own rounds of increases. This notice carries the cost-pass-through story into 2027 and adds another major chipmaker to the list of suppliers to watch. The date is new; the pressure is not.
+
+For now, the gap between what the letter announces and what it withholds is where the 2027 pricing negotiations will happen.
+
+**Verification note:** EmbeddedNote has not independently authenticated the notice with STMicroelectronics. The document is shown as received. Product scope, increase levels and customer-specific terms remain unconfirmed.
