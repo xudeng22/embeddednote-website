@@ -6,7 +6,7 @@ category: open-source
 draft: false
 author: EmbeddedNote
 sourceUrl: https://github.com/mx3353672833-debug/moto-gps-waveshare
-title: "Github 上硬核嵌入式项目之——摩托车圆屏导航，手机在包里算路"
+title: "Github 上硬核嵌入式项目之——摩托车圆屏导航"
 description: "MOTO GPS 用微雪 ESP32-S3 圆屏和 iPhone 做摩托车导航：手机算路，圆屏显示，自研 BLE 协议、共享 C++ 核心与 Ø52mm 四层板。"
 tags:
 - MOTO GPS
