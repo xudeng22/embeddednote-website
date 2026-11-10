@@ -7,7 +7,7 @@ draft: false
 author: EmbeddedNote
 sourceUrl: https://github.com/mx3353672833-debug/moto-gps-waveshare
 title: 'MOTO GPS: A Round-Screen Motorcycle Navigator With the Phone in Your Pocket'
-description: 'MOTO GPS pairs a Waveshare ESP32-S3 AMOLED board with an iPhone app, a custom BLE navigation protocol and a round four-layer PCB. The phone plans the route; the screen shows the next turn.'
+description: 'MOTO GPS pairs a Waveshare ESP32-S3 AMOLED board with an iPhone app, a custom BLE protocol and a round PCB. The phone plans; the screen shows the next turn.'
 tags:
 - MOTO GPS
 - ESP32-S3
@@ -18,7 +18,7 @@ tags:
 - LVGL
 - Open Source
 seoTitle: 'MOTO GPS: ESP32-S3 Round-Screen Motorcycle Navigator'
-seoDescription: 'Inside MOTO GPS: Waveshare ESP32-S3 AMOLED hardware, CO5300 display pins, a BLE v1 frame format, shared C++ navigation core and a round custom PCB.'
+seoDescription: 'Inside MOTO GPS: Waveshare ESP32-S3 AMOLED hardware, CO5300 pins, a BLE v1 frame format, a shared C++ navigation core and a round PCB.'
 ---
 
 A 1.75-inch circle sits on the handlebar. The phone stays in a jacket pocket. The screen shows a white route, the next turn and a distance — not a mirrored phone display. **MOTO GPS**, by Maler X, is built around the **Waveshare ESP32-S3-Touch-AMOLED-1.75C**, but the board is only half the story. The repository also contains an iPhone app, an Android app, a routing gateway, a shared C++ navigation core, a custom BLE protocol and a four-layer round PCB that has been designed but not fabricated.
@@ -49,11 +49,11 @@ The TE line is the one people skip. A display can light up without it, but the m
 
 <p><a href="/uploads/moto-gps-waveshare/moto-gps-board-en.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-board-en.webp" alt="MOTO GPS board-level wiring diagram" style="width:100%;"></a></p>
 
-*Display, touch, IMU and PMIC signal assignments. Pin names follow Waveshare's J3 and the project BSP; this is a reading aid, not a fabrication drawing.*
+*Display, touch, IMU and PMIC signal assignments. Pin names follow Waveshare's J3 and the project BSP; this is a reading aid, not a fabrication drawing. Open full size.*
 
 <p><a href="/uploads/moto-gps-waveshare/moto-gps-schematic-j3.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-schematic-j3.webp" alt="Waveshare ESP32-S3-Touch-AMOLED-1.75C schematic, J3 detail" style="width:100%;"></a></p>
 
-*The J3 detail from the public Waveshare schematic. The display uses QSPI plus a dedicated TE line; touch uses I²C with interrupt and reset.*
+*The J3 detail from the public Waveshare schematic. The display uses QSPI plus a dedicated TE line; touch uses I²C with interrupt and reset. Open full size.*
 
 The custom **H0175 EVT A1** board is a different story. It is a **52 mm four-layer** design built around an **ESP32-S3-WROOM-1U-N16R8**, with an **LC76GABMD** GNSS receiver, **QMI8658A** and **IIS2MDCTR** sensors, a **BQ25628E** charger, a **TPS63070** buck-boost converter and a **TUSB320LAI** USB-C controller. The V3 enclosure is **61 mm in diameter and 16 mm thick**, with a Garmin-compatible quarter-turn mount.
 
@@ -71,7 +71,7 @@ What the display receives is a projection: a navigation snapshot, a local slice 
 
 <p><a href="/uploads/moto-gps-waveshare/moto-gps-system-en.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-system-en.webp" alt="MOTO GPS system data path" style="width:100%;"></a></p>
 
-*The phone keeps the route and the routing state. The ESP32 receives a cropped display projection and renders it.*
+*The phone keeps the route and the routing state. The ESP32 receives a cropped display projection and renders it. Open full size.*
 
 Coordinate systems are part of that boundary. Search and positioning use WGS84; route geometry is normalized to GCJ-02 for the Chinese map source. Mixing the two without conversion shifts the route against the background. The repository documents the conversion points rather than hiding them in a helper function.
 
@@ -85,7 +85,7 @@ Every GATT operation carries one complete protocol frame. The v1 header is ten b
 
 <p><a href="/uploads/moto-gps-waveshare/moto-gps-ble-en.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-ble-en.webp" alt="MOTO GPS BLE v1 frame format" style="width:100%;"></a></p>
 
-*The v1 frame: a ten-byte header, N payload bytes and a CRC16. At MTU 23 the payload is only eight bytes, so the protocol fragments and reassembles its own messages.*
+*The v1 frame: a ten-byte header, N payload bytes and a CRC16. At MTU 23 the payload is only eight bytes, so the protocol fragments and reassembles its own messages. Open full size.*
 
 The frame size is not the ATT MTU. It is `min(local ATT_MTU − 3, peer max_frame_size, 512)`. At an MTU of 23, the characteristic value is 20 bytes and the payload is only **8 bytes**, so a 300-byte route window becomes 38 fragments. The protocol handles that fragmentation itself instead of relying on Prepare Write or Long Write, which behave differently across stacks.
 
