@@ -21,13 +21,13 @@ seoTitle: 'MOTO GPS: ESP32-S3 Round-Screen Motorcycle Navigator'
 seoDescription: 'Inside MOTO GPS: Waveshare ESP32-S3 AMOLED hardware, CO5300 pins, a BLE v1 frame format, a shared C++ navigation core and a round PCB.'
 ---
 
-A 1.75-inch circle sits on the handlebar. The phone stays in a jacket pocket. The screen shows a white route, the next turn and a distance — not a mirrored phone display. **MOTO GPS**, by Maler X, is built around the **Waveshare ESP32-S3-Touch-AMOLED-1.75C**, but the board is only half the story. The repository also contains an iPhone app, an Android app, a routing gateway, a shared C++ navigation core, a custom BLE protocol and a four-layer round PCB that has been designed but not fabricated.
+A 1.75-inch circle sits on the handlebar. The phone stays in a jacket pocket. The screen shows a white route, the next turn and a distance — not a mirrored phone display. **[MOTO GPS](https://github.com/mx3353672833-debug/moto-gps-waveshare)**, by Maler X, is built around the **Waveshare ESP32-S3-Touch-AMOLED-1.75C**, but the board is only half the story. The repository also contains an iPhone app, an Android app, a routing gateway, a shared C++ navigation core, a custom BLE protocol and a four-layer round PCB that has been designed but not fabricated.
 
 ![MOTO GPS round-screen navigator mounted on a motorcycle handlebar](/uploads/moto-gps-waveshare/moto-gps-hero.webp)
 
 *A design render of the V3 enclosure on a handlebar. The current build uses the Waveshare dev board, not the custom housing.*
 
-At the time of writing it has passed 500 stars and 96 forks. It is not a product. There is no App Store build, no prebuilt firmware and no finished enclosure for sale. What exists is a source-available prototype with a long README and a separate DIY guide.
+At the time of writing it has more than 500 stars and 96 forks. It is not a product. There is no App Store build, no prebuilt firmware and no finished enclosure for sale. What exists is a source-available prototype with a long README and a separate DIY guide.
 
 ## One repository, the whole chain
 
