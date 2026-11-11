@@ -4,6 +4,8 @@ translationKey: moto-gps-waveshare
 pubDate: '2026-11-10'
 category: open-source
 draft: false
+contentType: deep
+series: open-hardware
 author: EmbeddedNote
 sourceUrl: https://github.com/mx3353672833-debug/moto-gps-waveshare
 title: "Github 上硬核嵌入式项目之——摩托车圆屏导航"

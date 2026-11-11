@@ -8,6 +8,8 @@ category: connectivity
 tags: [BLE, GATT, ATT MTU, ESP32, 吞吐率, 工程实践]
 author: EmbeddedNote
 draft: false
+contentType: deep
+series: ble
 seoTitle: 'BLE 吞吐与传输时间计算——MTU、分包与连接事件'
 seoDescription: '用 24,400 字节文件详解 ATT MTU、有效负载、GATT 操作次数和连接事件预算，附可运行 Python 计算脚本与测试清单。'
 ---

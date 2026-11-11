@@ -11,6 +11,8 @@ tags:
 - DAC
 - SCPI
 draft: false
+contentType: deep
+series: open-hardware
 seoTitle: Github 上超硬核嵌入式项目：30MHz 任意波形发生器 ArbWave30
 seoDescription: ArbWave30 开源任意波形发生器采用 STM32、GW2A FPGA 和 AD9747 DAC，分析时钟、模拟链路、输出滤波与 SCPI 控制。
 ---

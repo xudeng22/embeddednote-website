@@ -12,6 +12,8 @@ tags:
   - PaperDIY
   - 硬件设计
 draft: false
+contentType: deep
+series: epaper
 seoTitle: 'M5Stack PaperDIY：4.7 英寸电子纸 DIY 套件与完整原理图'
 seoDescription: 'M5Stack PaperDIY 的 4.7 英寸电子纸、ESP32-S3、8 位并口、电源管理和开放原理图解析。Assembly Kit 售价 25 美元，Complete Kit 29.90 美元。'
 updatedDate: '2026-11-06'

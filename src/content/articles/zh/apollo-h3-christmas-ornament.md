@@ -6,6 +6,8 @@ translationKey: apollo-h3-christmas-ornament
 pubDate: '2026-10-29'
 category: open-source
 draft: false
+contentType: deep
+series: open-hardware
 author: EmbeddedNote
 sourceUrl: https://github.com/ApolloAutomation/H-3
 tags:

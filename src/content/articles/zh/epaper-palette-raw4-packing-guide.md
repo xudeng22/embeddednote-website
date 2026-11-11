@@ -8,6 +8,8 @@ category: display
 tags: [电子纸, 图像算法, 抖动, RAW4, 色板, 固件]
 author: EmbeddedNote
 draft: false
+contentType: deep
+series: epaper
 seoTitle: '电子纸图像转换——RAW4 打包、调色板与抖动算法实战'
 seoDescription: '详解四色、六色与八色电子纸的色板、RGB 与 Lab 匹配、RAW4 数据大小、奇数宽度跨行打包及代码校验。'
 ---

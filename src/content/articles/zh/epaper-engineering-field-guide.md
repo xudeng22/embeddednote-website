@@ -8,6 +8,8 @@ category: display
 tags: [电子纸, 嵌入式工程, BLE, 图像处理, 显示驱动, 验证方法]
 author: EmbeddedNote
 draft: false
+contentType: deep
+series: epaper
 seoTitle: '电子纸完整工程指南——图像编码、BLE、SPI 与刷新时序'
 seoDescription: '用可复算的实例理解电子纸调色板、RAW4 跨行打包、BLE 分包、SPI 理论耗时、BUSY 波形、功耗及验收测试。'
 ---

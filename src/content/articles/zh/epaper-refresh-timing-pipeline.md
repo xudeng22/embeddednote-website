@@ -8,6 +8,8 @@ category: display
 tags: [电子纸, SPI, 刷新时序, 波形, 测量, 嵌入式]
 author: EmbeddedNote
 draft: false
+contentType: deep
+series: epaper
 seoTitle: '电子纸刷新时序——SPI 传图、BUSY 与屏幕实际刷新时间'
 seoDescription: '以 800×540 电子纸数据为例计算 SPI 传输下限，拆解控制器 BUSY、驱动波形和视觉稳定时间，附逻辑分析仪测试方法。'
 ---
