@@ -98,6 +98,8 @@ article images, no dangling references to deleted originals.
 
 - The `zh` mirrors of the six rewritten articles still carry the previous text;
   they need the same verification blocks before hreflang pairs are fully aligned.
+  Their `series` metadata was added in the follow-up commit, so the Chinese
+  reading path already exists.
 - A handful of alt texts still say "GIF" after the animated WebP conversion.
 - Remaining long `seoTitle` values (68-91 characters) need editorial shortening;
   the template no longer adds a suffix to them, but they still truncate.
