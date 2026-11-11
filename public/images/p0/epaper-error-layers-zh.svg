@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" width="960" height="470" role="img" aria-label="电子纸图像流水线的五个层次,以及每层失败时的画面特征">
+  <rect width="960" height="470" fill="#fbf8f2"/>
+  <text x="24" y="34" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="15" font-weight="700" fill="#a63927" letter-spacing="1.2">错误出在哪一层</text>
+  <text x="24" y="58" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="13" fill="#59645e">先看症状,再逐层往下查。多数人直接从算法开始改,其实起点高了一层。</text>
+
+  <g font-family="Segoe UI, Microsoft YaHei, sans-serif">
+    <rect x="24" y="78" width="912" height="66" rx="6" fill="#ffffff" stroke="#d0c8bb"/>
+    <rect x="24" y="78" width="6" height="66" rx="3" fill="#8a9a8f"/>
+    <text x="48" y="104" font-size="15" font-weight="700" fill="#17211e">1 · 源图</text>
+    <text x="48" y="126" font-size="12.5" fill="#59645e">长宽比、裁切、色调、曝光——浏览器已经替你缩放过一次。</text>
+    <text x="640" y="104" font-size="12.5" font-weight="700" fill="#8a3f2c">典型特征:</text>
+    <text x="640" y="126" font-size="12.5" fill="#8a3f2c">整体拉伸、裁切错位、全图发虚</text>
+
+    <rect x="24" y="152" width="912" height="66" rx="6" fill="#ffffff" stroke="#d0c8bb"/>
+    <rect x="24" y="152" width="6" height="66" rx="3" fill="#b94530"/>
+    <text x="48" y="178" font-size="15" font-weight="700" fill="#17211e">2 · 调色板映射</text>
+    <text x="48" y="200" font-size="12.5" fill="#59645e">软件参考 RGB 与控制器原生色码是两套东西。</text>
+    <text x="640" y="178" font-size="12.5" font-weight="700" fill="#8a3f2c">典型特征:</text>
+    <text x="640" y="200" font-size="12.5" fill="#8a3f2c">整屏统一偏色,但形状是对的</text>
+
+    <rect x="24" y="226" width="912" height="66" rx="6" fill="#ffffff" stroke="#d0c8bb"/>
+    <rect x="24" y="226" width="6" height="66" rx="3" fill="#b94530"/>
+    <text x="48" y="252" font-size="15" font-weight="700" fill="#17211e">3 · 打包与布局</text>
+    <text x="48" y="274" font-size="12.5" fill="#59645e">行跨度、高低四位顺序、旋转、反色、位深。</text>
+    <text x="640" y="252" font-size="12.5" font-weight="700" fill="#8a3f2c">典型特征:</text>
+    <text x="640" y="274" font-size="12.5" fill="#8a3f2c">斜切、对角条带、镜像、重复列</text>
+
+    <rect x="24" y="300" width="912" height="66" rx="6" fill="#ffffff" stroke="#d0c8bb"/>
+    <rect x="24" y="300" width="6" height="66" rx="3" fill="#8a9a8f"/>
+    <text x="48" y="326" font-size="15" font-weight="700" fill="#17211e">4 · 驱动与波形</text>
+    <text x="48" y="348" font-size="12.5" fill="#59645e">刷新模式、LUT 选择、BUSY 处理、上电时序。</text>
+    <text x="640" y="326" font-size="12.5" font-weight="700" fill="#8a3f2c">典型特征:</text>
+    <text x="640" y="348" font-size="12.5" fill="#8a3f2c">上一帧残留、对比偏弱、切线换模式后颜色错</text>
+
+    <rect x="24" y="374" width="912" height="66" rx="6" fill="#ffffff" stroke="#d0c8bb"/>
+    <rect x="24" y="374" width="6" height="66" rx="3" fill="#8a9a8f"/>
+    <text x="48" y="400" font-size="15" font-weight="700" fill="#17211e">5 · 面板与环境</text>
+    <text x="48" y="422" font-size="12.5" fill="#59645e">温度、观察光源、批次差异、老化、FPC 接触。</text>
+    <text x="640" y="400" font-size="12.5" font-weight="700" fill="#8a3f2c">典型特征:</text>
+    <text x="640" y="422" font-size="12.5" fill="#8a3f2c">只有一条带或一个角,两台机器结果不同</text>
+  </g>
+</svg>

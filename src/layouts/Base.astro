@@ -31,14 +31,16 @@ const currentCategory = activeCategory ?? routeCategory ?? null;
 const origin = 'https://embeddednote.com';
 const rawTitle = title ?? 'EmbeddedNote';
 
-// Search results truncate around 580-600 px, which is roughly 55-60 characters.
-// Append the site suffix only when the combined title still fits; otherwise the
-// article headline alone is the better snippet.
+// Search results truncate around 580-600 px, which is roughly 55-60 characters
+// of Latin text. CJK glyphs are about twice as wide, so count them as two units
+// and only append the site suffix when the result still fits.
 const TITLE_SUFFIX = ' | EmbeddedNote';
 const TITLE_BUDGET = 62;
+const displayWidth = (value) =>
+  [...value].reduce((total, char) => total + (/[\u2e80-\u9fff\uff00-\uffef]/.test(char) ? 2 : 1), 0);
 const pageTitle = /embeddednote/i.test(rawTitle)
   ? rawTitle
-  : rawTitle.length + TITLE_SUFFIX.length <= TITLE_BUDGET
+  : displayWidth(rawTitle) + displayWidth(TITLE_SUFFIX) <= TITLE_BUDGET
     ? `${rawTitle}${TITLE_SUFFIX}`
     : rawTitle;
 
