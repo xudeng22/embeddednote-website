@@ -30,7 +30,7 @@ Anthropic 让 Claude Fable 5.2 做了三台东西：一个 USB-C 音箱、一个
 
 *三台设备：电池供电的掌上宠物、家用语音中枢、USB-C 音箱。图片：Anthropic*
 
-<p><a href="https://www.anthropic.com/research/claude-electronics-design" target="_blank" rel="noopener"><img src="/uploads/claude-electronics/claude-electronics-video-poster.webp" alt="Anthropic Claude 电子设计演示视频封面"></a></p>
+[![Anthropic Claude 电子设计演示视频封面](/uploads/claude-electronics/claude-electronics-video-poster.webp)](https://www.anthropic.com/research/claude-electronics-design)
 
 *Anthropic 公布的演示视频，点封面看原片。*
 

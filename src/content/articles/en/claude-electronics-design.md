@@ -28,7 +28,7 @@ Anthropic’s latest electronics demo is easy to summarize and easy to overread.
 
 That is a real step beyond “the model can write Arduino code.” It is not proof that a model can replace a hardware team. The useful question is narrower: how much of the design work did Claude actually do, where did it still need people, and what does the published material let an outside engineer verify?
 
-<p><a href="https://www.anthropic.com/research/claude-electronics-design" target="_blank" rel="noopener"><img src="/uploads/claude-electronics/claude-electronics-video-poster.webp" alt="Anthropic Claude electronics design demo video poster"></a></p>
+[![Anthropic Claude electronics design demo video poster](/uploads/claude-electronics/claude-electronics-video-poster.webp)](https://www.anthropic.com/research/claude-electronics-design)
 
 *Anthropic’s demo video is embedded in the research note; click the poster to watch it there.*
 
