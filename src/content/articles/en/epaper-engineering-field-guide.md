@@ -8,6 +8,8 @@ category: display
 tags: [E-Paper, Embedded Engineering, BLE, Image Processing, Display Drivers, Verification]
 author: EmbeddedNote
 draft: false
+contentType: deep
+series: epaper
 seoTitle: 'E-Paper Engineering Guide — From Image Bytes to Verified Refresh'
 seoDescription: 'Design an e-paper update pipeline with reproducible image-size calculations, palette mapping, BLE scheduling, SPI timing, waveform boundaries and test checklists.'
 ---

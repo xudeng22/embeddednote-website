@@ -4,6 +4,9 @@ translationKey: moto-gps-waveshare
 pubDate: '2026-11-10'
 category: open-source
 draft: false
+contentType: deep
+series: open-hardware
+updatedDate: '2026-11-11'
 author: EmbeddedNote
 sourceUrl: https://github.com/mx3353672833-debug/moto-gps-waveshare
 title: 'MOTO GPS: A Round-Screen Motorcycle Navigator With the Phone in Your Pocket'
@@ -16,7 +19,7 @@ tags:
 - BLE
 - Motorcycle Navigation
 - LVGL
-- Open Source
+- Source Available
 seoTitle: 'MOTO GPS: ESP32-S3 Round-Screen Motorcycle Navigator'
 seoDescription: 'Inside MOTO GPS: Waveshare ESP32-S3 AMOLED hardware, CO5300 pins, a BLE v1 frame format, a shared C++ navigation core and a round PCB.'
 ---
@@ -29,11 +32,26 @@ A 1.75-inch circle sits on the handlebar. The phone stays in a jacket pocket. Th
 
 At the time of writing it has more than 500 stars and 96 forks. It is not a product. There is no App Store build, no prebuilt firmware and no finished enclosure for sale. What exists is a source-available prototype with a long README and a separate DIY guide.
 
+## What we checked
+
+The repository, not the launch posts, is the source for this section. We read `README.md`, `LICENSE.md`, the hardware review packages and the 2026-09-16 update note.
+
+| Claim | Where we looked | Result |
+| --- | --- | --- |
+| 466 x 466 round AMOLED, CO5300 over QSPI, CST9217 touch | `README.md`, hardware table | Confirmed |
+| ESP32-S3 with 32 MB flash and 8 MB PSRAM | same table | Confirmed |
+| BLE GATT with encrypted write and notify characteristics, LE Secure Connections, Just Works | `README.md`, protocol section | Confirmed, and the missing MITM protection is stated by the author |
+| Self-designed A1 board | `hardware/manufacturing/engineering-candidates/rev-a1-.../README_DO_NOT_ORDER.md` | Engineering review only. The directory name is the author's own warning |
+| 9 C++ tests, 60 backend tests, 12 Swift tests, 13 BLE policy tests | 2026-09-16 update | Confirmed as the author's recorded run, on his bench |
+| Licence | `LICENSE.md`, PolyForm Noncommercial 1.0.0 | Source-available, not OSI open source |
+
+The licence point changes how the project should be described. The code is public and modifiable for personal, research and other non-commercial use, with attribution; selling pre-flashed units or shipping it inside a paid product needs separate permission. Calling it "open source" without that qualifier is the kind of shortcut that gets a hardware project into trouble later, so this article uses source-available from here on.
+
 ## One repository, the whole chain
 
 Most hobby navigation projects stop at a screen and a GPS module. This one keeps the chain: ESP32 firmware for the Waveshare board, an iOS app with Core Location and MapKit, a native Android client, a Node gateway that hides the AMap key, a shared C++ core for route progress and map projection, a WebAssembly preview, and KiCad files for a 52 mm round board. The breadth is the point — and so is the documentation of where each piece stops.
 
-<video controls muted loop playsinline poster="/uploads/moto-gps-waveshare/moto-gps-nav-poster.jpg" style="display:block;width:100%;max-width:620px;margin:26px auto 10px;border-radius:12px;background:#0b0f12;">
+<video controls muted loop playsinline poster="/uploads/moto-gps-waveshare/moto-gps-nav-poster.webp" style="display:block;width:100%;max-width:620px;margin:26px auto 10px;border-radius:12px;background:#0b0f12;">
   <source src="/uploads/moto-gps-waveshare/moto-gps-nav.mp4" type="video/mp4">
 </video>
 
