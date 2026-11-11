@@ -5,38 +5,169 @@ export function getStaticPaths(){return ['en','zh'].map(lang=>({params:{lang}}))
 const lang=Astro.params.lang==='zh'?'zh':'en';
 // Both language routes intentionally share the same English tool content.
 const zh=false;
+
+const faqs = [
+  {
+    q: 'Is the image uploaded to a server?',
+    a: 'No. The file is read with the browser File API, decoded on a canvas and quantized inside a Web Worker. Nothing is sent over the network, and the page works offline once loaded.'
+  },
+  {
+    q: 'What is the difference between RAW4 and RAW8?',
+    a: 'RAW8 stores one palette index per pixel, so an 800 × 480 frame is 384,000 bytes. RAW4 packs two indices into one byte, high nibble first, row by row without padding, so the same frame is 192,000 bytes. Neither file includes row alignment, rotation or a controller command set.'
+  },
+  {
+    q: 'Can I use this for a 7-color panel?',
+    a: 'Not by picking a menu item. The built-in 8-color set is illustrative, not a certified device profile. For a real panel, import a JSON profile that maps your measured sRGB values to the controller\u2019s native color codes, then quantize against that profile.'
+  },
+  {
+    q: 'Why do the colors look different on the panel than in the preview?',
+    a: 'The preview draws light-emitting RGB pixels. E-paper reflects ambient light, and the final color depends on the panel, waveform, temperature and viewing light. Treat the preview as a composition check, and measure the panel if color accuracy matters.'
+  },
+  {
+    q: 'Which dithering method should I choose?',
+    a: 'For text and UI screenshots, nearest-color with edge protection keeps glyphs crisp. For photographs, Floyd\u2013Steinberg usually preserves gradients best; Atkinson gives a lighter, grainier look; Bayer 4×4 produces a stable pattern that survives repeated refreshes predictably.'
+  },
+  {
+    q: 'Does the exported RAW file work directly with my display controller?',
+    a: 'Usually not as-is. Controllers differ in native palette codes, row stride, bit order, rotation and required command sequences. Use the export as a verified pixel buffer, then apply your driver\u2019s mapping in firmware.'
+  },
+  {
+    q: 'What is the file size limit?',
+    a: 'PNG, JPEG and WebP up to 20 MB, and the decoded frame is capped so the browser does not run out of memory. Very large photos should be cropped or resized before conversion.'
+  }
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a }
+  }))
+};
+
+const appLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'E-Paper Image Converter',
+  url: 'https://embeddednote.com/en/tools/epaper-image-converter/',
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'Any browser',
+  browserRequirements: 'Requires JavaScript and Web Workers',
+  description: 'Converts photos to 4-, 6- and 8-color e-paper palettes with CIE Lab matching and dithering, and exports PNG previews plus RAW4 and RAW8 palette index data. Runs locally in the browser.',
+  isAccessibleForFree: true,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  publisher: { '@id': 'https://embeddednote.com/#publisher' }
+};
+
+const panels = [
+  ['1.54 in', '200 × 200', 200 * 200],
+  ['2.13 in', '212 × 104', 212 * 104],
+  ['2.9 in', '296 × 128', 296 * 128],
+  ['4.2 in', '400 × 300', 400 * 300],
+  ['5.83 in', '648 × 480', 648 * 480],
+  ['7.5 in', '800 × 480', 800 * 480],
+  ['13.3 in', '1600 × 1200', 1600 * 1200]
+];
+const fmt = (n) => n.toLocaleString('en-US');
 ---
 <Base lang={lang}
-  title={zh?'电子纸图像转换器：四色、六色与八色抖动':'E-Paper Image Converter — 4, 6 & 8 Colors'}
-  description={zh?'免费在线电子纸图片转换工具：支持四色 BWRY、六色 Spectra 6 参考色和可自定义前需校验的八色参考调色板。浏览器本地处理，导出 PNG、8-bit/4-bit 调色板索引点阵。':'Free browser-based e-paper image converter with 4-, 6- and illustrative 8-color palettes, CIE Lab matching, measured palette JSON profiles, edge-aware text protection, PNG preview and indexed raw export. No image uploads.'}
+  title="E-Paper Image Converter — 4, 6 & 8 Colors"
+  description="Convert photos for e-paper: 4-, 6- and 8-color palettes, CIE Lab matching, dithering, and RAW4/RAW8 index export. Runs in your browser, no upload."
   translations={{en:'/en/tools/epaper-image-converter/',zh:'/zh/tools/epaper-image-converter/'}}
   activeCategory="tools">
   <section lang="en" class="epc-page" data-pagefind-body>
     <p class="eyebrow">EMBEDDEDNOTE / {zh?'工程工具':'ENGINEERING TOOLS'} / E-PAPER</p>
     <h1>{zh?'电子纸图像转换器':'E-Paper Image Converter'}</h1>
-    <p class="epc-lead">{zh?'将 JPG、PNG 或 WebP 转换为有限调色板的电子纸预览图与像素索引。支持四色、六色和示例八色；文件不上传。':'Turn JPG, PNG or WebP photos into limited-palette e-paper previews and indexed pixel data. Choose four, six or illustrative eight colors. Files stay on your device.'}</p>
-    <p class="epc-caution">{zh?'工程说明：不同厂商的四色/八色像素颜色及控制器编码并不统一。八色模式是示例调色板，并非任何 E Ink E6 产品的认证配置。':'Engineering note: 4- and 8-color panels do not share a universal palette or wire format. The eight-color option is illustrative, not a certified E Ink E6 profile.'}</p>
+    <p class="epc-lead">{zh?'将 JPG、PNG 或 WebP 转换为有限调色板的电子纸预览图与像素索引。支持四色、六色和示例八色；文件不上传。':'Turn a JPG, PNG or WebP photo into a limited-palette e-paper preview, then export the pixel indices as RAW4 or RAW8. Four-, six- and eight-color reference palettes, CIE Lab matching, three dithering methods, and nothing leaves your browser.'}</p>
+    <p class="epc-caution">{zh?'工程说明：不同厂商的四色/八色像素颜色及控制器编码并不统一。八色模式是示例调色板，并非任何 E Ink E6 产品的认证配置。':'Engineering note: 4- and 8-color panels do not share a universal palette or wire format. The eight-color option is illustrative, not a certified E Ink E6 profile. Nothing here replaces a measured profile for your exact panel.'}</p>
     <EPaperImageConverter lang="en"/>
+
     <article class="epc-article prose">
-      <h2>{zh?'算法与数据格式':'Algorithm and export format'}</h2>
-      <p>{zh?'先按目标尺寸缩放或裁切原图，再做基础亮度、对比度与饱和度调整，最后通过调色板最近邻、Floyd–Steinberg、Atkinson 或 Bayer 4×4 进行颜色量化。算法在专用 Web Worker 中执行，减少主线程卡顿。':'The image is resized or cropped, adjusted for brightness, contrast and saturation, then quantized using nearest-color, Floyd–Steinberg, Atkinson or Bayer 4×4 dithering. Quantization runs in a dedicated Web Worker to keep the page responsive.'}</p>
-      <p>{zh?'PNG 中只包含所选参考调色板的 RGB 颜色。RAW8 每像素 1 字节索引；RAW4 每字节两个索引，首像素位于高 4 位，按行从左到右、从上到下连续排列。未附加控制器要求的行对齐、像素方向和颜色代码。':'PNG uses exact reference RGB values. RAW8 stores one palette index per pixel; RAW4 packs two zero-based indices per byte, first pixel in the high nibble, row-major without row padding. Neither RAW file incorporates device-specific index mappings, row alignment, orientation or driver commands.'}</p>
-      <h2>{zh?'实测面板配置与边缘保护':'Measured device profiles and edge protection'}</h2>
-      <p>{zh?'v1.1 支持在本地导入含原生色号与实测 sRGB 颜色的面板 JSON 配置，使用 CIE Lab（ΔE76）量化并保护接近中性黑白的高对比度文字边缘。测量数据应记录光源与设备条件。ΔE76 为速度与精度的折中，不等于 CIEDE2000。':'v1.1 accepts local JSON profiles that separate native device color codes from measured sRGB appearance. Quantization offers CIE Lab (ΔE76), with optional protection for neutral high-contrast text edges. Document measurement lighting and equipment. ΔE76 is a speed/quality trade-off, not CIEDE2000.'}</p>
-      <h2>{zh?'预览与实际屏幕颜色':'Preview versus physical color'}</h2>
-      <p>{zh?'参考 RGB 调色板只是软件输出颜色，不等于反射式显示屏的实测色彩表现。不同面板、驱动波形、温度和光照都会影响实际颜色。正式产品应使用经校准的调色板和与硬件一致的编码映射。':'RGB reference swatches do not reproduce measured reflective panel colors. Real appearance depends on panel, waveform, temperature and lighting. Hardware releases need measured color calibration and an explicit device encoding map.'}</p>
-      <!-- embeddednote-p0-20261106 -->
+      <h2>What this converter does</h2>
+      <p>Three separate things happen in order, and it helps to keep them apart. First the image is fitted to the panel resolution and tone-adjusted. Then every pixel is mapped to the nearest color in the selected palette, optionally with error diffusion. Finally the palette indices are packed into a binary buffer you can drop into firmware.</p>
+      <p>All of it runs locally. There is no upload queue, no account, and no per-image limit beyond what your browser can hold in memory.</p>
+
+      <h2>Palettes: what each option actually is</h2>
+      <table>
+        <thead><tr><th>Option</th><th>What it contains</th><th>When to use it</th></tr></thead>
+        <tbody>
+          <tr><td>4-color · BWRY</td><td>Generic black, white, red, yellow reference values</td><td>Quick composition check for common 4-color panels</td></tr>
+          <tr><td>6-color · Spectra 6</td><td>Reference approximations of a six-color photo panel</td><td>Draft layouts before you have a measured profile</td></tr>
+          <tr><td>8-color · illustrative</td><td>Eight spread colors, explicitly not device-certified</td><td>Palette experiments; never as a production target</td></tr>
+          <tr><td>Imported device profile</td><td>Your JSON: native color codes plus measured sRGB values</td><td>Anything that ships — this is the only accurate mode</td></tr>
+        </tbody>
+      </table>
+      <p>The first three are convenience presets. A measured profile is the only one that can produce a defensible result, because it separates the panel's native color code from the sRGB value you measured under a stated light source.</p>
+
+      <h2>Export formats</h2>
+      <table>
+        <thead><tr><th>Output</th><th>Contents</th><th>Packing</th></tr></thead>
+        <tbody>
+          <tr><td>PNG</td><td>Preview using reference RGB values</td><td>—</td></tr>
+          <tr><td>RAW8 (<code>.bin</code>)</td><td>One palette index per pixel</td><td>Row-major, one byte per pixel</td></tr>
+          <tr><td>RAW4 (<code>.bin</code>)</td><td>Two palette indices per byte</td><td>Row-major, first pixel in the high nibble, no row padding</td></tr>
+          <tr><td>JSON</td><td>Palette, method, dimensions, histogram</td><td>Metadata for reproducing the run</td></tr>
+        </tbody>
+      </table>
+      <p>The RAW4 convention is the one that trips people up: a five-pixel-wide image is not padded to whole bytes per row. The indices <code>0 1 2 3 4 / 5 0 1 2 3</code> pack to <code>01 23 45 01 23</code>, with <code>0x45</code> straddling the row boundary. A driver that expects byte-aligned rows needs a different layout, and you have to decide that before writing the transfer code.</p>
+
+      <h2>Frame sizes for common panels</h2>
+      <table>
+        <thead><tr><th>Panel</th><th>Resolution</th><th>Pixels</th><th>RAW4</th><th>RAW8</th></tr></thead>
+        <tbody>
+          {panels.map(([name, res, px]) => (
+            <tr><td>{name}</td><td>{res}</td><td>{fmt(px)}</td><td>{fmt(Math.ceil(px / 2))} B</td><td>{fmt(px)} B</td></tr>
+          ))}
+        </tbody>
+      </table>
+      <p>The last column is usually the surprise: a 13.3-inch frame needs 1.92 MB in RAW8, which decides whether you buffer in PSRAM or stream in strips. See <a href={`/${lang}/articles/epaper-engineering-field-guide/`}>the full e-paper pipeline guide</a> for the transfer side of the same budget.</p>
+
+      <h2>How to use it</h2>
+      <ol>
+        <li><strong>Choose the palette.</strong> Start with 6-color if you are exploring; switch to an imported profile before anything ships.</li>
+        <li><strong>Set fit and tone.</strong> Crop to the real panel aspect ratio rather than stretching, and adjust brightness before dithering — the order changes the result.</li>
+        <li><strong>Pick a dithering method.</strong> Nearest-color with edge protection for text and UI, Floyd–Steinberg for photos, Bayer 4×4 when you need a repeatable pattern.</li>
+        <li><strong>Compare the preview, then export.</strong> Check the histogram, download RAW4 or RAW8 plus the JSON record, and keep the JSON with the build so the run can be reproduced.</li>
+      </ol>
+
+      <h2>Limits worth knowing before you ship</h2>
+      <ul>
+        <li>The preview uses light-emitting RGB values; a reflective panel under room light will not match it.</li>
+        <li>Exported indices are palette positions, not controller-native color codes.</li>
+        <li>Row stride, rotation, bit order and inversion are driver concerns — this tool does not apply them.</li>
+        <li>The eight-color preset is illustrative and must not be treated as a device profile.</li>
+        <li>Only PNG, JPEG and WebP up to 20 MB are accepted; HEIC from an iPhone needs converting first.</li>
+      </ul>
+
       <h2>Reproducible RAW4 packing test</h2>
-      <p>A five-pixel-wide image is a useful stress test because it exposes row-padding assumptions. For the example indexes <code>0 1 2 3 4 / 5 0 1 2 3</code>, this converter's continuous row-major RAW4 convention yields <code>01 23 45 01 23</code> in hex—five bytes in total. The byte <code>0x45</code> crosses the row boundary. A driver expecting independently byte-aligned rows would instead need a different six-byte layout.</p>
       <p>For 800 × 540 pixels, a continuous RAW4 buffer is 216,000 bytes, but neither its four-bit palette values nor its packing order is universal across panel controllers. Use a corner-pixel pattern and a checkerboard before attempting full photographs. Validate native index mapping, rotation, row stride and waveform selection separately.</p>
+
       <h2>Choosing a test image and reporting evidence</h2>
       <p>Compare nearest-color, Floyd–Steinberg, Atkinson and Bayer 4×4 using the same source dimensions, palette and tone settings. Test gradients, saturated blocks and small black text. Reference-color browser output must not be described as measured reflective-panel color. For measured-profile testing, record instrument, illuminant, panel model, temperature and waveform revision.</p>
-      <p><a href={`/${lang}/articles/epaper-palette-raw4-packing-guide/`}>Read the RAW4 byte-level verification guide</a> · <a href={`/${lang}/articles/epaper-refresh-timing-pipeline/`}>Understand SPI transport versus actual refresh time</a>.</p>
-      <h2>{zh?'参考项目与技术资料':'References and further reading'}</h2>
-      <p><a href="https://github.com/paperlesspaper/epdoptimize" target="_blank" rel="noopener noreferrer">EPD Optimize</a> · <a href="https://github.com/redphx/dithr" target="_blank" rel="noopener noreferrer">DITHR</a> · <a href="https://www.eink.com/tech/detail/How_it_works" target="_blank" rel="noopener noreferrer">E Ink technology overview</a></p>
+
+      <h2>Frequently asked questions</h2>
+      {faqs.map((item) => (
+        <div class="epc-faq">
+          <h3>{item.q}</h3>
+          <p>{item.a}</p>
+        </div>
+      ))}
+
+      <h2>Related reading</h2>
+      <ul>
+        <li><a href={`/${lang}/articles/epaper-palette-raw4-packing-guide/`}>RAW4 byte-level verification guide</a> — the odd-width test vector and where drivers disagree.</li>
+        <li><a href={`/${lang}/articles/epaper-refresh-timing-pipeline/`}>Why SPI transport is not panel refresh</a> — where the seconds actually go.</li>
+        <li><a href={`/${lang}/articles/epaper-engineering-field-guide/`}>The e-paper pipeline, end to end</a> — image, transfer, refresh and acceptance tests.</li>
+        <li><a href={`/${lang}/articles/m5stack-paperdiy-esp32-s3/`}>M5Stack PaperDIY review</a> — a 4.7-inch kit with published schematics.</li>
+      </ul>
+      <p class="epc-refs">Reference projects: <a href="https://github.com/paperlesspaper/epdoptimize" target="_blank" rel="noopener noreferrer">EPD Optimize</a> · <a href="https://github.com/redphx/dithr" target="_blank" rel="noopener noreferrer">DITHR</a> · <a href="https://www.eink.com/tech/detail/How_it_works" target="_blank" rel="noopener noreferrer">E Ink technology overview</a>.</p>
     </article>
   </section>
+  <script type="application/ld+json" set:html={JSON.stringify(appLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
 </Base>
 <style>
-.epc-page{max-width:1160px;margin:0 auto;padding:clamp(24px,4vw,44px) 0 70px}.epc-page h1{font:700 clamp(33px,4.4vw,55px)/1.12 Georgia,'Noto Serif SC',serif;color:#17211e;letter-spacing:-.025em;margin:12px 0 20px}.epc-lead{font:clamp(15px,1.55vw,18px)/1.75 system-ui,sans-serif;color:#59645e;max-width:950px}.epc-caution{border-left:3px solid #b94530;padding:10px 16px;background:#f8f3ea;color:#5b5144;font:13px/1.65 system-ui,sans-serif}.epc-article{max-width:900px;border-top:1px solid #d0c8bb;padding-top:24px}.epc-article h2{font-family:Georgia,'Noto Serif SC',serif}
+.epc-page{max-width:1160px;margin:0 auto;padding:clamp(24px,4vw,44px) 0 70px}.epc-page h1{font:700 clamp(33px,4.4vw,55px)/1.12 Georgia,'Noto Serif SC',serif;color:#17211e;letter-spacing:-.025em;margin:12px 0 20px}.epc-lead{font:clamp(15px,1.55vw,18px)/1.75 system-ui,sans-serif;color:#59645e;max-width:950px}.epc-caution{border-left:3px solid #b94530;padding:10px 16px;background:#f8f3ea;color:#5b5144;font:13px/1.65 system-ui,sans-serif}.epc-article{max-width:900px;border-top:1px solid #d0c8bb;padding-top:24px}.epc-article h2{font-family:Georgia,'Noto Serif SC',serif}.epc-article table{width:100%;border-collapse:collapse;margin:18px 0;font:14px/1.6 system-ui,sans-serif}.epc-article th,.epc-article td{border-bottom:1px solid #ded7cb;padding:9px 10px;text-align:left;vertical-align:top}.epc-article th{background:#f7f2e9;font-weight:700;color:#25322c}.epc-article code{background:#f1ece3;padding:2px 5px;border-radius:3px;font-size:.92em}.epc-faq{border-top:1px solid #e2dbcf;padding-top:14px;margin-top:14px}.epc-faq h3{font:700 17px/1.4 Georgia,'Noto Serif SC',serif;margin:0 0 6px}.epc-faq p{margin:0}.epc-refs{font-size:13px;color:#5b655f}
 </style>
