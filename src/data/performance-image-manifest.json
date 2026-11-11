@@ -2058,5 +2058,89 @@
 "/uploads/x-track/x-track-cover.webp": [
 1200,
 675
+],
+"/uploads/claude-electronics/claude-electronics-benchmark-640.webp": [
+640,
+416
+],
+"/uploads/claude-electronics/claude-electronics-benchmark.webp": [
+1600,
+1040
+],
+"/uploads/claude-electronics/claude-electronics-design-640.webp": [
+640,
+380
+],
+"/uploads/claude-electronics/claude-electronics-design.webp": [
+1600,
+951
+],
+"/uploads/claude-electronics/claude-electronics-enclosure-640.webp": [
+640,
+296
+],
+"/uploads/claude-electronics/claude-electronics-enclosure.webp": [
+1600,
+741
+],
+"/uploads/claude-electronics/claude-electronics-flow-en-640.webp": [
+640,
+347
+],
+"/uploads/claude-electronics/claude-electronics-flow-en.webp": [
+1900,
+1030
+],
+"/uploads/claude-electronics/claude-electronics-flow-zh-640.webp": [
+640,
+347
+],
+"/uploads/claude-electronics/claude-electronics-flow-zh.webp": [
+1900,
+1030
+],
+"/uploads/claude-electronics/claude-electronics-hero-640.webp": [
+640,
+427
+],
+"/uploads/claude-electronics/claude-electronics-hero.webp": [
+1600,
+1067
+],
+"/uploads/claude-electronics/claude-electronics-hub-pcb-640.webp": [
+640,
+360
+],
+"/uploads/claude-electronics/claude-electronics-hub-pcb.webp": [
+1600,
+900
+],
+"/uploads/claude-electronics/claude-electronics-routing-640.webp": [
+640,
+316
+],
+"/uploads/claude-electronics/claude-electronics-routing.webp": [
+1600,
+791
+],
+"/uploads/claude-electronics/claude-electronics-speaker-pcb-640.webp": [
+640,
+360
+],
+"/uploads/claude-electronics/claude-electronics-speaker-pcb.webp": [
+1600,
+900
+],
+"/uploads/claude-electronics/claude-electronics-video-poster-640.webp": [
+640,
+360
+],
+"/uploads/claude-electronics/claude-electronics-video-poster.webp": [
+1280,
+720
+],
+"/og/claude-electronics-design.webp": [
+1200,
+630
 ]
 }
