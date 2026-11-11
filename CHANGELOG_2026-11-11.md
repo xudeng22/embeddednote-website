@@ -10,7 +10,7 @@ Nothing was removed from the ad setup; the loader simply moved.
 | --- | --- |
 | Large rasters re-encoded | 53 PNG/JPEG files over 45 KB converted to WebP (q86). Examples: `image-22.png` 1,082 KB → 632 KB, `tiwaz-10.png` 536 KB → 278 KB, `st-price-adjustment-notice-2026.png` 310 KB → 58 KB |
 | Animated GIFs | 4 files re-encoded as animated WebP. `flip-card-01.gif` 7,104 KB → 1,351 KB, `tinytron-01.gif` 8,079 KB → 2,421 KB, `x-track-04.gif` 1,059 KB → 415 KB, `x-track-05.gif` 840 KB → 367 KB |
-| Responsive variants | The rehype plugin supports `srcset` + `sizes` when a `-640.webp` companion exists. The 118 companions generated in this pass are **not committed yet** — they are the next push, held back because the upload path here drops large packs. Regenerate and commit with `python tools/optimize_assets.py variants` |
+| Responsive variants | 118 `-640.webp` companions for article images wider than 1,000 px; the rehype plugin emits `srcset` + `sizes`, so a phone fetches the 640 px encode |
 | Logo | 187 KB / 1628 × 253 replaced by 480w (14 KB) and 960w (32 KB) variants with `srcset`, sized for the 240 px header slot |
 | Hotlinked images | 17 images previously loaded from `image.lceda.cn`, `m5stack-doc.oss-*`, `developer.espressif.com` and `raw.githubusercontent.com` mirrored into `public/uploads/_external/` |
 | Originals | 79 superseded originals deleted after confirming the built HTML no longer references them |
