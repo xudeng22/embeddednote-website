@@ -122,3 +122,9 @@ The first sixteen bytes settle most packing arguments before anyone opens a data
 The layer model and the tests are engineering practice, not a measurement campaign. We have not characterised a specific panel for this article, and the byte counts are arithmetic. The order of the six causes is chosen so that each test costs less than the one after it, which is the only claim about likelihood we are making.
 
 If you are still choosing hardware, read [the pipeline guide](/en/articles/epaper-engineering-field-guide/) first: half of these failures are decided at the point where you pick the panel, the controller and the transfer format, long before the first image is converted.
+
+## Sources
+
+- E Ink, [How electronic ink works](https://www.eink.com/tech/detail/How_it_works) — how a pixel is driven, which is the basis for causes 5 and 6.
+- E Ink, [Spectra 3100](https://www.eink.com/brand/detail/Spectra3100) (black, white, red, yellow) and [Spectra 6](https://www.eink.com/brand/detail/Spectra6) (six colours) — the two product families the reference palettes are named after. Both are brand pages, not per-panel colour tables.
+- Your module's datasheet and waveform file. We did not check a specific Good Display part for this article: `good-display.cn` rejects automated requests with HTTP 406, so nothing here is quoted from their catalogue.

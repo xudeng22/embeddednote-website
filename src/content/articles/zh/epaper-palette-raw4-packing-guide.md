@@ -40,7 +40,7 @@ seoDescription: '详解四色、六色与八色电子纸的色板、RGB 与 Lab 
 
 彩色电子纸尤其要分清“参考色”和“实测色”：网页预览色是发光显示器的 RGB；真实电子纸是反射式显示，结果受到光源、波形、面板批次和温度影响。如果准备做产品调色，应该记录测色仪、照明条件、面板型号和驱动版本。**不能因为 JSON 配置里写了 measured，就声称完成了实测标定。**
 
-[EmbeddedNote E-Paper Image Converter](/zh/tools/epaper-image-converter/) 支持参考调色板和本地导入的测量配置。工具中的八色示例不是 E Ink E6 或其他面板的官方认证色板。
+[EmbeddedNote E-Paper Image Converter](/zh/tools/epaper-image-converter/) 支持参考调色板和本地导入的测量配置。工具中的八色示例不是任何具体面板的官方认证色板。
 
 ## 抖动算法究竟改了什么
 

@@ -122,3 +122,9 @@ what appeared:          实际
 分层模型和这些测试属于工程实践,不是一次测量活动。本文没有为某块具体面板做特性测试,文中字节数都是算术结果。六个原因的顺序是按"每个测试比后一个便宜"排的——关于概率,我们只做这一个声明。
 
 如果你还在选硬件,先读[电子纸完整工程指南](/zh/articles/epaper-engineering-field-guide/):这里一半的失败,在你决定面板、控制器和传输格式的时候就已经注定了。
+
+## 参考来源
+
+- E Ink,[电子墨水原理](https://cn.eink.com/tech/detail/How_it_works)——像素如何被驱动,是第五、第六条原因的基础。
+- E Ink,[Spectra 3100](https://cn.eink.com/brand/detail/Spectra3100)(黑白红黄四色)、[Spectra 6](https://cn.eink.com/brand/detail/Spectra6)(六色)——参考色板命名的来源。两者都是品牌页,不是具体面板的色表。
+- 你手上模组的数据手册与波形文件。本文没有核对某一块具体的 Good Display 面板:`good-display.cn` 对自动请求返回 HTTP 406,所以这里没有引用他们目录里的任何参数。
