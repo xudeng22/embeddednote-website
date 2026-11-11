@@ -9,7 +9,7 @@ contentType: deep
 series: ai-hardware
 author: EmbeddedNote
 sourceUrl: https://www.anthropic.com/research/claude-electronics-design
-title: "Claude 把电路板画完了"
+title: "Claude 画完了电路板"
 description: "Anthropic 让 Claude Fable 5.2 从提示词做到 PCB、外壳和固件，三台原型由 Diode 制造并测试。本文拆开看它做对了什么、还有什么没验证。"
 tags:
 - Claude
