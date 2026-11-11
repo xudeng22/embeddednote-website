@@ -8,6 +8,8 @@ category: display
 tags: [E-Paper, SPI, Refresh, Timing, Waveform, Measurement]
 author: EmbeddedNote
 draft: false
+contentType: deep
+series: epaper
 seoTitle: 'E-Paper Refresh Time — SPI Transfer vs BUSY and Waveform Timing'
 seoDescription: 'Learn how to budget SPI transport, command overhead, panel drive, BUSY time and optical settling, with sample calculations and a real-hardware logging checklist.'
 ---

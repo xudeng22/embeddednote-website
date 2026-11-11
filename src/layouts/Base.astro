@@ -6,7 +6,22 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import AnalyticsConsent from '../components/AnalyticsConsent.astro';
 import { channels, ui } from '../i18n/ui';
 
-const { lang = 'en', title, description, translations = {}, switchLinks = translations, article = false, homepage = false, activeCategory = null } = Astro.props;
+const {
+  lang = 'en',
+  title,
+  description,
+  translations = {},
+  switchLinks = translations,
+  article = false,
+  homepage = false,
+  activeCategory = null,
+  image = null,
+  imageAlt = null,
+  noindex = false,
+  publishedTime = null,
+  modifiedTime = null,
+  breadcrumbs = null
+} = Astro.props;
 const dict = ui[lang];
 const pathname = Astro.url.pathname;
 // Match channel pages (including /page/N/) and preserve an article's category.
@@ -15,30 +30,70 @@ const routeCategory = pathname.match(/^\/(?:en|zh)\/category\/([^/]+)(?:\/|$)/)?
 const currentCategory = activeCategory ?? routeCategory ?? null;
 const origin = 'https://embeddednote.com';
 const rawTitle = title ?? 'EmbeddedNote';
-const pageTitle = /embeddednote/i.test(rawTitle) ? rawTitle : `${rawTitle} | EmbeddedNote`;
+
+// Search results truncate around 580-600 px, which is roughly 55-60 characters.
+// Append the site suffix only when the combined title still fits; otherwise the
+// article headline alone is the better snippet.
+const TITLE_SUFFIX = ' | EmbeddedNote';
+const TITLE_BUDGET = 62;
+const pageTitle = /embeddednote/i.test(rawTitle)
+  ? rawTitle
+  : rawTitle.length + TITLE_SUFFIX.length <= TITLE_BUDGET
+    ? `${rawTitle}${TITLE_SUFFIX}`
+    : rawTitle;
+
 const pageDesc = description ?? dict.description;
 const canonical = new URL(Astro.url.pathname, origin).href;
 const alternates = Object.entries(translations).filter(([, path]) => Boolean(path));
 const ogLocale = lang === 'zh' ? 'zh_CN' : 'en_US';
-const socialImage = new URL('/images/embeddednote-hero.webp', origin).href;
+
+// Every article ships its own 1200x630 card; pages without one fall back to the
+// site hero, which keeps a 4:3 ratio. Dimensions are declared so crawlers and
+// social clients can reserve space before the file is fetched.
+const hasArticleCard = Boolean(image);
+const socialPath = image ?? '/images/embeddednote-hero.webp';
+const socialImage = new URL(socialPath, origin).href;
+const socialWidth = hasArticleCard ? 1200 : 1200;
+const socialHeight = hasArticleCard ? 630 : 900;
+const socialType = socialPath.endsWith('.png') ? 'image/png' : 'image/webp';
+
 const tagline = lang === 'en'
   ? 'From a chip and a small project to the industry supply chain — documenting reusable engineering insights'
   : '从一个芯片、一个小项目到产业链，记录可复用的工程判断';
+
 const siteIdentity = {
   '@context': 'https://schema.org',
   '@graph': [
     {'@type':'Organization','@id':`${origin}/#publisher`,name:'EmbeddedNote',url:`${origin}/`,contactPoint:{'@type':'ContactPoint',email:'xden2019@gmail.com',contactType:'editorial inquiries'},logo:{'@type':'ImageObject',url:`${origin}/images/embeddednote-logo.webp`}},
-    {'@type':'WebSite','@id':`${origin}/#website`,name:'EmbeddedNote',url:`${origin}/`,inLanguage:['en','zh-CN'],publisher:{'@id':`${origin}/#publisher`},description:'An independent bilingual engineering blog with free tools, covering embedded systems, connectivity, displays and open-source hardware.'}
+    {
+      '@type':'WebSite','@id':`${origin}/#website`,name:'EmbeddedNote',url:`${origin}/`,inLanguage:['en','zh-CN'],publisher:{'@id':`${origin}/#publisher`},
+      description:'An independent bilingual engineering blog with free tools, covering embedded systems, connectivity, displays and open-source hardware.',
+      potentialAction:{'@type':'SearchAction',target:{'@type':'EntryPoint',urlTemplate:`${origin}/${lang}/?q={search_term_string}`},'query-input':'required name=search_term_string'}
+    }
   ]
 };
+
+const breadcrumbLd = breadcrumbs && breadcrumbs.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbs.map((crumb, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: crumb.name,
+        ...(crumb.path ? { item: new URL(crumb.path, origin).href } : {})
+      }))
+    }
+  : null;
 ---
 <!doctype html>
 <html lang={lang === 'zh' ? 'zh-CN' : 'en'}>
   <head>
     <meta charset="utf-8" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9169011296822300" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    {noindex
+      ? <meta name="robots" content="noindex, follow" />
+      : <meta name="robots" content="index, follow, max-image-preview:large" />}
     <title>{pageTitle}</title>
     <meta name="description" content={pageDesc} />
     <link rel="canonical" href={canonical} />
@@ -50,7 +105,14 @@ const siteIdentity = {
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={ogLocale} />
     <meta property="og:image" content={socialImage} />
-    <meta property="og:image:alt" content="EmbeddedNote embedded engineering and PCB" />
+    <meta property="og:image:secure_url" content={socialImage} />
+    <meta property="og:image:type" content={socialType} />
+    <meta property="og:image:width" content={String(socialWidth)} />
+    <meta property="og:image:height" content={String(socialHeight)} />
+    <meta property="og:image:alt" content={imageAlt ?? 'EmbeddedNote embedded engineering and PCB'} />
+    {article && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {article && modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+    {article && <meta property="article:publisher" content={`${origin}/`} />}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDesc} />
@@ -58,12 +120,22 @@ const siteIdentity = {
     {alternates.map(([locale, path]) => <link rel="alternate" hreflang={locale === 'zh' ? 'zh-CN' : 'en'} href={new URL(path, origin).href} />)}
     {translations.en && <link rel="alternate" hreflang="x-default" href={new URL(translations.en, origin).href} />}
     <script type="application/ld+json" set:html={JSON.stringify(siteIdentity)} />
+    {breadcrumbLd && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />}
   </head>
   <body>
     <header class="masthead">
       <div class="shell masthead-inner">
         <a href={`/${lang}/`} class="brand brand-image-link" aria-label="EmbeddedNote homepage">
-          <img class="brand-image" src="/images/embeddednote-logo.webp" alt="EmbeddedNote" width="1628" height="253" decoding="async" />
+          <img
+            class="brand-image"
+            src="/images/embeddednote-logo-480.webp"
+            srcset="/images/embeddednote-logo-480.webp 480w, /images/embeddednote-logo-960.webp 960w"
+            sizes="240px"
+            alt="EmbeddedNote"
+            width="480"
+            height="75"
+            decoding="async"
+          />
         </a>
         <span class="masthead-tagline">{tagline}</span>
         <LanguageSwitcher lang={lang} translations={switchLinks} />
@@ -103,5 +175,8 @@ const siteIdentity = {
       </div>
     </footer>
     <AnalyticsConsent />
+    {/* AdSense: same publisher account and loader, moved below the document so it
+        no longer competes with the first paint. Auto ads still render. */}
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9169011296822300" crossorigin="anonymous"></script>
   </body>
 </html>

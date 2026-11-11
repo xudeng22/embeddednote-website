@@ -55,7 +55,7 @@ The matrix uses a **HUB75-style connector**. A controller board has to supply th
 
 *TinyPICO-to-matrix wiring. The panel input and output connectors are marked PIN and POUT.*
 
-![Generic ESP32 GPIO-to-RGB matrix wiring diagram](/uploads/tetris-clock/tetris-clock-07.png)
+![Generic ESP32 GPIO-to-RGB matrix wiring diagram](/uploads/tetris-clock/tetris-clock-07.webp)
 
 *The corresponding wiring for a generic ESP32 board.*
 

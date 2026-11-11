@@ -49,7 +49,7 @@ const seoDescription = page > 1
 <Base lang={lang} title={page > 1 ? `${headline} — ${lang === 'zh' ? '第' : 'Page '}${page}${lang === 'zh' ? '页' : ''}` : headline}
   description={seoDescription}
   translations={page === 1 ? {en:`/en/category/${slug}/`,zh:`/zh/category/${slug}/`} : {}}
-  switchLinks={{en:`/en/category/${slug}/`,zh:`/zh/category/${slug}/`}}>
+  switchLinks={{en:`/en/category/${slug}/`,zh:`/zh/category/${slug}/`}} noindex={page > 1}>
   <section class="category-page en-journal-feed">
     <p class="eyebrow">EMBEDDED NOTES / {slug.toUpperCase()}</p>
     <h1>{headline}</h1>

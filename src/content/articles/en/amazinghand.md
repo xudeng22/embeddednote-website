@@ -41,7 +41,7 @@ The servos are **Feetech SCS0009** serial-bus units. The listed specifications p
 
 The lack of tendons running through the wrist makes the assembly easier to inspect and service. It also keeps the actuators close to the joints they drive, although it does not eliminate the usual trade-offs of servo backlash, linkage tolerances and printed-part compliance.
 
-![Four example poses of the four-finger robotic hand](/uploads/amazinghand/amazinghand-04.jpg)
+![Four example poses of the four-finger robotic hand](/uploads/amazinghand/amazinghand-04.webp)
 
 ## Printable parts and mechanical assembly
 
@@ -49,7 +49,7 @@ Most of the structure is 3D printed. The build uses rigid parts for the finger f
 
 ![Bill of 3D-printed parts and recommended materials](/uploads/amazinghand/amazinghand-05.jpg)
 
-![Example 3D-print arrangement and settings](/uploads/amazinghand/amazinghand-06.jpg)
+![Example 3D-print arrangement and settings](/uploads/amazinghand/amazinghand-06.webp)
 
 For a mechanical build like this, the assembly guide matters as much as the CAD files. The ball-joint rods must be set to the correct lengths, and each finger needs to be calibrated after assembly. The repository provides **STL and STEP files**, an **Onshape CAD model**, a step-by-step PDF assembly guide and scripts for initial servo alignment. It also includes named hand positions with corresponding servo angles, so common poses do not have to be recreated from scratch.
 
@@ -77,11 +77,11 @@ The project maintains its bill of materials in a shared spreadsheet, with a sepa
 
 ![Amazing Hand bill of materials and reference prices](/uploads/amazinghand/amazinghand-09.jpg)
 
-![Finger linkage assembly steps from the build guide](/uploads/amazinghand/amazinghand-10.jpg)
+![Finger linkage assembly steps from the build guide](/uploads/amazinghand/amazinghand-10.webp)
 
 For the first power-up, the practical sequence is to check the servo IDs, attach the external power supply, run the calibration routine and then test the fingers through the Python or Arduino examples. The published CAD includes preset joint configurations for several gestures.
 
-![Named hand positions and servo-angle presets in Onshape](/uploads/amazinghand/amazinghand-11.jpg)
+![Named hand positions and servo-angle presets in Onshape](/uploads/amazinghand/amazinghand-11.webp)
 
 ![Two Amazing Hands forming a heart shape](/uploads/amazinghand/amazinghand-12.jpg)
 
@@ -91,9 +91,9 @@ A hand-tracking demonstration is available on [YouTube](https://www.youtube.com/
 
 ![Community SG90 servo hand gripping a plastic bottle](/uploads/amazinghand/amazinghand-13.jpg)
 
-![Community force-control test bench](/uploads/amazinghand/amazinghand-14.jpg)
+![Community force-control test bench](/uploads/amazinghand/amazinghand-14.webp)
 
-![AmazingHandControl GUI showing live servo data](/uploads/amazinghand/amazinghand-15.jpg)
+![AmazingHandControl GUI showing live servo data](/uploads/amazinghand/amazinghand-15.webp)
 
 ![Amazing Base desktop stand](/uploads/amazinghand/amazinghand-16.jpg)
 

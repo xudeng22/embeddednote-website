@@ -30,7 +30,7 @@ Github 地址：[t0mg/tinytron](https://github.com/t0mg/tinytron)。作者的演
 
 项目提供两种看片方式。插上 FAT32 格式的 microSD 卡，把 MJPEG 编码的 AVI 视频和 JPEG 图片放在根目录，开机便按文件名字母序播放，先播放视频，再进入图片轮播；没有检测到 SD 卡时，设备会进入 Wi-Fi 模式，可以从电脑浏览器推送本地视频。它还做了屏幕或窗口镜像功能，不过这里有浏览器安全限制，后面再说。
 
-![tinytron 实际播放 Blender Studio 短片](/uploads/tinytron/tinytron-01.gif)
+![tinytron 实际播放 Blender Studio 短片](/uploads/tinytron/tinytron-01.webp)
 
 *SD 卡模式下的播放动画。画面内容为 Blender Studio 的《WING IT!》。*
 
@@ -44,15 +44,15 @@ Github 地址：[t0mg/tinytron](https://github.com/t0mg/tinytron)。作者的演
 
 外壳是另一个好玩的地方。作者拿索尼 KV-14V6D 之类的老电视当参考，在 Onshape 里画了前盖、后盖、边框和按键四个零件。用 PLA 打印，作者在 Prusa MK4S、0.28mm 层高条件下测得约 30 分钟、16g 耗材。边框粘到前盖，其余靠卡扣合拢，几分钟就能装起来。别被外观骗了，公差做得很紧，装屏幕时得靠外壳变形让位，不能掰屏幕；收后盖前还要检查电池有没有被夹住。
 
-![tinytron 3D 打印外壳整体设计渲染](/uploads/tinytron/tinytron-03.png)
+![tinytron 3D 打印外壳整体设计渲染](/uploads/tinytron/tinytron-03.webp)
 
-![tinytron 3D 打印外壳四件分解图](/uploads/tinytron/tinytron-04.png)
+![tinytron 3D 打印外壳四件分解图](/uploads/tinytron/tinytron-04.webp)
 
 *四件式外壳，前后盖、边框与按键都可以分别打印。*
 
-![tinytron 外壳 PrusaSlicer 俯视布局](/uploads/tinytron/tinytron-05.png)
+![tinytron 外壳 PrusaSlicer 俯视布局](/uploads/tinytron/tinytron-05.webp)
 
-![tinytron 外壳需要手动加支撑的区域](/uploads/tinytron/tinytron-06.png)
+![tinytron 外壳需要手动加支撑的区域](/uploads/tinytron/tinytron-06.webp)
 
 *切片截图中绿色部分是作者建议补充支撑的位置。*[完整组装视频（约 3 分钟）](https://www.youtube.com/watch?v=-QKKTKMmSjw)。
 
@@ -60,9 +60,9 @@ Github 地址：[t0mg/tinytron](https://github.com/t0mg/tinytron)。作者的演
 
 网页功能也比想象中多。没有 SD 卡时，tinytron 会连接之前配过的 Wi-Fi；连不上就建立名为 `Tinytron-XXXX` 的开放热点，访问 `192.168.4.1` 即可配置网络。连入局域网后，浏览器可以上传本地视频流、调整亮度、OSD 层级、自动关机时间，查看电池电压并做 OTA 更新。首次刷固件和视频转换都有网页工具，不一定要在电脑上搭开发环境。
 
-![tinytron 浏览器视频推流与屏幕镜像界面](/uploads/tinytron/tinytron-07.png)
+![tinytron 浏览器视频推流与屏幕镜像界面](/uploads/tinytron/tinytron-07.webp)
 
-![tinytron Wi-Fi、亮度及自动关机设置页面](/uploads/tinytron/tinytron-08.png)
+![tinytron Wi-Fi、亮度及自动关机设置页面](/uploads/tinytron/tinytron-08.webp)
 
 *网页推流与设置界面，采用复古 VCR 风格。*
 

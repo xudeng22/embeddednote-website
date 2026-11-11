@@ -21,6 +21,21 @@ export default function embeddednoteImages() {
         if (!props.decoding) props.decoding = 'async';
         // First image can be above the fold; do not lazy-load it by default.
         if (!props.loading && imageIndex > 1) props.loading = 'lazy';
+
+        // Responsive width: article bodies render at 800 px on desktop and a
+        // little under the viewport on phones, so a 640 px encode is enough
+        // there and saves the majority of the bytes on mobile connections.
+        if (!props.srcSet && /\.webp$/.test(key)) {
+          const variant = key.replace(/\.webp$/, '-640.webp');
+          if (manifest[variant]) {
+            const width = Array.isArray(m) ? m[0] : null;
+            const base = raw.endsWith('.webp') ? raw : `${raw}.webp`;
+            props.srcSet = width
+              ? `${raw} ${width}w, ${variant} 640w`
+              : `${raw} 800w, ${variant} 640w`;
+            if (!props.sizes) props.sizes = '(max-width: 700px) 92vw, 800px';
+          }
+        }
       }
       if (Array.isArray(node.children)) for (const child of node.children) visit(child);
     }

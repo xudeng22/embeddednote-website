@@ -40,23 +40,23 @@ Nonvolatile storage comes from an **Adesto AT25SF641**, a 64-Mbit (8 MB) NOR fla
 
 The first schematic sheet centers on the STM32F730 and its support circuitry. It covers decoupling, reset, boot configuration and the clocking needed for USB. The documentation also covers the boot and reset circuitry used when working with the board at firmware level.
 
-![STM32F730 microcontroller, decoupling, reset and boot circuitry](/uploads/numworks/numworks-03.png)
+![STM32F730 microcontroller, decoupling, reset and boot circuitry](/uploads/numworks/numworks-03.webp)
 
 The next sheet shows the matrix keyboard and LCD connections. The matrix keyboard reduces the number of GPIO pins required, although the schematic notes an ambiguity when multiple keys in the same group are pressed. The **ST7789V** display controller is connected through a **16-bit parallel bus** and has its own display RAM. NumWorks quotes a minimum bus write cycle of 66 ns, equivalent to a theoretical ceiling of roughly 200 frame writes per second. That is a bus-timing calculation, **not a measured 200 fps application refresh rate**.
 
-![Keypad matrix and 16-bit parallel LCD interface](/uploads/numworks/numworks-04.png)
+![Keypad matrix and 16-bit parallel LCD interface](/uploads/numworks/numworks-04.webp)
 
 The peripheral sheet includes the external flash, USB protection, oscillator and RGB status indicator. A **USBLC6-2SC6** protects the USB lines against electrostatic discharge. A glow-through RGB indicator uses red, green and blue channels behind the enclosure.
 
-![External flash, USB ESD protection, oscillator and RGB indicator circuits](/uploads/numworks/numworks-05.png)
+![External flash, USB ESD protection, oscillator and RGB indicator circuits](/uploads/numworks/numworks-05.webp)
 
 Battery charging is handled by an **RT9526A** using a constant-current/constant-voltage charging profile. An **RT9078 low-dropout regulator** supplies the 2.8 V logic rail from a 3.0–5.5 V input. The power schematics also cover battery-voltage sensing and the charge-pump circuitry used for the LCD backlight. The schematics show how charging, backlight power, and the 2.8 V logic rail are supplied from the same battery.
 
-![Battery measurement, charger, LCD backlight supply and logic regulator schematics](/uploads/numworks/numworks-06.png)
+![Battery measurement, charger, LCD backlight supply and logic regulator schematics](/uploads/numworks/numworks-06.webp)
 
 NumWorks also makes the PCB layers available for inspection. The illustrated board is a two-layer design, about 0.8 mm thick, with fine traces running between the processor, display interface and other components. The routing has to fit around the full keypad, display connections, battery interface, USB connector, and power circuitry.
 
-![NumWorks two-layer PCB routing and top-layer layout](/uploads/numworks/numworks-07.png)
+![NumWorks two-layer PCB routing and top-layer layout](/uploads/numworks/numworks-07.webp)
 
 ## Epsilon: a five-layer OS for a memory-constrained MCU
 
@@ -70,7 +70,7 @@ Epsilon can also be built for desktop simulation, making it possible to inspect 
 
 Separate from the Epsilon calculator simulator, **The Board** is NumWorks' large-screen math workspace. It lets students and teachers work with graphs, tables, and equations side by side in a browser. The accompanying image shows The Board next to the handheld calculator.
 
-![The Board workspace showing equations, a graph and a table of values](/uploads/numworks/numworks-08.jpeg)
+![The Board workspace showing equations, a graph and a table of values](/uploads/numworks/numworks-08.webp)
 
 On the handheld side, Epsilon includes math applications intended for school use as well as Python programming support. NumWorks offers an [online calculator simulator](https://www.numworks.com/simulator/) for anyone who wants to try the interface. Community firmware projects have taken Epsilon in other directions. Development of **Omega** is on hold; **Upsilon**, a fork of Omega, continues that work for supported calculator models.
 

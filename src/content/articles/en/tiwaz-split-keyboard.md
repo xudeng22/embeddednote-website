@@ -34,7 +34,7 @@ The later hardware revision uses an **STM32F401RET6**, a Cortex-M4 microcontroll
 
 *Tiwaz connects its two halves over a 3.5 mm TRS cable.*
 
-![Close-up of one Tiwaz keyboard half and joystick](/uploads/tiwaz/tiwaz-02.jpeg)
+![Close-up of one Tiwaz keyboard half and joystick](/uploads/tiwaz/tiwaz-02.webp)
 
 *The left half, with its thumb joystick at the lower right.*
 
@@ -46,7 +46,7 @@ The joysticks are what set Tiwaz apart. There are two Alps Alpine options: the *
 
 The firmware supports three input modes, switched with **Fn plus the lowest auxiliary key**. Digital mode (blue indicator) produces direction-button input; analog mode (yellow) exposes gamepad axes; mouse mode (red) controls the pointer. With the RKJX21224001, pressing the stick acts as a mouse click, with firmware handling drag and right-click gestures. Mouse mode is not supported with the PSP-style joystick. The PCB also breaks out the joystick signals to solder pads marked **3V3, B, X, Y and GND**, which makes it easier to experiment with a different controller.
 
-![Two Alps Alpine analog joysticks for the Tiwaz keyboard](/uploads/tiwaz/tiwaz-04.png)
+![Two Alps Alpine analog joysticks for the Tiwaz keyboard](/uploads/tiwaz/tiwaz-04.webp)
 
 *Two joystick options: RKJX21224001 (left) and the PSP-style RKJXU1210006 (right).*
 
@@ -58,19 +58,19 @@ Earlier prototypes ran on the RP2040. Strube found that the keyboard sometimes i
 
 The TRS cable carries both data and power between halves, and only one side normally needs a USB connection to the computer. Strube added an ideal-diode arrangement to limit backfeeding if both halves are accidentally connected over USB, plus a resettable fuse for the RGB LED load. The design also includes ESD protection on the USB and interconnect lines. These are worthwhile details to study if you're designing a DIY USB HID device rather than just assembling a keyboard.
 
-![Tiwaz keyboard PCB top side with hot swap switch holes](/uploads/tiwaz/tiwaz-06.jpeg)
+![Tiwaz keyboard PCB top side with hot swap switch holes](/uploads/tiwaz/tiwaz-06.webp)
 
 *PCB front, with 38 MX-compatible hot-swap positions and six auxiliary buttons.*
 
-![Earlier RP2040 revision of the Tiwaz split keyboard PCB](/uploads/tiwaz/tiwaz-07.jpeg)
+![Earlier RP2040 revision of the Tiwaz split keyboard PCB](/uploads/tiwaz/tiwaz-07.webp)
 
 *An earlier PCB revision using the RP2040; the project subsequently moved to the STM32F401.*
 
-![Tiwaz keyboard PCB top layer routing](/uploads/tiwaz/tiwaz-08.png)
+![Tiwaz keyboard PCB top layer routing](/uploads/tiwaz/tiwaz-08.webp)
 
 *Top-layer PCB routing.*
 
-![Tiwaz keyboard PCB bottom layer routing](/uploads/tiwaz/tiwaz-09.png)
+![Tiwaz keyboard PCB bottom layer routing](/uploads/tiwaz/tiwaz-09.webp)
 
 *Bottom-layer PCB routing.*
 
@@ -78,15 +78,15 @@ Mechanically, Tiwaz uses a gasket-mounted switch plate with damping material bet
 
 The case is 3D-printable, but Strube also designed its geometry with CNC machining in mind: no sharp internal corners, straightforward chamfers and tight-fitting interfaces. Print accuracy matters around the gaskets and joystick inserts. Keycaps are another practical constraint. A backlit, ortholinear layout made entirely of 1u keys doesn't leave many off-the-shelf options, so the builder sourced custom backlit keycaps.
 
-![Tiwaz mechanical keyboard gasket and PCB exploded assembly](/uploads/tiwaz/tiwaz-10.png)
+![Tiwaz mechanical keyboard gasket and PCB exploded assembly](/uploads/tiwaz/tiwaz-10.webp)
 
 *Exploded assembly showing the switch plate, gasket layers, PCB and enclosure.*
 
-![Tiwaz split keyboard components before assembly](/uploads/tiwaz/tiwaz-11.jpeg)
+![Tiwaz split keyboard components before assembly](/uploads/tiwaz/tiwaz-11.webp)
 
 *Components for one keyboard half, laid out before assembly.*
 
-![Tiwaz keyboard mechanical 3D CAD render](/uploads/tiwaz/tiwaz-12.png)
+![Tiwaz keyboard mechanical 3D CAD render](/uploads/tiwaz/tiwaz-12.webp)
 
 *3D rendering of one keyboard half and its joystick.*
 

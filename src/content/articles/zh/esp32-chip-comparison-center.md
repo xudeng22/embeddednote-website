@@ -29,19 +29,19 @@ seoDescription: 'ESP32 Chip Comparison Center支持多型号横向对比、差�
 
 先看单颗芯片。左侧选择型号，右侧的 **Technical Reference** 会列出核心能力、规格矩阵和对应文档；部分参数还能点开说明，不必单凭一行表格猜功能边界。需要横向比较时，勾选两颗或多颗芯片，处理器、无线、存储、外设等信息会并排显示，差异项高亮，还可以**导出 Excel**，方便放进方案评审或选型记录。
 
-![乐鑫官方芯片横向对比界面，支持差异高亮和Excel导出](https://developer.espressif.com/blog/2026/10/esp32-chip-comparison-center/img/compare-table_hu_3cd1316355470fda.webp)
+![乐鑫官方芯片横向对比界面，支持差异高亮和Excel导出](/uploads/_external/compare-table_hu_3cd1316355470fda.webp)
 
 *官方工具的多芯片对比表。图源：Espressif Developer Portal。*
 
 如果项目需求已经明确，反过来筛选更快。进入 **Chip Comparison** 页面，可以按照内核与内存、无线连接和外设能力设条件，例如指定 I²C、UART，或者要求 USB **High-Speed（HS）** 而不是 **Full-Speed（FS）**。筛选结果会同时列出匹配型号及主要规格，剩下几颗再展开比较就行。
 
-![乐鑫官方芯片筛选界面，包含无线、USB和其他外设选项](https://developer.espressif.com/blog/2026/10/esp32-chip-comparison-center/img/filter-conditions_hu_d6a7d29ca740f3b4.webp)
+![乐鑫官方芯片筛选界面，包含无线、USB和其他外设选项](/uploads/_external/filter-conditions_hu_d6a7d29ca740f3b4.webp)
 
 *按功能筛选芯片，USB 可进一步限定 HS 或 FS。图源：Espressif Developer Portal。*
 
 芯片选好还没结束。单芯片页面的 **Application Scenarios** 能查看官方 Demo、应用案例和相关资料；**Dev Board Selection** 则可以按芯片及屏幕、语音、视觉等需求寻找官方开发板，省去到商城逐个核对板载外设的时间。
 
-![乐鑫官方开发板筛选界面](https://developer.espressif.com/blog/2026/10/esp32-chip-comparison-center/img/devboard-filters_hu_2037c432f9658ab1.webp)
+![乐鑫官方开发板筛选界面](/uploads/_external/devboard-filters_hu_2037c432f9658ab1.webp)
 
 *按显示、语音和视觉等需求查找开发板。图源：Espressif Developer Portal。*
 

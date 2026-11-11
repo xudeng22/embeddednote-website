@@ -30,7 +30,7 @@ MIT协议，硬件、固件、外壳图纸全套公开，核心是FLIR的Lepton 
 
 *整机就这么大，USB-C口插上兼容设备就能用。图片：Cezar Chirila。*
 
-![Picothermal WebUSB 浏览器热成像网页显示效果](/uploads/picothermal/picothermal-webusb.png)
+![Picothermal WebUSB 浏览器热成像网页显示效果](/uploads/picothermal/picothermal-webusb.webp)
 
 *浏览器里的WebUSB界面，实时热像直接出，不用安装专用App。*
 
@@ -38,15 +38,15 @@ MIT协议，硬件、固件、外壳图纸全套公开，核心是FLIR的Lepton 
 
 硬件全套开源，KiCad工程、原理图PDF、Gerber、装配图、BOM都在仓库里，主板上USB-C接口用的是USB4155-03-C，入口挂了ESD3C3.3ST5G做静电保护，再过一颗MPZ1608S101ATA0磁珠，RP2040配W25Q16JV这颗16Mbit的QSPI Flash存固件，Lepton那边单独给了一颗25MHz的ECS-2520MV-250-CL做主时钟，SWD调试座用的是Tag-Connect的TC2030-CTX。电源页最有意思，USB的5V进来分了四路：两路TLV62569A降压出3.0V@1A和1.2V@1A，两路AP7330 LDO出3.3V@300mA和2.8V@300mA，各轨都留了测试点。PCB打了0.8mm和1.6mm两个厚度，作者最后选了1.6mm的，结实好焊，外壳STL也按两种板厚各出了一版底盖。
 
-![Picothermal 第一页原理图：USB-C RP2040 QSPI Flash Lepton](/uploads/picothermal/picothermal-schematic-main.png)
+![Picothermal 第一页原理图：USB-C RP2040 QSPI Flash Lepton](/uploads/picothermal/picothermal-schematic-main.webp)
 
 *原理图第1页：USB-C入口、RP2040、QSPI Flash和Lepton模组。*
 
-![Picothermal 第二页电源原理图：5V降压转换和LDO稳压](/uploads/picothermal/picothermal-schematic-power.png)
+![Picothermal 第二页电源原理图：5V降压转换和LDO稳压](/uploads/picothermal/picothermal-schematic-power.webp)
 
 *第2页电源：5V进来分四路，两路降压、两路LDO，电压电流都标了。*
 
-![Picothermal PCB 官方装配图](/uploads/picothermal/picothermal-assembly.png)
+![Picothermal PCB 官方装配图](/uploads/picothermal/picothermal-assembly.webp)
 
 *官方装配图，照着焊接。*
 

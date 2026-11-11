@@ -11,6 +11,9 @@ tags:
 - DAC
 - SCPI
 draft: false
+contentType: deep
+series: open-hardware
+updatedDate: '2026-11-11'
 seoTitle: 'ArbWave30: Open-Source 30 MHz Waveform Generator'
 seoDescription: ArbWave30 is an open-source 30 MHz signal generator built around a Gowin FPGA, 16-bit DAC, SCPI control and a thoroughly documented analog output path.
 ---
@@ -54,6 +57,21 @@ The differential-to-single-ended stage is documented in considerable detail. Wit
 The planned output stage uses a THS3095, targeting ±10 V into a high-impedance load. The analog board also needs several rails: ±15 V, ±5 V, 3.3 V_A, 1.8 V_A, 1.8 V_D, and 1.0 V_D. Low-noise LDOs such as TPS7A4701 and TPS7A9101 power the DAC, clocking, and analog circuits, while a TPS62933 supplies the FPGA's 1.0 V core. On a signal generator, the power supply is part of the signal path in all but name; many noise problems ultimately trace back to its rails.
 
 ![arbwave30 waveform generator — figure 9](/uploads/arbwave30-waveform-generator/arbwave30-waveform-generator-09.webp)
+
+## What we checked
+
+Everything below comes from the project README and the documents it links, read on 2026-11-11.
+
+| Claim | Where we looked | Result |
+| --- | --- | --- |
+| 30 MHz sine, 5 MHz square | README, V1.0 hardware targets | Confirmed as targets, not as guaranteed performance |
+| THD about -60.2 dBc and SFDR 63.26 dBc at 10 MHz | README, oscilloscope FFT | Author's measurement. The README itself warns the scope contributes harmonics |
+| 13.5% overshoot on the square wave | README, known issues | Confirmed; attributed to filter group delay |
+| 24 V DC input, under 24 W | README, control and interface | Confirmed |
+| Board about 225 x 90 mm | README, known issues | Confirmed, and listed as a problem to fix by splitting the board |
+| Project state | README, update status | **Paused.** The author says work resumes and the first release lands on 2026-12-25 |
+
+The pause matters more than any single specification. A reader who finds this page in December should check the repository before ordering a board, because the filter, the offset drift above 25 MHz and the board split are all still open items rather than finished design.
 
 ## Main components
 

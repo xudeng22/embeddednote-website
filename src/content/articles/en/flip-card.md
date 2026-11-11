@@ -27,7 +27,7 @@ Johnson wrote the firmware in **Rust**, using the **Embassy** embedded asynchron
 
 ## The fluid effect in motion
 
-![Animated FLIP fluid simulation on the badge, 93-frame GIF](/uploads/flip-card/flip-card-01.gif)
+![Animated FLIP fluid simulation on the badge, 93-frame GIF](/uploads/flip-card/flip-card-01.webp)
 
 ![flip-card hardware and LED matrix close-up](/uploads/flip-card/flip-card-02.webp)
 

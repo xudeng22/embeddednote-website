@@ -10,12 +10,27 @@ tags:
   - Github
   - open-source
 draft: false
+contentType: deep
+series: open-hardware
+updatedDate: '2026-11-11'
 author: 'EmbeddedNote'
 sourceUrl: 'https://github.com/KingKongRobotics/jumper'
 seoTitle: 'Jumper 22-DoF Robot: Open-Source RK3576 & MuJoCo'
 seoDescription: 'Jumper has four walking legs, two claws and an RK3576 controller. A closer look at MuJoCo training, ONNX export and onboard deployment.'
 ---
 Remember that little red crab robot that walked sideways across the exhibition floor at WAIC in July, then danced to trending music at WRC in August and even used its claw to pick up a refrigerator magnet and hand it to a visitor? On September 30, its developers open-sourced the entire software stack. The repository is KingKongRobotics/jumper, licensed under Apache-2.0. Unlike most "open-source robots" that release little more than a model and a few videos, this repository provides the complete pipeline, from training and simulation to model export and deployment on the onboard NPU. The team has also put up 100 engineering prototypes as competition prizes — teach Jumper a new move, and you get to keep the robot.
+
+## What we checked
+
+| Claim | Where we looked | Result |
+| --- | --- | --- |
+| 22 degrees of freedom | README, first line | Confirmed |
+| Apache-2.0 | README, licence section | Confirmed for the maintainer's own material; third-party assets keep their own terms |
+| Training stack: mjlab, rsl_rl, MuJoCo, MuJoCo Warp | README, training section | Confirmed |
+| Controller is an RK3576 | Not stated in the README or the docs we could read | **Unverified.** Treat the SoC in the earlier reports as unconfirmed until the hardware document says so |
+| Complete pipeline from training to on-device deployment | README, resource table | Partly. The repository is an authoring kit for appearance, motion and scenes, with training and export documented; the hardware design lives in a separate document |
+
+The distinction is worth keeping. Jumper publishes the workflow that produces a motion and packages it as an app, and it publishes hardware documentation, but the two are separate artefacts with separate licences. That is more honest than most robot repositories, and it is also why "fully open source from training to deployment" needs a footnote rather than a headline.
 
 ![Jumper open-source robot — introductory project image](/uploads/image-12.webp)
 

@@ -37,7 +37,7 @@ GitHub地址：[https://github.com/particle-iot/snowflake](https://github.com/pa
 
 玩法是这么设计的：插上电36颗灯珠就自己闪灯效，按一下正中央的Particle logo切下一套光效，长按logo放圣诞曲。固件带有预置歌曲及MP3音频资源。这还只是开胃菜，官方网页工具更新固件后，在启用语音触发功能的配置下，对着它说"sparkle"，灯就会切换到特殊闪烁效果，这是拿Edge Impulse训练的语音识别模型，固件里直接嵌了TensorFlow Lite Micro跑推理，关键词识别在设备本地运行，不需要把音频上传云端。
 
-![Particle Snowflake官方原理图](/uploads/particle-snowflake/particle-snowflake-schematic.png)
+![Particle Snowflake官方原理图](/uploads/particle-snowflake/particle-snowflake-schematic.webp)
 
 *官方原理图全貌，P2主控、PDM麦克风、触摸与电源一页看全。图片：Particle*
 

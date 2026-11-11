@@ -51,7 +51,7 @@ seoDescription: 介绍 ESP32 WiFi Tetris Clock 的64×32 P3
 
 *TinyPICO 接线图，PIN/POUT 的位置清晰可见。*
 
-![通用 ESP32 开发板与 RGB 矩阵屏接线示意](/uploads/tetris-clock/tetris-clock-07.png)
+![通用 ESP32 开发板与 RGB 矩阵屏接线示意](/uploads/tetris-clock/tetris-clock-07.webp)
 
 *通用 ESP32 开发板接线。*
 

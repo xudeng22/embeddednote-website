@@ -30,7 +30,7 @@ The design combines a **FLIR Lepton 3.5** radiometric infrared module with a **R
 
 *Picothermal puts the thermal sensor, controller and USB-C connection on a single compact PCB. Image: Cezar Chirila.*
 
-![Picothermal browser WebUSB interface showing a thermal image of a hand](/uploads/picothermal/picothermal-webusb.png)
+![Picothermal browser WebUSB interface showing a thermal image of a hand](/uploads/picothermal/picothermal-webusb.webp)
 
 *The WebUSB interface displays the radiometric image, a colour scale and camera controls without a companion app.*
 
@@ -40,15 +40,15 @@ The hardware files are available under the MIT licence. The repository includes 
 
 The power schematic is worth studying if you are designing a small USB-powered peripheral with several supply rails. The incoming 5 V feeds two **TLV62569A buck regulators**, producing 3.0 V and 1.2 V rails rated at 1 A, along with two **AP7330 LDOs** producing 3.3 V and 2.8 V rails rated at 300 mA. Test points make the supplies accessible during bring-up. Chirila tried **0.8 mm and 1.6 mm PCBs**, then used the thicker board because it was easier to handle and solder. The printed enclosure has matching base variants for both thicknesses.
 
-![Picothermal schematic with RP2040 USB-C connector QSPI flash and FLIR Lepton interface](/uploads/picothermal/picothermal-schematic-main.png)
+![Picothermal schematic with RP2040 USB-C connector QSPI flash and FLIR Lepton interface](/uploads/picothermal/picothermal-schematic-main.webp)
 
 *The main schematic brings together USB-C, RP2040, external flash and the Lepton module.*
 
-![Picothermal power schematic with two buck regulators and two LDOs](/uploads/picothermal/picothermal-schematic-power.png)
+![Picothermal power schematic with two buck regulators and two LDOs](/uploads/picothermal/picothermal-schematic-power.webp)
 
 *The USB 5 V input supplies two buck converters and two LDO-regulated rails.*
 
-![Picothermal assembly drawing and PCB component placement](/uploads/picothermal/picothermal-assembly.png)
+![Picothermal assembly drawing and PCB component placement](/uploads/picothermal/picothermal-assembly.webp)
 
 *The assembly drawing and manufacturing files are available in the hardware repository.*
 

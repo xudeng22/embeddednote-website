@@ -33,19 +33,19 @@ Start with a single chip in the left-hand list. The **Technical Reference** pane
 
 For a shortlist, select two or more chips. The tool places their specifications in adjacent columns, highlights the differences and allows the table to be **exported to Excel**. Espressif says the export retains the table contents and difference highlighting. That makes it more useful for a hardware review than a collection of screenshots or manually copied values.
 
-![Espressif’s side-by-side chip comparison with Excel export](https://developer.espressif.com/blog/2026/10/esp32-chip-comparison-center/img/compare-table_hu_3cd1316355470fda.webp)
+![Espressif’s side-by-side chip comparison with Excel export](/uploads/_external/compare-table_hu_3cd1316355470fda.webp)
 
 *Side-by-side specifications and highlighted differences. Image: Espressif Developer Portal.*
 
 The filtering view is particularly helpful when requirements are already fixed. Under **Chip Comparison**, you can narrow the list by CPU and memory capabilities, wireless support and peripherals. Instead of merely checking for “USB,” for example, you can distinguish **High-Speed from Full-Speed** support. The same interface includes common peripherals such as I²C and UART. Matching devices appear with their key specifications, and you can open a full comparison once the list is manageable.
 
-![Espressif’s feature filters for chips and peripherals](https://developer.espressif.com/blog/2026/10/esp32-chip-comparison-center/img/filter-conditions_hu_d6a7d29ca740f3b4.webp)
+![Espressif’s feature filters for chips and peripherals](/uploads/_external/filter-conditions_hu_d6a7d29ca740f3b4.webp)
 
 *The chip filters include wireless interfaces and USB speed classes. Image: Espressif Developer Portal.*
 
 There is more here than a specification spreadsheet. Selecting a chip also exposes **Application Scenarios**, with official demos, showcases and related reference material. Once you have settled on a likely device, **Dev Board Selection** can filter Espressif's official boards by chip and by hardware needs such as displays, voice or vision, making it easier to find a board suitable for evaluation.
 
-![Espressif development-board selection filters](https://developer.espressif.com/blog/2026/10/esp32-chip-comparison-center/img/devboard-filters_hu_2037c432f9658ab1.webp)
+![Espressif development-board selection filters](/uploads/_external/devboard-filters_hu_2037c432f9658ab1.webp)
 
 *Development boards can be narrowed down by the hardware fitted to them. Image: Espressif Developer Portal.*
 

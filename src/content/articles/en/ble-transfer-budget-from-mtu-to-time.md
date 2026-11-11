@@ -8,6 +8,8 @@ category: connectivity
 tags: [BLE, GATT, ATT MTU, ESP32, Throughput, Engineering]
 author: EmbeddedNote
 draft: false
+contentType: deep
+series: ble
 seoTitle: 'BLE Transfer Time — MTU, Packets and Connection Events Explained'
 seoDescription: 'Calculate BLE GATT payload efficiency, application packet counts, and scheduling limits—with auditable examples and a practical ESP32 measurement checklist.'
 ---

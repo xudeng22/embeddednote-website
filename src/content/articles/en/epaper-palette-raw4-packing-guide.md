@@ -8,6 +8,8 @@ category: display
 tags: [E-Paper, Image Processing, Dithering, RAW4, Color Palette, Firmware]
 author: EmbeddedNote
 draft: false
+contentType: deep
+series: epaper
 seoTitle: 'E-Paper RAW4 Format — Dithering, Index Packing and Test Vectors'
 seoDescription: 'Understand 4-bit e-paper image data, packed nibble order, unpadded rows, calibration limits and a reproducible odd-width RAW4 test vector.'
 ---

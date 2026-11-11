@@ -31,7 +31,7 @@ The [GitHub repository](https://github.com/t0mg/tinytron) has the firmware and p
 
 There are two playback paths. Insert a FAT32-formatted microSD card with MJPEG-encoded AVI files or JPEGs in its root directory and tinytron starts playing them alphabetically—videos first, then images. Without a card, it switches to Wi-Fi mode so a desktop browser can stream local video. Screen and window mirroring are also implemented, although that mode comes with a browser-security caveat.
 
-![Tinytron running an animated video from microSD](/uploads/tinytron/tinytron-01.gif)
+![Tinytron running an animated video from microSD](/uploads/tinytron/tinytron-01.webp)
 
 *SD-card playback of Blender Studio's short film WING IT!.*
 
@@ -45,15 +45,15 @@ The proposed build uses just three main components: the Waveshare board, an SPI 
 
 The enclosure borrows its proportions from sets such as Sony's KV-14V6D. Designed in Onshape, it comprises a front shell, rear shell, bezel and button. The author's PLA test print took about 30 minutes and 16 g of filament on a Prusa MK4S at 0.28 mm layer height. The bezel is glued to the front; the rest uses close-fitting snap joints. The tolerances make assembly quick but unforgiving. Flex the printed shell when seating the display, not the glass, and check that the battery is clear before closing the back.
 
-![Tinytron 3D case rendering](/uploads/tinytron/tinytron-03.png)
+![Tinytron 3D case rendering](/uploads/tinytron/tinytron-03.webp)
 
-![Tinytron exploded case with its four parts](/uploads/tinytron/tinytron-04.png)
+![Tinytron exploded case with its four parts](/uploads/tinytron/tinytron-04.webp)
 
 *The four printed pieces are designed to assemble without screws.*
 
-![Tinytron PrusaSlicer arrangement](/uploads/tinytron/tinytron-05.png)
+![Tinytron PrusaSlicer arrangement](/uploads/tinytron/tinytron-05.webp)
 
-![Support locations for Tinytron 3D printed enclosure](/uploads/tinytron/tinytron-06.png)
+![Support locations for Tinytron 3D printed enclosure](/uploads/tinytron/tinytron-06.webp)
 
 *Selected features need painted-on supports, marked green in the slicer images. The author also provides an [uncut assembly video](https://www.youtube.com/watch?v=-QKKTKMmSjw).*
 
@@ -61,9 +61,9 @@ The microSD reader connects over SPI. Tinytron reuses the breakout cable supplie
 
 With no card inserted, tinytron attempts to rejoin the saved Wi-Fi network. If that fails, it starts an open access point named `Tinytron-XXXX`; the configuration page is available at `192.168.4.1`. Once connected, its browser interface can stream video, display battery status, adjust brightness and OSD settings, set automatic shutdown and upload OTA firmware. The project also offers browser-based initial flashing and local video conversion, so a full development toolchain is optional for a straightforward build.
 
-![Tinytron browser video streaming interface](/uploads/tinytron/tinytron-07.png)
+![Tinytron browser video streaming interface](/uploads/tinytron/tinytron-07.webp)
 
-![Tinytron Wi-Fi and display settings interface](/uploads/tinytron/tinytron-08.png)
+![Tinytron Wi-Fi and display settings interface](/uploads/tinytron/tinytron-08.webp)
 
 *The web interface is styled after a VCR on-screen display.*
 

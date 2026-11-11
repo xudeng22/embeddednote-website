@@ -10,7 +10,12 @@ const articles = defineCollection({
     category:z.enum(['open-source','mcu-soc','hardware','connectivity','display','tools']),
     tags:z.array(z.string()).default([]),draft:z.boolean().default(false),
     author:z.string().default('EmbeddedNote'),sourceUrl:z.string().url().optional(),
-    seoTitle:z.string().optional(),seoDescription:z.string().optional()
+    seoTitle:z.string().optional(),seoDescription:z.string().optional(),
+    // news = short project brief that points at a deep page;
+    // deep = original engineering analysis with reproducible material.
+    contentType:z.enum(['news','deep']).default('news'),
+    // Groups articles that belong to one engineering series, e.g. 'epaper'.
+    series:z.string().optional()
   })
 });
 const about = defineCollection({

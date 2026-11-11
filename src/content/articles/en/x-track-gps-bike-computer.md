@@ -41,9 +41,9 @@ X-TRACK's map is **offline**. It does not fetch road imagery as you ride. Instea
 
 You can zoom the map and display the current position and recorded track. The ride pages show speed, distance, elapsed time, estimated calories, altitude and heading. GPX logging makes the data useful outside the device: copy the files to a PC and open them in tools such as GPXSee. Settings, including the last known position, timezone and map location, are saved in a `SystemSave.json` file on the card.
 
-![Animated X-TRACK startup screen](/uploads/x-track/x-track-04.gif)
+![Animated X-TRACK startup screen](/uploads/x-track/x-track-04.webp)
 
-![Animated X-TRACK speed display demonstration](/uploads/x-track/x-track-05.gif)
+![Animated X-TRACK speed display demonstration](/uploads/x-track/x-track-05.webp)
 
 *The original startup and speed demonstrations. The high-speed test is not representative of bicycle riding.*
 

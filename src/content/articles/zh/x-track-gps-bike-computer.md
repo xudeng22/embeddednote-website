@@ -41,9 +41,9 @@ Github 地址：[FASTSHIFT/X-TRACK](https://github.com/FASTSHIFT/X-TRACK)。
 
 界面交互靠旋转编码器，不需要弄一整排按键。地图可以显示当前位置并缩放，也能把实时行进轨迹画在底图上；运动信息包括速度、距离、时间、卡路里、海拔和航向。轨迹记录成 GPX 文件后，复制到电脑就能用 GPXSee 之类的软件打开，查看历史路线。系统参数保存在 `SystemSave.json` 中，包含上次定位位置、时区和地图目录等，关机时会写入存储卡。
 
-![X-TRACK 设备开机动画](/uploads/x-track/x-track-04.gif)
+![X-TRACK 设备开机动画](/uploads/x-track/x-track-04.webp)
 
-![X-TRACK 动态速度显示演示](/uploads/x-track/x-track-05.gif)
+![X-TRACK 动态速度显示演示](/uploads/x-track/x-track-05.webp)
 
 *开机动画与测速演示。后者是原作者的测试画面，并不代表自行车的正常骑行速度。*
 

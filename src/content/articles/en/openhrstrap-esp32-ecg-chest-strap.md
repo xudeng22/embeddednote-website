@@ -36,11 +36,11 @@ Power comes from a single-cell lithium-ion battery through a small **5 V boost m
 
 *The first OpenHRStrap prototype in a 3D-printed enclosure.*
 
-![OpenHRStrap V1 wiring schematic with AD8232 and ESP32-S3](/uploads/openhrstrap/openhrstrap-02.png)
+![OpenHRStrap V1 wiring schematic with AD8232 and ESP32-S3](/uploads/openhrstrap/openhrstrap-02.webp)
 
 *V1 wiring schematic showing the battery, 5 V boost module, AD8232 and XIAO ESP32-S3.*
 
-![OpenHRStrap chest strap device concept and electrode placement](/uploads/openhrstrap/openhrstrap-03.png)
+![OpenHRStrap chest strap device concept and electrode placement](/uploads/openhrstrap/openhrstrap-03.webp)
 
 *The hardware sketch shows the electronics and electrode placement on the chest strap.*
 
@@ -52,7 +52,7 @@ The detector evaluates two related signals. **FILT** contains peaks from the ban
 
 Rasic documents the processing chain in a Python notebook and supplies the source data and diagrams. The ESP32 Arduino code also contains a real-time, Pan–Tompkins-inspired filtering and detection path, but its implementation details are not identical to the offline Python analysis. The distinction matters when evaluating the plots against what the wearable delivers during a run.
 
-![Hand-drawn Pan–Tompkins QRS detection flowchart](/uploads/openhrstrap/openhrstrap-04.png)
+![Hand-drawn Pan–Tompkins QRS detection flowchart](/uploads/openhrstrap/openhrstrap-04.webp)
 
 *The author’s drawing covers the filter chain, adaptive thresholds and search-back logic.*
 
@@ -62,19 +62,19 @@ The repository includes traces at several points in the pipeline. After band-pas
 
 On one **80-plus-second prerecorded ECG dataset**, the author reports about **one missed R peak**. The first ten seconds were reserved for initializing detector parameters. That is a promising result for the particular static recording; it is not an accuracy figure for running or other motion-heavy conditions.
 
-![Raw ECG trace recorded by OpenHRStrap](/uploads/openhrstrap/openhrstrap-05.png)
+![Raw ECG trace recorded by OpenHRStrap](/uploads/openhrstrap/openhrstrap-05.webp)
 
 *The full recorded ECG trace before digital filtering.*
 
-![Band-pass filtered ECG waveform](/uploads/openhrstrap/openhrstrap-06.png)
+![Band-pass filtered ECG waveform](/uploads/openhrstrap/openhrstrap-06.webp)
 
 *Band-pass filtering reduces baseline drift and unwanted frequency components.*
 
-![Moving-window integration output for QRS detection](/uploads/openhrstrap/openhrstrap-07.png)
+![Moving-window integration output for QRS detection](/uploads/openhrstrap/openhrstrap-07.webp)
 
 *The moving-window integrator produces a smoother envelope for peak detection.*
 
-![R-peak detection over the integrated ECG signal](/uploads/openhrstrap/openhrstrap-08.png)
+![R-peak detection over the integrated ECG signal](/uploads/openhrstrap/openhrstrap-08.webp)
 
 *Detected peaks and adaptive threshold estimates on the integrated signal.*
 
@@ -84,11 +84,11 @@ To test V1 outside the bench, Rasic completed a **5 km run** while wearing the D
 
 The smartwatch is a comparison device, not a clinical reference, so the plots cannot establish which reading was correct at every moment. More importantly, **V1 did not log the underlying ECG and detection state during the run**. Without that evidence, it is difficult to separate electrode movement, analog noise and missed or incorrectly accepted beats. The author identifies proper data logging as one of the main goals for V2, alongside a custom PCB and a revised analog front end.
 
-![Five-kilometre run: DIY ECG chest strap versus PPG smartwatch](/uploads/openhrstrap/openhrstrap-09.png)
+![Five-kilometre run: DIY ECG chest strap versus PPG smartwatch](/uploads/openhrstrap/openhrstrap-09.webp)
 
 *The author compares heart-rate readings from the DIY strap and a PPG watch over a 5 km run.*
 
-![Heart-rate data recorded by the ESP32 DIY chest strap](/uploads/openhrstrap/openhrstrap-10.png)
+![Heart-rate data recorded by the ESP32 DIY chest strap](/uploads/openhrstrap/openhrstrap-10.webp)
 
 *The complete heart-rate series recorded by the ESP32-based prototype.*
 

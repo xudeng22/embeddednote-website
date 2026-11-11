@@ -20,7 +20,7 @@ seoDescription: "An ST notice dated November 4, 2026 says selected product price
 
 A price adjustment notice dated **November 4, 2026** and bearing the letterhead of **STMicroelectronics International N.V.** states that prices for selected products will be raised from **January 1, 2027**.
 
-![STMicroelectronics price adjustment notice dated November 4, 2026](/uploads/st-price-adjustment-notice-2026.png)
+![STMicroelectronics price adjustment notice dated November 4, 2026](/uploads/st-price-adjustment-notice-2026.webp)
 
 The reasons given in the letter are on the cost side: since 2026, the industry has faced persistent inflationary pressure, and operating and supply costs have continued to rise. Although the company has continued to mitigate these effects through efficiency improvements and cost optimization measures, costs for raw materials, transportation, labor and other operating inputs are still rising, so a further price adjustment has become necessary.
 

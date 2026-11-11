@@ -1,8 +1,9 @@
-
 ---
 import Base from '../../../layouts/Base.astro';
 import GiscusComments from '../../../components/GiscusComments.astro';
+import ArticleFooterNav from '../../../components/ArticleFooterNav.astro';
 import { getCollection, render } from 'astro:content';
+import { channels } from '../../../i18n/ui';
 
 export async function getStaticPaths() {
   const entries = await getCollection(
@@ -50,25 +51,44 @@ const { article, translations } = Astro.props;
 const lang = article.data.locale;
 const { Content } = await render(article);
 
+// One 1200x630 card per translation key, generated from the article's first
+// body image. See scripts/generate-og-images.py.
+const ogImage = `/og/${article.data.translationKey}.webp`;
+const ogImageUrl = new URL(ogImage, 'https://embeddednote.com').href;
+const canonicalUrl = new URL(Astro.url.pathname, 'https://embeddednote.com').href;
+
+const category = channels.find((c) => c.slug === article.data.category);
+const categoryLabel = category?.[lang] ?? article.data.category;
+
+const breadcrumbs = [
+  { name: lang === 'zh' ? '首页' : 'Home', path: `/${lang}/` },
+  { name: categoryLabel, path: `/${lang}/category/${article.data.category}/` },
+  { name: article.data.title }
+];
+
+const publishedIso = article.data.pubDate.toISOString();
+const modifiedIso = (article.data.updatedDate ?? article.data.pubDate).toISOString();
+
 const jsonld = {
   '@context': 'https://schema.org',
   '@type': 'TechArticle',
   headline: article.data.title,
-  description: article.data.description,
+  description: article.data.seoDescription ?? article.data.description,
   // An EmbeddedNote byline describes the site; a named writer is a Person.
   author: article.data.author === 'EmbeddedNote'
     ? { '@type': 'Organization', '@id': 'https://embeddednote.com/#publisher', name: 'EmbeddedNote' }
     : { '@type': 'Person', name: article.data.author },
   publisher: { '@id': 'https://embeddednote.com/#publisher' },
-  datePublished: article.data.pubDate.toISOString(),
-  dateModified: (
-    article.data.updatedDate ?? article.data.pubDate
-  ).toISOString(),
+  datePublished: publishedIso,
+  dateModified: modifiedIso,
   inLanguage: lang === 'zh' ? 'zh-CN' : 'en',
-  mainEntityOfPage: new URL(
-    Astro.url.pathname,
-    'https://embeddednote.com'
-  ).href
+  url: canonicalUrl,
+  mainEntityOfPage: canonicalUrl,
+  image: [ogImageUrl],
+  thumbnailUrl: ogImageUrl,
+  articleSection: categoryLabel,
+  keywords: article.data.tags.join(', '),
+  isPartOf: { '@id': 'https://embeddednote.com/#website' }
 };
 ---
 
@@ -81,8 +101,26 @@ const jsonld = {
   translations={translations}
   article={true}
   activeCategory={article.data.category}
+  image={ogImage}
+  imageAlt={article.data.title}
+  publishedTime={publishedIso}
+  modifiedTime={modifiedIso}
+  breadcrumbs={breadcrumbs}
 >
   <article class="prose" data-pagefind-body>
+    <nav class="en-breadcrumb" aria-label={lang === 'zh' ? '面包屑' : 'Breadcrumb'}>
+      <ol>
+        {breadcrumbs.map((crumb, index) => (
+          <li>
+            {crumb.path
+              ? <a href={crumb.path}>{crumb.name}</a>
+              : <span aria-current="page">{crumb.name}</span>}
+            {index < breadcrumbs.length - 1 && <span class="en-breadcrumb__sep" aria-hidden="true">›</span>}
+          </li>
+        ))}
+      </ol>
+    </nav>
+
     <p class="eyebrow">
       EMBEDDED NOTES · {article.data.category.toUpperCase()}
     </p>
@@ -128,6 +166,8 @@ const jsonld = {
     }
   </article>
 
+  <ArticleFooterNav article={article} lang={lang} />
+
   <GiscusComments
     lang={lang}
     term={article.data.translationKey}
@@ -138,3 +178,13 @@ const jsonld = {
     set:html={JSON.stringify(jsonld)}
   />
 </Base>
+
+<style>
+  .en-breadcrumb {margin:0 0 18px; font:500 12px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;}
+  .en-breadcrumb ol {display:flex; flex-wrap:wrap; gap:6px; margin:0; padding:0; list-style:none;}
+  .en-breadcrumb li {display:inline-flex; align-items:center; gap:6px; color:#6f7772; min-width:0;}
+  .en-breadcrumb a {color:#8f3c2c;}
+  .en-breadcrumb a:hover {text-decoration:underline;}
+  .en-breadcrumb span[aria-current] {color:#3d4a44; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:min(52ch,60vw);}
+  .en-breadcrumb__sep {color:#b6aaa0;}
+</style>

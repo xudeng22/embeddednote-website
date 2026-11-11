@@ -39,7 +39,7 @@ https://github.com/pollen-robotics/AmazingHand
 
 外壳几乎全是3D打印件，表面带柔性设计，既省成本又有点手感。左右手件用L/R前缀镜像区分，手指部分两只手通用，打印参数和建议官方单独写了份文档，普通FDM机器就能打。
 
-![AmazingHand 多种手指姿态演示](/uploads/amazinghand/amazinghand-04.jpg)
+![AmazingHand 多种手指姿态演示](/uploads/amazinghand/amazinghand-04.webp)
 
 3D打印的柔性外壳，官方打印指南里连参数都写好了
 
@@ -47,7 +47,7 @@ https://github.com/pollen-robotics/AmazingHand
 
 打印件清单表，每种件的材料、数量和备注都列好了
 
-![3D 打印排版与打印参数示例](/uploads/amazinghand/amazinghand-06.jpg)
+![3D 打印排版与打印参数示例](/uploads/amazinghand/amazinghand-06.webp)
 
 控制方式给了两条路，任选其一。一条是Waveshare串行总线驱动板，USB插电脑跑Python脚本；另一条是Arduino加一块Feetech TTL Linker转接板。8个舵机在同一条TTL总线上级联，靠ID寻址，食指1/2号、中指3/4号、无名指5/6号、拇指7/8号，想左右手挂同一条总线就把ID错开，不然谁都指挥不动。官方给了标定脚本和演示程序，通电就能看手比划。供电这块得单独准备，8个舵机一起动，建议外部5V/2A往上的DC电源，圆头接口，项目里直接建议用220V转5V的适配器。
 
@@ -61,11 +61,11 @@ https://github.com/pollen-robotics/AmazingHand
 
 ![AmazingHand 物料清单和参考成本](/uploads/amazinghand/amazinghand-09.jpg)
 
-![AmazingHand 手指组件装配步骤](/uploads/amazinghand/amazinghand-10.jpg)
+![AmazingHand 手指组件装配步骤](/uploads/amazinghand/amazinghand-10.webp)
 
 装配手册配图，按顺序来就行
 
-![Onshape 中可直接调用的手势角度预设](/uploads/amazinghand/amazinghand-11.jpg)
+![Onshape 中可直接调用的手势角度预设](/uploads/amazinghand/amazinghand-11.webp)
 
 Onshape里预置了命名位置，各种手势的舵机角度直接查
 
@@ -87,11 +87,11 @@ https://github.com/user-attachments/assets/485fc1f4-cc57-4e59-90b5-e84518b9fed0�
 
 SG90加力控的复刻版，成本还能再压一截
 
-![社区力控机械手测试台](/uploads/amazinghand/amazinghand-14.jpg)
+![社区力控机械手测试台](/uploads/amazinghand/amazinghand-14.webp)
 
 力控改造的完整测试台，代码也在GitHub挂着
 
-![AmazingHandControl Python GUI 舵机监测界面](/uploads/amazinghand/amazinghand-15.jpg)
+![AmazingHandControl Python GUI 舵机监测界面](/uploads/amazinghand/amazinghand-15.webp)
 
 第三方GUI工具，实时监控加手势动画录制
 

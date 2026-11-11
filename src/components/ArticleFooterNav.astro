@@ -1,0 +1,149 @@
+---
+/**
+ * End-of-article navigation.
+ * news posts point at the deep pages that carry the topic, so the feed keeps
+ * working as a discovery surface instead of a dead end.
+ */
+import { getCollection } from 'astro:content';
+import { channels } from '../i18n/ui';
+
+const { article, lang = 'en' } = Astro.props;
+
+const all = (await getCollection('articles', ({ data }) => !data.draft && data.locale === lang))
+  .filter((entry) => entry.id !== article.id);
+
+const slugOf = (entry) => entry.id.split('/').slice(1).join('/');
+const urlOf = (entry) => `/${lang}/articles/${slugOf(entry)}/`;
+const dateOf = (entry) => entry.data.pubDate.valueOf();
+
+const series = article.data.series ?? null;
+const seriesEntries = series
+  ? all.filter((entry) => entry.data.series === series).sort((a, b) => dateOf(a) - dateOf(b))
+  : [];
+
+const currentTags = new Set(article.data.tags.map((tag) => tag.toLowerCase()));
+const scored = all
+  .filter((entry) => entry.data.series !== series)
+  .map((entry) => {
+    let score = 0;
+    if (entry.data.category === article.data.category) score += 2;
+    for (const tag of entry.data.tags) {
+      if (currentTags.has(tag.toLowerCase())) score += 3;
+    }
+    return { entry, score };
+  })
+  .filter((item) => item.score > 0)
+  .sort((a, b) => b.score - a.score || dateOf(b.entry) - dateOf(a.entry))
+  .slice(0, 3)
+  .map((item) => item.entry);
+
+const seriesLabels = {
+  epaper: { en: 'E-paper engineering series', zh: '电子纸工程系列' },
+  ble: { en: 'BLE transfer series', zh: 'BLE 传输系列' },
+  'open-hardware': { en: 'Open-hardware teardown notes', zh: '开源硬件拆解笔记' }
+};
+
+const toolBySeries = {
+  epaper: {
+    href: `/${lang}/tools/epaper-image-converter/`,
+    en: { title: 'E-Paper Image Converter', body: 'Turn a photo into palette indexes and RAW4 bytes in the browser.' },
+    zh: { title: '电子纸图像转换器', body: '在浏览器里把照片转成色板索引与 RAW4 字节流。' }
+  },
+  ble: {
+    href: `/${lang}/tools/ble-throughput-calculator/`,
+    en: { title: 'BLE Throughput & Transfer Planner', body: 'Model MTU, PHY and connection interval before you write firmware.' },
+    zh: { title: 'BLE 吞吐与传输规划器', body: '在写固件前先算清 MTU、PHY 与连接间隔的影响。' }
+  }
+};
+
+const tool = series ? toolBySeries[series] ?? null : null;
+const categoryLabel = (entry) => channels.find((c) => c.slug === entry.data.category)?.[lang] ?? entry.data.category;
+const hasAny = seriesEntries.length > 0 || scored.length > 0 || tool;
+
+const labels = {
+  en: { series: 'In this series', related: 'Related reading', tool: 'Try the tool', part: 'Part' },
+  zh: { series: '本系列文章', related: '相关阅读', tool: '配套工具', part: '第' }
+}[lang];
+---
+
+{hasAny && (
+  <aside class="en-next-steps" aria-label={lang === 'zh' ? '延伸阅读' : 'Further reading'}>
+    {seriesEntries.length > 0 && (
+      <section class="en-next-steps__block">
+        <h2 class="en-next-steps__title">{labels.series}</h2>
+        <ol class="en-next-steps__series">
+          {seriesEntries.map((entry, index) => (
+            <li>
+              <span class="en-next-steps__index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <a href={urlOf(entry)}>{entry.data.title}</a>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )}
+
+    {scored.length > 0 && (
+      <section class="en-next-steps__block">
+        <h2 class="en-next-steps__title">{labels.related}</h2>
+        <ul class="en-next-steps__related">
+          {scored.map((entry) => (
+            <li>
+              <a href={urlOf(entry)}>{entry.data.title}</a>
+              <span class="en-next-steps__meta">{categoryLabel(entry)}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {tool && (
+      <a class="en-next-steps__tool" href={tool.href}>
+        <span class="en-next-steps__tool-kicker">{labels.tool}</span>
+        <strong>{tool[lang].title}</strong>
+        <span>{tool[lang].body}</span>
+      </a>
+    )}
+  </aside>
+)}
+
+<style>
+  .en-next-steps {
+    max-width: 800px;
+    margin: 34px auto 0;
+    display: grid;
+    gap: 20px;
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+  .en-next-steps__block { border-top: 2px solid #17211e; padding-top: 14px; }
+  .en-next-steps__title {
+    margin: 0 0 12px;
+    font: 700 12px/1.4 system-ui, sans-serif;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: #a63927;
+  }
+  .en-next-steps__series { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+  .en-next-steps__series li { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 8px; align-items: baseline; }
+  .en-next-steps__index { font: 700 12px/1.4 Georgia, serif; color: #b94530; }
+  .en-next-steps__series a { color: #17211e; font: 600 15px/1.5 Georgia, 'Noto Serif SC', serif; text-decoration: none; }
+  .en-next-steps__series a:hover { color: #b94530; text-decoration: underline; }
+  .en-next-steps__related { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .en-next-steps__related li { display: grid; gap: 2px; }
+  .en-next-steps__related a { color: #17211e; font: 600 15px/1.5 Georgia, 'Noto Serif SC', serif; text-decoration: none; }
+  .en-next-steps__related a:hover { color: #b94530; text-decoration: underline; }
+  .en-next-steps__meta { font: 500 11px/1.5 system-ui, sans-serif; color: #6f7772; letter-spacing: .04em; }
+  .en-next-steps__tool {
+    display: grid;
+    gap: 5px;
+    padding: 18px 20px;
+    border: 1px solid #d0c8bb;
+    border-left: 4px solid #b94530;
+    background: #fbf8f2;
+    text-decoration: none;
+    color: #17211e;
+  }
+  .en-next-steps__tool:hover { border-color: #b94530; }
+  .en-next-steps__tool-kicker { font: 700 10px/1.4 system-ui, sans-serif; letter-spacing: .12em; color: #a63927; text-transform: uppercase; }
+  .en-next-steps__tool strong { font: 700 17px/1.35 Georgia, 'Noto Serif SC', serif; }
+  .en-next-steps__tool span:last-child { font: 400 14px/1.6 system-ui, sans-serif; color: #58635e; }
+</style>

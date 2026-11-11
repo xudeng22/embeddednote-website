@@ -26,7 +26,7 @@ When you hand a coding job to Codex or Claude Code, the awkward part isn't alway
 
 HachimoDock, also known in Chinese as the *Hachimi machine*, was presented at the 2026 Guancha conference; [Chinese technology coverage](https://www.ithome.com/1/017/842.htm) describes it as a project incubated by a Xiaomi innovation team. The repository is maintained under an individual GitHub account, though, and it isn't a Xiaomi retail product. The [GitHub repository](https://github.com/YizhengWw/HachimoDock) holds the Windows/macOS desktop client and ESP32-P4 firmware. Schematics, PCB layout, BOM, enclosure models and assembly instructions are published separately on [OSHWHub](https://oshwhub.com/eda_gqvzlprk/project_cnbmkbjc), a Chinese open-hardware platform.
 
-![HachimoDock desktop device displaying a West Highland terrier](https://image.lceda.cn/oshwhub/pullImage/6c47814b144549beb179528ea77cd75e.png)
+![HachimoDock desktop device displaying a West Highland terrier](/uploads/_external/6c47814b144549beb179528ea77cd75e.png)
 
 *HachimoDock on a desk: three mechanical keys, an orange joystick and a computer running the agent.*
 
@@ -36,7 +36,7 @@ The board name includes Wi-Fi 6, but that shouldn't be confused with a Wi-Fi rad
 
 Below the screen sit three Kailh **CPG135001D01** mechanical switches. A **YA13S-L7.4-B10Ka(60)-0-DL01** self-centering, 5 kΩ joystick adds four directions and a center press. Short and long presses give the firmware a total of twelve configurable input gestures. The audio hardware includes a microphone, small speaker and an ES8311 codec path; the firmware also supports an ES7210 capture path on suitable hardware. Audio is captured on the device and sent to the PC for speech recognition—it does not run a full ASR service on the P4.
 
-![HachimoDock keys and four-way joystick](https://image.lceda.cn/oshwhub/pullImage/0187d6df22f74724acda54e111c7c850.png)
+![HachimoDock keys and four-way joystick](/uploads/_external/0187d6df22f74724acda54e111c7c850.png)
 
 *Three switches and a joystick provide most of the interaction; the display doesn't have to be touch-enabled.*
 
@@ -52,11 +52,11 @@ The often-repeated **¥150 DIY cost** also deserves some context. The hardware l
 
 The desktop manager handles the part that makes the pet useful: tracking agent state. The **Tauri/React manager** runs a local bridge that monitors the sessions exposed by Codex, Claude Code, OpenClaw and other supported agents. It normalizes what each integration can report, then sends the relevant updates to the P4 over USB. The display can show several active sessions as bubbles; the dog changes animation as a task starts working, calls tools or waits for approval. Completed and failed sessions remain visible for about a minute so the notification doesn't vanish as soon as the task ends. Capabilities differ between integrations: selecting a WorkBuddy bubble on the device, for example, does not automatically switch the active desktop conversation.
 
-![HachimoDock multiple agent session bubbles](https://raw.githubusercontent.com/YizhengWw/HachimoDock/main/assets/session-bubbles.webp)
+![HachimoDock multiple agent session bubbles](/uploads/_external/session-bubbles.webp)
 
 *Session bubbles show the tasks the desktop integration can currently observe.*
 
-![HachimoDock agent-state animation](https://raw.githubusercontent.com/YizhengWw/HachimoDock/main/assets/agent-status.gif)
+![HachimoDock agent-state animation](/uploads/_external/agent-status.webp)
 
 *The bundled character animations change as an agent moves between states.*
 
@@ -68,13 +68,13 @@ The desktop manager handles the part that makes the pet useful: tracking agent s
 
 The controls are useful for more than checking progress. Hold the configured voice key and the device records audio; the host handles ASR and routes the resulting text into the selected agent's input flow. Some integrations leave the text as a draft until you confirm it. The keys and joystick can also switch between session bubbles, navigate widgets and provide shortcuts. A Westie is the default character, but you can import images and animation clips or generate a new character using a separately configured service. Public builds don't include anyone else's API credentials.
 
-![HachimoDock voice input interface](https://image.lceda.cn/oshwhub/pullImage/0dddebc05c064f3a812d278b7c5dbe6e.png)
+![HachimoDock voice input interface](/uploads/_external/0dddebc05c064f3a812d278b7c5dbe6e.png)
 
 *Audio capture happens on the device; recognition and agent input routing happen on the PC.*
 
 Then there's **PetUI**, a runtime for small games and tools rather than just a single animated pet. The component manager can sync utilities such as a Pomodoro timer, task list, computer-status panel and stock watchlist, along with simple games. You can also ask a coding agent to build a new component using the project's `petui` Skill. Its output is checked against the **480 × 640 layout**, control mapping and resource limits before being copied to the device. The P4 runs the resulting component through its own widget runtime; it isn't executing arbitrary web JavaScript supplied by the agent.
 
-![HachimoDock PetUI component manager](https://image.lceda.cn/oshwhub/pullImage/410d87c82a0049d483f58391c23c5c72.jpg)
+![HachimoDock PetUI component manager](/uploads/_external/410d87c82a0049d483f58391c23c5c72.jpg)
 
 *PetUI components are managed on the computer and synchronized to the display.*
 

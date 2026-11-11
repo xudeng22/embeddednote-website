@@ -6,6 +6,9 @@ translationKey: apollo-h3-christmas-ornament
 pubDate: '2026-10-29'
 category: open-source
 draft: false
+contentType: deep
+series: open-hardware
+updatedDate: '2026-11-11'
 author: EmbeddedNote
 sourceUrl: https://github.com/ApolloAutomation/H-3
 tags:
@@ -22,11 +25,25 @@ seoDescription: 'Inside the Apollo H-3 Christmas ornament: ESP32-C6, 37 WS2812 L
 
 Most Christmas ornaments don't need a firmware repository. Apollo Automation's H-3 does. The snowman-shaped PCB carries 37 individually addressable RGB LEDs, a buzzer for holiday tunes and an ESP32-C6. It works as a standalone musical decoration, but it can also become a Home Assistant light and Bluetooth proxy when flashed with the smart firmware.
 
-The H-3 is the third entry in Apollo Automation's annual charity ornament series. The team says the proceeds support CASA of Lexington, which advocates for children involved in family-court cases, and the Open Home Foundation, which backs privacy-focused, open-source smart-home infrastructure. The hardware is intentionally playful, but the published ESPHome configuration makes it useful to anyone learning how addressable LEDs, buttons, deep sleep and Home Assistant fit together.
+The H-3 is the third entry in Apollo Automation's annual charity ornament series. The 2026 edition sends 100% of its profits to St. Jude Children's Research Hospital, a change from the two organisations supported by earlier ornaments in the series. The hardware is intentionally playful, but the published ESPHome configuration makes it useful to anyone learning how addressable LEDs, buttons, deep sleep and Home Assistant fit together.
 
 ![Apollo H-3 Christmas snowman PCB ornament and its five programmable LED zones](/uploads/apollo-h3/apollo-h3-cover.webp)
 
 *The H-3 uses a snowman-shaped PCB, with 37 RGB LEDs distributed across five zones.*
+
+### What we checked
+
+We worked from the public firmware in `Integrations/ESPHome/` (Core.yaml, substitutions `version: 26.11.5.1`) instead of the product page, because the YAML is what the ornament actually runs.
+
+| Claim | Where we looked | Result |
+| --- | --- | --- |
+| 37 WS2812 LEDs on a single GPIO3 chain | `light`, `esp32_rmt_led_strip`, `num_leds: 37` | Confirmed |
+| Zones: body 24, mouth 5, nose 1, eyes 2, hat 5 | partition ranges 0-23, 24-28, 29, 30-31, 32-36 | Confirmed, but the physical order is body, mouth, nose, eyes, hat |
+| Buzzer on GPIO6 with `max_power: 50%` | `output`, `platform: ledc` | Confirmed |
+| Song buttons on GPIO4, GPIO5 and GPIO7 | three `binary_sensor` entries and the ext1 wake mask | Confirmed |
+| 40% brightness ceiling | `led_max_brightness: "40"` applied as `color_correct` | Confirmed, and it is a hard per-channel cap, not a starting volume |
+
+That last row is the one worth internalising. Every zone and every effect is written through a 40% colour correction, so the Home Assistant brightness slider and the LED Brightness number move inside that ceiling; at 100% the strip is still running at 40% of its electrical maximum. If you compare the H-3 against a bare WS2812 ring at full white, the ornament will look dim, and that is deliberate.
 
 ### Thirty-seven LEDs, five zones and six tunes
 

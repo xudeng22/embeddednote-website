@@ -27,7 +27,7 @@ const seoDescription = page > 1
   : seoDescriptions[lang];
 ---
 <Base lang={lang} title={page > 1 ? `${t.latest} — ${lang === 'zh' ? '第' : 'Page '}${page}${lang === 'zh' ? '页' : ''}` : t.title}
-  description={seoDescription} translations={page === 1 ? {en:'/en/',zh:'/zh/'} : {}} switchLinks={{en:'/en/',zh:'/zh/'}} homepage={true}>
+  description={seoDescription} translations={page === 1 ? {en:'/en/',zh:'/zh/'} : {}} switchLinks={{en:'/en/',zh:'/zh/'}} homepage={true} noindex={page > 1}>
   {page === 1 && <section class="editorial-hero" aria-label={t.title}>
     <div class="hero-copy">
       <h1>{t.title}</h1>

@@ -10,12 +10,29 @@ tags:
   - Github
   - open-source
 draft: false
+contentType: deep
+series: open-hardware
+updatedDate: '2026-11-11'
 ---
 Ordinary alarm clocks wake people up with buzzers, music, or vibrations. But a GitHub project called `capacitor-alarm-clock` takes a very different approach: when the alarm goes off, the circuit subjects electrolytic capacitors to abnormal electrical conditions, producing a loud bang to wake someone up. The GitHub repository describes the idea rather bluntly: "capacitor blow up, human wake up." The creator openly admits that it's an elaborate joke that required a lot of effort, and explicitly warns that capacitor explosions can be quite violent and that the resulting fumes are unsafe to inhale. In other words, this is not an alarm clock you should try to replicate or keep running on your bedside table.
 
 GitHub Repository:
 
 [https://github.com/ArcaEge/capacitor-alarm-clock](https://github.com/ArcaEge/capacitor-alarm-clock)
+
+## What we checked
+
+The repository README is unusually specific for a joke project, so most of the hardware claims can be checked directly.
+
+| Claim | Where we looked | Result |
+| --- | --- | --- |
+| Three capacitor slots, up to 3 A | README, features | Confirmed |
+| 10 ohm series resistor per slot | README, features | Confirmed; the stated purpose is limiting inrush and avoiding a brownout if a capacitor shorts |
+| 128 x 64 SSD1315 display, ESP32, NTP time, web configuration | README, features | Confirmed |
+| USB-C or 12-15 V barrel jack, 72 x 74 x 36 mm | README | Confirmed |
+| Linear regulators dropping roughly 12 V | README, note | Confirmed by the author, who calls the heat normal and suggests a buck converter |
+
+One piece of arithmetic that the README does not spell out. With a 12 V rail and a 10 ohm limiter, each slot draws about 1.2 A at the instant it starts charging, falling as the capacitor comes up. Three slots fired together would ask for roughly 3.6 A, which is above the 3 A figure the project quotes. That is a budget for one slot at a time, not a simultaneous worst case, and it is the kind of number that decides whether a 12 V supply folds back on the first bang.
 
 # Safety Notice
 

@@ -49,7 +49,7 @@ A firmware update adds the feature behind the most memorable part of the project
 
 There is one setup detail worth knowing before trying it. In the published firmware, the voice callback checks a `sparkleEnable` setting that defaults to disabled. Installing the newer firmware alone does not guarantee that spoken commands will trigger the animation; the feature also needs to be enabled in the device configuration. The application otherwise uses Particle's platform for connected functions, so local inference should not be confused with a completely cloud-free system.
 
-![Particle Snowflake hardware schematic showing P2, LED chain, touch, microphone and power](/uploads/particle-snowflake/particle-snowflake-schematic.png)
+![Particle Snowflake hardware schematic showing P2, LED chain, touch, microphone and power](/uploads/particle-snowflake/particle-snowflake-schematic.webp)
 
 *Particle's schematic brings the LED chain, power rails, touch input and audio sections onto one sheet. Image: Particle.*
 

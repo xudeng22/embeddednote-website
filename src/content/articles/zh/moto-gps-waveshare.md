@@ -27,7 +27,7 @@ seoDescription: "MOTO GPS 用微雪 ESP32-S3 1.75 英寸圆屏、iPhone App 和�
 
 *车把上的圆屏只显示当前路段，完整路线留在手机里。图为项目外观效果图，当前实机用的是微雪成品板。*
 
-<video controls muted loop playsinline poster="/uploads/moto-gps-waveshare/moto-gps-nav-poster.jpg" style="width:100%;height:auto;border-radius:12px;background:#0b0f12;">
+<video controls muted loop playsinline poster="/uploads/moto-gps-waveshare/moto-gps-nav-poster.webp" style="width:100%;height:auto;border-radius:12px;background:#0b0f12;">
   <source src="/uploads/moto-gps-waveshare/moto-gps-nav.mp4" type="video/mp4">
 </video>
 

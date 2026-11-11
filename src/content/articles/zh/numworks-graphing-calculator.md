@@ -37,31 +37,31 @@ Epsilon操作系统和硬件资料全在里面，BOM、原理图、PCB、3D模�
 
 硬件是真开源。原理图PDF直接挂在工程页面，五张A4图纸，PCB的顶层底层丝印铜箔也放出来了，器件清单和每颗料的数据手册链接全部公开。处理器用的是ST的STM32F730V8T6，100脚LQFP，ARM Cortex-M7内核主频216MHz，256KB静态RAM，计算器的大脑和心脏都在这颗芯片上。外置Nor Flash是Adesto的AT25SF641，64Mbit，走104MHz的Quad-SPI总线，固件和用户数据都存在里面。
 
-![STM32F730 MCU 原理图](/uploads/numworks/numworks-03.png)
+![STM32F730 MCU 原理图](/uploads/numworks/numworks-03.webp)
 
 原理图第1页，STM32F730V8T6核心电路，去耦、复位、启动模式一应俱全
 
-![矩阵键盘及 LCD 接口原理图](/uploads/numworks/numworks-04.png)
+![矩阵键盘及 LCD 接口原理图](/uploads/numworks/numworks-04.webp)
 
 第2页是矩阵键盘和16位并口的LCD驱动电路
 
 屏幕模组集成了ST7789V的LCD控制器，接收MCU的位图数据驱动像素矩阵，自带SRAM帧缓冲，16位数据总线，写周期66ns，理论上限能到200fps刷新。电池通过USB充电，充电管理芯片是RT9526A，走恒流恒压（CC-CV）曲线；逻辑电源用一颗RT9078 LDO，3.0到5.5V输入稳压到2.8V给全系统供电。键盘是标准的矩阵扫描，行引脚还能配成待机唤醒。USB口挂了USBLC6-2SC6做ESD浪涌保护，机身里还藏着三颗RGB LED，通过壳体透光，颜色随便调，开机动画就是靠它做的。
 
-![NumWorks 外设、闪存、USB 接口原理图](/uploads/numworks/numworks-05.png)
+![NumWorks 外设、闪存、USB 接口原理图](/uploads/numworks/numworks-05.webp)
 
 电源部分：电池电压采样、USB充电、背光电荷泵、逻辑电源
 
-![NumWorks 电源管理原理图](/uploads/numworks/numworks-06.png)
+![NumWorks 电源管理原理图](/uploads/numworks/numworks-06.webp)
 
 外设部分：RGB LED、外部Flash、USB保护、高速晶振
 
-![NumWorks PCB 顶层布线图](/uploads/numworks/numworks-07.png)
+![NumWorks PCB 顶层布线图](/uploads/numworks/numworks-07.webp)
 
 双层板0.8mm，沉金工艺，这是顶层布局
 
 软件是重头戏。Epsilon是NumWorks自己写的图形计算器操作系统，C++开发，直接跑在裸机上，256KB内存要精打细算：栈只留32KB，堆干脆不用malloc，改成静态分配加可回收的GC节点池，官方文档还调侃说这点内存是阿波罗登月电脑的64倍。架构分了五层，从下往上依次是Ion硬件抽象层、Kandinsky图形引擎、Escher GUI工具库、Poincaré数学引擎，最上面再跑各种应用，每层都单独开源，可读性相当好。最关键的是Epsilon可以编译成独立应用程序在PC上跑，不用买计算器，电脑上就能把整套系统跑起来体验。
 
-![NumWorks The Board 图形工具界面](/uploads/numworks/numworks-08.jpeg)
+![NumWorks The Board 图形工具界面](/uploads/numworks/numworks-08.webp)
 
 The Board是官方配套的电脑端工具，函数图像、表格、方程求解可以并排看
 
