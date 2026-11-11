@@ -126,5 +126,5 @@ If you are still choosing hardware, read [the pipeline guide](/en/articles/epape
 ## Sources
 
 - E Ink, [How electronic ink works](https://www.eink.com/tech/detail/How_it_works) — how a pixel is driven, which is the basis for causes 5 and 6.
-- E Ink, [Spectra 3100](https://www.eink.com/brand/detail/Spectra3100) (black, white, red, yellow) and [Spectra 6](https://www.eink.com/brand/detail/Spectra6) (six colours) — the two product families the reference palettes are named after. Both are brand pages, not per-panel colour tables.
+- E Ink, [Spectra 3100](https://www.eink.com/brand/detail/Spectra3100) (black, white, red, yellow) and [Spectra 6](https://www.eink.com/brand/detail/Spectra6) (six colours, usually written **E6**) — the two product families the reference palettes are named after. Both are brand pages, not per-panel colour tables.
 - Your module's datasheet and waveform file. We did not check a specific Good Display part for this article: `good-display.cn` rejects automated requests with HTTP 406, so nothing here is quoted from their catalogue.

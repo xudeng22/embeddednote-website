@@ -126,5 +126,5 @@ what appeared:          实际
 ## 参考来源
 
 - E Ink,[电子墨水原理](https://cn.eink.com/tech/detail/How_it_works)——像素如何被驱动,是第五、第六条原因的基础。
-- E Ink,[Spectra 3100](https://cn.eink.com/brand/detail/Spectra3100)(黑白红黄四色)、[Spectra 6](https://cn.eink.com/brand/detail/Spectra6)(六色)——参考色板命名的来源。两者都是品牌页,不是具体面板的色表。
+- E Ink,[Spectra 3100](https://cn.eink.com/brand/detail/Spectra3100)(黑白红黄四色)、[Spectra 6](https://cn.eink.com/brand/detail/Spectra6)(六色,常简称 **E6**)——参考色板命名的来源。两者都是品牌页,不是具体面板的色表。
 - 你手上模组的数据手册与波形文件。本文没有核对某一块具体的 Good Display 面板:`good-display.cn` 对自动请求返回 HTTP 406,所以这里没有引用他们目录里的任何参数。

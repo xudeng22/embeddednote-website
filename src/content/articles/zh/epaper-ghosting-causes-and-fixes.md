@@ -53,7 +53,7 @@ seoDescription: '电子纸残影的物理成因、温度与刷新模式的影响
 
 冷的时候颜料走得慢。25 °C 下 300 ms 能完成的翻转,到 0 °C 可能完不成,屏上就会出现一个发灰、带残影的画面,看起来和软件 bug 一模一样。厂商按温度区间提供不同的波形表,控制器本来就应该选对那一张。
 
-两个公开数据可以说明量级:E Ink 给 [Spectra 6](https://cn.eink.com/brand/detail/Spectra6) 模块标注的工作温度是 **0–50 °C**,给 [Marquee](https://cn.eink.com/brand/detail/marquee) 标注的是 **−20 到 65 °C**(翻转时间 5–7 秒)。这是品牌级参数,不是你那块屏的数据手册,但它说明一件事:工作温度是被明确规定的参数,忽略温度的驱动只在一个很窄的区间里是对的。
+两个公开数据可以说明量级:E Ink 给 [Spectra 6](https://cn.eink.com/brand/detail/Spectra6) 模块(常简称 **E6**)标注的工作温度是 **0–50 °C**,给 [Marquee](https://cn.eink.com/brand/detail/marquee) 标注的是 **−20 到 65 °C**(翻转时间 5–7 秒)。这是品牌级参数,不是你那块屏的数据手册,但它说明一件事:工作温度是被明确规定的参数,忽略温度的驱动只在一个很窄的区间里是对的。
 
 三个直接后果:
 
@@ -121,7 +121,7 @@ void note_update(int mode)
 ## 参考来源
 
 - E Ink,[电子墨水原理](https://cn.eink.com/tech/detail/How_it_works)——第一节里颜料与电极的模型。
-- E Ink,[Spectra 6](https://cn.eink.com/brand/detail/Spectra6)(0–50 °C,对比度 30:1)、[Marquee](https://cn.eink.com/brand/detail/marquee)(−20 至 65 °C,翻转 5–7 秒)——上面引用的两个工作温区。
+- E Ink,[Spectra 6](https://cn.eink.com/brand/detail/Spectra6)(0–50 °C,对比度 30:1,常简称 **E6**)、[Marquee](https://cn.eink.com/brand/detail/marquee)(−20 至 65 °C,翻转 5–7 秒)——上面引用的两个工作温区。
 - 你手上模组随附的数据手册与波形文件。它们的优先级高于本文:控制器、原生色码、温度分档都按具体型号而定。
 
 另外说明:本文写作时我们尝试核对 Good Display(good-display.cn)的产品页,但该站对自动请求返回 HTTP 406,因此这里没有引用 Good Display 的任何参数。请以随屏附带的数据手册为准,不要相信二手摘要。

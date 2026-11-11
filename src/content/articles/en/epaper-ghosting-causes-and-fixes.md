@@ -53,7 +53,7 @@ The reliable operation is not a repeat; it is a full refresh, which uses a long 
 
 Pigment moves more slowly when it is cold. A waveform that completes a transition in 300 ms at 25 °C may not complete it at 0 °C, and the panel will show a weak, ghosted image that looks exactly like a software error. Vendors publish waveform tables per temperature band for this reason, and the controller is expected to select the right one.
 
-Two published examples show the scale. E Ink lists an operating range of **0–50 °C** for [Spectra 6](https://www.eink.com/brand/detail/Spectra6) modules and **−20 to 65 °C** for [Marquee](https://www.eink.com/brand/detail/marquee), with a 5–7 s transition time for the latter. Those are brand-level figures, not your panel's datasheet, but they make the point: the operating range is a specified parameter, and a driver that ignores temperature is only correct inside one narrow band.
+Two published examples show the scale. E Ink lists an operating range of **0–50 °C** for [Spectra 6](https://www.eink.com/brand/detail/Spectra6) modules (usually written **E6**) and **−20 to 65 °C** for [Marquee](https://www.eink.com/brand/detail/marquee), with a 5–7 s transition time for the latter. Those are brand-level figures, not your panel's datasheet, but they make the point: the operating range is a specified parameter, and a driver that ignores temperature is only correct inside one narrow band.
 
 Three practical consequences:
 
@@ -121,7 +121,7 @@ For the layers below this one, see [why your e-paper photo looks wrong](/en/arti
 ## Sources
 
 - E Ink, [How electronic ink works](https://www.eink.com/tech/detail/How_it_works) — the pigment and electrode model used in the first section.
-- E Ink, [Spectra 6](https://www.eink.com/brand/detail/Spectra6) (0–50 °C, 30:1 contrast) and [Marquee](https://www.eink.com/brand/detail/marquee) (−20 to 65 °C, 5–7 s transition) — the two published operating ranges quoted above.
+- E Ink, [Spectra 6](https://www.eink.com/brand/detail/Spectra6) (0–50 °C, 30:1 contrast, usually written **E6**) and [Marquee](https://www.eink.com/brand/detail/marquee) (−20 to 65 °C, 5–7 s transition) — the two published operating ranges quoted above.
 - The datasheet and waveform file that ship with your module. These override anything on this page: controller, native colour codes and temperature bands differ per part number.
 
 We also tried to check Good Display's catalogue (`good-display.cn`) for this article. Their site rejects automated requests with HTTP 406, so no Good Display figure is quoted here — open the datasheet that came with your panel instead of trusting a summary.
