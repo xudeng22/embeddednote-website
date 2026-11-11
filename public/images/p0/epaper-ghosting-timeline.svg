@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 320" width="960" height="320" role="img" aria-label="Ghosting accumulates across partial refreshes and clears after a full refresh">
+  <rect width="960" height="320" fill="#fbf8f2"/>
+  <text x="24" y="32" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700" fill="#a63927" letter-spacing="1.2">PARTIAL REFRESH ACCUMULATES RESIDUE</text>
+  <text x="24" y="54" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#59645e">The same panel, the same new frame, four different histories.</text>
+
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <!-- frame 1 -->
+    <g transform="translate(24,78)">
+      <rect width="200" height="150" rx="6" fill="#ffffff" stroke="#17211e" stroke-width="2"/>
+      <rect x="16" y="16" width="168" height="118" fill="#f4f0e7"/>
+      <rect x="46" y="42" width="70" height="10" fill="#17211e"/>
+      <rect x="46" y="62" width="110" height="8" fill="#5b655f"/>
+      <rect x="46" y="78" width="96" height="8" fill="#5b655f"/>
+      <text x="0" y="176" font-size="13" font-weight="700" fill="#17211e">Full refresh</text>
+      <text x="0" y="194" font-size="12" fill="#59645e">clean baseline</text>
+    </g>
+
+    <!-- frame 2 -->
+    <g transform="translate(252,78)">
+      <rect width="200" height="150" rx="6" fill="#ffffff" stroke="#17211e" stroke-width="2"/>
+      <rect x="16" y="16" width="168" height="118" fill="#f4f0e7"/>
+      <rect x="46" y="42" width="70" height="10" fill="#17211e"/>
+      <rect x="46" y="62" width="110" height="8" fill="#5b655f"/>
+      <rect x="46" y="78" width="96" height="8" fill="#5b655f"/>
+      <rect x="120" y="20" width="56" height="110" fill="#17211e" opacity="0.06"/>
+      <text x="0" y="176" font-size="13" font-weight="700" fill="#17211e">5 partial updates</text>
+      <text x="0" y="194" font-size="12" fill="#59645e">faint residue on the right edge</text>
+    </g>
+
+    <!-- frame 3 -->
+    <g transform="translate(480,78)">
+      <rect width="200" height="150" rx="6" fill="#ffffff" stroke="#17211e" stroke-width="2"/>
+      <rect x="16" y="16" width="168" height="118" fill="#f4f0e7"/>
+      <rect x="46" y="42" width="70" height="10" fill="#17211e"/>
+      <rect x="46" y="62" width="110" height="8" fill="#5b655f"/>
+      <rect x="46" y="78" width="96" height="8" fill="#5b655f"/>
+      <rect x="112" y="16" width="72" height="118" fill="#17211e" opacity="0.16"/>
+      <rect x="16" y="16" width="168" height="118" fill="none" stroke="#b94530" stroke-dasharray="4 3"/>
+      <text x="0" y="176" font-size="13" font-weight="700" fill="#b94530">20 partial updates</text>
+      <text x="0" y="194" font-size="12" fill="#59645e">ghost is now part of the image</text>
+    </g>
+
+    <!-- frame 4 -->
+    <g transform="translate(708,78)">
+      <rect width="200" height="150" rx="6" fill="#ffffff" stroke="#17211e" stroke-width="2"/>
+      <rect x="16" y="16" width="168" height="118" fill="#f4f0e7"/>
+      <rect x="46" y="42" width="70" height="10" fill="#17211e"/>
+      <rect x="46" y="62" width="110" height="8" fill="#5b655f"/>
+      <rect x="46" y="78" width="96" height="8" fill="#5b655f"/>
+      <path d="M132 24 l10 10 -10 10" fill="none" stroke="#8a9a8f" stroke-width="2"/>
+      <text x="0" y="176" font-size="13" font-weight="700" fill="#17211e">Full refresh</text>
+      <text x="0" y="194" font-size="12" fill="#59645e">residue cleared</text>
+    </g>
+  </g>
+
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <path d="M228 153 h18" stroke="#17211e" stroke-width="1.5" marker-end="url(#a)"/>
+    <path d="M456 153 h18" stroke="#17211e" stroke-width="1.5" marker-end="url(#a)"/>
+    <path d="M684 153 h18" stroke="#17211e" stroke-width="1.5" marker-end="url(#a)"/>
+    <defs>
+      <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+        <path d="M0 0 L10 5 L0 10 z" fill="#17211e"/>
+      </marker>
+    </defs>
+    <text x="24" y="268" font-size="12.5" fill="#59645e">The residue is pigment that never fully settled, not a stale framebuffer. Redrawing the same pixels does not move it.</text>
+    <text x="24" y="290" font-size="12.5" fill="#59645e">A full refresh with the vendor waveform is the only operation that resets the history — which is why the counter in the driver matters.</text>
+  </g>
+</svg>
