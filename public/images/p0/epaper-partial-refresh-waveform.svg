@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" width="960" height="300" role="img" aria-label="Full refresh waveform versus partial refresh waveform for an e-paper pixel">
+  <rect width="960" height="300" fill="#fbf8f2"/>
+  <g font-family="Segoe UI, Microsoft YaHei, sans-serif">
+    <text x="24" y="30" font-size="14" font-weight="700" fill="#a63927" letter-spacing="1.1">DRIVE SEQUENCE, NOT A SETTING</text>
+
+    <!-- full refresh -->
+    <text x="24" y="70" font-size="14" font-weight="700" fill="#17211e">Full refresh</text>
+    <line x1="24" y1="130" x2="936" y2="130" stroke="#d0c8bb"/>
+    <g fill="none" stroke="#17211e" stroke-width="2">
+      <path d="M40 130 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34"/>
+      <path d="M40 130 v34 h14 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34 h14 v-34 h14 v34"/>
+    </g>
+    <text x="24" y="196" font-size="12.5" fill="#59645e">Many transitions, both polarities, long settling time. This is what normalises the film.</text>
+
+    <!-- partial refresh -->
+    <text x="24" y="228" font-size="14" font-weight="700" fill="#17211e">Partial refresh</text>
+    <line x1="24" y1="272" x2="936" y2="272" stroke="#d0c8bb"/>
+    <g fill="none" stroke="#b94530" stroke-width="2">
+      <path d="M40 272 v-22 h18 v22 h140 v-22 h18 v22 h150 v-22 h18 v22 h150 v-22 h18 v22 h150 v-22 h18 v22 h150"/>
+    </g>
+    <text x="372" y="262" font-size="12" fill="#8a3f2c">few pulses, one polarity, short window</text>
+  </g>
+</svg>

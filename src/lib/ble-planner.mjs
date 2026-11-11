@@ -38,10 +38,11 @@ export function calculateBlePlan(raw = {}) {
   const valueBytes=Math.min(c.mtu-3,c.chunkBytes);
   const netBytes=valueBytes-c.appHeader;
   if(netBytes<1) return {ok:false,errors:['No application payload: reduce appHeader or increase chunkBytes / MTU'],warnings};
-  // The 4-byte MIC is an additional field after the LL payload, not deducted from
-  // the negotiated 27/251-byte LL Data PDU payload size (Bluetooth SIG).
+  // The MIC counts inside the 251-byte LL Data PDU payload ceiling (Core spec:
+  // the PDU Length field includes the MIC when the link is encrypted), so an
+  // encrypted link loses 4 bytes of usable payload per PDU.
   const mic=c.encryption?4:0;
-  const llDataCapacity=c.llPayload;
+  const llDataCapacity=Math.max(1, c.llPayload - mic);
   if(llDataCapacity<=0) return {ok:false,errors:['Invalid LL payload capacity'],warnings};
   const writes=Math.ceil(c.dataBytes/netBytes);
   const lastNetBytes=c.dataBytes-(writes-1)*netBytes;

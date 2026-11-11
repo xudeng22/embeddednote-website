@@ -105,10 +105,75 @@ def card_ghosting() -> None:
     image.save(OUT / "epaper-ghosting-causes-and-fixes.webp", "WEBP", quality=86, method=6)
 
 
+def card_partial_refresh() -> None:
+    image, draw = base(["Partial refresh:", "when it is safe"])
+    # waveforms
+    def wave(x0, y, amp, step, count, colour):
+        points = []
+        for i in range(count):
+            px = x0 + i * step
+            points.append((px, y))
+            points.append((px, y - amp))
+        draw.line(points, fill=colour, width=3)
+
+    draw.text((64, 250), "full", font=font(24, False), fill=MUTED)
+    wave(160, 274, 34, 14, 44, INK)
+    draw.text((64, 330), "partial", font=font(24, False), fill=MUTED)
+    wave(160, 354, 20, 26, 12, ACCENT)
+
+    # gates
+    gates = ["panel supports it", "mode unchanged", "temp in range", "budget left"]
+    y = 404
+    for gate in gates:
+        draw.rectangle([64, y, 84, y + 20], outline=ACCENT, width=2)
+        draw.text((100, y - 4), gate, font=font(24, False), fill=INK)
+        y += 38
+    draw.text((560, 404), "any gate fails", font=font(26, False), fill=MUTED)
+    draw.text((560, 442), "→ full refresh", font=font(34), fill=ACCENT)
+    image.save(OUT / "epaper-partial-refresh-safe.webp", "WEBP", quality=86, method=6)
+
+
+def card_ble_model() -> None:
+    image, draw = base(["How the BLE", "throughput model works"])
+    segments = [
+        ("LL 2", 100, (231, 224, 212)),
+        ("L2CAP 4", 108, (220, 211, 196)),
+        ("ATT 3", 92, (210, 200, 182)),
+        ("244 B value", 470, (201, 189, 159)),
+        ("MIC 4", 96, (214, 204, 186)),
+        ("CRC 3", 96, (231, 224, 212)),
+    ]
+    x = 64
+    for label, width, colour in segments:
+        draw.rectangle([x, 286, x + width, 344], fill=colour)
+        draw.text((x + 10, 306), label, font=font(18, False), fill=INK)
+        x += width
+
+    rows = [
+        ("MTU 247  →  244 B per write", "984 writes"),
+        ("2 PDUs per write (MIC in the 251 B ceiling)", "1,812 µs"),
+        ("4 writes per 15 ms event, 30 ms interval", "7.38 s"),
+    ]
+    y = 392
+    for left, right in rows:
+        draw.text((64, y), left, font=font(24, False), fill=MUTED)
+        draw.text((860, y), right, font=font(30), fill=INK)
+        y += 56
+    image.save(OUT / "ble-throughput-model.webp", "WEBP", quality=86, method=6)
+
+
 if __name__ == "__main__":
     card_names()
     card_photo_wrong()
     card_ghosting()
-    for name in ("epaper-names-decoded", "epaper-photo-looks-wrong", "epaper-ghosting-causes-and-fixes"):
+    card_partial_refresh()
+    card_ble_model()
+    for name in (
+        "epaper-names-decoded",
+        "epaper-photo-looks-wrong",
+        "epaper-ghosting-causes-and-fixes",
+        "epaper-partial-refresh-safe",
+        "ble-throughput-model",
+    ):
         path = OUT / f"{name}.webp"
         print(f"{path.name}: {path.stat().st_size // 1024} KB")
