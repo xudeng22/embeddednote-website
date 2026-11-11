@@ -63,7 +63,8 @@ const appLd = {
 
 const panels = [
   ['1.54 in', '200 × 200', 200 * 200],
-  ['2.13 in', '212 × 104', 212 * 104],
+  ['2.13 in (current)', '250 × 122', 250 * 122],
+  ['2.13 in (legacy)', '212 × 104', 212 * 104],
   ['2.9 in', '296 × 128', 296 * 128],
   ['4.2 in', '400 × 300', 400 * 300],
   ['5.83 in', '648 × 480', 648 * 480],
@@ -161,6 +162,7 @@ const fmt = (n) => n.toLocaleString('en-US');
         <li><a href={`/${lang}/articles/epaper-refresh-timing-pipeline/`}>Why SPI transport is not panel refresh</a> — where the seconds actually go.</li>
         <li><a href={`/${lang}/articles/epaper-engineering-field-guide/`}>The e-paper pipeline, end to end</a> — image, transfer, refresh and acceptance tests.</li>
         <li><a href={`/${lang}/articles/m5stack-paperdiy-esp32-s3/`}>M5Stack PaperDIY review</a> — a 4.7-inch kit with published schematics.</li>
+        <li><a href={`/${lang}/articles/epaper-names-decoded/`}>E-paper names decoded</a> — E6, SSD1680 and UC8151, and how to find your own module.</li>
       </ul>
       <p class="epc-refs">Reference projects: <a href="https://github.com/paperlesspaper/epdoptimize" target="_blank" rel="noopener noreferrer">EPD Optimize</a> · <a href="https://github.com/redphx/dithr" target="_blank" rel="noopener noreferrer">DITHR</a> · <a href="https://www.eink.com/tech/detail/How_it_works" target="_blank" rel="noopener noreferrer">E Ink technology overview</a>.</p>
     </article>
