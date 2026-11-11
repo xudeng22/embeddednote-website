@@ -15,6 +15,10 @@
 192,
 192
 ],
+"/images/embeddednote-hero-640.webp": [
+640,
+480
+],
 "/images/embeddednote-hero.webp": [
 1200,
 900
@@ -22,6 +26,10 @@
 "/images/embeddednote-logo-480.webp": [
 480,
 75
+],
+"/images/embeddednote-logo-640.webp": [
+640,
+99
 ],
 "/images/embeddednote-logo-960.webp": [
 960,
@@ -267,29 +275,57 @@
 1600,
 1600
 ],
+"/uploads/_external/K159-B_PaperDIY_Complete_Kit_main_pictures_08-640.webp": [
+640,
+640
+],
 "/uploads/_external/K159-B_PaperDIY_Complete_Kit_main_pictures_08.webp": [
 1600,
 1600
+],
+"/uploads/_external/K159-B_PaperDIY_sche_01-640.webp": [
+640,
+453
 ],
 "/uploads/_external/K159-B_PaperDIY_sche_01.webp": [
 7016,
 4961
 ],
+"/uploads/_external/K159-B_PaperDIY_sche_02-640.webp": [
+640,
+453
+],
 "/uploads/_external/K159-B_PaperDIY_sche_02.webp": [
 7016,
 4961
+],
+"/uploads/_external/K159-B_PaperDIY_sche_03-640.webp": [
+640,
+453
 ],
 "/uploads/_external/K159-B_PaperDIY_sche_03.webp": [
 7016,
 4961
 ],
+"/uploads/_external/K159-B_PaperDIY_sche_04-640.webp": [
+640,
+453
+],
 "/uploads/_external/K159-B_PaperDIY_sche_04.webp": [
 7016,
 4961
 ],
+"/uploads/_external/K159-PaperDIY-Assembly-Kit_main_pictures_02-640.webp": [
+640,
+640
+],
 "/uploads/_external/K159-PaperDIY-Assembly-Kit_main_pictures_02.webp": [
 1600,
 1600
+],
+"/uploads/_external/K159-PaperDIY-Assembly-Kit_main_pictures_06-640.webp": [
+640,
+640
 ],
 "/uploads/_external/K159-PaperDIY-Assembly-Kit_main_pictures_06.webp": [
 1600,
@@ -331,6 +367,10 @@
 519,
 289
 ],
+"/uploads/amazinghand/amazinghand-06-640.webp": [
+640,
+354
+],
 "/uploads/amazinghand/amazinghand-06.webp": [
 1064,
 588
@@ -351,6 +391,10 @@
 1080,
 587
 ],
+"/uploads/amazinghand/amazinghand-11-640.webp": [
+640,
+383
+],
 "/uploads/amazinghand/amazinghand-11.webp": [
 1080,
 646
@@ -362,6 +406,10 @@
 "/uploads/amazinghand/amazinghand-13.jpg": [
 341,
 373
+],
+"/uploads/amazinghand/amazinghand-14-640.webp": [
+640,
+347
 ],
 "/uploads/amazinghand/amazinghand-14.webp": [
 1080,
@@ -391,6 +439,10 @@
 433,
 577
 ],
+"/uploads/apollo-h3/apollo-h3-product-photo-640.webp": [
+640,
+854
+],
 "/uploads/apollo-h3/apollo-h3-product-photo.webp": [
 1265,
 1687
@@ -403,13 +455,25 @@
 1080,
 635
 ],
+"/uploads/arbwave30-waveform-generator/arbwave30-waveform-generator-03-640.webp": [
+640,
+375
+],
 "/uploads/arbwave30-waveform-generator/arbwave30-waveform-generator-03.webp": [
 1080,
 633
 ],
+"/uploads/arbwave30-waveform-generator/arbwave30-waveform-generator-04-640.webp": [
+640,
+436
+],
 "/uploads/arbwave30-waveform-generator/arbwave30-waveform-generator-04.webp": [
 1080,
 735
+],
+"/uploads/arbwave30-waveform-generator/arbwave30-waveform-generator-05-640.webp": [
+640,
+446
 ],
 "/uploads/arbwave30-waveform-generator/arbwave30-waveform-generator-05.webp": [
 1080,
@@ -515,6 +579,10 @@
 1033,
 796
 ],
+"/uploads/codex-hardware-41-projects-2026/official-15-640.webp": [
+640,
+349
+],
 "/uploads/codex-hardware-41-projects-2026/official-15.webp": [
 1074,
 586
@@ -535,6 +603,10 @@
 948,
 814
 ],
+"/uploads/codex-hardware-41-projects-2026/official-20-640.webp": [
+640,
+460
+],
 "/uploads/codex-hardware-41-projects-2026/official-20.webp": [
 1072,
 771
@@ -550,6 +622,10 @@
 "/uploads/codex-hardware-41-projects-2026/official-23.webp": [
 1048,
 550
+],
+"/uploads/codex-hardware-41-projects-2026/official-24-640.webp": [
+640,
+353
 ],
 "/uploads/codex-hardware-41-projects-2026/official-24.webp": [
 1063,
@@ -574,6 +650,10 @@
 "/uploads/codex-hardware-41-projects-2026/official-29.webp": [
 1075,
 597
+],
+"/uploads/codex-hardware-41-projects-2026/official-30-640.webp": [
+640,
+345
 ],
 "/uploads/codex-hardware-41-projects-2026/official-30.webp": [
 1080,
@@ -631,6 +711,10 @@
 800,
 450
 ],
+"/uploads/cyber-aegg-bornhack-badge/cyber-aegg-bornhack-badge-03-640.webp": [
+640,
+424
+],
 "/uploads/cyber-aegg-bornhack-badge/cyber-aegg-bornhack-badge-03.webp": [
 1080,
 715
@@ -638,6 +722,10 @@
 "/uploads/esp32-chip-comparison-center/esp32-chip-comparison-cover.webp": [
 1200,
 675
+],
+"/uploads/espressif-esp32-s31-developer-portal/espressif-esp32-s31-developer-portal-01-640.webp": [
+640,
+516
 ],
 "/uploads/espressif-esp32-s31-developer-portal/espressif-esp32-s31-developer-portal-01.webp": [
 1080,
@@ -667,6 +755,10 @@
 640,
 601
 ],
+"/uploads/flip-card/flip-card-02-640.webp": [
+640,
+952
+],
 "/uploads/flip-card/flip-card-02.webp": [
 1066,
 1585
@@ -678,6 +770,10 @@
 "/uploads/flip-card/flip-card-04.webp": [
 698,
 642
+],
+"/uploads/flip-card/flip-card-05-640.webp": [
+640,
+482
 ],
 "/uploads/flip-card/flip-card-05.webp": [
 1080,
@@ -707,17 +803,33 @@
 1200,
 675
 ],
+"/uploads/hachimodock/hachimodock-architecture-en-640.webp": [
+640,
+338
+],
 "/uploads/hachimodock/hachimodock-architecture-en.webp": [
 1600,
 845
+],
+"/uploads/hachimodock/hachimodock-architecture-zh-640.webp": [
+640,
+338
 ],
 "/uploads/hachimodock/hachimodock-architecture-zh.webp": [
 1600,
 845
 ],
+"/uploads/i2c-doctor-debug-tool/i2c-doctor-debug-tool-01-640.webp": [
+640,
+360
+],
 "/uploads/i2c-doctor-debug-tool/i2c-doctor-debug-tool-01.webp": [
 1080,
 607
+],
+"/uploads/i2c-doctor-debug-tool/i2c-doctor-debug-tool-02-640.webp": [
+640,
+2716
 ],
 "/uploads/i2c-doctor-debug-tool/i2c-doctor-debug-tool-02.webp": [
 1080,
@@ -731,13 +843,25 @@
 416,
 555
 ],
+"/uploads/image-1-640.webp": [
+640,
+217
+],
 "/uploads/image-1.webp": [
 1080,
 366
 ],
+"/uploads/image-10-640.webp": [
+640,
+287
+],
 "/uploads/image-10.webp": [
 1080,
 485
+],
+"/uploads/image-11-640.webp": [
+640,
+585
 ],
 "/uploads/image-11.webp": [
 1080,
@@ -747,9 +871,17 @@
 540,
 304
 ],
+"/uploads/image-13-640.webp": [
+640,
+217
+],
 "/uploads/image-13.webp": [
 1080,
 366
+],
+"/uploads/image-14-640.webp": [
+640,
+360
 ],
 "/uploads/image-14.webp": [
 1080,
@@ -767,6 +899,10 @@
 850,
 478
 ],
+"/uploads/image-18-640.webp": [
+640,
+151
+],
 "/uploads/image-18.webp": [
 1080,
 254
@@ -775,21 +911,41 @@
 1080,
 813
 ],
+"/uploads/image-2-640.webp": [
+640,
+360
+],
 "/uploads/image-2.webp": [
 1080,
 608
+],
+"/uploads/image-20-640.webp": [
+640,
+482
 ],
 "/uploads/image-20.webp": [
 1080,
 813
 ],
+"/uploads/image-21-640.webp": [
+640,
+482
+],
 "/uploads/image-21.webp": [
 1080,
 813
 ],
+"/uploads/image-22-640.webp": [
+640,
+532
+],
 "/uploads/image-22.webp": [
 1080,
 898
+],
+"/uploads/image-23-640.webp": [
+640,
+520
 ],
 "/uploads/image-23.webp": [
 1080,
@@ -798,6 +954,10 @@
 "/uploads/image-24.webp": [
 562,
 508
+],
+"/uploads/image-25-640.webp": [
+640,
+525
 ],
 "/uploads/image-25.webp": [
 1080,
@@ -819,6 +979,10 @@
 850,
 478
 ],
+"/uploads/image-3-640.webp": [
+640,
+360
+],
 "/uploads/image-3.webp": [
 1080,
 608
@@ -831,6 +995,10 @@
 540,
 459
 ],
+"/uploads/image-6-640.webp": [
+640,
+360
+],
 "/uploads/image-6.webp": [
 1080,
 608
@@ -842,6 +1010,10 @@
 "/uploads/image-8.webp": [
 850,
 478
+],
+"/uploads/image-9-640.webp": [
+640,
+427
 ],
 "/uploads/image-9.webp": [
 1080,
@@ -866,6 +1038,10 @@
 "/uploads/imu-array-32-fpga/imu-array-32-fpga-04.webp": [
 896,
 665
+],
+"/uploads/imu-array-32-fpga/imu-array-32-fpga-05-640.webp": [
+640,
+475
 ],
 "/uploads/imu-array-32-fpga/imu-array-32-fpga-05.webp": [
 1080,
@@ -903,6 +1079,10 @@
 1200,
 675
 ],
+"/uploads/kensat-2u-cubesat-llm/kensat-2u-cubesat-llm-01-640.webp": [
+640,
+565
+],
 "/uploads/kensat-2u-cubesat-llm/kensat-2u-cubesat-llm-01.webp": [
 1080,
 954
@@ -915,9 +1095,17 @@
 1080,
 709
 ],
+"/uploads/kensat-2u-cubesat-llm/kensat-2u-cubesat-llm-04-640.webp": [
+640,
+453
+],
 "/uploads/kensat-2u-cubesat-llm/kensat-2u-cubesat-llm-04.webp": [
 1080,
 764
+],
+"/uploads/kensat-2u-cubesat-llm/kensat-2u-cubesat-llm-05-640.webp": [
+640,
+586
 ],
 "/uploads/kensat-2u-cubesat-llm/kensat-2u-cubesat-llm-05.webp": [
 1080,
@@ -967,6 +1155,10 @@
 500,
 281
 ],
+"/uploads/micro-radar-esp32-c3/micro-radar-esp32-c3-02-640.webp": [
+640,
+651
+],
 "/uploads/micro-radar-esp32-c3/micro-radar-esp32-c3-02.webp": [
 1080,
 1099
@@ -979,13 +1171,25 @@
 1080,
 608
 ],
+"/uploads/micro-radar-esp32-c3/micro-radar-esp32-c3-05-640.webp": [
+640,
+598
+],
 "/uploads/micro-radar-esp32-c3/micro-radar-esp32-c3-05.webp": [
 1071,
 1000
 ],
+"/uploads/micro-radar-esp32-c3/micro-radar-esp32-c3-06-640.webp": [
+640,
+612
+],
 "/uploads/micro-radar-esp32-c3/micro-radar-esp32-c3-06.webp": [
 1080,
 1033
+],
+"/uploads/microduck/microduck-architecture-en-640.webp": [
+640,
+354
 ],
 "/uploads/microduck/microduck-architecture-en.webp": [
 1500,
@@ -995,6 +1199,10 @@
 1080,
 554
 ],
+"/uploads/microduck/microduck-cover-640.webp": [
+640,
+360
+],
 "/uploads/microduck/microduck-cover.webp": [
 1200,
 675
@@ -1003,9 +1211,17 @@
 1080,
 375
 ],
+"/uploads/microduck/microduck-on-desk-640.webp": [
+640,
+1138
+],
 "/uploads/microduck/microduck-on-desk.webp": [
 1080,
 1920
+],
+"/uploads/moto-gps-waveshare/moto-gps-a1-pcb-640.webp": [
+640,
+640
 ],
 "/uploads/moto-gps-waveshare/moto-gps-a1-pcb.webp": [
 1400,
@@ -1019,17 +1235,33 @@
 900,
 1957
 ],
+"/uploads/moto-gps-waveshare/moto-gps-ble-en-640.webp": [
+640,
+387
+],
 "/uploads/moto-gps-waveshare/moto-gps-ble-en.webp": [
 1800,
 1088
+],
+"/uploads/moto-gps-waveshare/moto-gps-ble-zh-640.webp": [
+640,
+387
 ],
 "/uploads/moto-gps-waveshare/moto-gps-ble-zh.webp": [
 1800,
 1088
 ],
+"/uploads/moto-gps-waveshare/moto-gps-board-en-640.webp": [
+640,
+432
+],
 "/uploads/moto-gps-waveshare/moto-gps-board-en.webp": [
 1800,
 1215
+],
+"/uploads/moto-gps-waveshare/moto-gps-board-zh-640.webp": [
+640,
+432
 ],
 "/uploads/moto-gps-waveshare/moto-gps-board-zh.webp": [
 1800,
@@ -1051,6 +1283,10 @@
 928,
 928
 ],
+"/uploads/moto-gps-waveshare/moto-gps-schematic-j3-640.webp": [
+640,
+488
+],
 "/uploads/moto-gps-waveshare/moto-gps-schematic-j3.webp": [
 1600,
 1219
@@ -1059,9 +1295,17 @@
 928,
 928
 ],
+"/uploads/moto-gps-waveshare/moto-gps-system-en-640.webp": [
+640,
+379
+],
 "/uploads/moto-gps-waveshare/moto-gps-system-en.webp": [
 1800,
 1065
+],
+"/uploads/moto-gps-waveshare/moto-gps-system-zh-640.webp": [
+640,
+379
 ],
 "/uploads/moto-gps-waveshare/moto-gps-system-zh.webp": [
 1800,
@@ -1075,13 +1319,25 @@
 900,
 711
 ],
+"/uploads/numworks/numworks-02-640.webp": [
+640,
+467
+],
 "/uploads/numworks/numworks-02.webp": [
 1414,
 1032
 ],
+"/uploads/numworks/numworks-03-640.webp": [
+640,
+455
+],
 "/uploads/numworks/numworks-03.webp": [
 1287,
 914
+],
+"/uploads/numworks/numworks-04-640.webp": [
+640,
+455
 ],
 "/uploads/numworks/numworks-04.webp": [
 1287,
@@ -1103,21 +1359,41 @@
 994,
 646
 ],
+"/uploads/numworks/numworks-cover-640.webp": [
+640,
+360
+],
 "/uploads/numworks/numworks-cover.webp": [
 1200,
 675
+],
+"/uploads/openhrstrap/openhrstrap-02-640.webp": [
+640,
+426
 ],
 "/uploads/openhrstrap/openhrstrap-02.webp": [
 1647,
 1096
 ],
+"/uploads/openhrstrap/openhrstrap-03-640.webp": [
+640,
+359
+],
 "/uploads/openhrstrap/openhrstrap-03.webp": [
 1265,
 710
 ],
+"/uploads/openhrstrap/openhrstrap-04-640.webp": [
+640,
+359
+],
 "/uploads/openhrstrap/openhrstrap-04.webp": [
 1265,
 710
+],
+"/uploads/openhrstrap/openhrstrap-05-640.webp": [
+640,
+154
 ],
 "/uploads/openhrstrap/openhrstrap-05.webp": [
 1634,
@@ -1143,6 +1419,10 @@
 850,
 393
 ],
+"/uploads/openhrstrap/openhrstrap-cover-640.webp": [
+640,
+360
+],
 "/uploads/openhrstrap/openhrstrap-cover.webp": [
 1200,
 675
@@ -1155,13 +1435,25 @@
 1080,
 608
 ],
+"/uploads/opentrailpaper/opentrailpaper-hardware-640.webp": [
+640,
+452
+],
 "/uploads/opentrailpaper/opentrailpaper-hardware.webp": [
 1080,
 763
 ],
+"/uploads/opentrailpaper/opentrailpaper-maps-640.webp": [
+640,
+470
+],
 "/uploads/opentrailpaper/opentrailpaper-maps.webp": [
 1080,
 793
+],
+"/uploads/paperdiy/paperdiy-cover-640.webp": [
+640,
+609
 ],
 "/uploads/paperdiy/paperdiy-cover.webp": [
 1200,
@@ -1175,6 +1467,10 @@
 1080,
 810
 ],
+"/uploads/paperpal-ai-epaper-desk-companion/paperpal-ai-epaper-desk-companion-03-640.webp": [
+640,
+480
+],
 "/uploads/paperpal-ai-epaper-desk-companion/paperpal-ai-epaper-desk-companion-03.webp": [
 1080,
 810
@@ -1183,17 +1479,33 @@
 1080,
 810
 ],
+"/uploads/paperpal-ai-epaper-desk-companion/paperpal-ai-epaper-desk-companion-05-640.webp": [
+640,
+1385
+],
 "/uploads/paperpal-ai-epaper-desk-companion/paperpal-ai-epaper-desk-companion-05.webp": [
 1080,
 2337
+],
+"/uploads/paperpal-ai-epaper-desk-companion/paperpal-ai-epaper-desk-companion-06-640.webp": [
+640,
+1385
 ],
 "/uploads/paperpal-ai-epaper-desk-companion/paperpal-ai-epaper-desk-companion-06.webp": [
 1080,
 2337
 ],
+"/uploads/paperpal-ai-epaper-desk-companion/paperpal-ai-epaper-desk-companion-07-640.webp": [
+640,
+1385
+],
 "/uploads/paperpal-ai-epaper-desk-companion/paperpal-ai-epaper-desk-companion-07.webp": [
 1080,
 2337
+],
+"/uploads/paperpal-ai-epaper-desk-companion/paperpal-ai-epaper-desk-companion-08-640.webp": [
+640,
+1385
 ],
 "/uploads/paperpal-ai-epaper-desk-companion/paperpal-ai-epaper-desk-companion-08.webp": [
 1080,
@@ -1203,13 +1515,25 @@
 1080,
 643
 ],
+"/uploads/particle-snowflake/particle-snowflake-back-640.webp": [
+640,
+780
+],
 "/uploads/particle-snowflake/particle-snowflake-back.webp": [
 1265,
 1542
 ],
+"/uploads/particle-snowflake/particle-snowflake-cover-640.webp": [
+640,
+360
+],
 "/uploads/particle-snowflake/particle-snowflake-cover.webp": [
 1200,
 675
+],
+"/uploads/particle-snowflake/particle-snowflake-front-640.webp": [
+640,
+780
 ],
 "/uploads/particle-snowflake/particle-snowflake-front.webp": [
 1265,
@@ -1219,13 +1543,25 @@
 900,
 506
 ],
+"/uploads/particle-snowflake/particle-snowflake-schematic-640.webp": [
+640,
+453
+],
 "/uploads/particle-snowflake/particle-snowflake-schematic.webp": [
 1287,
 910
 ],
+"/uploads/pico-usb-wifi/pico-usb-wifi-01-640.webp": [
+640,
+349
+],
 "/uploads/pico-usb-wifi/pico-usb-wifi-01.webp": [
 1080,
 589
+],
+"/uploads/pico-usb-wifi/pico-usb-wifi-02-640.webp": [
+640,
+350
 ],
 "/uploads/pico-usb-wifi/pico-usb-wifi-02.webp": [
 1080,
@@ -1239,13 +1575,25 @@
 1265,
 894
 ],
+"/uploads/picothermal/picothermal-cover-640.webp": [
+640,
+360
+],
 "/uploads/picothermal/picothermal-cover.webp": [
 1200,
 675
 ],
+"/uploads/picothermal/picothermal-schematic-main-640.webp": [
+640,
+453
+],
 "/uploads/picothermal/picothermal-schematic-main.webp": [
 1985,
 1404
+],
+"/uploads/picothermal/picothermal-schematic-power-640.webp": [
+640,
+453
 ],
 "/uploads/picothermal/picothermal-schematic-power.webp": [
 1985,
@@ -1263,6 +1611,10 @@
 1080,
 648
 ],
+"/uploads/pocket-lab-power-supply/pocket-lab-power-supply-03-640.webp": [
+640,
+453
+],
 "/uploads/pocket-lab-power-supply/pocket-lab-power-supply-03.webp": [
 1080,
 764
@@ -1270,6 +1622,10 @@
 "/uploads/pocket-lab-power-supply/pocket-lab-power-supply-04.webp": [
 1080,
 664
+],
+"/uploads/pocket-lab-power-supply/pocket-lab-power-supply-05-640.webp": [
+640,
+441
 ],
 "/uploads/pocket-lab-power-supply/pocket-lab-power-supply-05.webp": [
 1080,
@@ -1291,9 +1647,17 @@
 1080,
 286
 ],
+"/uploads/pocket-lab-power-supply/pocket-lab-power-supply-10-640.webp": [
+640,
+1128
+],
 "/uploads/pocket-lab-power-supply/pocket-lab-power-supply-10.webp": [
 1021,
 1800
+],
+"/uploads/pocket-lab-power-supply/pocket-lab-power-supply-11-640.webp": [
+640,
+232
 ],
 "/uploads/pocket-lab-power-supply/pocket-lab-power-supply-11.webp": [
 1080,
@@ -1315,9 +1679,17 @@
 1080,
 462
 ],
+"/uploads/pocketmage-pda/pocketmage-cover-640.webp": [
+640,
+360
+],
 "/uploads/pocketmage-pda/pocketmage-cover.webp": [
 1200,
 675
+],
+"/uploads/pocketmage-pda/pocketmage-device-640.webp": [
+640,
+448
 ],
 "/uploads/pocketmage-pda/pocketmage-device.webp": [
 1080,
@@ -1363,6 +1735,10 @@
 1200,
 675
 ],
+"/uploads/raspberry-pi-h1-2026-shipment-prices/raspberry-pi-h1-2026-shipment-prices-01-640.webp": [
+640,
+434
+],
 "/uploads/raspberry-pi-h1-2026-shipment-prices/raspberry-pi-h1-2026-shipment-prices-01.webp": [
 1080,
 732
@@ -1371,13 +1747,25 @@
 1039,
 573
 ],
+"/uploads/semiconductor-price-increases-2026/semiconductor-price-increases-2026-01-640.webp": [
+640,
+659
+],
 "/uploads/semiconductor-price-increases-2026/semiconductor-price-increases-2026-01.webp": [
 1080,
 1112
 ],
+"/uploads/semiconductor-price-increases-2026/semiconductor-price-increases-2026-02-640.webp": [
+640,
+758
+],
 "/uploads/semiconductor-price-increases-2026/semiconductor-price-increases-2026-02.webp": [
 1034,
 1224
+],
+"/uploads/semiconductor-price-increases-2026/semiconductor-price-increases-2026-03-640.webp": [
+640,
+538
 ],
 "/uploads/semiconductor-price-increases-2026/semiconductor-price-increases-2026-03.webp": [
 1060,
@@ -1387,13 +1775,25 @@
 831,
 1182
 ],
+"/uploads/state-of-iot-2025-connectivity/state-of-iot-2025-connectivity-01-640.webp": [
+640,
+336
+],
 "/uploads/state-of-iot-2025-connectivity/state-of-iot-2025-connectivity-01.webp": [
 1080,
 567
 ],
+"/uploads/stopwatch/stopwatch-01-640.webp": [
+640,
+640
+],
 "/uploads/stopwatch/stopwatch-01.webp": [
 1080,
 1080
+],
+"/uploads/stopwatch/stopwatch-02-640.webp": [
+640,
+452
 ],
 "/uploads/stopwatch/stopwatch-02.webp": [
 1080,
@@ -1402,6 +1802,10 @@
 "/uploads/stopwatch/stopwatch-03.webp": [
 1080,
 1051
+],
+"/uploads/tetris-clock/tetris-clock-01-640.webp": [
+640,
+360
 ],
 "/uploads/tetris-clock/tetris-clock-01.webp": [
 1157,
@@ -1423,17 +1827,33 @@
 1933,
 890
 ],
+"/uploads/tetris-clock/tetris-clock-07-640.webp": [
+640,
+297
+],
 "/uploads/tetris-clock/tetris-clock-07.webp": [
 1265,
 587
+],
+"/uploads/tetris-clock/tetris-clock-08-640.webp": [
+640,
+480
 ],
 "/uploads/tetris-clock/tetris-clock-08.webp": [
 1265,
 949
 ],
+"/uploads/tetris-clock/tetris-clock-cover-640.webp": [
+640,
+360
+],
 "/uploads/tetris-clock/tetris-clock-cover.webp": [
 1200,
 675
+],
+"/uploads/tickey/tickey_01-640.webp": [
+640,
+466
 ],
 "/uploads/tickey/tickey_01.webp": [
 1080,
@@ -1443,9 +1863,17 @@
 1080,
 262
 ],
+"/uploads/tickey/tickey_03-640.webp": [
+640,
+360
+],
 "/uploads/tickey/tickey_03.webp": [
 1080,
 608
+],
+"/uploads/tickey/tickey_04-640.webp": [
+640,
+612
 ],
 "/uploads/tickey/tickey_04.webp": [
 1000,
@@ -1467,9 +1895,17 @@
 1080,
 608
 ],
+"/uploads/tickey/tickey_09-640.webp": [
+640,
+480
+],
 "/uploads/tickey/tickey_09.webp": [
 1080,
 810
+],
+"/uploads/tickey/tickey_10-640.webp": [
+640,
+360
 ],
 "/uploads/tickey/tickey_10.webp": [
 1080,
@@ -1511,6 +1947,10 @@
 1200,
 675
 ],
+"/uploads/tiwaz/tiwaz-02-640.webp": [
+640,
+471
+],
 "/uploads/tiwaz/tiwaz-02.webp": [
 1080,
 795
@@ -1527,9 +1967,17 @@
 361,
 137
 ],
+"/uploads/tiwaz/tiwaz-06-640.webp": [
+640,
+385
+],
 "/uploads/tiwaz/tiwaz-06.webp": [
 1265,
 761
+],
+"/uploads/tiwaz/tiwaz-07-640.webp": [
+640,
+390
 ],
 "/uploads/tiwaz/tiwaz-07.webp": [
 1265,
@@ -1543,17 +1991,33 @@
 1180,
 350
 ],
+"/uploads/tiwaz/tiwaz-10-640.webp": [
+640,
+479
+],
 "/uploads/tiwaz/tiwaz-10.webp": [
 2104,
 1575
+],
+"/uploads/tiwaz/tiwaz-11-640.webp": [
+640,
+359
 ],
 "/uploads/tiwaz/tiwaz-11.webp": [
 1265,
 710
 ],
+"/uploads/tiwaz/tiwaz-12-640.webp": [
+640,
+406
+],
 "/uploads/tiwaz/tiwaz-12.webp": [
 1949,
 1237
+],
+"/uploads/tiwaz/tiwaz-cover-640.webp": [
+640,
+360
 ],
 "/uploads/tiwaz/tiwaz-cover.webp": [
 1280,
@@ -1562,6 +2026,10 @@
 "/uploads/x-track/x-track-01.webp": [
 782,
 1116
+],
+"/uploads/x-track/x-track-02-640.webp": [
+640,
+450
 ],
 "/uploads/x-track/x-track-02.webp": [
 1080,
@@ -1578,6 +2046,10 @@
 "/uploads/x-track/x-track-05.webp": [
 200,
 400
+],
+"/uploads/x-track/x-track-06-640.webp": [
+640,
+345
 ],
 "/uploads/x-track/x-track-06.webp": [
 1080,
