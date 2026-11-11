@@ -23,7 +23,7 @@ Partial refresh is sold as a speed feature — a fraction of the update time, no
 
 The question is not "does my driver support partial refresh". It is "does this panel, in this mode, at this temperature, with this content".
 
-![Full refresh drives many transitions; partial refresh uses a short, single-polarity sequence](/images/p0/epaper-partial-refresh-waveform.svg)
+<img src="/images/p0/epaper-partial-refresh-waveform.svg" alt="Full refresh drives many transitions; partial refresh uses a short, single-polarity sequence" width="960" height="300" loading="lazy" decoding="async">
 
 ## What partial refresh actually skips
 

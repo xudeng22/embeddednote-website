@@ -23,7 +23,7 @@ Every "BLE throughput calculator" is a model. The useful question is not what nu
 
 The worked example uses the defaults: 240 KB of application data, MTU 247, LE 2M PHY, 30 ms connection interval, 15 ms event length, encrypted link.
 
-![Packet layout from link-layer header through ATT payload and MIC](/images/p0/ble-packet-layout.svg)
+<img src="/images/p0/ble-packet-layout.svg" alt="Packet layout from link-layer header through ATT payload and MIC" width="960" height="330" loading="lazy" decoding="async">
 
 ## Step 1: from MTU to usable bytes per operation
 

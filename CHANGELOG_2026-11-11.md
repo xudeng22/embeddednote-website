@@ -103,3 +103,109 @@ article images, no dangling references to deleted originals.
 - A handful of alt texts still say "GIF" after the animated WebP conversion.
 - Remaining long `seoTitle` values (68-91 characters) need editorial shortening;
   the template no longer adds a suffix to them, but they still truncate.
+
+---
+
+# Second pass (same day): e-paper cluster, BLE model, and a model correction
+
+## 1. The converter page became a search landing page
+
+`/en/tools/epaper-image-converter/` now carries body copy instead of only a
+widget: a palette table that separates reference presets from a measured device
+profile, an export table with the RAW4 packing convention, a frame-size table
+for 1.54–13.3 inch panels, four usage steps, five honest limits, seven FAQ
+entries, and `FAQPage` + `WebApplication` structured data.
+
+While checking the frame sizes against vendor pages, the 2.13-inch row turned
+out to be wrong for current modules: 250 × 122, not 212 × 104. Both are now
+listed, with the older size marked legacy.
+
+## 2. Five new articles, in both languages
+
+| Article | Purpose |
+| --- | --- |
+| E-Paper Names Decoded | E6 = Spectra 6, 1680 = SSD1680, 8151 = UC8151; how to find the real part |
+| Why Your E-Paper Photo Looks Wrong | Five-layer error model, symptom table, six causes ordered by test cost |
+| E-Paper Ghosting | Residue mechanism, temperature and waveform, counter-based policy |
+| Partial Refresh: When It Is Safe | Three gates, content table, seams, 10-cycle verification |
+| How the BLE Throughput Model Works | The planner arithmetic with a worked 240 KB example |
+
+Each ships with a diagram card and an original SVG figure. `E6` was briefly
+removed as an unverifiable product name and then restored: Spectra 6 is what the
+trade calls E6, and the official name now appears with the shorthand attached.
+
+## 3. Social cards for text-only articles
+
+Articles without a photograph were falling back to the generic PCB hero in both
+their `og:image` and their feed thumbnail. They now get purpose-drawn 1200×630
+cards, and `ArticleFeed` falls back to `/og/<translationKey>.webp` instead of
+`/images/embeddednote-hero.webp`.
+
+## 4. Model correction: the MIC is inside the 251-byte ceiling
+
+While documenting the planner, the per-packet accounting did not match the
+Bluetooth Core specification.
+
+**What was wrong.** The planner treated the 4-byte MIC as an additional field
+after the LL payload, leaving the full 251-byte payload available for data. The
+Core spec counts the MIC *inside* the LL Data PDU length, so an encrypted link
+has 247 bytes of data capacity per PDU.
+
+**Consequence.** At MTU 247 the frame is 4 (L2CAP) + 3 (ATT) + 244 (value) = 251
+bytes, which exactly fills the ceiling — adding the MIC pushes it to 255, so it
+must be fragmented into two PDUs. The old model treated it as one.
+
+**Change.**
+
+```js
+// before
+const llDataCapacity = c.llPayload;              // 251
+// after
+const llDataCapacity = Math.max(1, c.llPayload - mic);  // 247
+```
+
+**Numbers that moved** (240 KB, MTU 247, LE 2M, 30 ms interval, 15 ms event,
+4 writes per event):
+
+| | Before | After |
+| --- | ---: | ---: |
+| Data per PDU | 251 B | 247 B |
+| Airtime per write + ack | 1,408 µs | 1,812 µs |
+| Total airtime | 1.39 s | 1.78 s |
+| Effective goodput | 1.39 Mbit/s | 1.08 Mbit/s |
+| Wall time at 30 ms | 7.38 s | 7.38 s |
+
+Wall time is unchanged because the four-writes-per-event assumption binds, not
+the radio. The LE 1M case moves from 2,250 µs to 2,992 µs per operation.
+
+The tool's own note said "the negotiated LL payload (up to 251 bytes) and the
+4-byte encryption MIC are distinct fields" in both languages. That sentence was
+wrong and is replaced.
+
+**Impact.** Any encrypted-link estimate from the planner is now 20–30% slower
+than before. Unencrypted estimates are unchanged.
+
+## 5. Chinese editions
+
+Every article in this pass exists in `zh` with the same structure, the same
+numbers and the same links; a script compares the numeric tokens and heading
+counts of each pair, and both match. Titles now measure CJK glyphs as two units
+so a Chinese headline stops getting a suffix that pushes it past the SERP width.
+
+## 6. Verification
+
+```
+npm run build           # 147 pages, clean
+node tools/…            # model numbers recomputed from the planner formula
+```
+
+Checked in the built output: `srcset` on article images, per-article `og:image`,
+`BreadcrumbList` + `TechArticle`, series/related/tool blocks on every article,
+and the five new cards returning HTTP 200.
+
+## Follow-ups for the next pass
+
+- The Chinese figures still carry English labels; a Chinese-labelled SVG set is
+  worth doing for the e-paper cluster.
+- `HANDOFF` note: the planner change means any screenshot or post quoting the old
+  numbers needs updating.
