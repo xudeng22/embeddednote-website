@@ -2,7 +2,8 @@
 /**
  * EmbeddedNote V2.7 — reusable media-led article list.
  * Reads existing Markdown body images; no frontmatter/CMS migration needed.
- * Articles with no suitable image get the site's existing PCB photograph.
+ * Articles with no usable body image fall back to their own social card
+ * (/og/<translationKey>.webp) rather than the generic site photograph.
  */
 import { channels } from '../i18n/ui';
 
@@ -13,7 +14,8 @@ const {
   headingLevel = 3
 } = Astro.props;
 
-const fallbackCover = '/images/embeddednote-hero.webp';
+// Every article ships a 1200x630 card, so the fallback can stay on-topic.
+const fallbackCover = (article) => `/og/${article.data.translationKey}.webp`;
 const dateFormat = new Intl.DateTimeFormat(lang === 'zh' ? 'zh-CN' : 'en-US', {
   year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC'
 });
@@ -26,8 +28,8 @@ function cleanImageSource(raw) {
   return null;
 }
 
-function firstArticleImage(body) {
-  if (typeof body !== 'string') return fallbackCover;
+function firstArticleImage(body, article) {
+  if (typeof body !== 'string') return fallbackCover(article);
   const matches = [];
   // Standard Markdown images, including optional quoted captions.
   for (const match of body.matchAll(/!\[[^\]]*\]\(\s*(?:<([^>]+)>|([^\s)]+))(?:\s+['"][^'"]*['"])?\s*\)/g)) {
@@ -42,7 +44,7 @@ function firstArticleImage(body) {
     const url = cleanImageSource(match.url);
     if (url) return url;
   }
-  return fallbackCover;
+  return fallbackCover(article);
 }
 
 const cards = entries.map(article => {
@@ -52,7 +54,7 @@ const cards = entries.map(article => {
     title: article.data.title,
     description: article.data.description,
     url: `/${lang}/articles/${slug}/`,
-    image: firstArticleImage(article.body),
+    image: firstArticleImage(article.body, article),
     categoryLabel: category?.[lang] ?? article.data.category,
     dateLabel: dateFormat.format(article.data.pubDate),
     dateISO: article.data.pubDate.toISOString().slice(0, 10)
