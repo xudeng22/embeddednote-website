@@ -156,6 +156,7 @@ const breadcrumbLd = breadcrumbs && breadcrumbs.length
           />
         </a>
         <span class="masthead-tagline">{tagline}</span>
+        <a class="masthead-supply" href={`/${lang}/supply/`} data-en-event="supply_nav_click" data-en-placement="masthead">{lang === 'zh' ? '供货' : 'Supply'}</a>
         <LanguageSwitcher lang={lang} translations={switchLinks} />
       </div>
       <nav class="mainnav" aria-label={lang === 'zh' ? '技术导航' : 'Technical navigation'}>
@@ -165,11 +166,7 @@ const breadcrumbLd = breadcrumbs && breadcrumbs.length
             class={currentCategory === c.slug ? 'is-current-category' : undefined}
             aria-current={pathname === `/${lang}/category/${c.slug}/` ? 'page' : undefined}
           >{c[lang]}</a>)}
-          <a
-            href={`/${lang}/supply/`}
-            class="nav-supply"
-            aria-current={pathname === `/${lang}/supply/` ? 'page' : undefined}
-          >{lang === 'zh' ? '供货' : 'Supply'}</a>
+
         </div>
       </nav>
     </header>
