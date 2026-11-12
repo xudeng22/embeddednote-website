@@ -80,16 +80,19 @@ Colour depth and storage width are two different numbers, and only the second on
 
 | Panel type | Colours | Bits of information | Stored as | 200 × 200 | 800 × 480 |
 | --- | --- | --- | --- | ---: | ---: |
-| Monochrome | 2 | 1 | 1 bit per pixel | 5,000 B | 48,000 B |
-| BWR / BWRY (E5) | 3–4 | 2 | 2 bits per pixel | 10,000 B | 96,000 B |
-| E6 | 6 | 3 | 4 bits per pixel (nibble) | 20,000 B | 192,000 B |
+| Monochrome | 2 | 1 | 1 bit per pixel, eight to a byte | 5,000 B | 48,000 B |
+| BWR (3 colours) | 3 | 2 | two 1-bit planes, sent one after the other | 10,000 B | 96,000 B |
+| BWRY (E5, 4 colours) | 4 | 2 | 2 bits per pixel, four to a byte | 10,000 B | 96,000 B |
+| E6 (6 colours) | 6 | 3 | 4 bits per pixel, two to a byte | 20,000 B | 192,000 B |
+
+BWR and BWRY land on the same byte count for different reasons: the three-colour panel sends two full-size bitplanes, while the four-colour panel packs two bits into every pixel. The totals agree; the layouts do not, and one cannot be fed to a controller that expects the other.
 
 Two consequences follow:
 
 - **Do not compute an E6 frame as `pixels × 3 ÷ 8`.** For a 31.5-inch panel that gives 1.38 MB; the real frame is 1.84 MB, because the controller takes a nibble per pixel and leaves the spare bit unused.
 - **The nibble codes are not always 0–5.** At least one public implementation assigns black 0, white 1, yellow 2, red 3, blue 5 and green 6, leaving 4 unused. A converter that emits sequential 0–5 indices needs a mapping table before the bytes reach the controller.
 
-E5 is the four-colour sibling (black, white, red, yellow) at 2 bits per pixel, which is why a 4-inch E5 panel at 540 × 800 stores the same 216,000 bytes as a six-colour panel of the same size.
+E5 is the four-colour sibling (black, white, red, yellow) at 2 bits per pixel, so a 540 × 800 area needs 108,000 bytes — half of what a six-colour panel of the same size carries.
 
 ## What a product catalogue actually tells you
 
