@@ -47,7 +47,7 @@ A module has all three, and they do not imply each other. Two modules sold as "2
 
 ## The E6 family, by size
 
-E6 is not one panel; it is a family that runs from a 1.18-inch badge to a 31.5-inch sign, all six-colour (black, white, yellow, red, blue, green) and all driven at 3 bits per pixel. The sizes below come from a supplier catalogue and three datasheets we read on 2026-11-12.
+E6 is not one panel; it is a family that runs from a 1.18-inch badge to a 31.5-inch sign, all six-colour (black, white, yellow, red, blue, green) and all driven at 3 bits per pixel. The sizes below come from a 2025 product catalogue and three datasheets we read on 2026-11-12.
 
 | Size | Resolution | Pixels | RAW4 | Status |
 | --- | --- | ---: | ---: | --- |
@@ -67,16 +67,17 @@ E6 is not one panel; it is a family that runs from a 1.18-inch badge to a 31.5-i
 | 28.5 in | 2,160 × 3,060 | 6,609,600 | 3,304,800 B | in production |
 | 31.5 in | 2,560 × 1,440 | 3,686,400 | 1,843,200 B | in production |
 
-Four things the table does not tell you:
+Five things the table does not tell you:
 
-- **The pixel count is not the byte count.** Six colours need three bits, but E6 frames are carried as 4-bit indices, so a frame is `width × height ÷ 2` bytes when packed — the supplier's own capacity sheet uses that arithmetic. The 31.5-inch panel needs 1.84 MB per frame; the 1.18-inch badge needs 24,720 bytes.
+- **The pixel count is not the byte count.** Six colours need three bits, but E6 frames are carried as 4-bit indices, so a frame is `width × height ÷ 2` bytes when packed — the catalogue's own capacity sheet uses that arithmetic. The 31.5-inch panel needs 1.84 MB per frame; the 1.18-inch badge needs 24,720 bytes.
 - **Orientation is a datasheet convention, not a rule.** The 13.3-inch panel is listed as 1200 × 1600 because that is how the flex is oriented; you will see the same module sold as 1600 × 1200.
 - **Interface changes with size.** The 10.1-inch module is 16-bit parallel; the 31.5-inch is SPI with single/dual/quad data lines and QSPI for pixel data.
 - **0–50 °C is the commercial range** on every E6 datasheet we opened. Storage is −25 to +60 °C on the two that state it.
+- **One value is corrected, not copied.** The catalogue gives the 31.5-inch panel as 2460 × 1440, but its own byte calculation uses 2560, and the datasheet confirms 2560 × 1440. The table follows the datasheet.
 
 E5 is the four-colour sibling (black, white, red, yellow) at 2 bits per pixel, which is why a 4-inch E5 panel at 540 × 800 stores the same 216,000 bytes as a six-colour panel of the same size.
 
-## What a supplier catalogue actually tells you
+## What a product catalogue actually tells you
 
 A 2025 product catalogue we work from lists 67 modules. It gives resolution, outline, active area, colour set, operating temperature, storage temperature, interface and connector for every one — and it has **no controller column at all**. That is normal: the controller is a choice made with the panel, not a property of the panel.
 
@@ -170,5 +171,5 @@ Probably neither. 7.5-inch panels exist in 800 × 480 and 640 × 384, and the bu
 
 - E Ink brand pages for [Spectra 6](https://www.eink.com/brand/detail/Spectra6), [Spectra 3100](https://www.eink.com/brand/detail/Spectra3100), [Gallery](https://www.eink.com/brand/detail/Gallery) and [Marquee](https://www.eink.com/brand/detail/marquee) — brand names, temperature ranges and the Spectra 6 resolution ceiling.
 - Waveshare's [2.13-inch e-Paper HAT](https://www.waveshare.com/2.13inch-e-paper-hat.htm) product page — 250 × 122 for the current module, which is why the older 212 × 104 resolution is marked legacy.
-- A supplier module catalogue (not public) supplied the E6 size, resolution and status columns; the three datasheets above are the public cross-check. Where the catalogue disagreed with its own arithmetic, the article says so instead of choosing a value.
+- A 2025 product catalogue (not public) supplied the E6 size and resolution columns; the three datasheets above are the public cross-check. Where the two disagree, the table follows the datasheet and the text says why.
 - Controller part numbers are the ones used in the vendors' own demo directory names; always confirm against the datasheet that ships with your panel.
