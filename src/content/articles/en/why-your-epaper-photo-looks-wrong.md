@@ -123,6 +123,20 @@ The layer model and the tests are engineering practice, not a measurement campai
 
 If you are still choosing hardware, read [the pipeline guide](/en/articles/epaper-engineering-field-guide/) first: half of these failures are decided at the point where you pick the panel, the controller and the transfer format, long before the first image is converted.
 
+## Questions that sit just outside the six causes
+
+### The image is perfect on a full refresh and wrong after a partial update. Which cause is it?
+
+None of the six — the pipeline is fine. A partial refresh applies a different waveform, so a palette mapping and packing that work in full mode can come out weak or shifted. Do not touch the packer: do a full refresh, then check whether the partial waveform is supported at that temperature.
+
+### The colour swatches are correct but the photograph is washed out. Palette or dithering?
+
+Swatches correct means the index-to-colour mapping is right. Washout is usually tone: brightness and contrast are applied before quantisation, and a photograph mapped onto six reference colours loses saturation by construction. Convert with nearest-colour and no tone adjustment; if it is still flat, the palette is the limit, not the algorithm.
+
+### How do I tell a row-stride bug from a nibble-order bug by looking at the panel?
+
+A stride error shears the image: content stays recognisable but each row is displaced a little more than the one above it. A nibble error swaps neighbouring pixels, so you see two-pixel stripes or alternating colours while the geometry stays intact. The 5 × 2 vector separates the two in a single frame.
+
 ## Sources
 
 - E Ink, [How electronic ink works](https://www.eink.com/tech/detail/How_it_works) — how a pixel is driven, which is the basis for causes 5 and 6.

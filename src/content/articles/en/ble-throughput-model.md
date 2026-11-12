@@ -107,6 +107,20 @@ Measure once, then adjust two numbers: writes per event and retry percentage. Ev
 
 A usable measurement records: phone model and OS, negotiated MTU, actual PHY, connection interval as reported by a sniffer or the peripheral, bytes transferred, and the timestamp at sender completion **and** at receiver verification. Without the last one you are measuring your own buffer, not the link.
 
+## Three questions the numbers invite
+
+### The model says 7.38 s but I measure 12 s. Which input do I change first?
+
+Writes per event. Drop it from 4 to 2 and the estimate roughly doubles; if that lands near your measurement, the gap is scheduling, not radio. Look at retries after that, and at the PHY last. Changing the MTU first usually moves the estimate by a few percent.
+
+### Does raising the MTU from 247 to 517 help?
+
+Rarely, and it can hurt. At 517 the value is 514 bytes, which no longer fits a single 251-byte link-layer payload, so each write fragments into three PDUs. The operation count falls from 984 to 467, but the per-byte overhead rises; on a clean link the two effects roughly cancel. Measure before you change it.
+
+### The phone reports the write succeeded, but the device received fewer bytes. Why?
+
+Because a write callback is a sender-side event: the host handed off the packet, the peripheral did not commit it. Check the negotiated value length (`maximumWriteValueLength` on iOS), whether the link dropped and reconnected mid-transfer, and whether the receiver verified a hash. The model's last step is receiver verification for exactly this reason.
+
 ## Where the numbers come from
 
 - Bluetooth Core Specification: the ATT header (opcode + handle), the L2CAP basic header, the LL packet format, preamble and CRC lengths, the 251-byte LL Data PDU ceiling with Data Length Extension, and the rule that the PDU length includes the MIC on an encrypted link.

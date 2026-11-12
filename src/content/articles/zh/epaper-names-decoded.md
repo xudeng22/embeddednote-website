@@ -84,6 +84,20 @@ seoDescription: 'E6 指 Spectra 6,1680 指 SSD1680,8151 指 UC8151。三套命�
 
 想了解缓冲区格式搞错之后会发生什么,看[照片为什么会显示错](/zh/articles/why-your-epaper-photo-looks-wrong/)和 [RAW4 编码指南](/zh/articles/epaper-palette-raw4-packing-guide/)。要按特定色板转图,[图像转换器](/zh/tools/epaper-image-converter/)支持导入设备配置。
 
+## 看完表之后的三个问题
+
+### 只标着“2.13 寸电子纸”的模组,到底是哪个分辨率?
+
+显示一张带一像素边框的整屏图,数一下一条边上有多少像素;或者看示例工程目录:`epd2in13` 是 212 × 104 那版,`epd2in13_V3` 通常是 250 × 122。两者都拿不到时,数据手册第一页一定写了。外形尺寸对两版是一样的,靠量对角线判断不出来。
+
+### 从控制器型号能看出支不支持局刷吗?
+
+不能。控制器提供这条命令,但面板要有配套的局刷波形。挂着 SSD1680 的模组照样可能只支持全刷。去厂家示例里找**针对这个版本**的局刷例程;找不到,就按不支持处理。
+
+### 两个 7.5 寸项目给出的字节数不一样,哪个是错的?
+
+大概率都没错。7.5 寸有 800 × 480 和 640 × 384 两种,缓冲还可能是 RAW4 或 RAW8。这是四个都成立的数字:大屏 192,000 / 384,000 字节,小屏 122,880 / 245,760 字节。先确认对方用的是哪个分辨率、哪种格式,再比。
+
 ## 参考来源
 
 - E Ink 品牌页:[Spectra 6](https://cn.eink.com/brand/detail/Spectra6)、[Spectra 3100](https://cn.eink.com/brand/detail/Spectra3100)、[Gallery](https://cn.eink.com/brand/detail/Gallery)、[Marquee](https://cn.eink.com/brand/detail/marquee)——品牌名、温区与 Spectra 6 的分辨率上限。

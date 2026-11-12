@@ -84,6 +84,20 @@ We are not publishing a controller-to-panel table, because that table changes wi
 
 For the byte-level consequences of getting the buffer format wrong, see [why your e-paper photo looks wrong](/en/articles/why-your-epaper-photo-looks-wrong/) and the [RAW4 packing guide](/en/articles/epaper-palette-raw4-packing-guide/). To convert an image against a specific palette, the [image converter](/en/tools/epaper-image-converter/) accepts an imported device profile.
 
+## Questions that come after the table
+
+### A module is sold only as "2.13 inch e-paper". Which resolution is it?
+
+Display a frame with a one-pixel border and count the pixels along an edge, or read the demo directory: `epd2in13` is the 212 × 104 part, `epd2in13_V3` is usually 250 × 122. If neither is available, the first page of the datasheet always states it. The physical outline is the same for both panels, so size alone cannot tell you.
+
+### Does the controller number tell me whether partial refresh will work?
+
+No. The controller exposes the command, but the panel needs a matching partial waveform. A module can carry an SSD1680 and still support full refresh only. Look for a partial example in the vendor demo that targets this exact revision — if there is none, treat partial as unavailable.
+
+### Two 7.5-inch projects quote different byte counts. Which one is wrong?
+
+Probably neither. 7.5-inch panels exist in 800 × 480 and 640 × 384, and the buffer may be RAW4 or RAW8. That is four legitimate numbers: 192,000 / 384,000 for the larger panel and 122,880 / 245,760 for the smaller. Check which resolution and which format the project used before comparing.
+
 ## Sources
 
 - E Ink brand pages for [Spectra 6](https://www.eink.com/brand/detail/Spectra6), [Spectra 3100](https://www.eink.com/brand/detail/Spectra3100), [Gallery](https://www.eink.com/brand/detail/Gallery) and [Marquee](https://www.eink.com/brand/detail/marquee) — brand names, temperature ranges and the Spectra 6 resolution ceiling.

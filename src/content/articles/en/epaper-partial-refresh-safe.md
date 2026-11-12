@@ -114,3 +114,17 @@ If the untouched area is stable and the full refresh returns to the step-1 image
 We have not characterised partial-refresh lifetime for a specific panel, and the number is rarely published. The gates above are structural: they follow from how the waveform works, not from a measurement campaign. Your datasheet, your temperature range and your content decide the actual budget.
 
 For the mechanism behind the residue, read [E-Paper Ghosting](/en/articles/epaper-ghosting-causes-and-fixes/). For the frame-size arithmetic that tells you how much data a partial update actually moves, see the [image converter](/en/tools/epaper-image-converter/) and [the pipeline guide](/en/articles/epaper-engineering-field-guide/).
+
+## Three questions that follow the gates
+
+### My controller supports a partial window. Should I update only the 20 × 20 area that changed?
+
+Only if the window overhead is smaller than the saving. Every partial update pays for a command sequence, a LUT selection and a BUSY wait regardless of area. Below roughly a tenth of the screen, packing a full frame and refreshing everything is often simpler and no slower. Measure both paths before optimising the window.
+
+### Can I use partial refresh for a 2 fps animation?
+
+Not within any budget that keeps the panel clean. Two frames a second spends a 20-update budget in ten seconds, and the residue never gets time to clear. Panels demonstrated at that rate are usually driven with waveforms outside the vendor's rated mode; the InkBoy article explains why that is not a lifetime guarantee.
+
+### What happens if power is lost during a partial update?
+
+The panel keeps whatever state the waveform reached — often a half-driven region that looks like a torn image. On the next boot, do a full refresh before displaying anything, and do not trust a cached framebuffer. Some controllers also leave BUSY asserted until they are re-initialised.

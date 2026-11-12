@@ -118,6 +118,20 @@ What we can say is structural: ghosting is history-dependent, temperature-depend
 
 For the layers below this one, see [why your e-paper photo looks wrong](/en/articles/why-your-epaper-photo-looks-wrong/) and [the refresh timing breakdown](/en/articles/epaper-refresh-timing-pipeline/). If you are preparing an image for the panel in the first place, the [image converter](/en/tools/epaper-image-converter/) has a palette table that separates reference colours from measured device profiles.
 
+## Three questions the policy raises
+
+### Can I clear ghosting by displaying a white frame for a while?
+
+No. A white frame is just another image, driven through the same short waveform that left the residue. Only the full-refresh sequence resets the film. If white appears to help, the residue has become less visible against a uniform background — the panel has not recovered.
+
+### How do I choose PARTIAL_BUDGET for a clock that updates every minute?
+
+A minute is 1,440 updates a day. A budget of 20 forces 72 full refreshes daily, a visible flash every 20 minutes. A budget of 120 allows two hours between forced refreshes, so an hourly full refresh binds first at 24 flashes a day. Choose the flash frequency you can tolerate, then derive the budget from it.
+
+### Is ghosting permanent, or does it fade if I stop updating?
+
+It depends how far the pigment was pushed. Residue from an incomplete transition usually clears with a full refresh. Charge trapped at the electrode, or a panel run outside its temperature range for a long time, can leave a permanent set that no waveform removes. The ten-frame test tells you which one you are looking at.
+
 ## Sources
 
 - E Ink, [How electronic ink works](https://www.eink.com/tech/detail/How_it_works) — the pigment and electrode model used in the first section.
