@@ -6,23 +6,169 @@ const lang=Astro.params.lang==='zh'?'zh':'en';
 const zh=lang==='zh';
 const translations={en:'/en/tools/ble-throughput-calculator/',zh:'/zh/tools/ble-throughput-calculator/'};
 const title=zh?'BLE 吞吐率与传输时间计算器':'BLE Throughput & Transfer Planner';
-const description=zh?'专业 BLE 传输规划工具：ATT MTU、LE 1M/2M PHY、DLE、L2CAP 分片、连接事件、iOS/Android 注意事项与传输时间估算。':'Estimate BLE GATT throughput and transfer time using negotiated ATT MTU, PHY, DLE, L2CAP fragmentation and connection-event limits. Includes iOS and Android considerations.';
-const schema={'@context':'https://schema.org','@type':'SoftwareApplication',name:title,applicationCategory:'DeveloperApplication',operatingSystem:'Web',isAccessibleForFree:true,description,url:`https://embeddednote.com/${lang}/tools/ble-throughput-calculator/`,publisher:{'@id':'https://embeddednote.com/#publisher'}};
+const description=zh?'按协商 MTU、PHY、DLE、L2CAP 分片和连接事件估算 BLE 传输时间，浏览器本地计算，附完整公式、假设清单与实测校准方法。':'Estimate BLE transfer time from the negotiated MTU, PHY, DLE and connection-event limits. Browser-based, with the full arithmetic documented.';
+
+const appLd={'@context':'https://schema.org','@type':'SoftwareApplication',name:'BLE Throughput & Transfer Planner',applicationCategory:'DeveloperApplication',operatingSystem:'Any browser',browserRequirements:'Requires JavaScript',isAccessibleForFree:true,offers:{'@type':'Offer',price:'0',priceCurrency:'USD'},description,url:`https://embeddednote.com/${lang}/tools/ble-throughput-calculator/`,publisher:{'@id':'https://embeddednote.com/#publisher'}};
+
+const faqs=[
+  {q:{en:'Is this a measurement or an estimate?',zh:'这是实测还是估算？'},
+   a:{en:'An estimate. Every number comes from the Bluetooth specification plus the assumptions you enter, not from a phone on a bench. The page says which assumption dominated the result, and the model article shows the arithmetic so you can check it.',zh:'是估算。所有数字来自蓝牙规范加上你填的假设，不是某台手机在实验台上测出来的。结果区会显示是哪个假设主导了结论，模型文章给出了完整算术，可以逐行核对。'}},
+  {q:{en:'Which MTU should I enter?',zh:'MTU 应该填哪个值？'},
+   a:{en:'The negotiated value, not the one your code requested. A request for 517 often ends up at 185 or 247 once the peer answers. On iOS, read CBPeripheral.maximumWriteValueLength(for:) instead of assuming.',zh:'填协商后的值，不是你请求的值。请求 517 常常在对端回应后落在 185 或 247。iOS 上应读 CBPeripheral.maximumWriteValueLength(for:)，不要假设。'}},
+  {q:{en:'Why does LE 2M sometimes not shorten the transfer?',zh:'为什么换 LE 2M 有时并不会更快？'},
+   a:{en:'Because the connection-event budget binds first. In the worked example, 2M cuts radio time by about 40% but the wall time stays 7.38 s, since only four writes fit per event by assumption. Raising that cap to eight brings it to 3.69 s.',zh:'因为先撞上的是连接事件预算。算例里 2M 把空口时间砍掉约 40%，总时长仍是 7.38 秒，因为假设每事件只做 4 次写。把上限提到 8 次会降到 3.69 秒。'}},
+  {q:{en:'What does "writes per event" mean?',zh:'“每事件写次数”是什么意思？'},
+   a:{en:'How many GATT operations the host and controller actually pipeline into one connection event. It is a scheduler property, not a specification constant. Four is a conservative stand-in for a phone; some links do more, many do fewer.',zh:'主机和控制器在一个连接事件里实际流水了几次 GATT 操作。这是调度属性，不是规范常量。4 次是对手机的保守替代值，有些链路更多，很多更少。'}},
+  {q:{en:'Why is the real transfer slower than the estimate?',zh:'为什么实测比估算慢？'},
+   a:{en:'Usually the receiver. Flash page writes, file-system commits and application handling often dominate once the radio is fast enough. Retransmissions and phone-side write queues add more. Calibrate by lowering writes-per-event and adding a retry percentage.',zh:'通常是接收端。射频够快之后，Flash 页写入、文件系统提交和应用处理往往才是大头。重传和手机侧写队列会再叠加。校准方法：调低每事件写次数、加上重传百分比。'}},
+  {q:{en:'Does it work for notifications instead of writes?',zh:'通知（notification）方向也能算吗？'},
+   a:{en:'The scheduling arithmetic is the same, but the direction changes who schedules. Notifications run peripheral to central, and the peripheral’s own scheduler usually decides the outcome. Select the notification method to see the caveat in the result panel.',zh:'调度算术一样，但方向变了，调度方也变了。通知由从机发往主机，通常由从机自己的调度器决定结果。在工具里选 notification，结果面板会给出对应提示。'}}
+];
+
+const faqLd={'@context':'https://schema.org','@type':'FAQPage',mainEntity:faqs.map((f)=>({'@type':'Question',name:f.q[lang],acceptedAnswer:{'@type':'Answer',text:f.a[lang]}}))};
+
+const copy={
+  en:{
+    lede:'Plan a BLE transfer before you write the firmware. Enter the negotiated MTU, PHY and connection parameters, and the tool returns the operation count, the event-slot budget and the wall-clock estimate — with the assumption that dominated the result.',
+    note:'Engineering note: this is a planning model. It uses the Bluetooth Core packet format and your inputs; it is not a benchmark of a specific phone. Receiver-side flash writes and host queues can dominate once the radio is fast enough.',
+    whatTitle:'What the model does in three steps',
+    what:[
+      'It converts the ATT MTU into usable bytes per operation: MTU minus three for the opcode and handle, minus any application header you declare.',
+      'It accounts for every byte that is not your data: L2CAP header, ATT header, MIC on an encrypted link, link-layer header, preamble, CRC, the empty acknowledgement and the inter-frame spaces.',
+      'It fits those operations into connection events. The number of events times the connection interval is the wall-clock estimate.'
+    ],
+    exampleTitle:'A worked example you can check by hand',
+    example:'240,000 bytes at MTU 247 on LE 2M, 30 ms interval, 15 ms event, four writes per event: 984 write operations, two link-layer packets per write because the MIC fills the 251-byte ceiling, 246 connection events, and 7.38 s. The radio is only busy for 1.78 s of that. Full derivation: ',
+    inputsTitle:'Inputs that change the answer most',
+    inputHead:['Input','What it changes','Common mistake'],
+    inputs:[
+      ['Negotiated MTU','Bytes per operation','Entering the requested MTU instead of the negotiated one'],
+      ['Writes per event','How many operations fit in an event','Treating it as a spec constant; it is a scheduler property'],
+      ['PHY (1M / 2M)','Airtime per packet','Assuming 2M halves the wall time; it only halves radio time'],
+      ['Connection interval','How often an event occurs','Lowering the interval when the event is already saturated'],
+      ['Encryption','Four bytes of MIC inside the link-layer ceiling','Forgetting that it forces an extra packet at MTU 247'],
+      ['Method (write / request / notification)','Who acknowledges and who schedules','Using write requests for bulk data and waiting on responses']
+    ],
+    notTitle:'What it does not model',
+    not:[
+      'Controller scheduling beyond the writes-per-event assumption.',
+      'Host queues (iOS canSendWriteWithoutResponse, Android OEM differences).',
+      'Receiver-side flash writes and file-system commits.',
+      'Packet-error probability — the retry field is a linear penalty, not a model.',
+      'Connection parameter renegotiation during the transfer.'
+    ],
+    readTitle:'How to read the result',
+    read:'The event-slot budget is the number to compare against a measurement. If your measured transfer takes 12 s where the model says 7.38 s, the difference is almost always writes-per-event or receiver time, not the PHY. Adjust those two first.',
+    faqTitle:'Frequently asked questions',
+    relTitle:'Related reading',
+    rel:[
+      ['/articles/ble-throughput-model/','How the throughput model works — the arithmetic, line by line'],
+      ['/articles/ble-transfer-budget-from-mtu-to-time/','BLE transfer budget from MTU to time — formulas and a Python check'],
+      ['/articles/epaper-engineering-field-guide/','E-paper pipeline guide — the same budget applied to image transfer']
+    ]
+  },
+  zh:{
+    lede:'在写固件之前先把 BLE 传输算清楚。填入协商后的 MTU、PHY 与连接参数，工具会给出操作次数、事件槽预算和总时长，并指出是哪个假设主导了结论。',
+    note:'工程说明：这是一个规划模型，用的是蓝牙核心规范的报文格式加上你填的假设，不是某台手机的实测。射频够快之后，接收端 Flash 写入和主机队列往往会成为主要耗时。',
+    whatTitle:'模型分三步',
+    what:[
+      '把 ATT MTU 换算成每次操作的有效字节：MTU 减 3（操作码与句柄），再减掉你声明的应用头。',
+      '把不属于数据的字节全部算进去：L2CAP 头、ATT 头、加密链路上的 MIC、链路层头、前导、CRC、空确认以及两段帧间隔。',
+      '把这些操作装进连接事件。事件数乘连接间隔，就是总时长估算。'
+    ],
+    exampleTitle:'一个可以手算核对的例子',
+    example:'240,000 字节、MTU 247、LE 2M、30 ms 间隔、15 ms 事件、每事件 4 次写：984 次写操作；由于 MIC 占满 251 字节上限，每次写要拆成两个链路层包；共 246 个连接事件，合计 7.38 秒。其中射频真正忙碌只有 1.78 秒。完整推导见：',
+    inputsTitle:'影响最大的几个输入',
+    inputHead:['输入','改变什么','常见错误'],
+    inputs:[
+      ['协商 MTU','每次操作的字节数','填了请求值而不是协商值'],
+      ['每事件写次数','一个事件能装几次操作','当成规范常量；其实它是调度属性'],
+      ['PHY（1M / 2M）','每包空口时间','以为 2M 能让总时长减半；它只减空口时间'],
+      ['连接间隔','事件发生的频率','事件已经饱和时还去调小间隔'],
+      ['加密','链路层上限里占 4 字节 MIC','忘了它在 MTU 247 时会多出一个包'],
+      ['方法（write / request / notification）','谁负责确认、谁负责调度','用 write request 传大数据，然后等响应']
+    ],
+    notTitle:'模型不算的部分',
+    not:[
+      '超出“每事件写次数”假设的控制器调度。',
+      '主机队列（iOS 的 canSendWriteWithoutResponse、Android 各厂商差异）。',
+      '接收端 Flash 写入与文件系统提交。',
+      '误包概率——重传字段是线性惩罚，不是模型。',
+      '传输过程中连接参数被重新协商。'
+    ],
+    readTitle:'怎么读结果',
+    read:'要拿去和实测对比的是“事件槽预算”。如果实测 12 秒、模型给 7.38 秒，差异几乎总是每事件写次数或接收端耗时，而不是 PHY。先调这两个。',
+    faqTitle:'常见问题',
+    relTitle:'相关阅读',
+    rel:[
+      ['/articles/ble-throughput-model/','BLE 吞吐模型是怎么算出来的——逐行算术'],
+      ['/articles/ble-transfer-budget-from-mtu-to-time/','从 MTU 算到传输时间——公式与 Python 校验'],
+      ['/articles/epaper-engineering-field-guide/','电子纸完整工程指南——同一套预算用在图像传输上']
+    ]
+  }
+};
+const t=copy[lang];
 ---
-<Base lang={lang} title={title} description={description} translations={translations}>
-  <BleTransferPlanner lang={lang}/>
-  <!-- embeddednote-p0-20261106 -->
+<Base lang={lang} title={title} description={description} translations={translations} image="/og/tool-ble-planner.webp" imageAlt="BLE throughput planner: MTU 247, 984 operations, 246 connection events, 7.38 seconds">
+  <section class="ble-page">
+    <p class="eyebrow">EMBEDDEDNOTE / {zh?'工程工具':'ENGINEERING TOOLS'} / BLE</p>
+    <p class="ble-lede">{t.lede}</p>
+    <p class="ble-note">{t.note}</p>
+    <BleTransferPlanner lang={lang}/>
+  </section>
+
   <article class="p0-ble-guide prose" data-pagefind-body>
-    <h2>{zh ? '工程实例：24,400 字节的 BLE 传输预算' : 'Worked example: a 24,400-byte BLE transfer budget'}</h2>
-    <p>{zh ? '假设每包有 2 字节应用层头，ATT MTU 为 247，则单次 Write Command 可承载 247−3−2＝242 字节文件数据。24,400 字节需要 101 次操作。若假设每 20 ms 连接事件稳定支持 4 次操作，预算为 26 个事件槽，即 0.52 秒；这不是任何设备的实测结果。' : 'Assume a two-byte application header, ATT MTU 247 and no smaller API cap. Each Write Command then carries 247−3−2 = 242 file bytes. A 24,400-byte payload needs 101 operations. At an assumed four operations per 20 ms event, it occupies 26 full event slots, or a 0.52-second scheduling budget—not a device benchmark.'}</p>
-    <p>{zh ? '同样假设下，MTU 23 的单包有效文件数据只有 18 字节，所需 1,356 次操作、339 个事件槽，即 6.78 秒。实际速度可能受平台写入队列、射频条件、接收缓存和确认策略限制。' : 'At MTU 23, only 18 file bytes fit in each operation: 1,356 operations, 339 event slots and a 6.78-second modeled budget under the same assumptions. API queues, RF conditions, receiver buffers and acknowledgments may change actual elapsed time.'}</p>
-    <h3>{zh ? '怎样验证模型' : 'Verify the model on target hardware'}</h3>
-    <p>{zh ? '至少记录手机与固件版本、已协商 MTU、PHY、连接间隔、设备端文件校验成功时刻。手机写入回调不一定等于接收端保存完成。明确区分模型推算和实际测试。' : 'Record phone and firmware versions, negotiated MTU, PHY, interval and the receiver-side hash-verification timestamp. A phone write callback does not necessarily mean the entire file has been committed by the peripheral.'}</p>
-    <p><a href={`/${lang}/articles/ble-transfer-budget-from-mtu-to-time/`}>{zh ? '阅读完整的公式、Python 脚本与测试清单' : 'Read the full calculations, Python code and measurement checklist'}</a></p>
+    <h2>{t.whatTitle}</h2>
+    <ol>
+      {t.what.map((line) => <li>{line}</li>)}
+    </ol>
+
+    <h2>{t.inputsTitle}</h2>
+    <table>
+      <thead><tr>{t.inputHead.map((h) => <th>{h}</th>)}</tr></thead>
+      <tbody>
+        {t.inputs.map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}
+      </tbody>
+    </table>
+
+    <h2>{t.exampleTitle}</h2>
+    <p>{t.example}<a href={`/${lang}/articles/ble-throughput-model/`}>{zh?'吞吐模型逐步推导':'how the throughput model works'}</a>.</p>
+
+    <h2>{t.notTitle}</h2>
+    <ul>
+      {t.not.map((line) => <li>{line}</li>)}
+    </ul>
+
+    <h2>{t.readTitle}</h2>
+    <p>{t.read}</p>
+
+    <h2>{t.faqTitle}</h2>
+    {faqs.map((f) => (
+      <div class="ble-faq">
+        <h3>{f.q[lang]}</h3>
+        <p>{f.a[lang]}</p>
+      </div>
+    ))}
+
+    <h2>{t.relTitle}</h2>
+    <ul>
+      {t.rel.map(([href, label]) => <li><a href={`/${lang}${href}`}>{label}</a></li>)}
+    </ul>
   </article>
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+  <script type="application/ld+json" set:html={JSON.stringify(appLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
 </Base>
 <style>
+  .ble-page{max-width:1160px;margin:0 auto;padding:clamp(20px,3vw,34px) 0 0}
+  .ble-lede{font:clamp(15px,1.5vw,18px)/1.75 system-ui,sans-serif;color:#59645e;max-width:950px;margin:10px 0 8px}
+  .ble-note{border-left:3px solid #b94530;padding:10px 16px;background:#f8f3ea;color:#5b5144;font:13px/1.65 system-ui,sans-serif;max-width:950px}
   .p0-ble-guide{max-width:940px;margin:30px auto 55px;padding:25px 0 0;border-top:1px solid #d7d1c7}
   .p0-ble-guide h2{font-family:Georgia,'Noto Serif SC',serif}
+  .p0-ble-guide table{width:100%;border-collapse:collapse;margin:18px 0;font:14px/1.6 system-ui,sans-serif}
+  .p0-ble-guide th,.p0-ble-guide td{border-bottom:1px solid #ded7cb;padding:9px 10px;text-align:left;vertical-align:top}
+  .p0-ble-guide th{background:#f7f2e9;font-weight:700;color:#25322c}
+  .ble-faq{border-top:1px solid #e2dbcf;padding-top:14px;margin-top:14px}
+  .ble-faq h3{font:700 17px/1.4 Georgia,'Noto Serif SC',serif;margin:0 0 6px}
+  .ble-faq p{margin:0}
 </style>

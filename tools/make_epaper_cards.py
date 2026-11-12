@@ -162,18 +162,57 @@ def card_ble_model() -> None:
     image.save(OUT / "ble-throughput-model.webp", "WEBP", quality=86, method=6)
 
 
+def card_tool_ble() -> None:
+    image, draw = base(["BLE throughput", "planner"])
+    steps = [("MTU 247", "244 B/write"), ("984 ops", "2 PDUs each"), ("246 events", "× 30 ms"), ("7.38 s", "estimate")]
+    x = 64
+    for big, small in steps:
+        panel(draw, [x, 300, x + 232, 430])
+        draw.text((x + 20, 318), big, font=font(30), fill=INK)
+        draw.text((x + 20, 364), small, font=font(20, False), fill=MUTED)
+        x += 254
+    draw.text((64, 474), "ATT MTU · PHY · DLE · connection events", font=font(22, False), fill=MUTED)
+    draw.text((64, 512), "browser-local planning model, no signup", font=font(22, False), fill=ACCENT)
+    image.save(OUT / "tool-ble-planner.webp", "WEBP", quality=86, method=6)
+
+
+def card_tool_converter() -> None:
+    image, draw = base(["E-paper image", "converter"])
+    rows = [
+        ("4", ["#000000", "#ffffff", "#ff0000", "#ffff00"]),
+        ("6", ["#000000", "#ffffff", "#ff0000", "#ffff00", "#0000ff", "#00ff00"]),
+        ("8", ["#000000", "#ffffff", "#ff0000", "#ffff00", "#0000ff", "#00ff00", "#00ffff", "#ff00ff"]),
+    ]
+    y = 300
+    for label, colours in rows:
+        draw.text((64, y + 6), label, font=font(28), fill=INK)
+        x = 118
+        size = 54 if len(colours) == 4 else 44
+        for hexv in colours:
+            rgb = tuple(int(hexv[i:i + 2], 16) for i in (1, 3, 5))
+            draw.rectangle([x, y, x + size, y + size], fill=rgb, outline=LINE)
+            x += size + 8
+        y += 76
+    draw.text((64, 520), "RAW4 / RAW8 export · CIE Lab · no upload", font=font(22, False), fill=MUTED)
+    image.save(OUT / "tool-epaper-converter.webp", "WEBP", quality=86, method=6)
+
+
 if __name__ == "__main__":
     card_names()
     card_photo_wrong()
     card_ghosting()
     card_partial_refresh()
     card_ble_model()
+    card_tool_ble()
+    card_tool_converter()
     for name in (
         "epaper-names-decoded",
         "epaper-photo-looks-wrong",
         "epaper-ghosting-causes-and-fixes",
         "epaper-partial-refresh-safe",
         "ble-throughput-model",
+        "tool-ble-planner",
+        "tool-epaper-converter",
     ):
         path = OUT / f"{name}.webp"
         print(f"{path.name}: {path.stat().st_size // 1024} KB")
