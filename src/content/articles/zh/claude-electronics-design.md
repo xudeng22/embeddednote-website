@@ -1,40 +1,35 @@
 ---
+title: Claude 画完 PCB
+description: Anthropic 让 Claude Fable 5.2 从提示词做到 PCB、外壳和固件，三台原型由 Diode
+  制造并测试。本文拆开看它做对了什么、还有什么没验证。
 locale: zh
 translationKey: claude-electronics-design
-pubDate: '2026-11-11'
-updatedDate: '2026-11-11'
+pubDate: 2026-11-11
 category: hardware
-draft: false
-contentType: deep
-series: ai-hardware
-author: EmbeddedNote
-sourceUrl: https://www.anthropic.com/research/claude-electronics-design
-title: "Claude 画完 PCB"
-description: "Anthropic 让 Claude Fable 5.2 从提示词做到 PCB、外壳和固件，三台原型由 Diode 制造并测试。本文拆开看它做对了什么、还有什么没验证。"
 tags:
-- Claude
-- Anthropic
-- AI 硬件
-- PCB 设计
-- KiCad
-- DFM
-- 原型开发
-- CAD
-seoTitle: "Claude Fable 5.2 画 PCB：从提示词到三台电子原型"
-seoDescription: "Anthropic 称 Claude Fable 5.2 从提示词设计了音箱、语音中枢和掌上宠物，含 PCB、外壳与固件；本文核对公开证据与未验证部分。"
+  - Claude
+  - Anthropic
+  - AI 硬件
+  - PCB 设计
+  - KiCad
+  - DFM
+  - 原型开发
+  - CAD
+draft: false
+seoTitle: Claude Fable 5.2 画 PCB：从提示词到三台电子原型
+seoDescription: Anthropic 称 Claude Fable 5.2 从提示词设计了音箱、语音中枢和掌上宠物，含 PCB、外壳与固件；本文核对公开证据与未验证部分。
 ---
-
 Anthropic 让 Claude Fable 5.2 做了三台东西：一个 USB-C 音箱、一个语音助手中枢、一个掌上电子宠物。不是写几段 Arduino 代码，也不是只画原理图；从规格、选型、原理图、PCB 布局布线，到外壳 CAD、固件和 BOM，它全走了一遍，最后 Diode 把板子做出来、装上、测试。三台都能工作，按 [Anthropic 的研究笔记](https://www.anthropic.com/research/claude-electronics-design) 的说法，用了几周也没坏。
 
 ![三台由 Claude 设计的电子原型](/uploads/claude-electronics/claude-electronics-hero.webp)
 
 *三台设备：电池供电的掌上宠物、家用语音中枢、USB-C 音箱。图片：Anthropic*
 
-[![Anthropic Claude 电子设计演示视频封面](/uploads/claude-electronics/claude-electronics-video-poster.webp)](https://www.anthropic.com/research/claude-electronics-design)
+![Anthropic Claude 电子设计演示视频封面](/uploads/claude-electronics/claude-electronics-video-poster.webp)
 
 *Anthropic 公布的演示视频，点封面看原片。*
 
-三台设备都不复杂，但正好覆盖不同的坑。音箱是插在电脑上的 USB-C 圆饼，带麦克风、扬声器、蓝牙和 PCB 天线；语音中枢有 USB 和以太网，放在家里；电子宠物用电池，带屏幕和按键。Anthropic 给的提示词很短，Claude 写规格、挑器件、画原理图、摆器件、拉线，连 3D 打印外壳和固件一起做。它不是在真空里干活，能调 KiCad 的路由器、读数据手册，Diode 提供设计环境和制造能力。
+三台设备都不复杂，但正好覆盖不同的坑。音箱是插在电脑上的 USB-C 圆饼，带麦克风、扬声器、蓝牙和 PCB 天线；语音中枢有 USB 和以太网，放在家里；电子宠物用电池，带屏幕和按键。Anthropic 给的提示词很短，Claude 写规格、挑器件、画原理图、摆器件、拉线，连 3D 打印外壳和固件一起做。它不是在真空里干活，能调 KiCad 的布线器、读数据手册，Diode 提供设计环境和制造能力。
 
 ![Claude 的外壳、PCB、固件和装配关系](/uploads/claude-electronics/claude-electronics-design.webp)
 
