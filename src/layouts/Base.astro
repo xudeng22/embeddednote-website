@@ -163,11 +163,15 @@ const breadcrumbLd = breadcrumbs && breadcrumbs.length
       </div>
       <nav class="mainnav" aria-label={lang === 'zh' ? '技术导航' : 'Technical navigation'}>
         <div class="shell navlinks">
-          {channels.map(c => <a
-            href={`/${lang}/category/${c.slug}/`}
-            class={currentCategory === c.slug ? 'is-current-category' : undefined}
-            aria-current={pathname === `/${lang}/category/${c.slug}/` ? 'page' : undefined}
-          >{c[lang]}</a>)}
+          {[
+            { href: `/${lang}/e-paper/`, label: lang === 'zh' ? '电子纸' : 'E-paper' },
+            { href: `/${lang}/connectivity/`, label: lang === 'zh' ? '低功耗无线' : 'Connectivity' },
+            { href: `/${lang}/notes/`, label: lang === 'zh' ? '笔记' : 'Notes' }
+          ].map(link => <a
+            href={link.href}
+            class={pathname === link.href ? 'is-current-category' : undefined}
+            aria-current={pathname === link.href ? 'page' : undefined}
+          >{link.label}</a>)}
 
         </div>
       </nav>

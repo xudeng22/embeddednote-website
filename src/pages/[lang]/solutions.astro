@@ -1,0 +1,206 @@
+---
+import Base from '../../layouts/Base.astro';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'zh' } }];
+}
+
+const lang = Astro.params.lang === 'zh' ? 'zh' : 'en';
+const zh = lang === 'zh';
+const translations = { en: '/en/solutions/', zh: '/zh/solutions/' };
+
+const frames = [
+  { size: '7.09 in', res: '1200 × 1600', ppi: '282', panel: 'E6', power: '5000 mAh + Type-C' },
+  { size: '10 in', res: '1600 × 1200', ppi: '200', panel: 'E6', power: '5000 mAh + Type-C' },
+  { size: '13.3 in', res: '1200 × 1600', ppi: '150', panel: 'E6', power: '5000 mAh + Type-C' },
+  { size: '31.5 in', res: '2560 × 1440', ppi: '94', panel: 'E6', power: '12V 3A Type-C' }
+];
+---
+
+<Base
+  lang={lang}
+  title={zh ? '电子纸方案设计:从面板到整机' : 'E-paper solution design: from panel to finished product'}
+  description={zh
+    ? 'DataDelta 的电子纸方案能力:TCON 与时序板、BLE + Wi-Fi 整机、自研图像处理算法、亚克力结构,以及 7.09 至 31.5 寸 E6 相框的参考设计。'
+    : 'What DataDelta designs around the panel: TCON and bridge boards, BLE + Wi-Fi product firmware, our own image engine, mechanical build, and E6 photo-frame reference designs from 7.09 to 31.5 inch.'}
+  translations={translations}
+>
+  <section class="en-solutions">
+    <p class="eyebrow">DATADELTA · {zh ? '方案设计' : 'SOLUTION DESIGN'}</p>
+    <h1>{zh ? '不止供屏:从面板到整机的方案设计' : 'Beyond the panel: designing the product around it'}</h1>
+    <p class="sol-lede">
+      {zh
+        ? '把一块电子纸做成能上市的产品,中间隔着一层东西:时序、驱动电压、图片处理、无线传输、结构。这一层是我们自己做的——所以下面这些不是示意图,是能出样的方案。'
+        : 'Between an e-paper panel and a shippable product sits a layer: timing, drive rails, image processing, wireless transfer, mechanics. We build that layer ourselves, so the designs below are things we can sample, not diagrams.'}
+    </p>
+
+    <div class="sol-grid">
+      <article>
+        <h2>{zh ? '面板与时序' : 'Panel and timing'}</h2>
+        <p>
+          {zh
+            ? 'T2000 / T2001 自研 TCON 板卡,覆盖 10.1 到 43 寸 E6,以及 Gallery 3/4。内置残影消除的软硬件。'
+            : 'In-house T2000 and T2001 TCON boards covering 10.1 to 43 inch E6 and Gallery 3/4, with ghosting removal implemented in both hardware and firmware.'}
+        </p>
+      </article>
+      <article>
+        <h2>{zh ? '无线与固件' : 'Wireless and firmware'}</h2>
+        <p>
+          {zh
+            ? 'BLE 负责配网和低功耗唤醒,Wi-Fi 负责传图;整机按"用完即断"设计,静态画面保持时不耗电。'
+            : 'BLE handles provisioning and low-power wake-up, Wi-Fi carries the image, and the radio disconnects when it is done so a static picture costs nothing.'}
+        </p>
+      </article>
+      <article>
+        <h2>{zh ? '图像处理' : 'Image engine'}</h2>
+        <p>
+          {zh
+            ? '自研的自适应算法:尺寸缩放、亮度与对比度处理、E6 六色映射。同一张照片在我们板子上和你用通用工具转出来的,差别就在这里。'
+            : 'Our own adaptive pipeline: scaling, brightness and contrast handling, E6 six-colour mapping. It is the difference between a generic conversion and the picture you see on the frame.'}
+        </p>
+      </article>
+      <article>
+        <h2>{zh ? '整机与结构' : 'Product and mechanics'}</h2>
+        <p>
+          {zh
+            ? '亚克力结构、供电方案(电池或适配器)、App 配网流程,连同认证和包装一起交付。'
+            : 'Acrylic enclosure, power design (battery or adapter), the app provisioning flow, delivered together with certification and packaging.'}
+        </p>
+      </article>
+    </div>
+
+    <h2>{zh ? '四款 E6 全彩相框参考设计' : 'Four E6 full-colour frame reference designs'}</h2>
+    <div class="sol-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>{zh ? '尺寸' : 'Size'}</th>
+            <th>{zh ? '分辨率' : 'Resolution'}</th>
+            <th>PPI</th>
+            <th>{zh ? '面板' : 'Panel'}</th>
+            <th>{zh ? '供电' : 'Power'}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {frames.map((f) => (
+            <tr>
+              <td>{f.size}</td>
+              <td>{f.res}</td>
+              <td>{f.ppi}</td>
+              <td>{f.panel}</td>
+              <td>{f.power}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="sol-note">
+      {zh
+        ? '四款共用同一套主控平台:BK725X + 超低功耗 BLE 芯片,32 GB 存储,支持设备热点与路由器两种模式,App 端 Android 7 / iOS 13 起。31.5 寸为 12V 适配器供电,可选锂电池。以上为 Demo 配置,量产结构、电池与功能按项目定制。'
+        : 'All four share one platform: BK725X with a low-power BLE companion, 32 GB storage, device-AP and router-STA modes, app support from Android 7 and iOS 13. The 31.5-inch build runs from a 12 V adapter with an optional battery. These are demo configurations; enclosure, power and features are customised per project.'}
+    </p>
+
+    <h2>{zh ? '平台能到的边界' : 'How far the platform reaches'}</h2>
+    <ul class="sol-list">
+      <li>{zh ? 'T2001:10.1 / 15.6 寸 E6,支持普通、涟漪、快门三种刷新模式。' : 'T2001: 10.1 and 15.6 inch E6, with normal, ripple and shutter refresh modes.'}</li>
+      <li>{zh ? 'T2000:25.3 / 28.5 / 31.5 / 43 寸 E6,内置大幅面残影消除。' : 'T2000: 25.3, 28.5, 31.5 and 43 inch E6, with large-format ghosting removal.'}</li>
+      <li>{zh ? 'Gallery 3/4 TCON:10.1 与 31.5 寸,支持 DC-VCOM 与大尺寸面板。' : 'Gallery 3/4 TCON: 10.1 and 31.5 inch, with DC-VCOM support for large panels.'}</li>
+      <li>{zh ? '转接板:13.3 寸 E6 经 SPI 接任意主控,并提供驱动代码。' : 'Bridge boards: the 13.3-inch E6 connects to any host MCU over SPI, with driver code provided.'}</li>
+      <li>{zh ? '电子皮肤驱动:Prism3S 单段到 320 段,±15 V / ±30 V,RS485 可级联 255 块。' : 'Electronic-skin drivers: Prism3S segments from 1 to 320, ±15 V or ±30 V, RS485 cascading to 255 boards.'}</li>
+    </ul>
+
+    <h2>{zh ? '定制开发做过什么' : 'What custom development has covered'}</h2>
+    <p>
+      {zh
+        ? '医用骨锯/环钻/吸脂一体主机(自研系统板、7 寸串口屏、霍尔板,客户已完成医疗器械注册)、牙科设备主控(5.48 寸 AMOLED,Linux 深度定制 Qt)、带编码器反馈的旋钮屏。这些不在网站的技术文章里,但它们说明了同一件事:端到端做整机,而不只是卖屏。'
+        : 'A modular medical host for bone saw, trephine and liposuction (in-house system board, 7-inch serial display, Hall sensor board, with the customer completing device registration); a dental unit built on Ingenic X2000 with a 5.48-inch AMOLED and a deeply customised Qt interface; knob displays with encoder feedback. They do not appear in the articles here, but they describe the same thing: end-to-end product work, not panel sales.'}
+    </p>
+
+    <h2>{zh ? '已服务的客户' : 'Who we have delivered to'}</h2>
+    <p class="sol-clients">
+      Midea · Haier · Hisense · GAC · CIMC · SF Express · Airbus
+    </p>
+
+    <div class="sol-cta">
+      <p>
+        {zh
+          ? '如果你要的是"这块屏 + 一块能点亮的板 + 能出货的整机",从供货页开始;如果你只有产品定义,也可以直接谈。'
+          : 'If what you need is the panel plus a board that drives it plus a product that ships, start from the supply page. If you only have a product definition so far, that is also a fine place to start.'}
+      </p>
+      <a href={`/${lang}/supply/`}>{zh ? '供货与打样 →' : 'Supply and samples →'}</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .en-solutions {
+    width: min(100%, 820px);
+    margin: 0 auto;
+    padding: clamp(38px, 6vw, 72px) 0 clamp(64px, 8vw, 110px);
+  }
+  .en-solutions h1 {
+    font: 700 clamp(32px, 4.2vw, 50px)/1.14 Georgia, 'Noto Serif SC', serif;
+    letter-spacing: -.025em;
+    margin: 12px 0 22px;
+    color: #17211e;
+  }
+  .en-solutions h2 {
+    font: 700 clamp(20px, 2.2vw, 26px)/1.3 Georgia, 'Noto Serif SC', serif;
+    margin: 42px 0 14px;
+    color: #17211e;
+  }
+  .sol-lede {
+    color: #4d574f;
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.75;
+    margin: 0 0 28px;
+  }
+  .sol-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin: 26px 0 8px;
+  }
+  .sol-grid article {
+    border: 1px solid #d8d0c3;
+    background: #fbf8f2;
+    padding: 18px;
+  }
+  .sol-grid h2 { font-size: 17px; margin: 0 0 8px; }
+  .sol-grid p { margin: 0; color: #4d574f; font-size: 14.5px; line-height: 1.65; }
+  .sol-table-wrap { overflow-x: auto; border: 1px solid #e3dccf; background: #fffdf9; }
+  .sol-table-wrap table {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: collapse;
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+  }
+  .sol-table-wrap th {
+    background: #f4eee3;
+    text-align: left;
+    font-weight: 700;
+    padding: 11px 14px;
+    border-bottom: 2px solid #d6cdbd;
+    white-space: nowrap;
+  }
+  .sol-table-wrap td { padding: 10px 14px; border-bottom: 1px solid #ece5d8; }
+  .sol-table-wrap tr:last-child td { border-bottom: 0; }
+  .sol-note { color: #6a736c; font-size: 14px; line-height: 1.7; margin: 12px 0 0; }
+  .sol-list { margin: 14px 0 0; padding-left: 20px; color: #37413b; line-height: 1.85; }
+  .sol-clients {
+    font: 700 15px/1.7 system-ui, sans-serif;
+    letter-spacing: .02em;
+    color: #17211e;
+    border-left: 4px solid #b94530;
+    padding: 4px 0 4px 14px;
+    margin: 14px 0 0;
+  }
+  .sol-cta {
+    margin-top: 46px;
+    border-top: 1px solid #d0c8bb;
+    padding-top: 22px;
+  }
+  .sol-cta p { color: #4d574f; line-height: 1.75; margin: 0 0 10px; }
+  .sol-cta a { color: #b94530; font-weight: 700; text-underline-offset: 3px; }
+</style>

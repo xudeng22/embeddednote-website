@@ -1,0 +1,122 @@
+---
+interface HubArticle {
+  title: string;
+  description: string;
+  href: string;
+  date: string;
+  kind?: string;
+}
+interface Props {
+  lang: 'en' | 'zh';
+  eyebrow: string;
+  heading: string;
+  lede: string;
+  articles: HubArticle[];
+  tools: { label: string; href: string; note: string }[];
+  sections?: { heading: string; items: HubArticle[] }[];
+}
+const { lang, eyebrow, heading, lede, articles, tools, sections = [] } = Astro.props;
+const zh = lang === 'zh';
+---
+<>
+  <section class="hub-page">
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>{heading}</h1>
+    <p class="hub-lede">{lede}</p>
+
+    {tools.length > 0 && (
+      <div class="hub-tools">
+        {tools.map((t) => (
+          <a class="hub-tool" href={t.href}>
+            <strong>{t.label}</strong>
+            <span>{t.note}</span>
+          </a>
+        ))}
+      </div>
+    )}
+
+    {sections.map((s) => (
+      <div class="hub-section">
+        <h2>{s.heading}</h2>
+        <ul class="hub-list">
+          {s.items.map((a) => (
+            <li>
+              <a href={a.href}>{a.title}</a>
+              <p>{a.description}</p>
+              <span class="hub-meta">{a.date}{a.kind ? ` · ${a.kind}` : ''}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+
+    {articles.length > 0 && (
+      <div class="hub-section">
+        <h2>{zh ? '全部文章' : 'All articles'}</h2>
+        <ul class="hub-list">
+          {articles.map((a) => (
+            <li>
+              <a href={a.href}>{a.title}</a>
+              <p>{a.description}</p>
+              <span class="hub-meta">{a.date}{a.kind ? ` · ${a.kind}` : ''}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    <div class="hub-cta">
+      <p>
+        {zh
+          ? '这些文章背后是我们自己在做的产品:面板、TCON、整机。要样品或报价,从供货页开始。'
+          : 'Behind these articles are products we build ourselves: panels, TCON boards, finished frames. For samples or a quote, start at the supply page.'}
+      </p>
+      <a href={`/${lang}/supply/`}>{zh ? '供货与打样 →' : 'Supply and samples →'}</a>
+    </div>
+  </section>
+
+  <style>
+    .hub-page {
+      width: min(100%, 820px);
+      margin: 0 auto;
+      padding: clamp(34px, 5vw, 64px) 0 clamp(60px, 8vw, 100px);
+    }
+    .hub-page h1 {
+      font: 700 clamp(32px, 4.4vw, 52px)/1.12 Georgia, 'Noto Serif SC', serif;
+      letter-spacing: -.03em;
+      margin: 10px 0 18px;
+      color: #17211e;
+    }
+    .hub-lede {
+      color: #4d574f;
+      font-size: clamp(16px, 1.5vw, 19px);
+      line-height: 1.75;
+      margin: 0 0 26px;
+    }
+    .hub-tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 0 0 12px; }
+    .hub-tool {
+      display: block;
+      border: 1px solid #d8d0c3;
+      background: #fbf8f2;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    .hub-tool strong { display: block; color: #17211e; font-size: 15px; margin-bottom: 4px; }
+    .hub-tool span { color: #5c665f; font-size: 13.5px; line-height: 1.55; }
+    .hub-tool:hover { border-color: #b94530; }
+    .hub-section h2 {
+      font: 700 clamp(20px, 2.2vw, 26px)/1.3 Georgia, 'Noto Serif SC', serif;
+      margin: 40px 0 6px;
+      color: #17211e;
+    }
+    .hub-list { list-style: none; margin: 0; padding: 0; }
+    .hub-list li { border-bottom: 1px solid #ddd5c7; padding: 16px 0; }
+    .hub-list a { color: #17211e; font: 700 17px/1.4 Georgia, serif; text-decoration: none; }
+    .hub-list a:hover { color: #b94530; }
+    .hub-list p { margin: 5px 0 6px; color: #5c665f; font-size: 14.5px; line-height: 1.65; }
+    .hub-meta { color: #8a928b; font-size: 12px; letter-spacing: .02em; }
+    .hub-cta { margin-top: 44px; border-top: 1px solid #d0c8bb; padding-top: 22px; }
+    .hub-cta p { color: #4d574f; line-height: 1.75; margin: 0 0 10px; }
+    .hub-cta a { color: #b94530; font-weight: 700; text-underline-offset: 3px; }
+  </style>
+</>

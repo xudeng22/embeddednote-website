@@ -69,6 +69,14 @@ const families = zh
       </article>
     </div>
 
+
+    <p class="supply-solutions">
+      {zh
+        ? '如果你要的不只是屏——TCON 板、转接板、整机结构、App 配网——我们做的是完整方案。'
+        : 'If you need more than the panel — TCON boards, bridge boards, enclosure, app provisioning — that is the other half of what we do.'}
+      <a href={`/${lang}/solutions/`}>{zh ? '看方案设计能力 →' : 'See the solution designs →'}</a>
+    </p>
+
     <h2>{zh ? '供哪些屏' : 'What we stock and what we source'}</h2>
     <div class="table-wrap-supply">
       <table>
@@ -237,6 +245,22 @@ const families = zh
     border-bottom: 1px solid #ece5d8;
   }
   .table-wrap-supply tr:last-child td { border-bottom: 0; }
+  .supply-solutions {
+    margin: 22px 0 0;
+    padding: 14px 16px;
+    background: #f4eee3;
+    border-left: 4px solid #17211e;
+    color: #37413b;
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  .supply-solutions a {
+    display: inline-block;
+    margin-top: 6px;
+    color: #b94530;
+    font-weight: 700;
+    text-underline-offset: 3px;
+  }
   .supply-note {
     color: #6a736c;
     font-size: 14px;

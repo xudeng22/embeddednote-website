@@ -1,0 +1,45 @@
+---
+import Base from '../../layouts/Base.astro';
+import HubPage from '../../components/HubPage.astro';
+import { getCollection } from 'astro:content';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'zh' } }];
+}
+
+const lang = Astro.params.lang === 'zh' ? 'zh' : 'en';
+const zh = lang === 'zh';
+const translations = { en: '/en/notes/', zh: '/zh/notes/' };
+
+const all = await getCollection('articles', ({ data }) => !data.draft);
+const items = all
+  .filter((a) => a.data.locale === lang)
+  .sort((a, b) => +b.data.pubDate - +a.data.pubDate)
+  .map((a) => ({
+    title: a.data.title,
+    description: a.data.description,
+    href: `/${lang}/articles/${a.id.split('/').pop()}/`,
+    date: a.data.pubDate.toISOString().slice(0, 10),
+    kind: a.data.contentType === 'deep' ? (zh ? '深度' : 'analysis') : undefined
+  }));
+---
+
+<Base
+  lang={lang}
+  title={zh ? '全部笔记:项目与行业观察' : 'All notes: projects and industry observations'}
+  description={zh
+    ? '不进入电子纸与无线两个专题的全部文章:开源项目拆解、芯片与供应链观察、AI 硬件。'
+    : 'Everything outside the two deep tracks: open-source project breakdowns, chip and supply-chain observations, AI hardware.'}
+  translations={translations}
+>
+  <HubPage
+    lang={lang}
+    eyebrow="EMBEDDEDNOTE · NOTES"
+    heading={zh ? '笔记' : 'Notes'}
+    lede={zh
+      ? '这里放不进两个专题的内容:项目拆解、选型与供应链观察、行业动向。它们不构成体系,但经常是读者第一次找到我们的地方。'
+      : 'Everything that does not belong to the two deep tracks: project breakdowns, selection and supply-chain observations, industry moves. They are not a system, but they are often where readers first find us.'}
+    articles={items}
+    tools={[]}
+  />
+</Base>

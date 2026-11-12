@@ -1,0 +1,75 @@
+---
+import Base from '../../layouts/Base.astro';
+import HubPage from '../../components/HubPage.astro';
+import { getCollection } from 'astro:content';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'zh' } }];
+}
+
+const lang = Astro.params.lang === 'zh' ? 'zh' : 'en';
+const zh = lang === 'zh';
+const translations = { en: '/en/e-paper/', zh: '/zh/e-paper/' };
+
+const all = await getCollection('articles', ({ data }) => !data.draft);
+const fmt = (d: Date) => d.toISOString().slice(0, 10);
+
+const pick = (predicate: (data: any) => boolean) =>
+  all
+    .filter((a) => a.data.locale === lang && predicate(a.data))
+    .sort((a, b) => +b.data.pubDate - +a.data.pubDate)
+    .map((a) => ({
+      title: a.data.title,
+      description: a.data.description,
+      href: `/${lang}/articles/${a.id.split('/').pop()}/`,
+      date: fmt(a.data.pubDate),
+      kind: a.data.contentType === 'deep' ? (zh ? '深度' : 'analysis') : undefined
+    }));
+
+const epaper = pick((d) => d.series === 'epaper' || d.category === 'display');
+
+const basics = pick(
+  (d) => d.series === 'epaper' && /names|photo|palette|pipeline/i.test(d.translationKey ?? '')
+);
+const basicsKeys = new Set(basics.map((b) => b.title));
+
+const rest = epaper.filter((a) => !basicsKeys.has(a.title));
+
+const tools = [
+  {
+    label: zh ? '图像转换器' : 'Image converter',
+    href: `/${lang}/tools/epaper-image-converter/`,
+    note: zh
+      ? '把照片转成 4/6 色索引,导出 RAW4 / RAW8,选面板尺寸即看字节数。'
+      : 'Turn a photo into 4- or 6-colour indexes, export RAW4 / RAW8, and see the byte count for your panel size.'
+  },
+  {
+    label: zh ? 'E6 家族尺寸表' : 'E6 size table',
+    href: `/${lang}/articles/epaper-names-decoded/`,
+    note: zh
+      ? '15 个尺寸的分辨率、像素数与打包字节数,连同命名对照。'
+      : 'Fifteen sizes with resolution, pixel count and packed bytes, next to the naming table.'
+  }
+];
+---
+
+<Base
+  lang={lang}
+  title={zh ? '电子纸工程:波形、残影、局刷与整条链路' : 'E-paper engineering: waveform, ghosting, partial refresh, end to end'}
+  description={zh
+    ? '电子纸从图像到玻璃的整条链路:调色板与 RAW4 打包、BLE 与 SPI 传输、波形与残影、局部刷新的安全边界,以及量产时会踩的坑。'
+    : 'The whole path from image to glass: palette and RAW4 packing, BLE and SPI transfer, waveform and ghosting, the safe limits of partial refresh, and what breaks in production.'}
+  translations={translations}
+>
+  <HubPage
+    lang={lang}
+    eyebrow="EMBEDDEDNOTE · E-PAPER"
+    heading={zh ? '电子纸工程' : 'E-paper engineering'}
+    lede={zh
+      ? '电子纸的难点不在"点亮",而在从图像到玻璃这一段:索引怎么排、字节怎么打、什么时候能局刷、残影在什么温度下失控。这里的每一篇都围绕这一段写,数字都可以自己复算。'
+      : 'The hard part of e-paper is not lighting the panel up; it is the path from image to glass — how indexes are ordered, how bytes are packed, when a partial refresh is safe, and at what temperature the residue takes over. Everything here is about that path, with numbers you can re-run.'}
+    articles={rest}
+    tools={tools}
+    sections={[{ heading: zh ? '先读这几篇' : 'Start with these', items: basics }]}
+  />
+</Base>

@@ -1,0 +1,57 @@
+---
+import Base from '../../layouts/Base.astro';
+import HubPage from '../../components/HubPage.astro';
+import { getCollection } from 'astro:content';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'zh' } }];
+}
+
+const lang = Astro.params.lang === 'zh' ? 'zh' : 'en';
+const zh = lang === 'zh';
+const translations = { en: '/en/connectivity/', zh: '/zh/connectivity/' };
+
+const all = await getCollection('articles', ({ data }) => !data.draft);
+const fmt = (d: Date) => d.toISOString().slice(0, 10);
+
+const items = all
+  .filter((a) => a.data.locale === lang && (a.data.series === 'ble' || a.data.category === 'connectivity'))
+  .sort((a, b) => +b.data.pubDate - +a.data.pubDate)
+  .map((a) => ({
+    title: a.data.title,
+    description: a.data.description,
+    href: `/${lang}/articles/${a.id.split('/').pop()}/`,
+    date: fmt(a.data.pubDate),
+    kind: a.data.contentType === 'deep' ? (zh ? '深度' : 'analysis') : undefined
+  }));
+
+const tools = [
+  {
+    label: zh ? 'BLE 吞吐计算器' : 'BLE throughput planner',
+    href: `/${lang}/tools/ble-throughput-calculator/`,
+    note: zh
+      ? '把 MTU、PHY、连接间隔换算成实际耗时,并列出模型没算的部分。'
+      : 'Turn MTU, PHY and connection interval into wall-clock time, and shows what the model leaves out.'
+  }
+];
+---
+
+<Base
+  lang={lang}
+  title={zh ? '低功耗无线:BLE 吞吐与传输预算' : 'Low-power radio: BLE throughput and transfer budgets'}
+  description={zh
+    ? 'BLE 传输的算术与工程判断:ATT 开销、MTU 与链路层上限、PHY 与事件间隔、重传与接收端校验,以及"为什么实测比模型慢一倍"。'
+    : 'The arithmetic and the engineering judgement behind BLE transfers: ATT overhead, MTU against the link-layer ceiling, PHY and event spacing, retries, receiver verification, and why measurements come out slower than the model.'}
+  translations={translations}
+>
+  <HubPage
+    lang={lang}
+    eyebrow="EMBEDDEDNOTE · CONNECTIVITY"
+    heading={zh ? '低功耗无线' : 'Low-power radio'}
+    lede={zh
+      ? '这一栏只写一件事:数据从 A 到 B 到底要多久、要多少电。BLE 的传输预算看起来简单,但把 MTU、PHY、事件间隔、重传和接收端开销摆在一起之后,直觉经常是错的。'
+      : 'One subject: how long data takes to cross the air, and what it costs in energy. A BLE transfer budget looks simple until MTU, PHY, event spacing, retries and receiver overhead are put on the same page — at which point intuition is usually wrong.'}
+    articles={items}
+    tools={tools}
+  />
+</Base>
