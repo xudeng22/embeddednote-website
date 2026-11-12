@@ -16,7 +16,7 @@ author: EmbeddedNote
 contentType: deep
 series: epaper
 seoTitle: 'E-Paper Partial Refresh: When It Is Safe'
-seoDescription: 'Three gates for using partial refresh safely: panel support, unchanged mode, and temperature. Plus which content to avoid and how to verify on your own panel.'
+seoDescription: 'Partial refresh is a panel capability, not a driver flag. Three gates decide whether an e-paper display can use it, and which content should never go through it.'
 ---
 
 Partial refresh is sold as a speed feature — a fraction of the update time, no full-screen flash, less power. All true, and all conditional. On the wrong hardware, or after the wrong sequence of updates, it produces weak contrast, visible seams and residue that a full refresh cannot always clear.

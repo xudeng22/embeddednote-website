@@ -10,8 +10,8 @@ author: EmbeddedNote
 draft: false
 contentType: deep
 series: epaper
-seoTitle: '电子纸刷新时序——SPI 传图、BUSY 与屏幕实际刷新时间'
-seoDescription: '以 800×540 电子纸数据为例计算 SPI 传输下限，拆解控制器 BUSY、驱动波形和视觉稳定时间，附逻辑分析仪测试方法。'
+seoTitle: '电子纸刷新时间:SPI、BUSY 与波形拆解'
+seoDescription: '为什么 SPI 提频几乎缩短不了电子纸刷新:传输、控制器准备、波形驱动与光学稳定四段拆开,附测量方法。'
 ---
 
 有时看 SPI 抓包，图片数据几百毫秒就传完了，屏幕却过了十几秒才显示完整。这未必是 MCU 性能差。电子纸控制器把数据收进 RAM 以后，还要按波形给像素施加电压，推动带电色素颗粒移动。**数据已经传完**和**显示完成**是两回事。

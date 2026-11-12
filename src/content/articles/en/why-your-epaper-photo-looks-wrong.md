@@ -16,7 +16,7 @@ author: EmbeddedNote
 contentType: deep
 series: epaper
 seoTitle: 'E-Paper Photo Looks Wrong? Six Causes, In Order'
-seoDescription: 'Six causes for an e-paper image that does not match the preview, ordered by how cheaply you can test them, with a symptom table and a one-minute check for each.'
+seoDescription: 'Your e-paper photo does not match the preview: palette mapping, byte packing, dithering, waveform and panel, checked in order of what it costs to test.'
 ---
 
 The browser preview looked right. The panel does not. The usual next move is to reopen the dithering code, and that is usually the wrong place to start.

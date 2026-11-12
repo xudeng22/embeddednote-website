@@ -14,8 +14,8 @@ draft: false
 author: EmbeddedNote
 contentType: deep
 series: epaper
-seoTitle: 'E-Paper Names Decoded: E6, SSD1680, UC8151'
-seoDescription: 'E6 means Spectra 6, 1680 means SSD1680, 8151 means UC8151. How the three naming systems fit together, and where to find your own module number.'
+seoTitle: 'E6, SSD1680, UC8151: E-Paper Model Names Explained'
+seoDescription: 'E-paper naming decoded: E Ink brand names (E6 = Spectra 6), controller IC numbers, and module part numbers, with a 15-size table of resolutions and byte counts.'
 supplyCta: true
 ---
 

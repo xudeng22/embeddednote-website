@@ -15,8 +15,8 @@ draft: false
 author: EmbeddedNote
 contentType: deep
 series: epaper
-seoTitle: '电子纸残影:成因、温度与局刷策略'
-seoDescription: '电子纸残影的物理成因、温度与刷新模式的影响,以及一个计数器式的更新策略和可复现的验收流程,附可直接照抄的策略骨架。'
+seoTitle: '电子纸残影:原因、温度与清除方法'
+seoDescription: '电子纸(墨水屏)为什么会留下上一帧的浅影:波形、温度与刷新策略如何影响残影,给出基于计数器的更新策略和可复现的十帧测试。'
 supplyCta: true
 ---
 

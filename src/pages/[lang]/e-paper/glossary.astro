@@ -1,0 +1,156 @@
+---
+import Base from '../../../layouts/Base.astro';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'zh' } }];
+}
+
+const lang = Astro.params.lang === 'zh' ? 'zh' : 'en';
+const zh = lang === 'zh';
+const translations = { en: '/en/e-paper/glossary/', zh: '/zh/e-paper/glossary/' };
+
+const terms = zh
+  ? [
+      ['电子纸 / 墨水屏', '反射式显示,靠带电颜料在黑液里上下移动成像,不发光、断电后画面保持。常写 e-paper 或 e-paper display;E Ink 是厂商名,不是品类名。'],
+      ['Spectra 6(E6)', '六色(黑白黄红蓝绿)反射式面板。每像素 3 位颜色信息,但按 4 位半字节存放,所以一帧是宽×高÷2 字节。工作温区 0–50 °C,像素密度从 31.5 寸的 94 ppi 到 7.09 寸的 282 ppi。'],
+      ['Spectra 3100(BWRY)', '四色(黑白红黄)面板,2 位色深,一帧是宽×高÷4 字节。常见于价签、胸牌、桌牌。'],
+      ['Kaleido', '在黑白 Carta 背板上加彩色滤光片,靠滤光片显色。反射率低于纯黑白屏,彩色偏灰。'],
+      ['Gallery(ACeP)', '四粒子全彩技术,不使用滤光片,颜色由不同电压驱动不同颜料到表面形成。刷新慢,常用在标牌。'],
+      ['RAW4', '每像素 4 位索引的打包格式,一个字节放两个像素,先出现的像素在高四位。奇数宽度要处理行尾补齐。'],
+      ['局部刷新(局刷)', '只驱动变化区域、用更短波形的刷新方式。是面板能力加上波形支持,不是驱动里的一个开关。'],
+      ['残影(ghosting)', '上一帧没走完的颜料残留。全刷能重置薄膜,短波形的局刷会逐渐累积残留。'],
+      ['波形(waveform)', '驱动颜料的一组电压时序。同一块屏在不同温度下要用不同波形,靠屏上的温度传感器选表。'],
+      ['TCON', '时序控制板。把主控送来的图像数据转换成面板需要的扫描时序和电压,大尺寸电子纸通常需要独立 TCON。'],
+      ['全刷(baseline)', '完整的擦除—写入—闪烁序列,用来清掉残影。它是唯一能让薄膜回到干净状态的操作。'],
+      ['PPI', '每英寸像素数 = 分辨率 ÷ 有效显示区英寸数。同样 1200×1600,7.09 寸是 282 ppi,13.3 寸只有 150 ppi。']
+    ]
+  : [
+      ['E-paper / e-ink', 'A reflective display that moves charged pigment through a dark fluid instead of emitting light. The image persists without power. "E Ink" is a company, not the category name.'],
+      ['Spectra 6 (E6)', 'Six-colour reflective panel (black, white, yellow, red, blue, green). Three bits of colour per pixel, carried as 4-bit nibbles, so one frame is width × height ÷ 2 bytes. Rated 0–50 °C; density runs from 94 ppi at 31.5 inch to 282 ppi at 7.09 inch.'],
+      ['Spectra 3100 (BWRY)', 'Four-colour panel (black, white, red, yellow) at 2 bits per pixel, so a frame is width × height ÷ 4 bytes. Common in tags, badges and desk cards.'],
+      ['Kaleido', 'A colour filter array placed over a black-and-white Carta panel. Colour comes from the filter, which costs reflectance and leaves colours muted.'],
+      ['Gallery (ACeP)', 'Four-particle full colour with no filter: different voltages bring different pigments to the surface. Slow to refresh, used for signage.'],
+      ['RAW4', 'A packing format with a 4-bit index per pixel, two pixels per byte, the earlier pixel in the high nibble. Odd widths need row padding.'],
+      ['Partial refresh', 'Driving only the changed region with a shorter waveform. It is a panel capability plus waveform support, not a flag in the driver.'],
+      ['Ghosting', 'Residue from a transition the pigment did not finish. A full refresh resets the film; repeated short partial updates accumulate residue.'],
+      ['Waveform', 'The voltage sequence that drives the pigment. The same panel needs different waveforms at different temperatures, selected from a table using the panel temperature sensor.'],
+      ['TCON', 'Timing controller. Converts image data from the host into the scan timing and voltages the panel needs; large e-paper panels usually need a separate TCON board.'],
+      ['Full refresh (baseline)', 'The complete erase-write-flash sequence that clears residue. It is the only operation that returns the film to a clean state.'],
+      ['PPI', 'Pixels per inch, resolution divided by the active area in inches. The same 1200 × 1600 is 282 ppi at 7.09 inch and 150 ppi at 13.3 inch.']
+    ];
+
+const links = zh
+  ? {
+      'Spectra 6(E6)': '/zh/articles/epaper-names-decoded/',
+      'Spectra 3100(BWRY)': '/zh/articles/epaper-names-decoded/',
+      'RAW4': '/zh/articles/epaper-palette-raw4-packing-guide/',
+      '局部刷新(局刷)': '/zh/articles/epaper-partial-refresh-safe/',
+      '残影(ghosting)': '/zh/articles/epaper-ghosting-causes-and-fixes/',
+      'TCON': '/zh/solutions/',
+      'PPI': '/zh/articles/epaper-names-decoded/'
+    }
+  : {
+      'Spectra 6 (E6)': '/en/articles/epaper-names-decoded/',
+      'Spectra 3100 (BWRY)': '/en/articles/epaper-names-decoded/',
+      'RAW4': '/en/articles/epaper-palette-raw4-packing-guide/',
+      'Partial refresh': '/en/articles/epaper-partial-refresh-safe/',
+      'Ghosting': '/en/articles/epaper-ghosting-causes-and-fixes/',
+      'TCON': '/en/solutions/',
+      'PPI': '/en/articles/epaper-names-decoded/'
+    };
+
+const faqs = zh
+  ? [
+      ['电子纸和墨水屏是一回事吗?', '是一回事。中文口语叫墨水屏,正式说法是电子纸;英文写作 e-paper 或 e-paper display,也有人直接叫 e-ink,但 E Ink 其实是厂商名称。'],
+      ['电子纸需要一直供电才能显示吗?', '不需要。电子纸是双稳态的,断電后画面保持;功耗只发生在刷新瞬间。这也是价签能用一颗电池跑几年的原因。'],
+      ['E6 和 Spectra 6 是两种屏吗?', '不是。E6 是 Spectra 6 的常用缩写,指同一类六色面板。数据手册上写全称,卖家标题里常写 E6。'],
+      ['电子纸能显示多少种颜色?', '取决于面板:黑白 1 位、四色(BWRY)2 位、六色(E6)3 位信息。注意信息位数不等于存储位数,E6 按 4 位存放。'],
+      ['为什么同一块 1200×1600 的屏,ppi 不一样?', 'ppi 由有效显示区决定。像素数相同,屏幕越大 ppi 越低:7.09 寸是 282 ppi,13.3 寸只有 150 ppi。']
+    ]
+  : [
+      ['Is e-paper the same as e-ink?', 'Effectively yes. "E-paper" is the category, "e-ink" is the technology most panels use; E Ink is a company name, though it is often used as a shorthand for the category.'],
+      ['Does e-paper need power to keep an image?', 'No. E-paper is bistable: the image stays with the power off, and energy is only spent while refreshing. That is why a shelf label can run for years on one cell.'],
+      ['Are E6 and Spectra 6 different panels?', 'No. E6 is the common shorthand for Spectra 6. Datasheets use the full name; shop listings usually say E6.'],
+      ['How many colours can e-paper show?', 'It depends on the panel: monochrome is 1 bit, four-colour BWRY is 2 bits, six-colour E6 carries 3 bits of information. Storage can be wider than the information: E6 is stored as 4 bits per pixel.'],
+      ['Why do two 1200 × 1600 panels have different ppi?', 'PPI is set by the active area, not the pixel count. The same resolution gives 282 ppi at 7.09 inch and 150 ppi at 13.3 inch.']
+    ];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  inLanguage: zh ? 'zh-CN' : 'en',
+  mainEntity: faqs.map(([q, a]) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a }
+  }))
+};
+---
+
+<Base
+  lang={lang}
+  title={zh ? '电子纸术语表:从 E6 到 RAW4' : 'E-paper glossary: from E6 to RAW4'}
+  description={zh
+    ? '电子纸常见术语的一次性解释:E6 与 Spectra 6、BWRY、Kaleido、RAW4、局刷、残影、波形、TCON、PPI,每个词都指向更详细的那一篇。'
+    : 'One page for the words that come up when reading about e-paper: E6 and Spectra 6, BWRY, Kaleido, RAW4, partial refresh, ghosting, waveform, TCON and PPI, each pointing at the deeper article.'}
+  translations={translations}
+>
+  <section class="glossary-page">
+    <p class="eyebrow">EMBEDDEDNOTE · {zh ? '术语表' : 'GLOSSARY'}</p>
+    <h1>{zh ? '电子纸术语表' : 'E-paper glossary'}</h1>
+    <p class="gl-lede">
+      {zh
+        ? '读电子纸资料时最容易被几个词卡住:E6 到底是什么、RAW4 怎么排、局刷为什么不能随便用。这一页把词解释清楚,每个词后面都指向详细的那一篇。'
+        : 'A handful of words stop most people reading e-paper material: what E6 actually is, how RAW4 is packed, why partial refresh is not a free switch. This page defines them and points at the article that goes deeper.'}
+    </p>
+
+    <dl class="gl-list">
+      {terms.map(([term, def]) => (
+        <div class="gl-item">
+          <dt>{links[term] ? <a href={links[term]}>{term}</a> : term}</dt>
+          <dd>{def}</dd>
+        </div>
+      ))}
+    </dl>
+
+    <h2>{zh ? '五个直接回答' : 'Five direct answers'}</h2>
+    <dl class="gl-faq">
+      {faqs.map(([q, a]) => (
+        <div>
+          <dt>{q}</dt>
+          <dd>{a}</dd>
+        </div>
+      ))}
+    </dl>
+
+    <div class="gl-cta">
+      <p>
+        {zh
+          ? '这些词背后是我们自己在做的产品:面板、TCON、整机。要样品或方案,从供货页开始。'
+          : 'Behind these words are products we build: panels, TCON boards, finished units. For samples or a design, start at the supply page.'}
+      </p>
+      <a href={`/${lang}/supply/`}>{zh ? '供货与打样 →' : 'Supply and samples →'}</a>
+    </div>
+  </section>
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+</Base>
+
+<style>
+  .glossary-page { width: min(100%, 820px); margin: 0 auto; padding: clamp(34px, 5vw, 64px) 0 clamp(60px, 8vw, 100px); }
+  .glossary-page h1 { font: 700 clamp(32px, 4.4vw, 50px)/1.12 Georgia, 'Noto Serif SC', serif; letter-spacing: -.03em; margin: 10px 0 18px; color: #17211e; }
+  .gl-lede { color: #4d574f; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.75; margin: 0 0 26px; }
+  .gl-list { margin: 0; padding: 0; }
+  .gl-item { border-bottom: 1px solid #e3dccf; padding: 14px 0; }
+  .gl-item dt { font: 700 16px/1.4 Georgia, 'Noto Serif SC', serif; color: #17211e; margin-bottom: 4px; }
+  .gl-item dt a { color: #17211e; text-decoration: none; border-bottom: 1px solid #c9bfb2; }
+  .gl-item dt a:hover { color: #b94530; border-color: #b94530; }
+  .gl-item dd { margin: 0; color: #4d574f; font-size: 14.5px; line-height: 1.7; }
+  .glossary-page h2 { font: 700 clamp(20px, 2.2vw, 26px)/1.3 Georgia, 'Noto Serif SC', serif; margin: 42px 0 12px; color: #17211e; }
+  .gl-faq { margin: 0; }
+  .gl-faq > div { padding: 12px 0; border-bottom: 1px solid #ece5d8; }
+  .gl-faq dt { font-weight: 700; color: #17211e; margin-bottom: 4px; }
+  .gl-faq dd { margin: 0; color: #4d574f; line-height: 1.7; font-size: 14.5px; }
+  .gl-cta { margin-top: 40px; border-top: 1px solid #d0c8bb; padding-top: 22px; }
+  .gl-cta p { color: #4d574f; line-height: 1.75; margin: 0 0 10px; }
+  .gl-cta a { color: #b94530; font-weight: 700; text-underline-offset: 3px; }
+</style>

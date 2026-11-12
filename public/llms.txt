@@ -11,6 +11,11 @@ Editorial rule: numbers are either calculated from stated formulas, quoted from 
 document that defines them, or labelled as unverified. The site does not publish
 benchmark results it has not measured, and it says so in the article.
 
+## Tools and references
+
+- [E-paper glossary](https://embeddednote.com/en/e-paper/glossary/): E6, BWRY, RAW4, partial refresh, ghosting, TCON, PPI, one sentence each.
+- [E6 module table](https://embeddednote.com/en/articles/epaper-names-decoded/): 15 sizes with resolution, pixel count and packed bytes.
+
 ## Tools
 
 - [E-Paper Image Converter](https://embeddednote.com/en/tools/epaper-image-converter/): converts a photo to 4-, 6- or 8-colour e-paper palettes with CIE Lab matching and Floyd–Steinberg / Atkinson / Bayer dithering, then exports PNG previews plus RAW4 and RAW8 palette-index data. Client-side, no upload.

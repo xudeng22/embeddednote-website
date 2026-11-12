@@ -15,8 +15,8 @@ draft: false
 author: EmbeddedNote
 contentType: deep
 series: epaper
-seoTitle: 'E-Paper Ghosting: Causes, Temperature and Update Policy'
-seoDescription: 'What e-paper ghosting actually is, why temperature and refresh mode change it, and a counter-based update policy with a test sequence you can reproduce.'
+seoTitle: 'E-Paper Ghosting: Why It Happens and How to Clear It'
+seoDescription: 'Why an e-paper (e-ink) panel keeps a faint copy of the last frame: waveform, temperature and update policy, plus the counter-based fix and a ten-frame test you can run.'
 supplyCta: true
 ---
 
