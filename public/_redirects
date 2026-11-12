@@ -1,4 +1,26 @@
-/ /en/ 302
-/en/articles/embeddednote-launch/ /en/about/ 301
-/zh/articles/embeddednote-launch/ /zh/about/ 301
-/articles/embeddednote-launch/ /zh/about/ 301
+# Category pages collapsed into the two topic hubs plus the notes archive.
+# Bare path and pagination both need a rule; the splat does not cover the bare path.
+/en/category/display/   /en/e-paper/   301
+/en/category/display/*  /en/e-paper/   301
+/zh/category/display/   /zh/e-paper/   301
+/zh/category/display/*  /zh/e-paper/   301
+/en/category/connectivity/   /en/connectivity/   301
+/en/category/connectivity/*  /en/connectivity/   301
+/zh/category/connectivity/   /zh/connectivity/   301
+/zh/category/connectivity/*  /zh/connectivity/   301
+/en/category/open-source/   /en/notes/   301
+/en/category/open-source/*  /en/notes/   301
+/zh/category/open-source/   /zh/notes/   301
+/zh/category/open-source/*  /zh/notes/   301
+/en/category/mcu-soc/   /en/notes/   301
+/en/category/mcu-soc/*  /en/notes/   301
+/zh/category/mcu-soc/   /zh/notes/   301
+/zh/category/mcu-soc/*  /zh/notes/   301
+/en/category/hardware/   /en/notes/   301
+/en/category/hardware/*  /en/notes/   301
+/zh/category/hardware/   /zh/notes/   301
+/zh/category/hardware/*  /zh/notes/   301
+/en/category/tools/   /en/notes/   301
+/en/category/tools/*  /en/notes/   301
+/zh/category/tools/   /zh/notes/   301
+/zh/category/tools/*  /zh/notes/   301
