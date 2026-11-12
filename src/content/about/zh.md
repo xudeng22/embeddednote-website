@@ -11,7 +11,7 @@ locale: zh
 
 ## 这里主要写什么
 
-网站保留六个技术分类：[开源项目](/zh/category/open-source/)、[MCU 与 SoC](/zh/category/mcu-soc/)、[硬件设计](/zh/category/hardware/)、[通信技术](/zh/category/connectivity/)、[显示技术](/zh/category/display/)和[开发工具](/zh/category/tools/)。有些文章拆解项目仓库和原理图，有些专门讨论协议分包、数据编码、器件选型或调试方法。
+网站按两条主线组织：[电子纸](/zh/e-paper/)（波形、残影、局部刷新、图像到字节的整条链路）和[低功耗无线](/zh/connectivity/)（BLE 吞吐与传输预算）；其余项目拆解、芯片与供应链观察收在[笔记](/zh/notes/)里。有些文章拆解仓库和原理图，有些专门讨论协议分包、数据编码或调试方法。
 
 除了文章，还可以直接使用 [BLE 吞吐率与传输时间工具](/zh/tools/ble-throughput-calculator/) 和 [E-Paper Image Converter](/zh/tools/epaper-image-converter/)。例如，[电子纸工程指南](/zh/articles/epaper-engineering-field-guide/) 将图像处理、文件传输和刷屏时序放在同一条链路中分析。这些计算和工具有自己的适用条件，不能直接当成实物测试结论。
 

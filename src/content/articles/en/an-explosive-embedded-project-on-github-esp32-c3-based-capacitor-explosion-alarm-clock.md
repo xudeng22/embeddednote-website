@@ -34,7 +34,7 @@ The repository README is unusually specific for a joke project, so most of the h
 
 One piece of arithmetic that the README does not spell out. With a 12 V rail and a 10 ohm limiter, each slot draws about 1.2 A at the instant it starts charging, falling as the capacitor comes up. Three slots fired together would ask for roughly 3.6 A, which is above the 3 A figure the project quotes. That is a budget for one slot at a time, not a simultaneous worst case, and it is the kind of number that decides whether a 12 V supply folds back on the first bang.
 
-# Safety Notice
+## Safety Notice
 
 Exploding electrolytic capacitors can produce high-velocity fragments, hot materials, and irritating fumes. This article is intended to introduce an open-source engineering project. Building this device or conducting similar experiments indoors or near a bed is strongly discouraged.
 
@@ -48,7 +48,7 @@ The entire device measures just 72 × 74 × 36 mm. On the front, there's a 128 �
 
 The front panel features only an OLED display and two buttons, giving the device a remarkably understated appearance.
 
-# The Hardware Isn't Complicated, but Every Component Has a Purpose
+## The Hardware Isn't Complicated, but Every Component Has a Purpose
 
 The main controller is an ESP32-C3-MINI-1-N4, featuring a RISC-V core and built-in Wi-Fi. It handles network connectivity, NTP time synchronization, menu interaction, alarm scheduling, and web-based configuration.
 
@@ -77,7 +77,7 @@ Main Components
 | 12 V / 3.3 V linear regulators | Relay and logic power supplies |
 
 
-# The Actuator Design Is Completely Absurd
+## The Actuator Design Is Completely Absurd
 
 The firmware is built using PlatformIO. Early in the project, while the developer was still waiting for ESP32 components to arrive, an ESP8266 build target was also retained.
 
@@ -99,7 +99,7 @@ This approach would preserve the most interesting parts of the project's softwar
 
 ![ESP32-C3 capacitor alarm clock — figure accompanying firmware discussion](/uploads/image-24.webp)
 
-# The PCB and Mechanical Design Are Where This Joke Gets Surprisingly Serious
+## The PCB and Mechanical Design Are Where This Joke Gets Surprisingly Serious
 
 The repository organizes its KiCad project into hierarchical schematics covering the main board, ESP32, power supply, USB interface, relays, and display circuitry. It also provides Gerber files, a component BOM, enclosure CAD files, and an Onshape project.
 

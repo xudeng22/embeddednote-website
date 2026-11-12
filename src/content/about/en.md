@@ -20,7 +20,7 @@ A project video can tell you what a device does. It rarely tells you which files
 
 ## What you'll find here
 
-We cover six areas: [open-source projects](/en/category/open-source/), [MCUs and SoCs](/en/category/mcu-soc/), [hardware design](/en/category/hardware/), [connectivity](/en/category/connectivity/), [displays](/en/category/display/) and [development tools](/en/category/tools/).
+The site runs on two tracks: [e-paper](/en/e-paper/) (waveform, ghosting, partial refresh, the whole path from image to bytes) and [low-power radio](/en/connectivity/) (BLE throughput and transfer budgets). Project breakdowns, chip and supply-chain observations sit in [notes](/en/notes/).
 
 Some posts work through a schematic, repository or datasheet. Others explain a communication budget, a display-data format or a debugging method. The goal is to leave readers with something they can check or use, not just a list of specifications.
 
