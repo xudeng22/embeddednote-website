@@ -23,5 +23,5 @@ h1,h2,h3,.brand{font-family:Georgia,"Times New Roman",serif} .hero h1{max-width:
 /* Supply entry in the masthead nav: same rhythm, different colour */
 .en-footer-supply{color:#b94530;font-weight:700}
 /* Supply button in the masthead, before the language switch */
-.masthead-supply{display:inline-flex;align-items:center;justify-content:center;background:#b94530;color:#fff;font:700 11px/1 system-ui,sans-serif;letter-spacing:.04em;padding:9px 13px;text-decoration:none;white-space:nowrap}
+.masthead-supply{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;background:#b94530;color:#fff;font:700 11px/1 system-ui,sans-serif;letter-spacing:.04em;padding:9px 13px;text-decoration:none;white-space:nowrap}
 .masthead-supply:hover{background:#17211e;color:#fff}
