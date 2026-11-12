@@ -156,8 +156,10 @@ const breadcrumbLd = breadcrumbs && breadcrumbs.length
           />
         </a>
         <span class="masthead-tagline">{tagline}</span>
-        <a class="masthead-supply" href={`/${lang}/supply/`} data-en-event="supply_nav_click" data-en-placement="masthead">{lang === 'zh' ? '供货' : 'Supply'}</a>
-        <LanguageSwitcher lang={lang} translations={switchLinks} />
+        <div class="masthead-actions">
+          <a class="masthead-supply" href={`/${lang}/supply/`} data-en-event="supply_nav_click" data-en-placement="masthead">{lang === 'zh' ? '供货' : 'Supply'}</a>
+          <LanguageSwitcher lang={lang} translations={switchLinks} />
+        </div>
       </div>
       <nav class="mainnav" aria-label={lang === 'zh' ? '技术导航' : 'Technical navigation'}>
         <div class="shell navlinks">
