@@ -37,7 +37,7 @@ A module has all three, and they do not imply each other. Two modules sold as "2
 
 | Official name | What people write | What it is |
 | --- | --- | --- |
-| E Ink [Spectra 6](https://www.eink.com/brand/detail/Spectra6) | **E6** | Six-colour panel family for signage. 0–50 °C, up to 200 ppi |
+| E Ink [Spectra 6](https://www.eink.com/brand/detail/Spectra6) | **E6** | Six-colour panel family for signage. 0–50 °C; 94 ppi at 31.5 in up to 282 ppi at 7.09 in |
 | E Ink [Spectra 3100](https://www.eink.com/brand/detail/Spectra3100) | BWRY, "four colour" | Black, white, red, yellow |
 | E Ink [Gallery](https://www.eink.com/brand/detail/Gallery) | **ACeP** | Advanced Colour ePaper, the older full-colour family |
 | E Ink [Kaleido](https://www.eink.com/brand) | — | Colour filter over a Carta backplane; the reader-style colour |
@@ -72,6 +72,7 @@ Four things the table does not tell you:
 
 - **The pixel count is not the byte count.** Six colours need three bits, but E6 frames are carried as 4-bit indices, so a frame is `width × height ÷ 2` bytes when packed — the catalogue's own capacity sheet uses that arithmetic. The 31.5-inch panel needs 1.84 MB per frame; the 1.18-inch badge needs 24,720 bytes.
 - **Orientation is a datasheet convention, not a rule.** The 13.3-inch panel is listed as 1200 × 1600 because that is how the flex is oriented; you will see the same module sold as 1600 × 1200.
+- **Pixel density falls as the panel grows.** 282 ppi at 7.09 in, 200 ppi at 10.1 in, 150 ppi at 13.3 in, 94 ppi at 31.5 in — all from the panel datasheets.
 - **Interface changes with size.** The 10.1-inch module is 16-bit parallel; the 31.5-inch is SPI with single/dual/quad data lines and QSPI for pixel data.
 - **0–50 °C is the commercial range** on every E6 datasheet we opened. Storage is −25 to +60 °C on the two that state it.
 
