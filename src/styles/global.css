@@ -19,3 +19,8 @@ h1,h2,h3,.brand{font-family:Georgia,"Times New Roman",serif} .hero h1{max-width:
 /* Markdown alignment (| ---: |) arrives as align="right"; keep it for headers too */
 .prose th[align="right"], .prose td[align="right"]{text-align:right}
 .prose th[align="center"], .prose td[align="center"]{text-align:center}
+
+/* Supply entry in the masthead nav: same rhythm, different colour */
+.mainnav a.nav-supply{color:#b94530}
+.mainnav a.nav-supply:hover{background:#b94530;color:#fff}
+.en-footer-supply{color:#b94530;font-weight:700}

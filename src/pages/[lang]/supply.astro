@@ -1,0 +1,270 @@
+---
+import Base from '../../layouts/Base.astro';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'zh' } }];
+}
+
+const lang = Astro.params.lang === 'zh' ? 'zh' : 'en';
+const zh = lang === 'zh';
+const translations = { en: '/en/supply/', zh: '/zh/supply/' };
+const email = 'xden2019@gmail.com';
+const subject = zh ? '电子纸选型咨询' : 'E-paper panel enquiry';
+
+const families = zh
+  ? [
+      { name: '黑白', sizes: '0.97 – 13.3 寸', colours: '黑、白', use: '价签、阅读器、仪表' },
+      { name: 'BWR / BWRY(E5)', sizes: '1.54 – 17.06 寸', colours: '黑、白、红、黄', use: '价签、胸牌、桌牌' },
+      { name: 'E6(Spectra 6)', sizes: '1.18 – 31.5 寸', colours: '黑白黄红蓝绿', use: '标牌、相框、胸章' }
+    ]
+  : [
+      { name: 'Monochrome', sizes: '0.97 – 13.3 in', colours: 'black, white', use: 'labels, readers, instruments' },
+      { name: 'BWR / BWRY (E5)', sizes: '1.54 – 17.06 in', colours: 'black, white, red, yellow', use: 'tags, badges, desk cards' },
+      { name: 'E6 (Spectra 6)', sizes: '1.18 – 31.5 in', colours: 'black, white, yellow, red, blue, green', use: 'signage, frames, badges' }
+    ];
+---
+
+<Base
+  lang={lang}
+  title={zh ? '电子纸面板、驱动板与整机方案' : 'E-paper panels, driver boards and finished displays'}
+  description={zh
+    ? '电子纸面板与模组供货：黑白、BWRY、E6 六色，0.97 至 31.5 寸，配套驱动板、定制排线与固件调试。'
+    : 'E-paper panels and modules: monochrome, BWRY and E6 six-colour from 0.97 to 31.5 inch, with driver boards, custom FPC and firmware bring-up.'}
+  translations={translations}
+>
+  <section class="en-supply">
+    <p class="eyebrow">EMBEDDEDNOTE · {zh ? '供货与方案' : 'SUPPLY'}</p>
+    <h1>{zh ? '电子纸面板、驱动板与整机方案' : 'E-paper panels, driver boards and finished displays'}</h1>
+    <p class="en-supply-lede">
+      {zh
+        ? '这个站点的技术文章写的正是我们供货的这类屏。如果你正在选型、要样品、或者需要一块能直接点亮的驱动板，从这里开始。'
+        : 'We supply the kind of panels this site writes about. If you are specifying an e-paper display and need samples, a driver board, or a custom FPC, start here.'}
+    </p>
+
+    <div class="supply-cards">
+      <article>
+        <h2>{zh ? '面板与模组' : 'Panels and modules'}</h2>
+        <p>
+          {zh
+            ? '黑白、四色(BWR / BWRY)、六色(E6)。带 FPC 的裸屏模组,SPI 接口为主,大尺寸有并口方案。'
+            : 'Monochrome, four-colour (BWR / BWRY) and six-colour (E6). Bare modules with FPC, mostly SPI, with parallel options on the larger sizes.'}
+        </p>
+      </article>
+      <article>
+        <h2>{zh ? '驱动板' : 'Driver boards'}</h2>
+        <p>
+          {zh
+            ? '把屏点亮所需的那一圈电路:升压、电平转换、SPI 接口,以及 ESP32 / STM32 / nRF 上的点亮固件。'
+            : 'The circuit between a panel and your MCU: boost rails, level shifting, SPI, plus bring-up firmware for ESP32, STM32 and nRF parts.'}
+        </p>
+      </article>
+      <article>
+        <h2>{zh ? '集成支持' : 'Integration support'}</h2>
+        <p>
+          {zh
+            ? '定制排线、结构图、刷新型号选择,以及"这张图在你的屏上为什么发灰"这类问题的排查。'
+            : 'Custom FPC, mechanical drawings, waveform selection, and the debugging that starts with "why does this image look washed out on my panel".'
+          }
+        </p>
+      </article>
+    </div>
+
+    <h2>{zh ? '供哪些屏' : 'What we stock and what we source'}</h2>
+    <div class="table-wrap-supply">
+      <table>
+        <thead>
+          <tr>
+            <th>{zh ? '系列' : 'Family'}</th>
+            <th>{zh ? '尺寸范围' : 'Size range'}</th>
+            <th>{zh ? '颜色' : 'Colours'}</th>
+            <th>{zh ? '常见用途' : 'Typical use'}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {families.map((f) => (
+            <tr>
+              <td>{f.name}</td>
+              <td>{f.sizes}</td>
+              <td>{f.colours}</td>
+              <td>{f.use}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="supply-note">
+      {zh
+        ? '尺寸范围写的是我们实际走通过的型号;同一尺寸下往往有多个分辨率,选型请以具体型号为准。站内的 E6 家族表列了 15 个尺寸的分辨率与字节数。'
+        : 'The ranges are parts we have actually handled. One diagonal usually carries several resolutions, so selection comes down to the exact model; the E6 table on this site lists 15 sizes with resolution and byte count.'}
+    </p>
+
+    <h2>{zh ? '怎么开始' : 'How it works'}</h2>
+    <ol class="supply-steps">
+      <li>
+        <strong>{zh ? '说清楚需求' : 'Tell us the spec'}</strong>
+        <span>{zh ? '尺寸、分辨率、颜色、接口、目标产量、认证要求。' : 'Size, resolution, colours, interface, target volume, certification.'}</span>
+      </li>
+      <li>
+        <strong>{zh ? '样品' : 'Sample'}</strong>
+        <span>{zh ? '先给一块能点亮的样品和对应数据手册,你自己验波形和显示效果。' : 'A working sample and its datasheet, so you can check the waveform and the image yourself.'}</span>
+      </li>
+      <li>
+        <strong>{zh ? '验证' : 'Validation'}</strong>
+        <span>{zh ? '温度、刷新策略、贴合与结构。这一步最容易发现问题,也最省钱。' : 'Temperature, refresh policy, bonding and mechanics. Problems found here are the cheap ones.'}</span>
+      </li>
+      <li>
+        <strong>{zh ? '量产' : 'Volume'}</strong>
+        <span>{zh ? '确认型号后进批量,交期与 MOQ 按尺寸和是否定制排线单独报。' : 'Once the part is fixed, MOQ and lead time are quoted per size and per custom FPC.'}</span>
+      </li>
+    </ol>
+
+    <h2>{zh ? '发邮件时请带上' : 'What to put in the email'}</h2>
+    <ul class="supply-list">
+      <li>{zh ? '目标尺寸与分辨率(或已知型号)' : 'Target size and resolution, or a part number you already use'}</li>
+      <li>{zh ? '颜色数,以及是否需要局刷' : 'Colour count, and whether you need partial refresh'}</li>
+      <li>{zh ? '主控与接口(SPI / 并口 / 其他)' : 'Host MCU and interface (SPI, parallel, other)'}</li>
+      <li>{zh ? '预期年用量与首批数量' : 'Expected annual volume and first order'}</li>
+      <li>{zh ? '销售地区与认证要求' : 'Destination market and certification needs'}</li>
+      <li>{zh ? '时间节点:打样、试产、量产' : 'Timeline: prototype, pilot, mass production'}</li>
+    </ul>
+
+    <h2>{zh ? '两件我们不做的事' : 'Two things we do not do'}</h2>
+    <p>
+      {zh
+        ? '第一,不编数据。给不出的参数,我们说给不出,不拿别家型号的数字顶上。第二,不写软文。这个站点的文章是编辑内容,供应商付费不会改变结论——包括我们自己供货的型号。'
+        : 'We do not invent numbers: if a figure is not available, we say so instead of borrowing one from a similar part. And we do not sell reviews: the articles here stay editorial, and paying us does not change a conclusion, including about parts we supply.'}
+    </p>
+
+    <div class="supply-contact">
+      <p>
+        {zh
+          ? '把上面的信息发到这个邮箱,标题用「电子纸选型」;我们会在一个工作日内回,先回答能不能做,再谈价格。'
+          : 'Send the list above to this address with "E-paper panel enquiry" in the subject. We reply within one working day, first on whether it is feasible, then on price.'}
+      </p>
+      <p class="supply-email">
+        <a href={`mailto:${email}?subject=${encodeURIComponent(subject)}`}>{email}</a>
+      </p>
+      <p class="supply-company">
+        {zh ? '供货方:德坦数字科技(Datadelta)' : 'Supplied by Datadelta (德坦数字科技)'}
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .en-supply {
+    width: min(100%, 820px);
+    margin: 0 auto;
+    padding: clamp(38px, 6vw, 72px) 0 clamp(64px, 8vw, 110px);
+  }
+  .en-supply h1 {
+    font: 700 clamp(34px, 4.2vw, 52px)/1.14 Georgia, 'Noto Serif SC', serif;
+    letter-spacing: -.025em;
+    margin: 12px 0 22px;
+    color: #17211e;
+  }
+  .en-supply h2 {
+    font: 700 clamp(20px, 2.2vw, 26px)/1.3 Georgia, 'Noto Serif SC', serif;
+    margin: 42px 0 14px;
+    color: #17211e;
+  }
+  .en-supply-lede {
+    color: #4d574f;
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.75;
+    margin: 0 0 30px;
+  }
+  .supply-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 14px;
+    margin: 26px 0 8px;
+  }
+  .supply-cards article {
+    border: 1px solid #d8d0c3;
+    background: #fbf8f2;
+    padding: 18px 18px 16px;
+  }
+  .supply-cards h2 {
+    font-size: 17px;
+    margin: 0 0 8px;
+  }
+  .supply-cards p {
+    margin: 0;
+    color: #4d574f;
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+  .table-wrap-supply {
+    overflow-x: auto;
+    border: 1px solid #e3dccf;
+    background: #fffdf9;
+  }
+  .table-wrap-supply table {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: collapse;
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+  }
+  .table-wrap-supply th {
+    background: #f4eee3;
+    text-align: left;
+    font-weight: 700;
+    padding: 11px 14px;
+    border-bottom: 2px solid #d6cdbd;
+    white-space: nowrap;
+  }
+  .table-wrap-supply td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #ece5d8;
+  }
+  .table-wrap-supply tr:last-child td { border-bottom: 0; }
+  .supply-note {
+    color: #6a736c;
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 12px 0 0;
+  }
+  .supply-steps {
+    list-style: none;
+    padding: 0;
+    margin: 18px 0 0;
+    counter-reset: step;
+  }
+  .supply-steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 0 0 18px 46px;
+    border-left: 1px solid #ddd5c7;
+    margin-left: 15px;
+  }
+  .supply-steps li:last-child { border-left-color: transparent; padding-bottom: 0; }
+  .supply-steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: -15px;
+    top: -2px;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    background: #b94530;
+    color: #fff;
+    font: 700 13px system-ui, sans-serif;
+    border-radius: 50%;
+  }
+  .supply-steps strong { display: block; margin-bottom: 2px; color: #17211e; }
+  .supply-steps span { color: #4d574f; font-size: 14.5px; line-height: 1.65; }
+  .supply-list { margin: 14px 0 0; padding-left: 20px; color: #37413b; line-height: 1.85; }
+  .supply-contact {
+    margin-top: 46px;
+    border-top: 1px solid #d0c8bb;
+    padding-top: 24px;
+  }
+  .supply-contact p { color: #4d574f; line-height: 1.75; margin: 0 0 12px; }
+  .supply-email { font-size: clamp(18px, 2vw, 22px); }
+  .supply-email a { color: #b94530; text-underline-offset: 3px; overflow-wrap: anywhere; }
+  .supply-email a:hover { text-decoration: underline; }
+  .supply-company { font-size: 13.5px; color: #6a736c; }
+</style>

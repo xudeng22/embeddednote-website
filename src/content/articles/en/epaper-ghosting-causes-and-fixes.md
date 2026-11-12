@@ -17,6 +17,7 @@ contentType: deep
 series: epaper
 seoTitle: 'E-Paper Ghosting: Causes, Temperature and Update Policy'
 seoDescription: 'What e-paper ghosting actually is, why temperature and refresh mode change it, and a counter-based update policy with a test sequence you can reproduce.'
+supplyCta: true
 ---
 
 Ghosting looks like a software bug: the previous frame is still there, faintly, behind the new one. So the first instinct is to redraw the frame harder — refresh twice, refresh in a different mode, write the same buffer again.

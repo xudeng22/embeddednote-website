@@ -16,6 +16,7 @@ contentType: deep
 series: epaper
 seoTitle: '电子纸命名对照:E6、SSD1680、UC8151'
 seoDescription: 'E6 指 Spectra 6,1680 指 SSD1680,8151 指 UC8151。三套命名怎么对应,以及如何在两分钟内找到自己模组的真实型号。'
+supplyCta: true
 ---
 
 有人问"E6 7.3 寸屏",得到的回答却是 SSD1680 和一份 2.13 寸的数据手册。这里混了三套命名,而且没有一套等于你下单时的商品标题。

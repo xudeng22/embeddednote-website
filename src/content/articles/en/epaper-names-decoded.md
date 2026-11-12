@@ -16,6 +16,7 @@ contentType: deep
 series: epaper
 seoTitle: 'E-Paper Names Decoded: E6, SSD1680, UC8151'
 seoDescription: 'E6 means Spectra 6, 1680 means SSD1680, 8151 means UC8151. How the three naming systems fit together, and where to find your own module number.'
+supplyCta: true
 ---
 
 Someone asks about an "E6 7.3 inch panel" and gets an answer about "SSD1680" and a datasheet for a 2.13-inch module. Three different naming systems are in play, and none of them is the same as the product title you bought.

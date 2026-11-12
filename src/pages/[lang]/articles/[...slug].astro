@@ -2,6 +2,7 @@
 import Base from '../../../layouts/Base.astro';
 import GiscusComments from '../../../components/GiscusComments.astro';
 import ArticleFooterNav from '../../../components/ArticleFooterNav.astro';
+import SupplyCta from '../../../components/SupplyCta.astro';
 import { getCollection, render } from 'astro:content';
 import { channels } from '../../../i18n/ui';
 
@@ -165,6 +166,8 @@ const jsonld = {
       )
     }
   </article>
+
+  {article.data.supplyCta && <SupplyCta lang={lang} placement="article" />}
 
   <ArticleFooterNav article={article} lang={lang} />
 

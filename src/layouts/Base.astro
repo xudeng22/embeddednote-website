@@ -165,6 +165,11 @@ const breadcrumbLd = breadcrumbs && breadcrumbs.length
             class={currentCategory === c.slug ? 'is-current-category' : undefined}
             aria-current={pathname === `/${lang}/category/${c.slug}/` ? 'page' : undefined}
           >{c[lang]}</a>)}
+          <a
+            href={`/${lang}/supply/`}
+            class="nav-supply"
+            aria-current={pathname === `/${lang}/supply/` ? 'page' : undefined}
+          >{lang === 'zh' ? '供货' : 'Supply'}</a>
         </div>
       </nav>
     </header>
@@ -173,6 +178,7 @@ const breadcrumbLd = breadcrumbs && breadcrumbs.length
       <div class="shell en-footer-inner">
         <a href={`/${lang}/`} class="en-footer-brand" aria-label="EmbeddedNote homepage">Embedded<span>Note</span></a>
         <nav class="en-footer-links" aria-label={lang === 'zh' ? '页脚链接' : 'Footer links'}>
+          <a href={`/${lang}/supply/`} class="en-footer-supply">{lang === 'zh' ? '供货与方案' : 'Supply'}</a>
           <!-- embeddednote-footer-tools-v1.4:start -->
           <a href={`/${lang}/tools/ble-throughput-calculator/`}>{lang === 'zh' ? 'BLE 传输规划器' : 'BLE Transfer Planner'}</a>
           <span aria-hidden="true">|</span>

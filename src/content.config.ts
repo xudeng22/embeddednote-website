@@ -15,7 +15,9 @@ const articles = defineCollection({
     // deep = original engineering analysis with reproducible material.
     contentType:z.enum(['news','deep']).default('news'),
     // Groups articles that belong to one engineering series, e.g. 'epaper'.
-    series:z.string().optional()
+    series:z.string().optional(),
+    // Shows the panel-supply call to action under the article body.
+    supplyCta:z.boolean().default(false)
   })
 });
 const about = defineCollection({
