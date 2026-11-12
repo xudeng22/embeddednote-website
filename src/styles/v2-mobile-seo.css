@@ -29,7 +29,9 @@
 .prose video,
 .prose iframe { max-width: 100%; height: auto; }
 .prose pre { overflow-x: auto; max-width: 100%; }
-.prose table { display: block; overflow-x: auto; max-width: 100%; }
+/* Tables keep their table layout so columns can share the full width; the
+   scroll container is added at build time by the rehype plugin. */
+.prose table { max-width: 100%; }
 
 @media (max-width: 700px) {
   .masthead-inner { gap: 12px; min-width: 0; }
