@@ -67,13 +67,12 @@ E6 is not one panel; it is a family that runs from a 1.18-inch badge to a 31.5-i
 | 28.5 in | 2,160 × 3,060 | 6,609,600 | 3,304,800 B | in production |
 | 31.5 in | 2,560 × 1,440 | 3,686,400 | 1,843,200 B | in production |
 
-Five things the table does not tell you:
+Four things the table does not tell you:
 
 - **The pixel count is not the byte count.** Six colours need three bits, but E6 frames are carried as 4-bit indices, so a frame is `width × height ÷ 2` bytes when packed — the catalogue's own capacity sheet uses that arithmetic. The 31.5-inch panel needs 1.84 MB per frame; the 1.18-inch badge needs 24,720 bytes.
 - **Orientation is a datasheet convention, not a rule.** The 13.3-inch panel is listed as 1200 × 1600 because that is how the flex is oriented; you will see the same module sold as 1600 × 1200.
 - **Interface changes with size.** The 10.1-inch module is 16-bit parallel; the 31.5-inch is SPI with single/dual/quad data lines and QSPI for pixel data.
 - **0–50 °C is the commercial range** on every E6 datasheet we opened. Storage is −25 to +60 °C on the two that state it.
-- **One value is corrected, not copied.** The catalogue gives the 31.5-inch panel as 2460 × 1440, but its own byte calculation uses 2560, and the datasheet confirms 2560 × 1440. The table follows the datasheet.
 
 ### How many bytes a frame really takes
 
@@ -186,5 +185,5 @@ Probably neither. 7.5-inch panels exist in 800 × 480 and 640 × 384, and the bu
 
 - E Ink brand pages for [Spectra 6](https://www.eink.com/brand/detail/Spectra6), [Spectra 3100](https://www.eink.com/brand/detail/Spectra3100), [Gallery](https://www.eink.com/brand/detail/Gallery) and [Marquee](https://www.eink.com/brand/detail/marquee) — brand names, temperature ranges and the Spectra 6 resolution ceiling.
 - Waveshare's [2.13-inch e-Paper HAT](https://www.waveshare.com/2.13inch-e-paper-hat.htm) product page — 250 × 122 for the current module, which is why the older 212 × 104 resolution is marked legacy.
-- A 2025 product catalogue (not public) supplied the E6 size and resolution columns; the three datasheets above are the public cross-check. Where the two disagree, the table follows the datasheet and the text says why.
+- A 2025 product catalogue (not public) supplied the E6 size and resolution columns; the three datasheets above are the public cross-check. Where the two disagree, the table follows the datasheet.
 - Controller part numbers are the ones used in the vendors' own demo directory names; always confirm against the datasheet that ships with your panel.
