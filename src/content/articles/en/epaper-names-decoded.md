@@ -49,23 +49,23 @@ A module has all three, and they do not imply each other. Two modules sold as "2
 
 E6 is not one panel; it is a family that runs from a 1.18-inch badge to a 31.5-inch sign, all six-colour (black, white, yellow, red, blue, green) and all driven at 3 bits per pixel. The sizes below come from a supplier catalogue and three datasheets we read on 2026-11-12.
 
-| Size | Resolution | Pixels | RAW4 | Status | Note |
-| --- | --- | ---: | ---: | --- | --- |
-| 1.18 in | 240 × 206 | 49,440 | 24,720 B | in production |  |
-| 1.54 in | 200 × 200 | 40,000 | 20,000 B | in production |  |
-| 2.61 in | 400 × 400 | 160,000 | 80,000 B | sampling | HX5325 controller |
-| 3.68 in | 528 × 792 | 418,176 | 209,088 B | in production |  |
-| 3.98 in | 552 × 768 | 423,936 | 211,968 B | in production |  |
-| 4.0 in | 570 × 800 | 456,000 | 228,000 B | development |  |
-| 4.38 in | 560 × 800 | 448,000 | 224,000 B | development |  |
-| 6.19 in | 494 × 1,490 | 736,060 | 368,030 B | in production | number-plate format |
-| 9.7 in | 1,120 × 784 | 878,080 | 439,040 B | in production | supplier sheet also quotes 874 rows |
-| 10.1 in | 1,600 × 1,200 | 1,920,000 | 960,000 B | in production | 200 ppi, 16-bit parallel |
-| 13.3 in | 1,200 × 1,600 | 1,920,000 | 960,000 B | in production | 0.169 mm pitch, 0-50 C |
-| 16.36 in | 3,840 × 1,490 | 5,721,600 | 2,860,800 B | in production | number-plate format |
-| 18.56 in | 400 × 3,200 | 1,280,000 | 640,000 B | in production | shelf label |
-| 28.5 in | 2,160 × 3,060 | 6,609,600 | 3,304,800 B | sampling |  |
-| 31.5 in | 2,560 × 1,440 | 3,686,400 | 1,843,200 B | sampling | 94 ppi, SPI/QSPI, 0-50 C |
+| Size | Resolution | Pixels | RAW4 | Status |
+| --- | --- | ---: | ---: | --- |
+| 1.18 in | 240 × 206 | 49,440 | 24,720 B | in production |
+| 1.54 in | 200 × 200 | 40,000 | 20,000 B | in production |
+| 2.61 in | 400 × 400 | 160,000 | 80,000 B | in production |
+| 3.68 in | 528 × 792 | 418,176 | 209,088 B | in production |
+| 3.98 in | 552 × 768 | 423,936 | 211,968 B | in production |
+| 4.0 in | 570 × 800 | 456,000 | 228,000 B | in production |
+| 4.38 in | 560 × 800 | 448,000 | 224,000 B | in production |
+| 6.19 in | 494 × 1,490 | 736,060 | 368,030 B | in production |
+| 9.7 in | 1,120 × 784 | 878,080 | 439,040 B | in production |
+| 10.1 in | 1,600 × 1,200 | 1,920,000 | 960,000 B | in production |
+| 13.3 in | 1,200 × 1,600 | 1,920,000 | 960,000 B | in production |
+| 16.36 in | 3,840 × 1,490 | 5,721,600 | 2,860,800 B | in production |
+| 18.56 in | 400 × 3,200 | 1,280,000 | 640,000 B | in production |
+| 28.5 in | 2,160 × 3,060 | 6,609,600 | 3,304,800 B | in production |
+| 31.5 in | 2,560 × 1,440 | 3,686,400 | 1,843,200 B | in production |
 
 Four things the table does not tell you:
 
@@ -73,8 +73,6 @@ Four things the table does not tell you:
 - **Orientation is a datasheet convention, not a rule.** The 13.3-inch panel is listed as 1200 × 1600 because that is how the flex is oriented; you will see the same module sold as 1600 × 1200.
 - **Interface changes with size.** The 10.1-inch module is 16-bit parallel; the 31.5-inch is SPI with single/dual/quad data lines and QSPI for pixel data.
 - **0–50 °C is the commercial range** on every E6 datasheet we opened. Storage is −25 to +60 °C on the two that state it.
-
-The 9.7-inch row carries a caveat: the supplier sheet gives 1120 × 784 in its dot-matrix column but computes its byte count from 1120 × 874. We kept the dot-matrix figure and flagged the conflict rather than pick one silently.
 
 E5 is the four-colour sibling (black, white, red, yellow) at 2 bits per pixel, which is why a 4-inch E5 panel at 540 × 800 stores the same 216,000 bytes as a six-colour panel of the same size.
 
