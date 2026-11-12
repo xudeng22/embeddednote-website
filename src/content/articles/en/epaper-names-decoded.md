@@ -78,6 +78,43 @@ The 9.7-inch row carries a caveat: the supplier sheet gives 1120 × 784 in its d
 
 E5 is the four-colour sibling (black, white, red, yellow) at 2 bits per pixel, which is why a 4-inch E5 panel at 540 × 800 stores the same 216,000 bytes as a six-colour panel of the same size.
 
+## What a supplier catalogue actually tells you
+
+A 2025 product catalogue we work from lists 67 modules. It gives resolution, outline, active area, colour set, operating temperature, storage temperature, interface and connector for every one — and it has **no controller column at all**. That is normal: the controller is a choice made with the panel, not a property of the panel.
+
+Representative rows, including two that show why the model number cannot be decoded from the size:
+
+| Model | Size | Resolution | Colours | Operating temperature |
+| --- | --- | --- | --- | --- |
+| P15415S | 1.54 in | 200 × 200 | BWRY | 0–40 °C |
+| P213167 | 2.13 in | 122 × 250 | BW | 0–50 °C |
+| P21335S | 2.13 in | 122 × 250 | BWRY | 0–40 °C |
+| P29005S | 2.9 in | 128 × 296 | BW | 0–50 °C |
+| P350024 | 3.5 in | 184 × 384 | BW | 0–50 °C |
+| P397012 | 3.97 in | 480 × 800 | BWRY | 0–40 °C |
+| PL133040 | 13.3 in | 960 × 680 | BW | 0–50 °C |
+
+Two things fall out of the whole list, not just the rows above:
+
+- **Adding colour costs ten degrees.** Every black/white part is rated 0–50 °C; every BWR and BWRY part is 0–40 °C. Across 67 models there are only two black/white exceptions. One N-Color part is narrower still, at 15–35 °C.
+- **The size prefix is not the resolution.** `PL133040` is a 13.3-inch panel at 960 × 680, while the 13.3-inch E6 module is 1200 × 1600. Same diagonal, different product.
+
+## Controllers, where we could confirm one
+
+The catalogue does not name controllers, so this column only exists where the vendor shipped a demo whose filename states it. A missing entry means "not stated in the files we have", not "unsupported".
+
+| Vendor demo | Panel | Resolution | Controller | Partial example |
+| --- | --- | --- | --- | --- |
+| `CODE_Partial_P290051_296x128_SSD1680` | 2.9 in | 128 × 296 | SSD1680 | yes |
+| `CODE_Partial_P426010_480x800_SSD1677` | 4.26 in | 480 × 800 | SSD1677 | yes |
+| `4.26&3.97CODE_800×480_E5_SSD2677` | 3.97 / 4.26 in | 480 × 800 | SSD2677 | no |
+| `1.18CODE_206×240_E6_HX5325` | 1.18 in | 206 × 240 | HX5325 | no |
+| `4色价签 296x128 SSD2680` | 2.9 in | 128 × 296 | SSD2680 | no |
+| `4色价签 250x128 SSD2682` | 2.13 in | 122 × 250 | SSD2682 | no |
+| `4色价签 300x400 SSD2683` | 3.0 in | 300 × 400 | SSD2683 | no |
+
+The pattern worth noticing: the only two partial-refresh demos are the two that say `Partial` in the filename, and they target SSD1680 and SSD1677. If your panel ships a driver from a different family, treat partial refresh as something to prove rather than assume.
+
 ## The controller numbers in the code
 
 Demo folders are named after the controller, not the panel, so the number in the filename is your real search key:
