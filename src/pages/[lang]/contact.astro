@@ -25,10 +25,10 @@ const translations = { en: '/en/contact/', zh: '/zh/contact/' };
     <h1>{zh ? '联系我们' : 'Contact'}</h1>
     <p class="en-contact-intro">
       {zh
-        ? '欢迎向我们推荐项目、反馈技术错误，或就编辑及合作事宜与我们联系。'
-        : 'We welcome project suggestions, technical corrections, and relevant editorial or partnership enquiries.'}
+        ? '欢迎推荐项目、指出技术错误;供货、方案设计与资料合作请走商务合作。'
+        : 'Project suggestions and technical corrections are welcome. For panels, design work or datasheets, use the business cooperation page.'}
     </p>
-        <p><a href={`/${lang}/partner/`} data-en-event="partner_link_click" data-en-placement="contact">{zh ? '商业合作与品牌赞助 →' : 'Brand Partnerships & Sponsorships →'}</a></p>
+        <p><a href={`/${lang}/partner/`} data-en-event="partner_link_click" data-en-placement="contact">{zh ? '商务合作 →' : 'Business cooperation →'}</a></p>
 <p class="en-contact-email">
       <strong>{zh ? '邮箱：' : 'Email:'}</strong>
       <a href="mailto:xden2019@gmail.com">xden2019@gmail.com</a>

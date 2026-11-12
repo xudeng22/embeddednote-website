@@ -17,7 +17,10 @@ export default defineConfig({
       },
       // Paginated archive pages are noindex,follow; keep them out of the sitemap
       // so the crawl budget goes to articles and tools.
-      filter: (page) => !/\/page\/\d+\/?$/.test(page)
+      // Category pages were collapsed into /e-paper/, /connectivity/ and /notes/
+      // and now answer with a 301, so they should not be advertised either.
+      filter: (page) =>
+        !/\/page\/\d+\/?$/.test(page) && !/\/category\/[^/]+\//.test(page)
     })
   ],
   markdown: { rehypePlugins: [embeddednoteImages] },

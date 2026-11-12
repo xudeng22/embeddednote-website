@@ -162,16 +162,31 @@ const breadcrumbLd = breadcrumbs && breadcrumbs.length
         </div>
       </div>
       <nav class="mainnav" aria-label={lang === 'zh' ? '技术导航' : 'Technical navigation'}>
-        <div class="shell navlinks">
+        <div class="shell navlinks navlinks-3">
           {[
-            { href: `/${lang}/e-paper/`, label: lang === 'zh' ? '电子纸' : 'E-paper' },
-            { href: `/${lang}/connectivity/`, label: lang === 'zh' ? '低功耗无线' : 'Connectivity' },
-            { href: `/${lang}/notes/`, label: lang === 'zh' ? '笔记' : 'Notes' }
+            {
+              href: `/${lang}/e-paper/`,
+              label: lang === 'zh' ? '电子纸' : 'E-paper',
+              desc: lang === 'zh' ? '波形 · 残影 · 局部刷新' : 'Waveform, ghosting, partial refresh'
+            },
+            {
+              href: `/${lang}/connectivity/`,
+              label: lang === 'zh' ? '低功耗无线' : 'Connectivity',
+              desc: lang === 'zh' ? 'BLE 吞吐与传输预算' : 'BLE throughput and transfer budgets'
+            },
+            {
+              href: `/${lang}/notes/`,
+              label: lang === 'zh' ? '笔记' : 'Notes',
+              desc: lang === 'zh' ? '项目 · 芯片 · 供应链' : 'Projects, chips, supply chain'
+            }
           ].map(link => <a
             href={link.href}
-            class={pathname === link.href ? 'is-current-category' : undefined}
+            class:list={['nav-cell', pathname === link.href && 'is-current-category']}
             aria-current={pathname === link.href ? 'page' : undefined}
-          >{link.label}</a>)}
+          >
+            <span class="nav-label">{link.label}</span>
+            <span class="nav-desc">{link.desc}</span>
+          </a>)}
 
         </div>
       </nav>
