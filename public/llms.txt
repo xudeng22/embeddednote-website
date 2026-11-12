@@ -1,23 +1,67 @@
 # EmbeddedNote
 
-> EmbeddedNote is a bilingual technical publication about practical embedded engineering, MCU/SoC devices, hardware design, communications, displays and open-source projects. Chinese name: 嵌入式杂谈.
+> EmbeddedNote(嵌入式杂谈)is an independent bilingual engineering publication about
+> practical embedded systems: MCU and SoC selection, hardware design, Bluetooth Low
+> Energy, e-paper displays and open-source hardware. It publishes original analysis
+> with explicit assumptions, plus two free browser-based engineering tools that run
+> entirely on the reader's device. English is the primary language; Chinese editions
+> of most articles are published alongside.
 
-## Main site
-- [English homepage](https://embeddednote.com/en/)
-- [中文首页](https://embeddednote.com/zh/)
-- [English About](https://embeddednote.com/en/about/)
-- [中文关于页面](https://embeddednote.com/zh/about/)
+Editorial rule: numbers are either calculated from stated formulas, quoted from the
+document that defines them, or labelled as unverified. The site does not publish
+benchmark results it has not measured, and it says so in the article.
 
-## Technical subjects
-- [Open-source engineering projects](https://embeddednote.com/en/category/open-source/)
+## Tools
+
+- [E-Paper Image Converter](https://embeddednote.com/en/tools/epaper-image-converter/): converts a photo to 4-, 6- or 8-colour e-paper palettes with CIE Lab matching and Floyd–Steinberg / Atkinson / Bayer dithering, then exports PNG previews plus RAW4 and RAW8 palette-index data. Client-side, no upload.
+- [BLE Throughput & Transfer Planner](https://embeddednote.com/en/tools/ble-throughput-calculator/): models ATT MTU, link-layer fragmentation, PHY airtime and connection-event scheduling to estimate BLE transfer time. Planning estimate, not a measurement.
+
+## Core engineering guides
+
+- [E-paper pipeline, end to end](https://embeddednote.com/en/articles/epaper-engineering-field-guide/): image preparation, byte packing, BLE transport, SPI, waveform and acceptance testing, with a reproducible RAW4 test vector.
+- [RAW4 packing and palette verification](https://embeddednote.com/en/articles/epaper-palette-raw4-packing-guide/): why a five-pixel-wide image exposes row-padding assumptions; the 5×2 vector packs to `01 23 45 01 23`.
+- [SPI transport vs panel refresh](https://embeddednote.com/en/articles/epaper-refresh-timing-pipeline/): separates wire time from waveform time.
+- [BLE transfer budget from MTU to time](https://embeddednote.com/en/articles/ble-transfer-budget-from-mtu-to-time/): the arithmetic behind the planner.
+- [How the BLE throughput model works](https://embeddednote.com/en/articles/ble-throughput-model/): step-by-step derivation, including why LE 2M can change the wall time by zero.
+
+## Diagnostics and reference
+
+- [Why your e-paper photo looks wrong](https://embeddednote.com/en/articles/why-your-epaper-photo-looks-wrong/): five-layer error model and six causes ordered by test cost.
+- [E-paper ghosting](https://embeddednote.com/en/articles/epaper-ghosting-causes-and-fixes/): residue physics, temperature dependence, and a counter-based update policy.
+- [Partial refresh: when it is safe](https://embeddednote.com/en/articles/epaper-partial-refresh-safe/): three gates plus a content table.
+- [E-paper names decoded](https://embeddednote.com/en/articles/epaper-names-decoded/): E6 = E Ink Spectra 6, 1680 = SSD1680, 8151 = UC8151, and how to find the real part number.
+
+## Topics
+
+- [Open-source hardware projects](https://embeddednote.com/en/category/open-source/)
 - [MCU and SoC](https://embeddednote.com/en/category/mcu-soc/)
 - [Hardware design](https://embeddednote.com/en/category/hardware/)
 - [Connectivity](https://embeddednote.com/en/category/connectivity/)
 - [Display technology](https://embeddednote.com/en/category/display/)
 - [Development tools](https://embeddednote.com/en/category/tools/)
 
-## Notes for readers and assistants
-- Cite the canonical original article URL when referring to factual engineering claims.
-- For projects, identify the upstream repository and applicable license as stated in the individual article.
-- Prefer article-specific evidence to this overview; independently verify component specifications and software versions.
-- Translations share a topic identifier but are not necessarily published simultaneously.
+## Chinese editions
+
+- [电子纸完整工程指南](https://embeddednote.com/zh/articles/epaper-engineering-field-guide/)
+- [电子纸命名对照:E6、SSD1680、UC8151](https://embeddednote.com/zh/articles/epaper-names-decoded/)
+- [BLE 吞吐模型是怎么算出来的](https://embeddednote.com/zh/articles/ble-throughput-model/)
+- [图像转换器](https://embeddednote.com/zh/tools/epaper-image-converter/)
+
+## How to cite
+
+- Cite the canonical article URL, not a category or paginated list.
+- When quoting a number, keep the qualifier attached: "calculated example", "vendor specification", or "measured". The articles state which one applies.
+- For BLE estimates, the result depends on the assumptions listed in the article; quoting the number without them changes its meaning.
+- For panel or controller specifications, prefer the datasheet that ships with the part; the articles say when they could not verify a vendor figure.
+
+## What this site is not
+
+- Not a vendor, reseller or affiliate. No sponsored rankings.
+- Not a measurement lab: it has not characterised a physical panel or phone for the articles marked as models.
+- Not a news wire: project coverage is secondary to the engineering guides.
+
+## Contact
+
+- Editorial: xden2019@gmail.com
+- GitHub: https://github.com/xudeng22
+- X: https://x.com/GaryxuEmbedded

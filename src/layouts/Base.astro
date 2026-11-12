@@ -66,7 +66,23 @@ const tagline = lang === 'en'
 const siteIdentity = {
   '@context': 'https://schema.org',
   '@graph': [
-    {'@type':'Organization','@id':`${origin}/#publisher`,name:'EmbeddedNote',url:`${origin}/`,contactPoint:{'@type':'ContactPoint',email:'xden2019@gmail.com',contactType:'editorial inquiries'},logo:{'@type':'ImageObject',url:`${origin}/images/embeddednote-logo.webp`}},
+    {
+      '@type':'Organization','@id':`${origin}/#publisher`,name:'EmbeddedNote',alternateName:'嵌入式杂谈',
+      url:`${origin}/`,
+      description:'An independent bilingual engineering publication covering embedded systems, MCU/SoC selection, hardware design, BLE connectivity, e-paper displays and open-source hardware, with free browser-based engineering tools.',
+      contactPoint:{'@type':'ContactPoint',email:'xden2019@gmail.com',contactType:'editorial inquiries'},
+      logo:{'@type':'ImageObject',url:`${origin}/images/embeddednote-logo.webp`},
+      founder:{'@id':`${origin}/#founder`},
+      sameAs:['https://github.com/xudeng22','https://x.com/GaryxuEmbedded'],
+      knowsAbout:['Embedded systems','E-paper displays','Bluetooth Low Energy','ESP32','PCB design','Open-source hardware']
+    },
+    {
+      '@type':'Person','@id':`${origin}/#founder`,name:'Gary Xu',
+      url:`${origin}/en/about/`,
+      sameAs:['https://github.com/xudeng22','https://x.com/GaryxuEmbedded'],
+      worksFor:{'@id':`${origin}/#publisher`},
+      knowsAbout:['Embedded systems','E-paper displays','Bluetooth Low Energy','ESP32']
+    },
     {
       '@type':'WebSite','@id':`${origin}/#website`,name:'EmbeddedNote',url:`${origin}/`,inLanguage:['en','zh-CN'],publisher:{'@id':`${origin}/#publisher`},
       description:'An independent bilingual engineering blog with free tools, covering embedded systems, connectivity, displays and open-source hardware.',

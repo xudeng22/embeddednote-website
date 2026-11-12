@@ -7,6 +7,15 @@ locale: en
 
 **EmbeddedNote is an independent engineering blog and a collection of free tools for embedded developers.** We publish in English and Chinese, focusing on microcontrollers, board design, wireless connectivity, displays and open-source hardware.
 
+## Quick facts
+
+- **What it is:** an independent, bilingual (English / Chinese) engineering publication, not a vendor site.
+- **Who runs it:** Gary Xu, an embedded engineer writing since 2025; about 55,000 combined followers on WeChat and Zhihu.
+- **What is free:** two browser-based tools, no account and no upload — an [e-paper image converter](/en/tools/epaper-image-converter/) and a [BLE throughput planner](/en/tools/ble-throughput-calculator/).
+- **What is covered:** e-paper and display pipelines, BLE transfer budgets, MCU/SoC selection, PCB design, open-source hardware.
+- **How claims are handled:** every number is a calculated example, a quoted specification, or a measurement, and the article says which.
+- **Language:** English is primary; most articles have a Chinese edition under `/zh/`.
+
 A project video can tell you what a device does. It rarely tells you which files are worth reading first, how its hardware is connected, or what might go wrong when you try to build something similar. Those are the details we try to bring into the articles.
 
 ## What you'll find here
