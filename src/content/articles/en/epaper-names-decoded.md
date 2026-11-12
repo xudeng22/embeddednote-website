@@ -47,7 +47,7 @@ A module has all three, and they do not imply each other. Two modules sold as "2
 
 ## The E6 family, by size
 
-E6 is not one panel; it is a family that runs from a 1.18-inch badge to a 31.5-inch sign, all six-colour (black, white, yellow, red, blue, green) and all driven at 3 bits per pixel. The sizes below come from a 2025 product catalogue and three datasheets we read on 2026-11-12.
+E6 is not one panel; it is a family that runs from a 1.18-inch badge to a 31.5-inch sign, all six-colour (black, white, yellow, red, blue, green), and all carrying three bits of colour information per pixel inside a four-bit nibble. The sizes below come from a 2025 product catalogue and three datasheets we read on 2026-11-12.
 
 | Size | Resolution | Pixels | RAW4 | Status |
 | --- | --- | ---: | ---: | --- |
@@ -74,6 +74,21 @@ Five things the table does not tell you:
 - **Interface changes with size.** The 10.1-inch module is 16-bit parallel; the 31.5-inch is SPI with single/dual/quad data lines and QSPI for pixel data.
 - **0–50 °C is the commercial range** on every E6 datasheet we opened. Storage is −25 to +60 °C on the two that state it.
 - **One value is corrected, not copied.** The catalogue gives the 31.5-inch panel as 2460 × 1440, but its own byte calculation uses 2560, and the datasheet confirms 2560 × 1440. The table follows the datasheet.
+
+### How many bytes a frame really takes
+
+Colour depth and storage width are two different numbers, and only the second one decides your buffer size.
+
+| Panel type | Colours | Bits of information | Stored as | 200 × 200 | 800 × 480 |
+| --- | --- | --- | --- | ---: | ---: |
+| Monochrome | 2 | 1 | 1 bit per pixel | 5,000 B | 48,000 B |
+| BWR / BWRY (E5) | 3–4 | 2 | 2 bits per pixel | 10,000 B | 96,000 B |
+| E6 | 6 | 3 | 4 bits per pixel (nibble) | 20,000 B | 192,000 B |
+
+Two consequences follow:
+
+- **Do not compute an E6 frame as `pixels × 3 ÷ 8`.** For a 31.5-inch panel that gives 1.38 MB; the real frame is 1.84 MB, because the controller takes a nibble per pixel and leaves the spare bit unused.
+- **The nibble codes are not always 0–5.** At least one public implementation assigns black 0, white 1, yellow 2, red 3, blue 5 and green 6, leaving 4 unused. A converter that emits sequential 0–5 indices needs a mapping table before the bytes reach the controller.
 
 E5 is the four-colour sibling (black, white, red, yellow) at 2 bits per pixel, which is why a 4-inch E5 panel at 540 × 800 stores the same 216,000 bytes as a six-colour panel of the same size.
 
