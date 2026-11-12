@@ -15,3 +15,7 @@ h1,h2,h3,.brand{font-family:Georgia,"Times New Roman",serif} .hero h1{max-width:
 .prose .table-wrap{margin:22px 0;border:1px solid #e3dccf;border-radius:6px;overflow-x:auto;background:#fffdf9;-webkit-overflow-scrolling:touch}
 .prose .table-wrap table{margin:0;min-width:520px}
 @media(max-width:700px){.prose thead th,.prose tbody td{padding:9px 12px}}
+
+/* Markdown alignment (| ---: |) arrives as align="right"; keep it for headers too */
+.prose th[align="right"], .prose td[align="right"]{text-align:right}
+.prose th[align="center"], .prose td[align="center"]{text-align:center}
