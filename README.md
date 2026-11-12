@@ -2,6 +2,14 @@
 
 Six-channel Chinese engineering blog starter for **https://embeddednote.com**.
 
+## What this repository publishes
+
+Beyond the articles, the site ships two browser-side tools and the reference tables they depend on:
+
+- [E-paper image converter](https://embeddednote.com/en/tools/epaper-image-converter/) — palette mapping, dithering, RAW4/RAW8 export and a frame-size table for 2.13 to 31.5 inch panels.
+- [BLE throughput planner](https://embeddednote.com/en/tools/ble-throughput-calculator/) — packet overhead, airtime and wall-clock estimate, with every assumption on the page.
+- [E-paper names decoded](https://embeddednote.com/en/articles/epaper-names-decoded/) — brand, controller and part-number naming kept apart, plus the 15-size E6 table.
+
 ## Local setup
 
 Requires Node.js 20.19+ or 22.12+ (check the Node compatibility of the installed Astro major version).
