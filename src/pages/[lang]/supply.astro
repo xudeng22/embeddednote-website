@@ -106,7 +106,7 @@ const families = zh
       </li>
       <li>
         <strong>{zh ? '样品' : 'Sample'}</strong>
-        <span>{zh ? '先给一块能点亮的样品和对应数据手册,你自己验波形和显示效果。' : 'A working sample and its datasheet, so you can check the waveform and the image yourself.'}</span>
+        <span>{zh ? '先给一块能点亮的样品和对应数据手册。样品按成本收费,你自己验波形和显示效果。' : 'A working sample and its datasheet, so you can check the waveform and the image yourself. Samples are charged at cost.'}</span>
       </li>
       <li>
         <strong>{zh ? '验证' : 'Validation'}</strong>
@@ -114,7 +114,7 @@ const families = zh
       </li>
       <li>
         <strong>{zh ? '量产' : 'Volume'}</strong>
-        <span>{zh ? '确认型号后进批量,交期与 MOQ 按尺寸和是否定制排线单独报。' : 'Once the part is fixed, MOQ and lead time are quoted per size and per custom FPC.'}</span>
+        <span>{zh ? '确认型号后进批量。MOQ 按型号定,交期连同是否定制排线一起报。' : 'Once the part is fixed, MOQ depends on the model; lead time comes with it, and a custom FPC moves both.'}</span>
       </li>
     </ol>
 
@@ -135,6 +135,23 @@ const families = zh
         : 'We do not invent numbers: if a figure is not available, we say so instead of borrowing one from a similar part. And we do not sell reviews: the articles here stay editorial, and paying us does not change a conclusion, including about parts we supply.'}
     </p>
 
+
+    <h2>{zh ? '三个常问的' : 'Three questions that come first'}</h2>
+    <dl class="supply-faq">
+      <dt>{zh ? '样品收费吗?' : 'Do samples cost anything?'}</dt>
+      <dd>{zh
+        ? '收成本费。样品给的是能点亮、带数据手册的实物,你可以先验波形和显示效果再决定。'
+        : 'Yes, at cost. A sample ships as a working module with its datasheet, so you can check the waveform and the image before committing.'}</dd>
+      <dt>{zh ? 'MOQ 是多少?' : 'What is the MOQ?'}</dt>
+      <dd>{zh
+        ? '按型号定。同一尺寸换个分辨率或颜色数,起订量就不一样,所以在报价里一起给,不单独挂一个笼统数字。'
+        : 'It depends on the model. The same diagonal with a different resolution or colour set carries a different minimum, so it comes with the quote rather than as one blanket number.'}</dd>
+      <dt>{zh ? '交期多久?' : 'How long is lead time?'}</dt>
+      <dd>{zh
+        ? '常备型号和定制排线差得比较多,按你确认的具体型号报。急的项目请在邮件里写明时间节点。'
+        : 'Stock parts and custom FPC builds differ enough that we quote per confirmed part. If the timeline is tight, say so in the email.'}</dd>
+    </dl>
+
     <div class="supply-contact">
       <p>
         {zh
@@ -145,7 +162,7 @@ const families = zh
         <a href={`mailto:${email}?subject=${encodeURIComponent(subject)}`}>{email}</a>
       </p>
       <p class="supply-company">
-        {zh ? '供货方:德坦数字科技(Datadelta)' : 'Supplied by Datadelta (德坦数字科技)'}
+        {zh ? '供货方:Datadelta' : 'Supplied by Datadelta'}
       </p>
     </div>
   </section>
@@ -257,6 +274,20 @@ const families = zh
   .supply-steps strong { display: block; margin-bottom: 2px; color: #17211e; }
   .supply-steps span { color: #4d574f; font-size: 14.5px; line-height: 1.65; }
   .supply-list { margin: 14px 0 0; padding-left: 20px; color: #37413b; line-height: 1.85; }
+  .supply-faq {
+    margin: 16px 0 0;
+  }
+  .supply-faq dt {
+    font-weight: 700;
+    color: #17211e;
+    margin: 14px 0 4px;
+  }
+  .supply-faq dd {
+    margin: 0;
+    color: #4d574f;
+    line-height: 1.7;
+    font-size: 14.5px;
+  }
   .supply-contact {
     margin-top: 46px;
     border-top: 1px solid #d0c8bb;
