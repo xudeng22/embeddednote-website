@@ -157,6 +157,7 @@ const breadcrumbLd = breadcrumbs && breadcrumbs.length
         </a>
         <span class="masthead-tagline">{tagline}</span>
         <div class="masthead-actions">
+          <a class="masthead-solutions" href={`/${lang}/solutions/`} data-en-event="solutions_nav_click" data-en-placement="masthead">{lang === 'zh' ? '方案' : 'Design'}</a>
           <a class="masthead-supply" href={`/${lang}/supply/`} data-en-event="supply_nav_click" data-en-placement="masthead">{lang === 'zh' ? '供货' : 'Supply'}</a>
           <LanguageSwitcher lang={lang} translations={switchLinks} />
         </div>
@@ -196,6 +197,7 @@ const breadcrumbLd = breadcrumbs && breadcrumbs.length
       <div class="shell en-footer-inner">
         <a href={`/${lang}/`} class="en-footer-brand" aria-label="EmbeddedNote homepage">Embedded<span>Note</span></a>
         <nav class="en-footer-links" aria-label={lang === 'zh' ? '页脚链接' : 'Footer links'}>
+          <a href={`/${lang}/solutions/`} class="en-footer-solutions">{lang === 'zh' ? '方案设计' : 'Solution design'}</a>
           <a href={`/${lang}/supply/`} class="en-footer-supply">{lang === 'zh' ? '供货与方案' : 'Supply'}</a>
           <!-- embeddednote-footer-tools-v1.4:start -->
           <a href={`/${lang}/tools/ble-throughput-calculator/`}>{lang === 'zh' ? 'BLE 传输规划器' : 'BLE Transfer Planner'}</a>

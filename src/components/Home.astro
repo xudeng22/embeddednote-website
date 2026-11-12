@@ -66,6 +66,25 @@ const seoDescription = page > 1
       <a href={`/${lang}/articles/epaper-refresh-timing-pipeline/`}>{lang === 'zh' ? '刷新时序测量' : 'Refresh timing breakdown'}</a>
     </div>
   </section>}
+  <section class="home-supply-band" data-pagefind-ignore>
+    <a class="hs-card hs-solutions" href={`/${lang}/solutions/`} data-en-event="home_solutions_click" data-en-placement="home-band">
+      <span class="hs-kicker">{lang === 'zh' ? '方案设计' : 'SOLUTION DESIGN'}</span>
+      <strong>{lang === 'zh' ? '从面板到整机' : 'From panel to product'}</strong>
+      <p>{lang === 'zh'
+        ? 'TCON 时序板、转接板、BLE + Wi-Fi 固件、亚克力结构。四份 E6 相框方案书可以直接下载。'
+        : 'TCON and bridge boards, BLE and Wi-Fi firmware, acrylic enclosure. Four E6 frame spec sheets are downloadable.'}</p>
+      <em>{lang === 'zh' ? '看方案与规格书 →' : 'See the designs and spec sheets →'}</em>
+    </a>
+    <a class="hs-card hs-supply" href={`/${lang}/supply/`} data-en-event="home_supply_click" data-en-placement="home-band">
+      <span class="hs-kicker">{lang === 'zh' ? '供货' : 'SUPPLY'}</span>
+      <strong>{lang === 'zh' ? '电子纸面板与模组' : 'E-paper panels and modules'}</strong>
+      <p>{lang === 'zh'
+        ? '黑白、BWRY、E6 六色,0.97 至 31.5 寸,配驱动板与定制排线。样品按成本收费。'
+        : 'Monochrome, BWRY and E6 six-colour, 0.97 to 31.5 inch, with driver boards and custom FPC. Samples at cost.'}</p>
+      <em>{lang === 'zh' ? '看供货与打样 →' : 'See supply and samples →'}</em>
+    </a>
+  </section>
+
   <SearchBox lang={lang} />
   <section id="latest" class="en-journal-feed" data-pagefind-ignore>
     <h2 class="visually-hidden">{t.latest}</h2>
@@ -119,5 +138,45 @@ const seoDescription = page > 1
     color:#6e726c;
     font:500 12px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;
     letter-spacing:.01em;
+  }
+
+  .home-supply-band {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    margin: 34px 0 8px;
+  }
+  .hs-card {
+    display: block;
+    border: 1px solid #d8d0c3;
+    background: #fbf8f2;
+    padding: 20px 22px 18px;
+    text-decoration: none;
+    transition: border-color .18s ease, background-color .18s ease;
+  }
+  .hs-card:hover { border-color: #b94530; background: #fffdf9; }
+  .hs-kicker {
+    display: block;
+    font: 700 10px/1 Georgia, serif;
+    letter-spacing: .12em;
+    color: #b94530;
+    margin-bottom: 8px;
+  }
+  .hs-card strong {
+    display: block;
+    font: 700 clamp(19px, 2vw, 23px)/1.25 Georgia, 'Noto Serif SC', serif;
+    color: #17211e;
+    margin-bottom: 6px;
+  }
+  .hs-card p {
+    margin: 0 0 10px;
+    color: #55605a;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .hs-card em {
+    font: 700 12px/1 system-ui, sans-serif;
+    font-style: normal;
+    color: #b94530;
   }
 </style>

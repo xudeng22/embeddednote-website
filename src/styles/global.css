@@ -27,3 +27,6 @@ h1,h2,h3,.brand{font-family:Georgia,"Times New Roman",serif} .hero h1{max-width:
 .masthead-supply:hover{background:#17211e;color:#fff}
 /* Masthead actions: supply button and language switch share the third grid cell */
 .masthead .masthead-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;justify-self:end;min-width:0}
+.masthead-solutions{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;background:transparent;color:#17211e;border:1px solid #17211e;font:700 11px/1 system-ui,sans-serif;letter-spacing:.04em;padding:8px 12px;text-decoration:none;white-space:nowrap}
+.masthead-solutions:hover{background:#17211e;color:#f8f4ed}
+.en-footer-solutions{color:#17211e;font-weight:700}

@@ -10,10 +10,22 @@ const zh = lang === 'zh';
 const translations = { en: '/en/solutions/', zh: '/zh/solutions/' };
 
 const frames = [
-  { size: '7.09 in', res: '1200 × 1600', ppi: '282', panel: 'E6', power: '5000 mAh + Type-C' },
-  { size: '10 in', res: '1600 × 1200', ppi: '200', panel: 'E6', power: '5000 mAh + Type-C' },
-  { size: '13.3 in', res: '1200 × 1600', ppi: '150', panel: 'E6', power: '5000 mAh + Type-C' },
-  { size: '31.5 in', res: '2560 × 1440', ppi: '94', panel: 'E6', power: '12V 3A Type-C' }
+  {
+    size: '7.09 in', res: '1200 × 1600', ppi: '282', panel: 'E6', power: '5000 mAh + Type-C',
+    doc: '/downloads/e6-frame/e6-frame-7.09in.pdf', docSize: '374 KB', use: zh ? '桌面小相框、胸章' : 'desk frame, badge'
+  },
+  {
+    size: '10 in', res: '1600 × 1200', ppi: '200', panel: 'E6', power: '5000 mAh + Type-C',
+    doc: '/downloads/e6-frame/e6-frame-10in.pdf', docSize: '376 KB', use: zh ? '相框、货架展示' : 'frames, shelf display'
+  },
+  {
+    size: '13.3 in', res: '1200 × 1600', ppi: '150', panel: 'E6', power: '5000 mAh + Type-C',
+    doc: '/downloads/e6-frame/e6-frame-13.3in.pdf', docSize: '388 KB', use: zh ? 'A4 相框、办公标牌' : 'A4 frame, office signage'
+  },
+  {
+    size: '31.5 in', res: '2560 × 1440', ppi: '94', panel: 'E6', power: '12V 3A Type-C',
+    doc: '/downloads/e6-frame/e6-frame-31.5in.pdf', docSize: '2.0 MB', use: zh ? '墙面画框、门店' : 'wall frame, retail'
+  }
 ];
 ---
 
@@ -79,6 +91,7 @@ const frames = [
             <th>PPI</th>
             <th>{zh ? '面板' : 'Panel'}</th>
             <th>{zh ? '供电' : 'Power'}</th>
+            <th>{zh ? '规格书' : 'Spec sheet'}</th>
           </tr>
         </thead>
         <tbody>
@@ -89,6 +102,11 @@ const frames = [
               <td>{f.ppi}</td>
               <td>{f.panel}</td>
               <td>{f.power}</td>
+              <td>
+                <a class="doc-link" href={f.doc} download data-en-event="spec_download" data-en-placement="solutions-table">
+                  PDF <span>{f.docSize}</span>
+                </a>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -99,6 +117,24 @@ const frames = [
         ? '四款共用同一套主控平台:BK725X + 超低功耗 BLE 芯片,32 GB 存储,支持设备热点与路由器两种模式,App 端 Android 7 / iOS 13 起。31.5 寸为 12V 适配器供电,可选锂电池。以上为 Demo 配置,量产结构、电池与功能按项目定制。'
         : 'All four share one platform: BK725X with a low-power BLE companion, 32 GB storage, device-AP and router-STA modes, app support from Android 7 and iOS 13. The 31.5-inch build runs from a 12 V adapter with an optional battery. These are demo configurations; enclosure, power and features are customised per project.'}
     </p>
+
+    <h2>{zh ? '四份方案书,可直接下载' : 'Four spec sheets, ready to download'}</h2>
+    <p class="sol-dl-intro">
+      {zh
+        ? '每份都是单页规格书:屏幕参数、主控与无线配置、供电、结构尺寸、App 要求、工作流程。方案书为中文版,需要英文版请在邮件里说明。'
+        : 'Each one is a single-page spec: panel parameters, host platform, wireless setup, power, mechanical dimensions, app requirements and the workflow. The sheets are written in Chinese; ask for an English version by email and we will send it.'}
+    </p>
+    <ul class="sol-downloads">
+      {frames.map((f) => (
+        <li>
+          <a href={f.doc} download data-en-event="spec_download" data-en-placement="solutions-list">
+            <strong>{f.size} {zh ? 'E6 全彩相框方案' : 'E6 full-colour frame'}</strong>
+            <span>{f.res} · {f.ppi} ppi · {f.use}</span>
+            <em>PDF · {f.docSize}</em>
+          </a>
+        </li>
+      ))}
+    </ul>
 
     <h2>{zh ? '平台能到的边界' : 'How far the platform reaches'}</h2>
     <ul class="sol-list">
@@ -187,6 +223,33 @@ const frames = [
   .sol-table-wrap td { padding: 10px 14px; border-bottom: 1px solid #ece5d8; }
   .sol-table-wrap tr:last-child td { border-bottom: 0; }
   .sol-note { color: #6a736c; font-size: 14px; line-height: 1.7; margin: 12px 0 0; }
+  .doc-link {
+    display: inline-block;
+    background: #17211e;
+    color: #f8f4ed;
+    font: 700 11px/1 system-ui, sans-serif;
+    padding: 7px 9px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .doc-link span { font-weight: 400; opacity: .75; margin-left: 3px; }
+  .doc-link:hover { background: #b94530; color: #fff; }
+  .sol-dl-intro { color: #4d574f; line-height: 1.7; margin: 0 0 14px; }
+  .sol-downloads { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .sol-downloads a {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: 2px 12px;
+    border: 1px solid #d8d0c3;
+    background: #fbf8f2;
+    padding: 13px 16px;
+    text-decoration: none;
+  }
+  .sol-downloads strong { color: #17211e; font-size: 15px; }
+  .sol-downloads span { grid-column: 1; color: #5c665f; font-size: 13px; }
+  .sol-downloads em { grid-row: 1; grid-column: 2; color: #b94530; font: 700 11px/1 system-ui, sans-serif; font-style: normal; }
+  .sol-downloads a:hover { border-color: #b94530; }
   .sol-list { margin: 14px 0 0; padding-left: 20px; color: #37413b; line-height: 1.85; }
   .sol-clients {
     font: 700 15px/1.7 system-ui, sans-serif;
