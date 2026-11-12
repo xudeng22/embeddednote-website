@@ -1,12 +1,12 @@
 ---
 const {lang='en'}=Astro.props;
-const zh=false;
+const zh=lang==='zh';
 const t=(en,cn)=>zh?cn:en;
 ---
 
 <!-- embeddednote-upload-en-v1.4:start -->
 <!-- embeddednote-upload-en-v1.4:end -->
-<div class="epc" data-epc-lang="en" lang="en" data-pagefind-ignore>
+<div class="epc" data-epc-lang={lang} lang={lang} data-pagefind-ignore>
   <section class="epc-card epc-presets">
     <h2>{t('Display profiles','屏幕配置')}</h2>
     <div class="epc-form-grid">
