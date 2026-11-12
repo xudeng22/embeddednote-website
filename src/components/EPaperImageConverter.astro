@@ -11,25 +11,25 @@ const t=(en,cn)=>zh?cn:en;
     <h2>{t('Display profiles','屏幕配置')}</h2>
     <div class="epc-form-grid">
       <label>{t('Display profile','显示面板配置')}
-        <select id="epc-palette"><option value="four">4-color · BWRY (reference)</option><option value="six" selected>6-color · Spectra 6 (reference)</option><option value="eight">8-color · Illustrative (reference)</option><option value="custom">{t('Imported device profile','导入的设备配置')}</option></select>
+        <select id="epc-palette"><option value="four">{t('4-color · BWRY (reference)','4 色 · BWRY（参考）')}</option><option value="six" selected>{t('6-color · Spectra 6 (reference)','6 色 · Spectra 6（参考）')}</option><option value="eight">{t('8-color · Illustrative (reference)','8 色 · 示例（参考）')}</option><option value="custom">{t('Imported device profile','导入的设备配置')}</option></select>
       </label>
       <label>{t('Color matching','颜色匹配方式')}
-        <select id="epc-matching"><option value="lab" selected>CIE Lab · ΔE76</option><option value="rgb">Weighted RGB · legacy</option></select>
+        <select id="epc-matching"><option value="lab" selected>CIE Lab · ΔE76</option><option value="rgb">{t('Weighted RGB · legacy','加权 RGB · 旧算法')}</option></select>
       </label>
       <label>{t('Size preset','尺寸预设')}
-        <select id="epc-size"><option value="800x540">800 × 540</option><option value="416x240">416 × 240</option><option value="1200x1600">1200 × 1600</option><option value="1600x1200" selected>1600 × 1200</option><option value="800x528">800 × 528</option><option value="3840x1490">3840 × 1490</option><option value="custom">Custom</option></select>
+        <select id="epc-size"><option value="800x540">800 × 540</option><option value="416x240">416 × 240</option><option value="1200x1600">1200 × 1600</option><option value="1600x1200" selected>1600 × 1200</option><option value="800x528">800 × 528</option><option value="3840x1490">3840 × 1490</option><option value="custom">{t('Custom','自定义')}</option></select>
       </label>
       <label>{t('Width (px)','宽度（px）')}<input id="epc-width" type="number" min="1" max="6000" step="1" value="1600" required /></label>
       <label>{t('Height (px)','高度（px）')}<input id="epc-height" type="number" min="1" max="6000" step="1" value="1200" required /></label>
-      <label>{t('Resize mode','适配方式')}<select id="epc-fit"><option value="contain">Contain · {t('no crop','不裁切')}</option><option value="cover" selected>Cover · {t('crop to fill','裁切填充')}</option><option value="stretch">Stretch · {t('may distort','可能变形')}</option></select></label>
-      <label>{t('Dithering','抖动算法')}<select id="epc-method"><option value="floyd" selected>Floyd–Steinberg</option><option value="atkinson">Atkinson</option><option value="bayer">Bayer 4×4</option><option value="nearest">Nearest color · no dithering</option></select></label>
-      <label>Photo tone fit
-        <select id="epc-tone-fit"><option value="none" selected>Off · accurate source tones</option><option value="photo">On · stretch to display range (experimental)</option></select>
+      <label>{t('Resize mode','适配方式')}<select id="epc-fit"><option value="contain">{t('Contain · no crop','完整显示 · 不裁切')}</option><option value="cover" selected>{t('Cover · crop to fill','填满 · 裁切填充')}</option><option value="stretch">{t('Stretch · may distort','拉伸 · 可能变形')}</option></select></label>
+      <label>{t('Dithering','抖动算法')}<select id="epc-method"><option value="floyd" selected>Floyd–Steinberg</option><option value="atkinson">Atkinson</option><option value="bayer">Bayer 4×4</option><option value="nearest">{t('Nearest color · no dithering','最近邻 · 不抖动')}</option></select></label>
+      <label>{t('Photo tone fit','照片色调拟合')}
+        <select id="epc-tone-fit"><option value="none" selected>{t('Off · accurate source tones','关 · 保持源色调')}</option><option value="photo">{t('On · stretch to display range (experimental)','开 · 拉伸到显示范围（实验性）')}</option></select>
       </label>
     </div>
     <div class="epc-profile-io">
       <label>{t('Import measured palette profile (JSON)','导入实测调色板配置（JSON）')}
-        <span class="epc-file-ui"><span class="epc-file-choose">Choose JSON File</span><span class="epc-file-name" id="epc-profile-filename" aria-live="polite">No file selected</span></span>
+        <span class="epc-file-ui"><span class="epc-file-choose">{t('Choose JSON File','选择 JSON 文件')}</span><span class="epc-file-name" id="epc-profile-filename" aria-live="polite">{t('No file selected','未选择文件')}</span></span>
         <input class="epc-file-native" type="file" id="epc-profile-file" accept="application/json,.json" />
       </label>
       <button type="button" id="epc-profile-export" class="epc-outline">{t('Export profile template','导出面板配置模板')}</button>
@@ -49,7 +49,7 @@ const t=(en,cn)=>zh?cn:en;
   <section class="epc-card epc-upload">
     <h2>{t('Image & conversion','图片与转换')}</h2>
     <label class="epc-drop" id="epc-drop">{t('Choose or drop an image (PNG, JPEG, WebP; max 20 MB)','选择或拖入图片（PNG、JPEG、WebP；最多 20 MB）')}
-      <span class="epc-file-ui"><span class="epc-file-choose">Choose Image</span><span class="epc-file-name">PNG, JPEG or WebP · Max 20 MB</span></span>
+      <span class="epc-file-ui"><span class="epc-file-choose">{t('Choose Image','选择图片')}</span><span class="epc-file-name">{t('PNG, JPEG or WebP · Max 20 MB','PNG、JPEG 或 WebP · 最大 20 MB')}</span></span>
       <input class="epc-file-native" id="epc-file" type="file" accept="image/png,image/jpeg,image/webp" />
     </label>
     <p id="epc-filename" class="epc-subtle" aria-live="polite">{t('No image selected','尚未选择图片')}</p>
@@ -66,7 +66,7 @@ const t=(en,cn)=>zh?cn:en;
     <h2>{t('Download & pixel data','导出与点阵数据')}</h2>
     <div id="epc-summary" class="epc-summary">{t('Convert an image to see pixel counts, color mix and export options.','转换后可查看像素、颜色占比与导出格式。')}</div>
     <div id="epc-hist" class="epc-hist"></div>
-    <div class="epc-actions"><button id="epc-png" type="button" disabled>{t('Download PNG','下载 PNG')}</button><button id="epc-raw8" type="button" disabled>RAW 8-bit indexes</button><button id="epc-raw4" type="button" disabled>RAW packed 4-bit</button><button id="epc-json" type="button" disabled>{t('Manifest JSON','配置 JSON')}</button></div>
+    <div class="epc-actions"><button id="epc-png" type="button" disabled>{t('Download PNG','下载 PNG')}</button><button id="epc-raw8" type="button" disabled>{t('RAW 8-bit indexes','RAW 8 位索引')}</button><button id="epc-raw4" type="button" disabled>{t('RAW packed 4-bit','RAW 4 位打包')}</button><button id="epc-json" type="button" disabled>{t('Manifest JSON','配置 JSON')}</button></div>
     <p class="epc-hint">{t('RAW codes are palette indices (row-major, high nibble first for 4-bit), not a controller-ready EPD framebuffer. Match native color codes, byte/bit order, panel orientation, row stride and waveform in your firmware.','RAW 导出为调色板索引（逐行排列；4-bit 高半字节在前），并非可直接刷屏的控制器帧缓冲。须在固件中适配颜色编码、字节/位序、方向、行步长及波形。')}</p>
   </section>
 </div>
