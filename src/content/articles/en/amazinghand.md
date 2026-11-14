@@ -1,7 +1,6 @@
 ---
-title: 'Amazing Hand: An Open-Source Robotic Hand with Eight Servos'
-description: Pollen Robotics packs eight serial servos and four articulated fingers into a 400 g, 3D-printable robotic hand.
-  A closer look at its linkages, control and build files.
+title: 'Amazing Hand: eight servos, 400 g, and a printable hand'
+description: 'Eight serial servos and four articulated fingers in a 400 g 3D-printed hand: the BOM, the control chain, and what it cannot do yet.'
 locale: en
 translationKey: pollen-amazinghand-8dof
 pubDate: '2026-10-19'
@@ -15,7 +14,7 @@ tags:
 draft: false
 sourceUrl: https://github.com/pollen-robotics/AmazingHand
 author: EmbeddedNote
-seoTitle: 'Amazing Hand: Open-Source 8-DOF Robotic Hand | EmbeddedNote'
+seoTitle: 'Amazing Hand: 8-Servo Open-Source Robot Hand'
 seoDescription: 'Inside Pollen Robotics’ Amazing Hand: eight Feetech SCS0009 servos, parallel finger linkages, 3D-printed
   parts, TTL control and Reachy 2 compatibility.'
 updatedDate: '2026-11-06'

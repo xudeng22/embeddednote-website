@@ -20,6 +20,8 @@ This guide treats each mapping separately. Its sample data is **synthetic and re
 
 ![5×2 RAW4 nibble packing: five bytes with no row padding](/images/p0/epaper-palette-raw4-packing-guide-cover.webp)
 
+**In one sentence:** RAW4 stores one 4-bit palette index per pixel, two pixels per byte, the first pixel in the high nibble, rows packed continuously unless your driver demands padding.
+
 ## 1. Establish the target before choosing a dithering algorithm
 
 Start by recording the active display width and height, supported physical inks, orientation, input pixel format, row stride and firmware color codes. “Four-color e-paper” is not one interoperable file format. Even panels marketed with a similar number of colors can have different native palettes, controller interfaces and waveform requirements.

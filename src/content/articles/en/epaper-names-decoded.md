@@ -23,6 +23,8 @@ Someone asks about an "E6 7.3 inch panel" and gets an answer about "SSD1680" and
 
 This is the decoder. It is short on purpose: you need the right search term in the next two minutes, not a catalogue.
 
+**In one sentence:** E6 is E Ink's Spectra 6 (six colours), SSD1680 and UC8151 are controller ICs, and only the panel model fixes size and resolution.
+
 ## Three naming systems
 
 | What it names | Example | Where you meet it |

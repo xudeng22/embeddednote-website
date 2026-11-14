@@ -25,6 +25,8 @@ The question is not "does my driver support partial refresh". It is "does this p
 
 <img src="/images/p0/epaper-partial-refresh-waveform.svg" alt="Full refresh drives many transitions; partial refresh uses a short, single-polarity sequence" width="960" height="300" loading="lazy" decoding="async">
 
+**In one sentence:** partial refresh is safe only when the panel ships a partial waveform, the temperature is inside the rated range, and the changed area is small and infrequent. Anything else belongs on a full refresh.
+
 ## What partial refresh actually skips
 
 A full refresh drives every pixel through several transitions so it ends in a defined state, regardless of where it started. A partial refresh skips most of that work: it addresses a region, applies a short waveform with fewer transitions, and leaves everything else untouched.

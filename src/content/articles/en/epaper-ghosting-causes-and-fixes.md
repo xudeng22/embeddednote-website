@@ -26,6 +26,8 @@ None of that works reliably, because ghosting is not a stale buffer. It is pigme
 
 <img src="/images/p0/epaper-ghosting-timeline.svg" alt="Residue accumulating across partial refreshes and clearing after a full refresh" width="960" height="320" loading="lazy" decoding="async">
 
+**In one sentence:** ghosting is pigment that did not finish moving. A full refresh clears it, and repeated partial refreshes without a baseline make it accumulate.
+
 ## What ghosting physically is
 
 An e-paper pixel is a cavity with white and black pigment particles suspended in fluid. The controller drives them with a voltage waveform: a sequence of pulses whose amplitudes and durations push particles to one end or the other. A full refresh drives them through several transitions so that every pixel ends in a well-defined state.

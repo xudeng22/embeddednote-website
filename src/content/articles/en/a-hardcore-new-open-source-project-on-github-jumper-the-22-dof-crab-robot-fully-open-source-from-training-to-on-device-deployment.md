@@ -1,7 +1,6 @@
 ---
-title: "A Hardcore New Open-Source Project on GitHub: Jumper, the 22-DoF Crab
-  Robot — Fully Open Source from Training to On-Device Deployment"
-description: "Jumper is a 22-DoF open-source robot with four walking legs and two claws. We examine its RK3576 controller, MuJoCo training, ONNX export and on-device deployment."
+title: 'Jumper: a 22-DoF crab robot whose whole training stack is open'
+description: 'A 22-DoF crab robot with four walking legs and two claws: RK3576 controller, MuJoCo training and on-device deployment, plus what the parts actually cost.'
 locale: en
 translationKey: Open-Source Project - Jumper
 pubDate: 2026-10-14
@@ -15,7 +14,7 @@ series: open-hardware
 updatedDate: '2026-11-11'
 author: 'EmbeddedNote'
 sourceUrl: 'https://github.com/KingKongRobotics/jumper'
-seoTitle: 'Jumper 22-DoF Robot: Open-Source RK3576 & MuJoCo'
+seoTitle: 'Jumper 22-DoF Crab Robot: Open Build and BOM'
 seoDescription: 'Jumper has four walking legs, two claws and an RK3576 controller. A closer look at MuJoCo training, ONNX export and onboard deployment.'
 ---
 Remember that little red crab robot that walked sideways across the exhibition floor at WAIC in July, then danced to trending music at WRC in August and even used its claw to pick up a refrigerator magnet and hand it to a visitor? On September 30, its developers open-sourced the entire software stack. The repository is KingKongRobotics/jumper, licensed under Apache-2.0. Unlike most "open-source robots" that release little more than a model and a few videos, this repository provides the complete pipeline, from training and simulation to model export and deployment on the onboard NPU. The team has also put up 100 engineering prototypes as competition prizes — teach Jumper a new move, and you get to keep the robot.
