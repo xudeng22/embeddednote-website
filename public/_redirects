@@ -24,3 +24,6 @@
 /en/category/tools/*  /en/notes/   301
 /zh/category/tools/   /zh/notes/   301
 /zh/category/tools/*  /zh/notes/   301
+
+# Cloudflare's email obfuscation injects this link; Googlebot recorded it as a 404.
+/cdn-cgi/l/email-protection  /en/contact/  301

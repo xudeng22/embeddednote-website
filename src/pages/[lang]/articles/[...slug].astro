@@ -201,6 +201,19 @@ const jsonld = {
       document.addEventListener('keydown', onKey);
     });
   </script>
+  <script is:inline>
+    (function () {
+      var heads = document.querySelectorAll('.prose h2[id], .prose h3[id]');
+      heads.forEach(function (h) {
+        var link = document.createElement('a');
+        link.className = 'heading-anchor';
+        link.href = '#' + h.id;
+        link.setAttribute('aria-label', 'Link to this section');
+        link.textContent = '#';
+        h.appendChild(link);
+      });
+    })();
+  </script>
 </Base>
 
 <style>

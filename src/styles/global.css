@@ -38,3 +38,10 @@ h1,h2,h3,.brand{font-family:Georgia,"Times New Roman",serif} .hero h1{max-width:
 .prose img{cursor:zoom-in}
 .en-lightbox{position:fixed;inset:0;z-index:9999;background:rgba(23,33,30,.94);display:grid;place-items:center;padding:24px;cursor:zoom-out}
 .en-lightbox img{max-width:96vw;max-height:92vh;width:auto;height:auto;box-shadow:0 18px 50px rgba(0,0,0,.45)}
+
+/* Heading anchor links and clickable table rows */
+.prose h2,.prose h3{position:relative}
+.heading-anchor{margin-left:.4em;color:#c9bfb2;text-decoration:none;font-weight:400;opacity:0;transition:opacity .15s ease}
+.prose h2:hover .heading-anchor,.prose h3:hover .heading-anchor,.heading-anchor:focus-visible{opacity:1}
+.heading-anchor:hover{color:#b94530}
+.sol-table-wrap tbody tr:hover{background:#fbf6ec}

@@ -166,6 +166,19 @@ const frames = [
       <a href={`/${lang}/supply/`}>{zh ? '供货与打样 →' : 'Supply and samples →'}</a>
     </div>
   </section>
+<script is:inline>
+  (function () {
+    document.querySelectorAll('.sol-table-wrap tbody tr').forEach(function (row) {
+      var link = row.querySelector('a.doc-link');
+      if (!link) return;
+      row.style.cursor = 'pointer';
+      row.addEventListener('click', function (event) {
+        if (event.target.closest('a')) return;
+        window.open(link.href, '_blank', 'noopener');
+      });
+    });
+  })();
+</script>
 </Base>
 
 <style>
