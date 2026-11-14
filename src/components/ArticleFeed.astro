@@ -64,6 +64,7 @@ const cards = entries.map(article => {
 <div class="en-feed">
   {cards.map(card => (
     <article class="en-feed__item">
+      <a class="en-feed__cover" href={card.url} tabindex="-1" aria-hidden="true"></a>
       <a class="en-feed__photo" href={card.url} aria-label={card.title}>
         <img src={card.image} alt={card.title} width="640" height="360" loading="lazy" decoding="async" />
       </a>

@@ -30,3 +30,11 @@ h1,h2,h3,.brand{font-family:Georgia,"Times New Roman",serif} .hero h1{max-width:
 .masthead-solutions{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;background:transparent;color:#17211e;border:1px solid #17211e;font:700 11px/1 system-ui,sans-serif;letter-spacing:.04em;padding:8px 12px;text-decoration:none;white-space:nowrap}
 .masthead-solutions:hover{background:#17211e;color:#f8f4ed}
 .en-footer-solutions{color:#17211e;font-weight:700}
+
+/* Full-card links and the article image lightbox (dead-click fixes) */
+.en-feed__item{position:relative}
+.en-feed__cover{position:absolute;inset:0;z-index:1}
+.en-next-steps__related a,.en-next-steps__series a{display:block}
+.prose img{cursor:zoom-in}
+.en-lightbox{position:fixed;inset:0;z-index:9999;background:rgba(23,33,30,.94);display:grid;place-items:center;padding:24px;cursor:zoom-out}
+.en-lightbox img{max-width:96vw;max-height:92vh;width:auto;height:auto;box-shadow:0 18px 50px rgba(0,0,0,.45)}

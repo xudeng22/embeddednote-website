@@ -180,6 +180,27 @@ const jsonld = {
     type="application/ld+json"
     set:html={JSON.stringify(jsonld)}
   />
+  <script is:inline>
+    document.addEventListener('click', function (event) {
+      var img = event.target.closest('.prose img');
+      if (!img || img.closest('a')) return;
+      event.preventDefault();
+      var box = document.createElement('div');
+      box.className = 'en-lightbox';
+      var big = document.createElement('img');
+      big.src = img.currentSrc || img.src;
+      big.alt = img.alt || '';
+      box.appendChild(big);
+      document.body.appendChild(box);
+      function close() {
+        box.remove();
+        document.removeEventListener('keydown', onKey);
+      }
+      function onKey(e) { if (e.key === 'Escape') close(); }
+      box.addEventListener('click', close);
+      document.addEventListener('keydown', onKey);
+    });
+  </script>
 </Base>
 
 <style>
