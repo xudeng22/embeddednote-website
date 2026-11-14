@@ -62,7 +62,7 @@
         <path d="M0 0 L10 5 L0 10 z" fill="#17211e"/>
       </marker>
     </defs>
-    <text x="24" y="268" font-size="12.5" fill="#59645e">The residue is pigment that never fully settled, not a stale framebuffer. Redrawing the same pixels does not move it.</text>
-    <text x="24" y="290" font-size="12.5" fill="#59645e">A full refresh with the vendor waveform is the only operation that resets the history — which is why the counter in the driver matters.</text>
+    <text x="24" y="296" font-size="12.5" fill="#59645e">The residue is pigment that never fully settled, not a stale framebuffer. Redrawing the same pixels does not move it.</text>
+    <text x="24" y="314" font-size="12.5" fill="#59645e">A full refresh with the vendor waveform is the only operation that resets the history — which is why the counter in the driver matters.</text>
   </g>
 </svg>
