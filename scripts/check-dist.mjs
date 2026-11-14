@@ -42,9 +42,10 @@ for (const lang of languages) {
     check(html.includes('rel="canonical"'), `${lang} homepage canonical`);
     check(html.includes(`/${lang}/privacy/`), `${lang} privacy footer link`);
     check(!html.includes(`/articles/embeddednote-launch/`), `${lang} homepage without welcome article`);
-    for (const c of ['display', 'connectivity']) {
-      check(html.includes(`/${lang}/category/${c}/`), `${lang} homepage category ${c}`);
-    }
+    // Category routes were collapsed into the topic hubs and now answer with a
+    // 301, so the homepage links the hubs rather than the old category paths.
+    check(html.includes(`/${lang}/e-paper/`), `${lang} homepage hub e-paper`);
+    check(html.includes(`/${lang}/connectivity/`), `${lang} homepage hub connectivity`);
   }
   if (has(about)) {
     const html = read(about);
@@ -69,7 +70,8 @@ if (has('_redirects')) {
     ['/zh/articles/embeddednote-launch/', '/zh/about/'],
     ['/articles/embeddednote-launch/', '/zh/about/']
   ]) {
-    check(rules.split(/\r?\n/).some(line => line.trim() === `${source} ${target} 301`), `301: ${source}`);
+    // The rules file aligns columns with runs of spaces; compare on tokens.
+    check(rules.split(/\r?\n/).some(line => line.trim().replace(/\s+/g, ' ') === `${source} ${target} 301`), `301: ${source}`);
   }
 }
 

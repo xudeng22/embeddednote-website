@@ -67,6 +67,6 @@ benchmark results it has not measured, and it says so in the article.
 
 ## Contact
 
-- Editorial: xden2019@gmail.com
+- Editorial: xudeng@datadelta.cn
 - GitHub: https://github.com/xudeng22
 - X: https://x.com/GaryxuEmbedded

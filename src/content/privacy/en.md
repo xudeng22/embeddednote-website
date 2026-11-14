@@ -8,7 +8,7 @@ locale: en
 **Effective date: October 15, 2026**  
 **Last updated: October 15, 2026**
 
-EmbeddedNote ("we", "us", or "our") publishes the website [embeddednote.com](https://embeddednote.com/), a bilingual publication about embedded systems, hardware, semiconductors and open-source engineering. This Policy explains how information may be collected, used and shared when you visit our website or contact us. For privacy enquiries, please email **[xden2019@gmail.com](mailto:xden2019@gmail.com)**.
+EmbeddedNote ("we", "us", or "our") publishes the website [embeddednote.com](https://embeddednote.com/), a bilingual publication about embedded systems, hardware, semiconductors and open-source engineering. This Policy explains how information may be collected, used and shared when you visit our website or contact us. For privacy enquiries, please email **[xudeng@datadelta.cn](mailto:xudeng@datadelta.cn)**.
 
 ## 1. Information we process
 
@@ -50,7 +50,7 @@ We keep correspondence only for as long as reasonably needed to respond, maintai
 
 ## 7. Your privacy choices and rights
 
-Depending on your location and applicable law, you may have rights to request access, correction or deletion of personal information, object to or restrict certain processing, or withdraw consent where processing is based on consent. To make a request, email [xden2019@gmail.com](mailto:xden2019@gmail.com). We may need to verify your request and will respond as required by applicable law. Browser controls and any consent-management interface made available on the website can also be used to manage applicable cookie choices.
+Depending on your location and applicable law, you may have rights to request access, correction or deletion of personal information, object to or restrict certain processing, or withdraw consent where processing is based on consent. To make a request, email [xudeng@datadelta.cn](mailto:xudeng@datadelta.cn). We may need to verify your request and will respond as required by applicable law. Browser controls and any consent-management interface made available on the website can also be used to manage applicable cookie choices.
 
 ## 8. Children and external links
 
@@ -58,4 +58,4 @@ EmbeddedNote is intended for a general technical readership, not specifically fo
 
 ## 9. Changes and contact
 
-We may revise this Policy as services or legal requirements change. The updated version and date will be shown on this page. For questions, corrections or privacy requests, contact **[xden2019@gmail.com](mailto:xden2019@gmail.com)**.
+We may revise this Policy as services or legal requirements change. The updated version and date will be shown on this page. For questions, corrections or privacy requests, contact **[xudeng@datadelta.cn](mailto:xudeng@datadelta.cn)**.

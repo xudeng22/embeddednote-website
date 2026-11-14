@@ -65,7 +65,7 @@ const links=zh
       <label>{zh?'联系邮箱':'Email'}<input name="email" type="email" maxlength="160" required autocomplete="email"/></label>
       <label class="full">{zh?'具体需求':'What you need'}<textarea name="brief" rows="5" maxlength="2000" required></textarea></label>
       <button type="submit">{zh?'生成邮件':'Compose email'}</button>
-      <p class="full note">{zh?'也可以直接写信到':'Or write to'} <a href="mailto:xden2019@gmail.com" data-en-event="partner_email_click" data-en-placement="partner">xden2019@gmail.com</a></p>
+      <p class="full note">{zh?'也可以直接写信到':'Or write to'} <a href="mailto:xudeng@datadelta.cn" data-en-event="partner_email_click" data-en-placement="partner">xudeng@datadelta.cn</a></p>
     </form>
   </div>
 </section>
@@ -79,7 +79,7 @@ const links=zh
     const subject=`Business cooperation - ${val('type')}`;
     const body=`Company: ${val('company')}\nEmail: ${val('email')}\nType: ${val('type')}\n\n${val('brief')}`;
     (window as any).embeddednoteAnalytics?.capture?.('partner_email_compose',{type:val('type'),page:location.pathname});
-    location.href=`mailto:xden2019@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    location.href=`mailto:xudeng@datadelta.cn?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   });
 </script>
 <style>

@@ -1,5 +1,5 @@
 ---
-title: 'E-Paper Resolution and Size Chart: 15 Sizes, Real Numbers'
+title: 'E-Paper Resolution and Size Chart: 16 Sizes, Real Numbers'
 description: 'Every E6 size from 1.18 to 31.5 inch with resolution, pixel count and packed bytes, plus how ppi works and why the same diagonal carries two different resolutions.'
 seoTitle: 'E-Paper Resolution and Size Chart (E6 to 31.5 in)'
 seoDescription: 'A reference table of e-paper sizes: 15 E6 panels with resolution, pixels, RAW4 and RAW8 bytes, the ppi formula, and the one-diagonal-two-resolutions trap.'
@@ -27,7 +27,7 @@ Three quantities get confused, so they are separated here:
 
 Worked example, 10.1-inch E6: the active area is 203.2 × 152.4 mm, so the long edge is 203.2 ÷ 25.4 = 8.0 inch, and 1600 ÷ 8.0 = **200 ppi**. The same resolution at 13.3 inch gives 1600 ÷ (270.4 ÷ 25.4) = **150 ppi**. Same pixels, different density.
 
-## The six-colour family, all 15 sizes
+## The six-colour family, all 16 sizes
 
 E6 is E Ink's Spectra 6: six colours (black, white, yellow, red, blue, green), three bits of colour per pixel carried as a 4-bit nibble. PPI is listed only where the panel datasheet states it or gives an active area; a dash means "not published for that part", not "unknown quality".
 
@@ -50,7 +50,7 @@ E6 is E Ink's Spectra 6: six colours (black, white, yellow, red, blue, green), t
 | 28.5 in | 2,160 × 3,060 | 6,609,600 | 3,304,800 B | 6,609,600 B | — |
 | 31.5 in | 2,560 × 1,440 | 3,686,400 | 1,843,200 B | 3,686,400 B | 94 |
 
-The same table is available as a [CSV file](/downloads/epaper-e6-sizes.csv) if you want it in a spreadsheet.
+The same table is available as a [CSV file](/downloads/epaper-e6-sizes.csv) if you want it in a spreadsheet. Every size also has its own page: [E6 e-paper panels by size](/en/e-paper/e6/).
 
 Two rows punish a careless assumption. The 31.5-inch panel is the largest and the *lowest* density at 94 ppi, because 2560 pixels spread over a 696 mm width. The 7.09-inch is the densest at 282 ppi — a small frame with a 1600-pixel edge. If your text was designed for one, it will not fit the other unchanged.
 

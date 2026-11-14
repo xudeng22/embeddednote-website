@@ -1,0 +1,412 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { e6Panels, bytes, type E6Panel } from '../../../../data/e6-panels';
+
+export function getStaticPaths() {
+  return e6Panels.flatMap((panel) => [
+    { params: { lang: 'en', size: panel.slug }, props: { panel } },
+    { params: { lang: 'zh', size: panel.slug }, props: { panel } }
+  ]);
+}
+
+interface Props {
+  panel: E6Panel;
+}
+
+const { panel } = Astro.props as Props;
+const lang = Astro.params.lang === 'zh' ? 'zh' : 'en';
+const zh = lang === 'zh';
+
+const { sizeIn, width, height, pixels, raw4, raw8, ppi, interfaceNote, use } = panel;
+
+const raw4b = bytes(raw4);
+const raw8b = bytes(raw8);
+const px = pixels.toLocaleString('en-US');
+const res = `${width.toLocaleString('en-US')} × ${height.toLocaleString('en-US')}`;
+
+const translations = {
+  en: `/en/e-paper/e6/${panel.slug}/`,
+  zh: `/zh/e-paper/e6/${panel.slug}/`
+};
+
+const title = zh
+  ? `E6 ${sizeIn} 寸电子纸面板：${res}`
+  : `E6 ${sizeIn}" E-Paper Panel: ${width}×${height}`;
+
+const description = zh
+  ? `E6 ${sizeIn} 寸六色电子纸面板，${res} 像素。RAW4 一帧 ${raw4b}，RAW8 一帧 ${raw8b}${ppi ? `，${ppi} ppi` : ''}。可提供样品、驱动板与点亮固件。`
+  : `Six-colour E6 e-paper panel at ${sizeIn} inch, ${res}. One frame is ${raw4b} in RAW4 or ${raw8b} in RAW8${ppi ? `, ${ppi} ppi` : ''}. Samples, driver boards and bring-up firmware.`;
+
+// Buffer guidance is derived from the exact packed frame size, not from a
+// catalogue claim. Thresholds are about where a design usually changes shape.
+const ramNote = (() => {
+  if (raw4 <= 50000) {
+    return {
+      en: 'A full RAW4 frame fits in the internal SRAM of most Cortex-M class parts, so the image can live in RAM and refresh straight from it. No external memory is needed for a single frame.',
+      zh: '一整帧 RAW4 可以放进多数 Cortex-M 级芯片的内部 SRAM，图像可以常驻内存、直接从内存刷新，单帧不需要外部存储。'
+    };
+  }
+  if (raw4 <= 200000) {
+    return {
+      en: 'A full RAW4 frame still fits an MCU with 128 KB of SRAM, but it leaves little room for a second buffer, the radio stack and the application. Double buffering moves you to PSRAM.',
+      zh: '一整帧 RAW4 还能放进 128 KB SRAM 的 MCU，但留给第二缓冲、协议栈和应用的空间已经不多。要做双缓冲就得考虑 PSRAM。'
+    };
+  }
+  if (raw4 <= 500000) {
+    return {
+      en: 'A full RAW4 frame is past the internal SRAM of most microcontrollers at this size. Expect to either stream the frame in strips or add PSRAM.',
+      zh: '这个尺寸的一整帧 RAW4 已经超出多数单片机的内部 SRAM，通常要么按条带流式写入，要么加 PSRAM。'
+    };
+  }
+  if (raw4 <= 1000000) {
+    return {
+      en: 'A full RAW4 frame is roughly half a megabyte to a megabyte. PSRAM, or a strip-by-strip transfer from flash, is the normal answer; a partial-refresh window is often cheaper than a full frame.',
+      zh: '一整帧 RAW4 大约在 0.5 至 1 MB 之间，常规做法是用 PSRAM，或者从 Flash 按条带传输；局刷窗口往往比整帧刷新更划算。'
+    };
+  }
+  if (raw4 <= 2000000) {
+    return {
+      en: 'A full RAW4 frame approaches 2 MB. That is external PSRAM territory, and partial-refresh windows start to matter more than full-frame throughput.',
+      zh: '一整帧 RAW4 接近 2 MB，已经进入外部 PSRAM 的范畴；此时局刷窗口比整帧吞吐更重要。'
+    };
+  }
+  return {
+    en: 'A full RAW4 frame is over 2.8 MB. Plan for external PSRAM and strip streaming: a single contiguous buffer is usually not the right design at this size.',
+    zh: '一整帧 RAW4 超过 2.8 MB，需要按外部 PSRAM 加条带流式传输来设计；这个尺寸下，单块连续缓冲通常不是正确做法。'
+  };
+})();
+
+// Aspect ratio comes straight from the pixel matrix, so it is exact; the
+// sentence around it is what changes between shapes and keeps each page from
+// being a template with the numbers swapped.
+const ratio = width / height;
+const ratioLabel = ratio >= 1 ? `${ratio.toFixed(2)}:1` : `1:${(1 / ratio).toFixed(2)}`;
+const aspect = (() => {
+  if (ratio >= 2) {
+    return {
+      en: `At ${ratioLabel} this is a wide strip rather than a page. Layouts built for a 4:3 panel lose most of their height here, so plan the artwork as a horizontal band and check that any partial-refresh window still covers the text you update.`,
+      zh: `${ratioLabel} 的比例说明它是一条宽幅条屏，而不是一页纸。按 4:3 排的版到这里会损失大半个高度，画面要按横向条带来设计，同时确认局刷窗口仍然覆盖你要更新的文字区域。`
+    };
+  }
+  if (ratio >= 1.25) {
+    return {
+      en: `At ${ratioLabel} this is a landscape panel. Text blocks run wide, which suits signage lines and shelf strips, but a portrait poster or an A4 document will need re-flowing rather than scaling.`,
+      zh: `${ratioLabel} 是横版比例，文字行会拉得比较宽，适合标牌和货架条屏；但竖版海报或 A4 文档需要重新排版，不能直接缩放。`
+    };
+  }
+  if (ratio >= 0.95) {
+    return {
+      en: `At ${ratioLabel} this is effectively square. Square panels take badges, QR-style layouts and icon grids well, and they waste less area than a 4:3 crop when the content is not a photo.`,
+      zh: `${ratioLabel} 基本是正方形。方形屏适合胸章、二维码式排版和图标网格；内容不是照片时，它比 4:3 裁切浪费的面积更少。`
+    };
+  }
+  if (ratio >= 0.6) {
+    return {
+      en: `At ${ratioLabel} this is a portrait panel, close to A-series paper. Documents, lists and frame-style layouts map onto it with little rework, but wide tables and dashboards will not fit without a redesign.`,
+      zh: `${ratioLabel} 是竖版比例，接近 A 系列纸张。文档、列表和相框式排版几乎不用改就能放进去；但宽表格和仪表盘不放宽就放不下。`
+    };
+  }
+  return {
+    en: `At ${ratioLabel} this is a tall column, not a page. It suits shelf strips, column signage and vertical lists; anything designed for a normal page has to be rebuilt around a single narrow column.`,
+    zh: `${ratioLabel} 是一条竖长条，不是一页纸。适合货架条屏、柱状标牌和竖向列表；按普通页面设计的内容必须围绕单列窄栏重做。`
+  };
+})();
+
+const index = e6Panels.findIndex((item) => item.slug === panel.slug);
+const prevPanel = index > 0 ? e6Panels[index - 1] : null;
+const nextPanel = index < e6Panels.length - 1 ? e6Panels[index + 1] : null;
+
+const faqs = [
+  {
+    q: zh ? `${sizeIn} 寸 E6 一帧有多少字节？` : `How many bytes is one full frame at ${sizeIn} inch?`,
+    a: zh
+      ? `RAW4 每字节装两个索引，${res} 一帧是 ${raw4b}；RAW8 每像素一个字节，一帧是 ${raw8b}。两个数字都不含行填充、旋转和控制器命令。`
+      : `RAW4 packs two indices per byte, so a ${res} frame is ${raw4b}. RAW8 carries one index per byte and is ${raw8b}. Neither number includes row padding, rotation or a controller command set.`
+  },
+  {
+    q: zh ? `${sizeIn} 寸 E6 需要外部 RAM 吗？` : `Does the ${sizeIn}-inch E6 panel need external RAM?`,
+    a: ramNote[lang]
+  },
+  {
+    q: zh ? `${sizeIn} 寸 E6 能拿样品吗？` : `Can I get a sample of the ${sizeIn}-inch E6 panel?`,
+    a: zh
+      ? '可以。样品按成本收费，发的是能点亮、带数据手册的实物模组，你可以先验波形和显示效果再决定。选型、MOQ 与交期按具体型号单独报。'
+      : 'Yes. Samples are charged at cost and ship as working modules with the datasheet, so you can check the waveform and the image before committing. MOQ and lead time are quoted per confirmed part.'
+  }
+];
+
+const breadcrumbs = [
+  { name: zh ? '首页' : 'Home', path: `/${lang}/` },
+  { name: 'E-paper', path: `/${lang}/e-paper/` },
+  { name: zh ? 'E6 尺寸' : 'E6 sizes', path: `/${lang}/e-paper/e6/` },
+  { name: `${sizeIn} in` }
+];
+
+const productLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: zh
+    ? `E6 ${sizeIn} 寸六色电子纸面板（${res}）`
+    : `E6 ${sizeIn} inch six-colour e-paper panel (${res})`,
+  description: zh
+    ? `E6（Spectra 6）${sizeIn} 寸六色电子纸面板，分辨率 ${res}，一帧 RAW4 ${raw4b} / RAW8 ${raw8b}。`
+    : `E6 (Spectra 6) ${sizeIn}-inch six-colour e-paper panel, ${res} resolution, one frame ${raw4b} in RAW4 or ${raw8b} in RAW8.`,
+  category: 'Electronic paper display module',
+  brand: { '@type': 'Brand', name: 'EmbeddedNote' },
+  url: new URL(translations[lang], 'https://embeddednote.com').href,
+  additionalProperty: [
+    { '@type': 'PropertyValue', name: 'Diagonal', value: `${sizeIn} in` },
+    { '@type': 'PropertyValue', name: 'Resolution', value: res },
+    { '@type': 'PropertyValue', name: 'Pixels', value: pixels },
+    { '@type': 'PropertyValue', name: 'Colours', value: '6 (black, white, yellow, red, blue, green)' },
+    { '@type': 'PropertyValue', name: 'RAW4 bytes per frame', value: raw4 },
+    { '@type': 'PropertyValue', name: 'RAW8 bytes per frame', value: raw8 },
+    ...(ppi ? [{ '@type': 'PropertyValue', name: 'Pixel density', value: `${ppi} ppi` }] : [])
+  ]
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a }
+  }))
+};
+
+const related = [
+  { href: `/${lang}/e-paper/e6/`, label: zh ? '全部 E6 尺寸' : 'All E6 sizes' },
+  { href: `/${lang}/articles/epaper-size-chart/`, label: zh ? '尺寸与分辨率对照' : 'Size and resolution chart' },
+  { href: `/${lang}/tools/epaper-image-converter/`, label: zh ? '图像转换器' : 'Image converter' },
+  { href: `/${lang}/articles/epaper-names-decoded/`, label: zh ? '电子纸命名对照' : 'E-paper names decoded' },
+  { href: `/${lang}/e-paper/glossary/`, label: zh ? '术语表' : 'Glossary' }
+];
+---
+
+<Base
+  lang={lang}
+  title={title}
+  description={description}
+  translations={translations}
+  breadcrumbs={breadcrumbs}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(productLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+  </Fragment>
+
+  <article class="e6-size">
+    <p class="eyebrow">EMBEDDEDNOTE · E-PAPER · E6</p>
+
+    <h1>{zh ? `E6 ${sizeIn} 寸电子纸面板` : `E6 ${sizeIn}" E-Paper Panel`}</h1>
+    <p class="e6-size-sub">{res} · {zh ? '六色' : 'six colours'} · {sizeIn} in</p>
+
+    <p class="e6-size-lede">
+      {zh
+        ? `这一档是 E6（Spectra 6）家族里 ${sizeIn} 寸的那款，分辨率 ${res}，常见于${use.zh}。下面把它一帧要多少字节、对主控内存意味着什么，用可以自己复算的数字写清楚。`
+        : `This is the ${sizeIn}-inch member of the E6 (Spectra 6) family: ${res}, most often used in ${use.en}. The numbers below are the ones that decide your buffer and your transfer, and each one can be re-derived from the panel's own datasheet.`}
+    </p>
+
+    <h2>{zh ? '参数' : 'The numbers'}</h2>
+    <div class="e6-size-table-wrap">
+      <table class="e6-size-table">
+        <tbody>
+          <tr><th>{zh ? '对角线' : 'Diagonal'}</th><td>{sizeIn} in</td></tr>
+          <tr><th>{zh ? '分辨率' : 'Resolution'}</th><td>{res}</td></tr>
+          <tr><th>{zh ? '像素数' : 'Pixels'}</th><td>{px}</td></tr>
+          <tr><th>{zh ? 'RAW4（每帧）' : 'RAW4 per frame'}</th><td>{raw4b}</td></tr>
+          <tr><th>{zh ? 'RAW8（每帧）' : 'RAW8 per frame'}</th><td>{raw8b}</td></tr>
+          <tr><th>{zh ? '像素密度' : 'Pixel density'}</th><td>{ppi ? `${ppi} ppi` : '—'}</td></tr>
+          <tr><th>{zh ? '长宽比' : 'Aspect ratio'}</th><td>{width}:{height} ({ratioLabel})</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="e6-size-note">
+      {zh
+        ? 'E6 每像素 3 位颜色信息，但按 4 位半字节存放，所以打包后一帧是 宽 × 高 ÷ 2 字节；RAW8 是每像素一字节。'
+        : 'E6 carries three bits of colour per pixel inside a four-bit nibble, so a packed frame is width × height ÷ 2 bytes; RAW8 is one byte per pixel.'}
+      {ppi
+        ? (zh
+            ? `${ppi} ppi 来自该型号的数据手册，不是用对角线反推出来的。`
+            : `${ppi} ppi comes from that part's datasheet, not from dividing the diagonal.`)
+        : (zh
+            ? '像素密度一栏的破折号表示该型号的数据手册没有公布 PPI 或有效显示区，不是"没有这个参数"——我们也不用对角线反推它。'
+            : 'A dash in the density row means the datasheet for that part does not publish ppi or an active area — it does not mean the number is unknown to us, and we do not back it out of the diagonal.')}
+    </p>
+
+    <h2>{zh ? '这一帧对你的内存意味着什么' : 'What that frame costs you'}</h2>
+    <p>{ramNote[lang]}</p>
+    <p>{aspect[lang]}</p>
+
+    {interfaceNote && (
+      <>
+        <h2>{zh ? '接口' : 'Interface'}</h2>
+        <p>{interfaceNote[lang]}</p>
+      </>
+    )}
+
+    <h2>{zh ? '样品、驱动板与点亮固件' : 'Samples, driver boards and bring-up'}</h2>
+    <p>
+      {zh
+        ? `这块屏我们供货。样品按成本收费，给的是能点亮、带数据手册的实物模组，你可以先验波形和显示效果；需要的话配一块驱动板（升压、电平转换、SPI）和 ESP32 / STM32 / nRF 上的点亮固件。定制排线、结构图和刷新型号选择也在范围内。`
+        : `We supply this panel. A sample ships at cost as a working module with its datasheet, so you can check the waveform and the image before committing, and it can come with a driver board (boost rails, level shifting, SPI) plus bring-up firmware for ESP32, STM32 and nRF parts. Custom FPC, mechanical drawings and waveform selection are part of the same conversation.`}
+    </p>
+    <p class="e6-size-inline-cta">
+      <a href={`/${lang}/supply/`}>{zh ? '看供货与流程 →' : 'See what we supply →'}</a>
+    </p>
+
+    <h2>{zh ? '常问的三个' : 'Three questions that come first'}</h2>
+    <dl class="e6-size-faq">
+      {faqs.map((item) => (
+        <>
+          <dt>{item.q}</dt>
+          <dd>{item.a}</dd>
+        </>
+      ))}
+    </dl>
+
+    <h2>{zh ? '相关' : 'Related'}</h2>
+    <ul class="e6-size-related">
+      {related.map((item) => (
+        <li><a href={item.href}>{item.label}</a></li>
+      ))}
+    </ul>
+
+    <nav class="e6-size-pager" aria-label={zh ? '同系列其他尺寸' : 'Other sizes in this family'}>
+      {prevPanel
+        ? <a href={`/${lang}/e-paper/e6/${prevPanel.slug}/`} rel="prev">← {prevPanel.sizeIn} in</a>
+        : <span aria-hidden="true"></span>}
+      {nextPanel
+        ? <a href={`/${lang}/e-paper/e6/${nextPanel.slug}/`} rel="next">{nextPanel.sizeIn} in →</a>
+        : <span aria-hidden="true"></span>}
+    </nav>
+
+    <div class="e6-size-cta">
+      <p>
+        {zh
+          ? '要样品或报价，把尺寸、分辨率、颜色数、接口、目标产量和时间节点发到邮箱，一个工作日内回。'
+          : 'For a sample or a quote, send the size, resolution, colour count, interface, target volume and timeline. We reply within one working day.'}
+      </p>
+      <p class="e6-size-email">
+        <a href={`mailto:xudeng@datadelta.cn?subject=${encodeURIComponent(zh ? `E6 ${sizeIn} 寸选型咨询` : `E6 ${sizeIn} inch panel enquiry`)}`}>xudeng@datadelta.cn</a>
+      </p>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .e6-size {
+    width: min(100%, 780px);
+    margin: 0 auto;
+    padding: clamp(38px, 6vw, 72px) 0 clamp(64px, 8vw, 110px);
+  }
+  .e6-size h1 {
+    font: 700 clamp(32px, 4vw, 50px)/1.14 Georgia, 'Noto Serif SC', serif;
+    letter-spacing: -.025em;
+    margin: 12px 0 6px;
+    color: #17211e;
+  }
+  .e6-size-sub {
+    font: 500 15px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: #6a736c;
+    margin: 0 0 22px;
+  }
+  .e6-size-lede {
+    color: #4d574f;
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.75;
+    margin: 0 0 30px;
+  }
+  .e6-size h2 {
+    font: 700 clamp(20px, 2.2vw, 26px)/1.3 Georgia, 'Noto Serif SC', serif;
+    margin: 42px 0 14px;
+    color: #17211e;
+  }
+  .e6-size-table-wrap {
+    overflow-x: auto;
+    border: 1px solid #e3dccf;
+    background: #fffdf9;
+  }
+  .e6-size-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    font-variant-numeric: tabular-nums;
+  }
+  .e6-size-table th {
+    text-align: left;
+    font-weight: 600;
+    color: #4d574f;
+    background: #f4eee3;
+    padding: 10px 14px;
+    border-bottom: 1px solid #ece5d8;
+    white-space: nowrap;
+    width: 42%;
+  }
+  .e6-size-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #ece5d8;
+    color: #17211e;
+  }
+  .e6-size-table tr:last-child th,
+  .e6-size-table tr:last-child td { border-bottom: 0; }
+  .e6-size-note {
+    color: #6a736c;
+    font-size: 13.5px;
+    line-height: 1.7;
+    margin: 10px 0 0;
+  }
+  .e6-size p { color: #37413b; line-height: 1.8; }
+  .e6-size-inline-cta a {
+    color: #b94530;
+    font-weight: 700;
+    text-underline-offset: 3px;
+  }
+  .e6-size-faq dt {
+    font-weight: 700;
+    color: #17211e;
+    margin: 16px 0 4px;
+  }
+  .e6-size-faq dd {
+    margin: 0;
+    color: #4d574f;
+    line-height: 1.75;
+    font-size: 14.5px;
+  }
+  .e6-size-related {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+  }
+  .e6-size-related a {
+    color: #b94530;
+    text-underline-offset: 3px;
+  }
+  .e6-size-cta {
+    margin-top: 46px;
+    border-top: 1px solid #d0c8bb;
+    padding-top: 24px;
+  }
+  .e6-size-pager {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 36px;
+    padding-top: 18px;
+    border-top: 1px solid #e3dccf;
+    font-variant-numeric: tabular-nums;
+  }
+  .e6-size-pager a {
+    color: #b94530;
+    font-weight: 600;
+    text-underline-offset: 3px;
+  }
+  .e6-size-cta p { color: #4d574f; line-height: 1.75; margin: 0 0 12px; }
+  .e6-size-email { font-size: clamp(18px, 2vw, 22px); }
+  .e6-size-email a { color: #b94530; text-underline-offset: 3px; overflow-wrap: anywhere; }
+</style>

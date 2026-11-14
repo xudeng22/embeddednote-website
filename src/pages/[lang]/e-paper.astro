@@ -54,8 +54,15 @@ const tools = [
     label: zh ? 'E6 家族尺寸表' : 'E6 size table',
     href: `/${lang}/articles/epaper-names-decoded/`,
     note: zh
-      ? '15 个尺寸的分辨率、像素数与打包字节数,连同命名对照。'
-      : 'Fifteen sizes with resolution, pixel count and packed bytes, next to the naming table.'
+      ? '16 个尺寸的分辨率、像素数与打包字节数,连同命名对照。'
+      : 'Sixteen sizes with resolution, pixel count and packed bytes, next to the naming table.'
+  },
+  {
+    label: zh ? 'E6 逐尺寸页' : 'E6 size pages',
+    href: `/${lang}/e-paper/e6/`,
+    note: zh
+      ? '16 个尺寸各一页:分辨率、每帧字节数,以及这个缓冲对主控内存意味着什么。'
+      : 'One page per size: resolution, bytes per frame, and what that buffer means for your MCU.'
   }
 ];
 ---

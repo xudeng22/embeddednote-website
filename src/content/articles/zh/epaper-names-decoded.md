@@ -15,7 +15,7 @@ author: EmbeddedNote
 contentType: deep
 series: epaper
 seoTitle: '电子纸型号命名:E6、SSD1680、UC8151 对照'
-seoDescription: '电子纸命名对照:E6 就是 Spectra 6,E Ink 品牌名、控制器型号与模组料号怎么区分,附 15 个尺寸的分辨率与字节数表。'
+seoDescription: '电子纸命名对照:E6 就是 Spectra 6,E Ink 品牌名、控制器型号与模组料号怎么区分,附 16 个尺寸的分辨率与字节数表。'
 supplyCta: true
 ---
 

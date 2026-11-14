@@ -25,5 +25,14 @@
 /zh/category/tools/   /zh/notes/   301
 /zh/category/tools/*  /zh/notes/   301
 
+# Default language: send bare hits to the English edition. 302 because the
+# target is a language default, not a permanent move.
+/   /en/   302
+
+# Pre-restructure article URLs that still receive inbound links.
+/en/articles/embeddednote-launch/   /en/about/   301
+/zh/articles/embeddednote-launch/   /zh/about/   301
+/articles/embeddednote-launch/      /zh/about/   301
+
 # Cloudflare's email obfuscation injects this link; Googlebot recorded it as a 404.
 /cdn-cgi/l/email-protection  /en/contact/  301

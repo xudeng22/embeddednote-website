@@ -46,8 +46,8 @@ AI-assisted tools may be used for drafting, translation or editing. They are not
 
 ## Corrections, attribution and partnerships
 
-If you find an incorrect specification, broken reference or image-credit problem, email [xden2019@gmail.com](mailto:xden2019@gmail.com) with the page link and the part that needs checking. For substantial corrections, we aim to update the page while keeping its original publication date and identifying the revision.
+If you find an incorrect specification, broken reference or image-credit problem, email [xudeng@datadelta.cn](mailto:xudeng@datadelta.cn) with the page link and the part that needs checking. For substantial corrections, we aim to update the page while keeping its original publication date and identifying the revision.
 
 Third-party projects and trademarks remain the property of their respective owners. Coverage does not imply a manufacturer's endorsement. We do not publish sponsored articles or sell a favourable conclusion. Commercial relationships with suppliers of parts we also sell are disclosed on the business cooperation page.
 
-We also welcome open-source project suggestions and relevant engineering collaboration enquiries at **[xden2019@gmail.com](mailto:xden2019@gmail.com)**.
+We also welcome open-source project suggestions and relevant engineering collaboration enquiries at **[xudeng@datadelta.cn](mailto:xudeng@datadelta.cn)**.

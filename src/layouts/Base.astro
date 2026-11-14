@@ -70,7 +70,7 @@ const siteIdentity = {
       '@type':'Organization','@id':`${origin}/#publisher`,name:'EmbeddedNote',alternateName:'嵌入式杂谈',
       url:`${origin}/`,
       description:'An independent bilingual engineering publication covering embedded systems, MCU/SoC selection, hardware design, BLE connectivity, e-paper displays and open-source hardware, with free browser-based engineering tools.',
-      contactPoint:{'@type':'ContactPoint',email:'xden2019@gmail.com',contactType:'editorial inquiries'},
+      contactPoint:{'@type':'ContactPoint',email:'xudeng@datadelta.cn',contactType:'editorial inquiries'},
       logo:{'@type':'ImageObject',url:`${origin}/images/embeddednote-logo.webp`},
       founder:{'@id':`${origin}/#founder`},
       sameAs:['https://github.com/xudeng22','https://x.com/GaryxuEmbedded'],
@@ -139,6 +139,10 @@ const breadcrumbLd = breadcrumbs && breadcrumbs.length
     {translations.en && <link rel="alternate" hreflang="x-default" href={new URL(translations.en, origin).href} />}
     <script type="application/ld+json" set:html={JSON.stringify(siteIdentity)} />
     {breadcrumbLd && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />}
+    {/* Page-specific structured data (Product, FAQPage, ...). Kept in <head>
+        so crawlers see it before the body, and injected by pages via
+        <Fragment slot="head">. */}
+    <slot name="head" />
   </head>
   <body>
     <header class="masthead">

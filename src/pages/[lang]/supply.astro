@@ -8,7 +8,7 @@ export function getStaticPaths() {
 const lang = Astro.params.lang === 'zh' ? 'zh' : 'en';
 const zh = lang === 'zh';
 const translations = { en: '/en/supply/', zh: '/zh/supply/' };
-const email = 'xden2019@gmail.com';
+const email = 'xudeng@datadelta.cn';
 const subject = zh ? '电子纸选型咨询' : 'E-paper panel enquiry';
 
 const families = zh
@@ -102,8 +102,9 @@ const families = zh
     </div>
     <p class="supply-note">
       {zh
-        ? '尺寸范围写的是我们实际走通过的型号;同一尺寸下往往有多个分辨率,选型请以具体型号为准。站内的 E6 家族表列了 15 个尺寸的分辨率与字节数。'
-        : 'The ranges are parts we have actually handled. One diagonal usually carries several resolutions, so selection comes down to the exact model; the E6 table on this site lists 15 sizes with resolution and byte count.'}
+        ? '尺寸范围写的是我们实际走通过的型号;同一尺寸下往往有多个分辨率,选型请以具体型号为准。'
+        : 'The ranges are parts we have actually handled. One diagonal usually carries several resolutions, so selection comes down to the exact model.'}
+      <a href={`/${lang}/e-paper/e6/`}>{zh ? '16 个尺寸的分辨率与字节数 →' : 'All 16 E6 sizes with resolution and byte count →'}</a>
     </p>
 
     <h2>{zh ? '怎么开始' : 'How it works'}</h2>
