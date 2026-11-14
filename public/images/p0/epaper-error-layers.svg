@@ -26,7 +26,7 @@
     <text x="48" y="252" font-size="15" font-weight="700" fill="#17211e">3 · Packing and layout</text>
     <text x="48" y="274" font-size="12.5" fill="#59645e">Row stride, nibble order, rotation, inversion, bit depth.</text>
     <text x="640" y="252" font-size="12.5" font-weight="700" fill="#8a3f2c">Signature:</text>
-    <text x="640" y="274" font-size="12.5" fill="#8a3f2c">shear, diagonal bands, mirroring, duplicated columns</text>
+    <text x="640" y="274" font-size="12.5" fill="#8a3f2c">shear, diagonal bands,<tspan x="640" dy="15">mirroring, duplicated columns</tspan></text>
 
     <!-- layer 4 -->
     <rect x="24" y="300" width="912" height="66" rx="6" fill="#ffffff" stroke="#d0c8bb"/>
@@ -34,7 +34,7 @@
     <text x="48" y="326" font-size="15" font-weight="700" fill="#17211e">4 · Driver and waveform</text>
     <text x="48" y="348" font-size="12.5" fill="#59645e">Refresh mode, LUT selection, BUSY handling, power sequencing.</text>
     <text x="640" y="326" font-size="12.5" font-weight="700" fill="#8a3f2c">Signature:</text>
-    <text x="640" y="348" font-size="12.5" fill="#8a3f2c">faint previous image, weak contrast, wrong colours after mode change</text>
+    <text x="640" y="348" font-size="12.5" fill="#8a3f2c">faint previous image, weak contrast,<tspan x="640" dy="15">wrong colours after a mode change</tspan></text>
 
     <!-- layer 5 -->
     <rect x="24" y="374" width="912" height="66" rx="6" fill="#ffffff" stroke="#d0c8bb"/>
@@ -42,6 +42,6 @@
     <text x="48" y="400" font-size="15" font-weight="700" fill="#17211e">5 · Panel and environment</text>
     <text x="48" y="422" font-size="12.5" fill="#59645e">Temperature, viewing light, panel batch, ageing, FPC seating.</text>
     <text x="640" y="400" font-size="12.5" font-weight="700" fill="#8a3f2c">Signature:</text>
-    <text x="640" y="422" font-size="12.5" fill="#8a3f2c">one band, one corner, or different on two identical builds</text>
+    <text x="640" y="422" font-size="12.5" fill="#8a3f2c">one band, one corner,<tspan x="640" dy="15">or different on two identical builds</tspan></text>
   </g>
 </svg>
