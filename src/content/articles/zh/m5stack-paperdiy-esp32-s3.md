@@ -17,6 +17,7 @@ series: epaper
 seoTitle: 'M5Stack PaperDIY：4.7 英寸电子纸 DIY 套件与完整原理图'
 seoDescription: 'M5Stack PaperDIY 的 4.7 英寸电子纸、ESP32-S3、8 位并口、电源管理和开放原理图解析。Assembly Kit 售价 25 美元，Complete Kit 29.90 美元。'
 updatedDate: '2026-11-06'
+supplyCta: true
 ---
 
 M5Stack 最近上架的 PaperDIY，第一眼看着像一块普通的电子纸开发板。点开套件清单，才发现它把屏、主板、电池、亚克力板甚至外壳都拆开卖了。Assembly Kit 给的是屏幕、主板、电池和亚克力压板，得自己装；Complete Kit 已经装进 3D 打印外壳，到手可以直接写程序。两者核心电路相同，区别主要在结构。想做桌面日历、低功耗信息牌，或者给自己的设备换一块像样的显示屏，这套东西比从零画板省事得多。尤其是电子纸的排线、电源时序和固定方式，一开始就有人替你处理好了。

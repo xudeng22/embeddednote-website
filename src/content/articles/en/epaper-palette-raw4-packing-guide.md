@@ -12,6 +12,7 @@ contentType: deep
 series: epaper
 seoTitle: 'E-Paper RAW4: 4-Bit Packing, Dithering and Vectors'
 seoDescription: 'How e-paper images become bytes: palette mapping, dithering, continuous 4-bit (RAW4) packing, odd-width row padding, and a 5x2 test vector to verify your driver.'
+supplyCta: true
 ---
 
 A photograph can look convincing in an RGB browser preview and still appear wrong on a color e-paper panel. The failure is not always “bad dithering.” Three separate mappings are involved: **the source image to a restricted color palette**, **palette indexes to bytes**, and **those indexes to the panel's actual controller codes and drive waveforms**. Confusing any two of them can create swapped colors, mirrored text, or an incorrect frame size.

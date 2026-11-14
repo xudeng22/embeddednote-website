@@ -12,6 +12,7 @@ contentType: deep
 series: epaper
 seoTitle: 'E-Paper Engineering Guide: Image to Verified Refresh'
 seoDescription: 'An e-paper (e-ink) pipeline from image to verified refresh: colour depth and bytes, RAW4 packing, BLE transfer budgets, SPI timing, waveform limits and acceptance tests.'
+supplyCta: true
 ---
 
 The screen is the most visible part of an e-paper product, but it is rarely the only reason an update fails. A photograph may look correct in a desktop preview and render with swapped colors on hardware. A BLE transfer may finish on the phone while the receiver has only part of the file. A controller may load an entire frame over SPI in under a second and then spend many more seconds executing the display waveform. Each failure lives at a different boundary.

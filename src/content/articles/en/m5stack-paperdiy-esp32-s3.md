@@ -17,6 +17,7 @@ series: epaper
 seoTitle: 'M5Stack PaperDIY: $25 ESP32-S3 E-Paper Kit and Schematics'
 seoDescription: 'Inside M5Stack PaperDIY: a 4.7-inch, 960 × 540 e-paper display, ESP32-S3, parallel data interface, power management and ESP-IDF firmware.'
 updatedDate: '2026-11-11'
+supplyCta: true
 ---
 
 M5Stack sells its PaperDIY e-paper development platform in two versions. The $25 Assembly Kit includes a 4.7-inch display, controller board, 140 mAh battery and acrylic retaining plate for user assembly. The $29.90 Complete Kit uses the same core electronics, preassembled in a 3D-printed enclosure. Either version provides a practical starting point for a desk calendar, status display or other device that updates only occasionally. The display connection, power circuitry and basic mounting hardware are already part of the design.

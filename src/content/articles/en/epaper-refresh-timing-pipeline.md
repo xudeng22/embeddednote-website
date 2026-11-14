@@ -12,6 +12,7 @@ contentType: deep
 series: epaper
 seoTitle: 'E-Paper Refresh Time: SPI, BUSY and Waveform'
 seoDescription: 'Why a fast SPI clock barely shortens an e-paper refresh: transport, controller preparation, waveform driving and optical settling, with a measurement recipe.'
+supplyCta: true
 ---
 
 A display can accept its pixel data over SPI in a fraction of a second and still take many seconds to update. That is not necessarily a driver bug. E-paper must move charged pigment particles using controlled voltage waveforms, and the panel's update behavior is a separate physical process from moving bytes into controller memory.
