@@ -12,19 +12,27 @@ const translations = { en: '/en/solutions/', zh: '/zh/solutions/' };
 const frames = [
   {
     size: '7.09 in', res: '1200 × 1600', ppi: '282', panel: 'E6', power: '5000 mAh + Type-C',
-    doc: '/downloads/e6-frame/e6-frame-7.09in.pdf', docSize: '374 KB', use: zh ? '桌面小相框、胸章' : 'desk frame, badge'
+    doc: zh ? '/downloads/e6-frame/e6-frame-7.09in.pdf' : '/downloads/e6-frame/e6-frame-7.09in-en.pdf',
+    docSize: zh ? '374 KB' : '184 KB',
+    use: zh ? '桌面小相框、胸章' : 'desk frame, badge'
   },
   {
     size: '10 in', res: '1600 × 1200', ppi: '200', panel: 'E6', power: '5000 mAh + Type-C',
-    doc: '/downloads/e6-frame/e6-frame-10in.pdf', docSize: '376 KB', use: zh ? '相框、货架展示' : 'frames, shelf display'
+    doc: zh ? '/downloads/e6-frame/e6-frame-10in.pdf' : '/downloads/e6-frame/e6-frame-10in-en.pdf',
+    docSize: zh ? '376 KB' : '164 KB',
+    use: zh ? '相框、货架展示' : 'frames, shelf display'
   },
   {
     size: '13.3 in', res: '1200 × 1600', ppi: '150', panel: 'E6', power: '5000 mAh + Type-C',
-    doc: '/downloads/e6-frame/e6-frame-13.3in.pdf', docSize: '388 KB', use: zh ? 'A4 相框、办公标牌' : 'A4 frame, office signage'
+    doc: zh ? '/downloads/e6-frame/e6-frame-13.3in.pdf' : '/downloads/e6-frame/e6-frame-13.3in-en.pdf',
+    docSize: zh ? '388 KB' : '171 KB',
+    use: zh ? 'A4 相框、办公标牌' : 'A4 frame, office signage'
   },
   {
     size: '31.5 in', res: '2560 × 1440', ppi: '94', panel: 'E6', power: '12V 3A Type-C',
-    doc: '/downloads/e6-frame/e6-frame-31.5in.pdf', docSize: '2.0 MB', use: zh ? '墙面画框、门店' : 'wall frame, retail'
+    doc: zh ? '/downloads/e6-frame/e6-frame-31.5in.pdf' : '/downloads/e6-frame/e6-frame-31.5in-en.pdf',
+    docSize: zh ? '2.0 MB' : '366 KB',
+    use: zh ? '墙面画框、门店' : 'wall frame, retail'
   }
 ];
 ---
@@ -121,8 +129,8 @@ const frames = [
     <h2>{zh ? '四份方案书,可直接下载' : 'Four spec sheets, ready to download'}</h2>
     <p class="sol-dl-intro">
       {zh
-        ? '每份都是单页规格书:屏幕参数、主控与无线配置、供电、结构尺寸、App 要求、工作流程。方案书为中文版,需要英文版请在邮件里说明。'
-        : 'Each one is a single-page spec: panel parameters, host platform, wireless setup, power, mechanical dimensions, app requirements and the workflow. The sheets are written in Chinese; ask for an English version by email and we will send it.'}
+        ? '每份都是单页规格书:屏幕参数、主控与无线配置、供电、结构尺寸、App 要求、工作流程。中文版与英文版都可以直接下载。'
+        : 'Each one is a single-page spec: panel parameters, host platform, wireless setup, power, mechanical dimensions, app requirements and the workflow. Both the English and the Chinese edition download directly.'}
     </p>
     <ul class="sol-downloads">
       {frames.map((f) => (
