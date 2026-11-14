@@ -50,6 +50,8 @@ E6 is E Ink's Spectra 6: six colours (black, white, yellow, red, blue, green), t
 | 28.5 in | 2,160 × 3,060 | 6,609,600 | 3,304,800 B | 6,609,600 B | — |
 | 31.5 in | 2,560 × 1,440 | 3,686,400 | 1,843,200 B | 3,686,400 B | 94 |
 
+The same table is available as a [CSV file](/downloads/epaper-e6-sizes.csv) if you want it in a spreadsheet.
+
 Two rows punish a careless assumption. The 31.5-inch panel is the largest and the *lowest* density at 94 ppi, because 2560 pixels spread over a 696 mm width. The 7.09-inch is the densest at 282 ppi — a small frame with a 1600-pixel edge. If your text was designed for one, it will not fit the other unchanged.
 
 ## Four-colour and monochrome, for contrast
