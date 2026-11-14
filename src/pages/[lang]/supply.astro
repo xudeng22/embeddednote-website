@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import EmailCapture from '../../components/EmailCapture.astro';
 
 export function getStaticPaths() {
   return [{ params: { lang: 'en' } }, { params: { lang: 'zh' } }];
@@ -160,6 +161,16 @@ const families = zh
         ? '常备型号和定制排线差得比较多,按你确认的具体型号报。急的项目请在邮件里写明时间节点。'
         : 'Stock parts and custom FPC builds differ enough that we quote per confirmed part. If the timeline is tight, say so in the email.'}</dd>
     </dl>
+
+    <EmailCapture
+      lang={lang}
+      source={`supply-${lang}`}
+      heading={zh ? '先拿资料，再谈项目' : 'Take the documents first'}
+      blurb={zh
+        ? '四份 E6 相框方案书的英文版，加上每两周一封的电子纸工程笔记。不需要先报价。'
+        : 'English editions of the four E6 frame briefs, plus a short e-paper engineering note every two weeks. No quote required first.'}
+      cta={zh ? '把资料发我' : 'Send the documents'}
+    />
 
     <div class="supply-contact">
       <p>

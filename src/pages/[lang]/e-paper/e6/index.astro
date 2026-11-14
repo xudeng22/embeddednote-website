@@ -1,5 +1,6 @@
 ---
 import Base from '../../../../layouts/Base.astro';
+import EmailCapture from '../../../../components/EmailCapture.astro';
 import { e6Panels, bytes } from '../../../../data/e6-panels';
 
 export function getStaticPaths() {
@@ -78,6 +79,12 @@ const description = zh
         ? 'PPI 一栏的破折号表示该型号的数据手册没有公布像素密度或有效显示区。我们不用对角线反推——对角线是外形尺寸，分辨率是玻璃尺寸，两者相关但不成公式。'
         : 'A dash in the PPI column means the datasheet for that part does not publish pixel density or an active area. We do not back it out of the diagonal: a diagonal is an outline measurement and resolution is a glass measurement.'}
     </p>
+
+    <EmailCapture
+      lang={lang}
+      source={`e6-hub-${lang}`}
+      interests={e6Panels.map((panel) => `${panel.sizeIn} in`)}
+    />
 
     <h2>{zh ? '怎么用这张表' : 'How to use this table'}</h2>
     <p>

@@ -1,0 +1,241 @@
+---
+/**
+ * Email capture.
+ *
+ * Posts to /api/subscribe (a Cloudflare Pages Function in /functions). The
+ * markup is a real form, so it still works with JavaScript disabled: the
+ * function answers a form-encoded POST with a small confirmation page, and a
+ * JSON POST (the fetch path) with JSON.
+ *
+ * Configuration is entirely server-side; see functions/api/subscribe.ts.
+ */
+interface Props {
+  lang?: 'en' | 'zh';
+  source: string;
+  heading?: string;
+  blurb?: string;
+  cta?: string;
+  /** Optional兴趣 selector, e.g. which panel size the reader came for. */
+  interests?: string[];
+}
+
+const {
+  lang = 'en',
+  source,
+  heading,
+  blurb,
+  cta,
+  interests = []
+} = Astro.props;
+
+const zh = lang === 'zh';
+const headingText = heading ?? (zh ? '把英文规格书发给我' : 'Send me the English spec sheets');
+const blurbText = blurb ?? (zh
+  ? '四份 E6 相框方案书（7.09 / 10 / 13.3 / 31.5 寸）的英文版，加上每两周一封的电子纸工程笔记。随时可以退订。'
+  : 'English editions of the four E6 frame briefs (7.09, 10, 13.3 and 31.5 inch), plus a short e-paper engineering note every two weeks. Unsubscribe any time.');
+const ctaText = cta ?? (zh ? '发给我' : 'Send them');
+---
+
+<section class="ec" data-source={source} aria-labelledby={`ec-title-${source}`}>
+  <div class="ec-inner">
+    <div class="ec-copy">
+      <h2 id={`ec-title-${source}`}>{headingText}</h2>
+      <p>{blurbText}</p>
+    </div>
+
+    <form class="ec-form" method="post" action="/api/subscribe" novalidate>
+      <input type="hidden" name="source" value={source} />
+      <input type="hidden" name="lang" value={lang} />
+      <!-- Honeypot: bots fill this, people never see it. -->
+      <div class="ec-hp" aria-hidden="true">
+        <label for={`ec-company-${source}`}>Company</label>
+        <input id={`ec-company-${source}`} type="text" name="company" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div class="ec-row">
+        <label class="ec-label" for={`ec-email-${source}`}>{zh ? '工作邮箱' : 'Work email'}</label>
+        <input
+          id={`ec-email-${source}`}
+          class="ec-input"
+          type="email"
+          name="email"
+          required
+          autocomplete="email"
+          inputmode="email"
+          placeholder={zh ? 'name@company.com' : 'name@company.com'}
+        />
+      </div>
+
+      {interests.length > 0 && (
+        <div class="ec-row">
+          <label class="ec-label" for={`ec-interest-${source}`}>{zh ? '关注哪一款' : 'Which size?'}</label>
+          <select id={`ec-interest-${source}`} class="ec-input" name="interest">
+            <option value="">{zh ? '都发' : 'All of them'}</option>
+            {interests.map((item) => <option value={item}>{item}</option>)}
+          </select>
+        </div>
+      )}
+
+      <button class="ec-submit" type="submit">{ctaText}</button>
+
+      <p class="ec-status" role="status" aria-live="polite" data-ec-status></p>
+      <p class="ec-note">
+        {zh ? '只用于发送规格书和工程笔记，不转给第三方。' : 'Used only to send the sheets and the notes. Never passed to a third party.'}
+        <a href={`/${lang}/privacy/`}>{zh ? '隐私政策' : 'Privacy'}</a>
+      </p>
+      <p class="ec-fallback" data-ec-fallback hidden>
+        {zh ? '表单暂时不可用，直接写信到' : 'The form is unavailable — email us at'}
+        <a href={`mailto:xudeng@datadelta.cn?subject=${encodeURIComponent(zh ? '索取 E6 规格书' : 'E6 spec sheets')}`}>xudeng@datadelta.cn</a>
+      </p>
+    </form>
+  </div>
+</section>
+
+<script>
+  // Progressive enhancement: intercept the submit, report inline, and never
+  // leave the reader on a blank API response if the function is not configured.
+  for (const form of document.querySelectorAll('form.ec-form')) {
+    const status = form.querySelector('[data-ec-status]');
+    const fallback = form.querySelector('[data-ec-fallback]');
+    const button = form.querySelector('button');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!(form instanceof HTMLFormElement)) return;
+
+      const data = new FormData(form);
+      if (String(data.get('company') ?? '').trim()) return; // honeypot
+
+      const email = String(data.get('email') ?? '').trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        status.textContent = document.documentElement.lang === 'zh-CN'
+          ? '请填写一个有效的邮箱地址。'
+          : 'Please enter a valid email address.';
+        status.dataset.state = 'error';
+        return;
+      }
+
+      button.disabled = true;
+      status.textContent = document.documentElement.lang === 'zh-CN' ? '发送中…' : 'Sending…';
+      status.dataset.state = 'pending';
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(Object.fromEntries(data.entries()))
+        });
+        const payload = await response.json().catch(() => ({}));
+
+        if (response.ok) {
+          status.textContent = document.documentElement.lang === 'zh-CN'
+            ? '已收到，规格书稍后发到你的邮箱。'
+            : 'Got it — the sheets are on their way to your inbox.';
+          status.dataset.state = 'ok';
+          form.reset();
+        } else if (response.status === 503) {
+          status.textContent = '';
+          status.dataset.state = 'error';
+          fallback.hidden = false;
+        } else {
+          status.textContent = payload.message
+            || (document.documentElement.lang === 'zh-CN' ? '出了点问题，请稍后再试。' : 'Something went wrong — please try again.');
+          status.dataset.state = 'error';
+        }
+      } catch {
+        status.textContent = '';
+        status.dataset.state = 'error';
+        fallback.hidden = false;
+      } finally {
+        button.disabled = false;
+      }
+    });
+  }
+</script>
+
+<style>
+  .ec {
+    margin: 44px 0;
+    border: 1px solid #d8d0c3;
+    background: #fbf8f2;
+  }
+  .ec-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 28px;
+    padding: 26px 26px 22px;
+  }
+  @media (max-width: 720px) {
+    .ec-inner { grid-template-columns: 1fr; gap: 18px; }
+  }
+  .ec-copy h2 {
+    font: 700 clamp(19px, 2vw, 23px)/1.3 Georgia, 'Noto Serif SC', serif;
+    margin: 0 0 8px;
+    color: #17211e;
+  }
+  .ec-copy p {
+    margin: 0;
+    color: #4d574f;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .ec-hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .ec-row { margin-bottom: 10px; }
+  .ec-label {
+    display: block;
+    font-size: 12px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: #6a736c;
+    margin-bottom: 4px;
+  }
+  .ec-input {
+    width: 100%;
+    padding: 9px 11px;
+    border: 1px solid #c9c0b1;
+    background: #fff;
+    color: #17211e;
+    font-size: 15px;
+    border-radius: 0;
+  }
+  .ec-input:focus {
+    outline: 2px solid #b94530;
+    outline-offset: 1px;
+  }
+  .ec-submit {
+    margin-top: 4px;
+    padding: 10px 20px;
+    background: #b94530;
+    color: #fff;
+    border: 0;
+    font: 600 15px/1 system-ui, sans-serif;
+    cursor: pointer;
+  }
+  .ec-submit:hover { background: #a03a27; }
+  .ec-submit:disabled { opacity: .6; cursor: progress; }
+  .ec-status {
+    margin: 10px 0 0;
+    font-size: 13.5px;
+    line-height: 1.5;
+    min-height: 1em;
+  }
+  .ec-status[data-state='ok'] { color: #2f6b45; }
+  .ec-status[data-state='error'] { color: #b94530; }
+  .ec-note {
+    margin: 8px 0 0;
+    font-size: 12px;
+    color: #6a736c;
+  }
+  .ec-note a { color: #6a736c; text-underline-offset: 2px; }
+  .ec-fallback {
+    margin: 8px 0 0;
+    font-size: 13.5px;
+    color: #b94530;
+  }
+</style>
