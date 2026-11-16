@@ -50,13 +50,13 @@ For an **8-bit index**, every pixel occupies a byte. For a **4-bit index**, two 
 | 720 × 480 | RGB888, 24 bits/pixel | 1,036,800 B | Uncompressed input photo/frame |
 | 200 × 200 | 1 bit/pixel | 5,000 B | One packed binary plane |
 
-The table deliberately mixes *possible* intermediate formats; it does not claim that the referenced panels use these exact buffers. A controller may require color planes, byte-aligned scanlines, separate commands, inversion, rotated scan order or a proprietary indexed code set. **Never select a payload format from a color count alone.** Six available colors require at least three information bits per pixel in theory, but that says nothing about the controller's transfer format.
+The table deliberately mixes *possible* intermediate formats; it does not claim that the referenced panels use these exact buffers. A controller may require color planes, byte-aligned scanlines, separate commands, inversion, rotated scan order or a proprietary indexed code set. **Never select a payload format from a color count alone.** Six available colors require at least three information bits per pixel in theory, but that says nothing about the controller's transfer format. The energy side of the same pipeline is worked out in [e-paper power consumption](/en/articles/epaper-power-model/).
 
-When estimating memory, distinguish an RGB source image, a decoded intermediate surface, an index framebuffer, optional double buffering and the controller transfer scratch space. A 720 × 480 RGB888 buffer is about 0.99 MiB by itself; a second full-size buffer can be a major design decision on an MCU. The headline flash size is not the same thing as available contiguous RAM.
+When estimating memory, distinguish an RGB source image, a decoded intermediate surface, an index framebuffer, optional double buffering and the controller transfer scratch space. A 720 × 480 RGB888 buffer is about 0.99 MiB by itself; a second full-size buffer can be a major design decision on an MCU. The headline flash size is not the same thing as available contiguous RAM. Every resolution mentioned here has its byte count in the [size chart](/en/articles/epaper-size-chart/).
 
 ## 3. Use a binary test vector before a photograph
 
-A first photograph is a terrible low-level diagnostic: incorrect nibble order, palette maps and rotation can all look like “bad color processing.” Begin with a tiny artificial pattern whose bytes you know in advance.
+A first photograph is a terrible low-level diagnostic: incorrect nibble order, palette maps and rotation can all look like “bad color processing.” Begin with a tiny artificial pattern whose bytes you know in advance. When a partial update is safe is a separate question, covered in [partial refresh](/en/articles/epaper-partial-refresh-safe/).
 
 Assume a **five-pixel-wide, two-row** indexed image with values:
 

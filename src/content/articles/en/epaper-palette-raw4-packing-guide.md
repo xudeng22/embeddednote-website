@@ -41,7 +41,7 @@ Some controller protocols instead require separate planes, row padding, line hea
 
 ## 2. The palette is both a numerical and physical problem
 
-Palette quantization assigns every source pixel to one of a finite set of reference colors. A simple nearest-color algorithm in sRGB uses squared Euclidean distance, but sRGB values are gamma encoded and are not perceptually uniform. Converting samples to CIE Lab and comparing ΔE76 is often a more useful baseline when approximating colors; ΔE76 is not equivalent to the more elaborate CIEDE2000 method.
+Palette quantization assigns every source pixel to one of a finite set of reference colors. A simple nearest-color algorithm in sRGB uses squared Euclidean distance, but sRGB values are gamma encoded and are not perceptually uniform. Converting samples to CIE Lab and comparing ΔE76 is often a more useful baseline when approximating colors; ΔE76 is not equivalent to the more elaborate CIEDE2000 method. If you only need the numbers, the [size chart](/en/articles/epaper-size-chart/) lists RAW4 and RAW8 sizes for every E6 resolution.
 
 For reflective e-paper, even an accurate Lab calculation is only as good as its *reference palette*. RGB swatches sampled from a manufacturer presentation are not measurements of the actual display. A defensible calibrated palette requires panel readings under a documented illuminant, temperature, drive waveform and instrument setup. A JSON field marked “measured” does not turn guessed RGB values into real measurements.
 

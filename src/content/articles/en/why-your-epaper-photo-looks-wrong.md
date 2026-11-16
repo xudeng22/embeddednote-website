@@ -40,7 +40,7 @@ The rows are ordered by how fast you can rule them out, not by how likely they a
 
 ## Cause 1: the image you converted is not the image you think
 
-Browsers rescale silently. A canvas is sized by CSS in one place and by `width`/`height` attributes in another, EXIF orientation may or may not have been applied, and a "crop" in the UI can be a letterbox in the buffer.
+Browsers rescale silently. A canvas is sized by CSS in one place and by `width`/`height` attributes in another, EXIF orientation may or may not have been applied, and a "crop" in the UI can be a letterbox in the buffer. If the panel name is what is unclear, [E-paper names decoded](/en/articles/epaper-names-decoded/) separates brand, controller and part number.
 
 **One-minute check.** Export the preview PNG and read its real pixel dimensions. They must equal the panel resolution exactly, not the source photo's. Then open the source at 1:1 and confirm the region you expected is the region that arrived.
 

@@ -46,7 +46,7 @@ A module has all three, and they do not imply each other. Two modules sold as "2
 | E Ink [Carta](https://www.eink.com/brand) | — | The black-and-white baseline |
 | E Ink [Marquee](https://www.eink.com/brand/detail/marquee) | — | Four-particle colour, −20 to 65 °C, 5–7 s transitions |
 
-`E6` is the one that trips people up most often, because it looks like a controller number and it is not. If you are searching for a six-colour panel, search both "Spectra 6" and "E6" — vendors use the short form in titles and the long form in datasheets.
+`E6` is the one that trips people up most often, because it looks like a controller number and it is not. If you are searching for a six-colour panel, search both "Spectra 6" and "E6" — vendors use the short form in titles and the long form in datasheets. Resolution and density for the family are tabulated in the [size chart](/en/articles/epaper-size-chart/).
 
 ## The E6 family, by size
 
@@ -89,7 +89,7 @@ Colour depth and storage width are two different numbers, and only the second on
 | BWRY (E5, 4 colours) | 4 | 2 | 2 bits per pixel, four to a byte | 10,000 B | 96,000 B |
 | E6 (6 colours) | 6 | 3 | 4 bits per pixel, two to a byte | 20,000 B | 192,000 B |
 
-BWR and BWRY land on the same byte count for different reasons: the three-colour panel sends two full-size bitplanes, while the four-colour panel packs two bits into every pixel. The totals agree; the layouts do not, and one cannot be fed to a controller that expects the other.
+BWR and BWRY land on the same byte count for different reasons: the three-colour panel sends two full-size bitplanes, while the four-colour panel packs two bits into every pixel. The totals agree; the layouts do not, and one cannot be fed to a controller that expects the other. Operating range is on the same datasheet page; [cold failure modes](/en/articles/epaper-cold-failure/) explains why it is a boundary rather than a comfort zone.
 
 Two consequences follow:
 

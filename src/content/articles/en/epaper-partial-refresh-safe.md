@@ -36,7 +36,7 @@ That is why it is fast and why it does not flash. It is also why the result depe
 
 ## Gate 1: the panel and the waveform support it
 
-This is not a software setting you can enable. A panel either ships with a partial waveform or it does not, and the controller has to expose the addressing mode. Some modules state plainly in the datasheet that only full refresh is supported; large panels are the usual case.
+This is not a software setting you can enable. A panel either ships with a partial waveform or it does not, and the controller has to expose the addressing mode. Some modules state plainly in the datasheet that only full refresh is supported; large panels are the usual case. Refreshing less is also the cheapest energy saving; the arithmetic is in [power consumption](/en/articles/epaper-power-model/).
 
 Check three things before writing any code:
 
@@ -44,7 +44,7 @@ Check three things before writing any code:
 2. The controller datasheet documents a partial/region update command and what it does to the LUT.
 3. The vendor demo has a working partial example for **this** panel revision, not a sibling size.
 
-If any of those is missing, treat partial as unsupported. A driver that sends a partial command to a panel without the waveform usually does not fail loudly — it produces a grey, low-contrast update that looks like a contrast bug.
+If any of those is missing, treat partial as unsupported. A driver that sends a partial command to a panel without the waveform usually does not fail loudly — it produces a grey, low-contrast update that looks like a contrast bug. The gates change once the panel is cold; [cold failure modes](/en/articles/epaper-cold-failure/) explains which ones move.
 
 ## Gate 2: the mode has not changed since the last full refresh
 

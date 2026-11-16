@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import HubPage from '../../components/HubPage.astro';
 import { getCollection } from 'astro:content';
+import { NOTES_GROUPS, notesGroupOf, isNotesArticle } from '../../lib/notes-groups.mjs';
 
 export function getStaticPaths() {
   return [{ params: { lang: 'en' } }, { params: { lang: 'zh' } }];
@@ -12,16 +13,13 @@ const zh = lang === 'zh';
 const translations = { en: '/en/notes/', zh: '/zh/notes/' };
 
 const all = await getCollection('articles', ({ data }) => !data.draft);
-const items = all
-  .filter((a) => a.data.locale === lang)
-  .sort((a, b) => +b.data.pubDate - +a.data.pubDate)
-  .map((a) => ({
-    title: a.data.title,
-    description: a.data.description,
-    href: `/${lang}/articles/${a.id.split('/').pop()}/`,
-    date: a.data.pubDate.toISOString().slice(0, 10),
-    kind: a.data.contentType === 'deep' ? (zh ? '深度' : 'analysis') : undefined
-  }));
+const notes = all.filter((a) => a.data.locale === lang && isNotesArticle(a.data));
+
+const counts = {};
+for (const a of notes) {
+  const group = notesGroupOf(a.data);
+  counts[group] = (counts[group] ?? 0) + 1;
+}
 ---
 
 <Base
@@ -39,7 +37,52 @@ const items = all
     lede={zh
       ? '开源项目分享、工程实践、项目拆解、选型与供应链观察、行业动向。它们不构成体系,但经常是读者第一次找到我们的地方。'
       : 'Open-source project write-ups, engineering practice, project teardowns, selection and supply-chain observations, and industry moves. They are not a system, but they are often where readers first find us.'}
-    articles={items}
+    articles={[]}
     tools={[]}
   />
+
+  <section class="notes-groups">
+    {NOTES_GROUPS.map((g) => (
+      <a class="ng-card" href={`/${lang}/notes/${g.slug}/`}>
+        <span class="ng-count">{counts[g.slug] ?? 0}</span>
+        <strong>{zh ? g.zh : g.en}</strong>
+        <span class="ng-note">{zh ? g.noteZh : g.noteEn}</span>
+        <em>{zh ? '查看这一组 →' : 'Open this group →'}</em>
+      </a>
+    ))}
+  </section>
 </Base>
+
+<style>
+  .notes-groups {
+    width: min(100%, 820px);
+    margin: 0 auto 80px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .ng-card {
+    position: relative;
+    display: block;
+    border: 1px solid #d8d0c3;
+    background: #fbf8f2;
+    padding: 22px 22px 18px;
+    text-decoration: none;
+    transition: border-color .18s ease, background-color .18s ease;
+  }
+  .ng-card:hover { border-color: #b94530; background: #fffdf9; }
+  .ng-count {
+    display: block;
+    font: 700 34px/1 Georgia, serif;
+    color: #b94530;
+    margin-bottom: 10px;
+  }
+  .ng-card strong {
+    display: block;
+    font: 700 19px/1.3 Georgia, 'Noto Serif SC', serif;
+    color: #17211e;
+    margin-bottom: 6px;
+  }
+  .ng-note { display: block; color: #5c665f; font-size: 14px; line-height: 1.6; margin-bottom: 12px; }
+  .ng-card em { font: 700 12px/1 system-ui, sans-serif; font-style: normal; color: #b94530; }
+</style>

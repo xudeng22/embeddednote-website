@@ -44,13 +44,13 @@ The cost is that the final state of a pixel depends on where it started. A pixel
 | Temperature | Pigment viscosity and switching speed | The waveform table you select, and whether you allow partial at all |
 | Refresh history | How many short waveforms since the last full one | A counter, and a budget |
 
-Most implementations control the first one by accident, ignore the second, and never implement the third. The third is the cheapest to fix.
+Most implementations control the first one by accident, ignore the second, and never implement the third. The third is the cheapest to fix. What you write matters here too: the [size chart](/en/articles/epaper-size-chart/) lists the frame bytes for every E6 panel.
 
 ## Why "refresh it again" sometimes makes it worse
 
-A second partial refresh on the same region pushes the pigment through the same short sequence again. If the residue came from an incomplete transition, a repeat can help. If it came from charge trapped at the electrode, repeating the same short waveform can deepen the imbalance instead of clearing it.
+A second partial refresh on the same region pushes the pigment through the same short sequence again. If the residue came from an incomplete transition, a repeat can help. If it came from charge trapped at the electrode, repeating the same short waveform can deepen the imbalance instead of clearing it. Which waveform runs is the other half of the story; [refresh modes](/en/articles/epaper-refresh-modes/) explains what GC16, GL16, DU and A2 change.
 
-The reliable operation is not a repeat; it is a full refresh, which uses a long sequence specifically designed to normalise every pixel. That is why the fix belongs in the update policy, not in the button handler.
+The reliable operation is not a repeat; it is a full refresh, which uses a long sequence specifically designed to normalise every pixel. That is why the fix belongs in the update policy, not in the button handler. Temperature changes this faster than anything else; [cold failure modes](/en/articles/epaper-cold-failure/) walks through what happens below the rated range.
 
 ## Temperature is not a detail
 

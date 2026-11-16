@@ -49,11 +49,11 @@ At 4 MHz the same arithmetic is **0.432 s**; at 1 MHz it is **1.728 s**. These a
 | 4 MHz | 0.432 s |
 | 20 MHz | 0.0864 s |
 
-The dramatic difference in this table says **nothing** by itself about pigment-motion time. Increasing SPI speed from 4 MHz to 20 MHz can save, at most, roughly 0.346 seconds of ideal bus clocking for this example; it cannot eliminate a separate 12-second waveform phase.
+The dramatic difference in this table says **nothing** by itself about pigment-motion time. Increasing SPI speed from 4 MHz to 20 MHz can save, at most, roughly 0.346 seconds of ideal bus clocking for this example; it cannot eliminate a separate 12-second waveform phase. The waveform behind that BUSY time is chosen by mode; [refresh modes](/en/articles/epaper-refresh-modes/) explains the four you will meet.
 
 ## Why the BUSY signal is not the whole story
 
-A controller's BUSY output is a digital view of its internal state. The logic level, transitions and meaning of “ready” depend on the specific driver. Some modules may also require a delay or power-down sequence. A visible panel can show transient flashes, intermediate colors or residual change during and sometimes after the reported busy interval.
+A controller's BUSY output is a digital view of its internal state. The logic level, transitions and meaning of “ready” depend on the specific driver. Some modules may also require a delay or power-down sequence. A visible panel can show transient flashes, intermediate colors or residual change during and sometimes after the reported busy interval. What each of those seconds costs in energy is in [power consumption](/en/articles/epaper-power-model/).
 
 Therefore publish both **electrical completion** and, when useful, an **optical criterion** (for example, a repeatable camera or photodiode threshold) instead of treating the BUSY edge as automatic proof that every pixel reached its final appearance. A smartphone video can illustrate behavior but is a poor substitute for calibrated timing without a timestamped reference and controlled lighting.
 

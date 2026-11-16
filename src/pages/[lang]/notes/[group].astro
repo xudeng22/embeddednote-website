@@ -1,0 +1,81 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { NOTES_GROUPS, notesGroupOf, isNotesArticle } from '../../../lib/notes-groups.mjs';
+
+export function getStaticPaths() {
+  const paths = [];
+  for (const lang of ['en', 'zh']) {
+    for (const g of NOTES_GROUPS) paths.push({ params: { lang, group: g.slug } });
+  }
+  return paths;
+}
+
+const lang = Astro.params.lang === 'zh' ? 'zh' : 'en';
+const slug = Astro.params.group;
+const zh = lang === 'zh';
+const meta = NOTES_GROUPS.find((g) => g.slug === slug);
+if (!meta) throw new Error(`unknown notes group: ${slug}`);
+
+const all = await getCollection('articles', ({ data }) => !data.draft);
+const items = all
+  .filter((a) => a.data.locale === lang && isNotesArticle(a.data) && notesGroupOf(a.data) === slug)
+  .sort((a, b) => +b.data.pubDate - +a.data.pubDate)
+  .map((a) => ({
+    title: a.data.title,
+    description: a.data.description,
+    href: `/${lang}/articles/${a.id.split('/').pop()}/`,
+    date: a.data.pubDate.toISOString().slice(0, 10)
+  }));
+
+const others = NOTES_GROUPS.filter((g) => g.slug !== slug);
+---
+
+<Base
+  lang={lang}
+  title={`${zh ? meta.zh : meta.en} · ${zh ? '笔记' : 'Notes'}`}
+  description={zh ? meta.noteZh : meta.noteEn}
+  translations={{ en: `/en/notes/${slug}/`, zh: `/zh/notes/${slug}/` }}
+>
+  <section class="notes-group">
+    <p class="eyebrow">EMBEDDEDNOTE · {zh ? '笔记' : 'NOTES'}</p>
+    <h1>{zh ? meta.zh : meta.en}</h1>
+    <p class="ng-lede">{zh ? meta.noteZh : meta.noteEn}</p>
+
+    <ul class="ng-list">
+      {items.map((a) => (
+        <li>
+          <a href={a.href}>{a.title}</a>
+          <p>{a.description}</p>
+          <span class="ng-meta">{a.date}</span>
+        </li>
+      ))}
+    </ul>
+
+    <div class="ng-nav">
+      <p>{zh ? '其他分组' : 'Other groups'}</p>
+      <ul>
+        {others.map((g) => (
+          <li><a href={`/${lang}/notes/${g.slug}/`}>{zh ? g.zh : g.en}</a></li>
+        ))}
+        <li><a href={`/${lang}/notes/`}>{zh ? '返回笔记首页' : 'Back to notes'}</a></li>
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .notes-group { width: min(100%, 820px); margin: 0 auto; padding: clamp(34px, 5vw, 64px) 0 clamp(60px, 8vw, 100px); }
+  .notes-group h1 { font: 700 clamp(30px, 4.2vw, 46px)/1.14 Georgia, 'Noto Serif SC', serif; letter-spacing: -.03em; margin: 10px 0 16px; color: #17211e; }
+  .ng-lede { color: #4d574f; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.75; margin: 0 0 26px; }
+  .ng-list { list-style: none; margin: 0; padding: 0; }
+  .ng-list li { border-bottom: 1px solid #ddd5c7; padding: 16px 0; }
+  .ng-list a { color: #17211e; font: 700 17px/1.4 Georgia, serif; text-decoration: none; }
+  .ng-list a:hover { color: #b94530; }
+  .ng-list p { margin: 5px 0 6px; color: #5c665f; font-size: 14.5px; line-height: 1.65; }
+  .ng-meta { color: #8a928b; font-size: 12px; }
+  .ng-nav { margin-top: 42px; border-top: 1px solid #d0c8bb; padding-top: 18px; }
+  .ng-nav p { color: #6a736c; font-size: 13px; margin: 0 0 8px; }
+  .ng-nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0; padding: 0; }
+  .ng-nav a { color: #b94530; font-weight: 700; text-decoration: none; }
+</style>

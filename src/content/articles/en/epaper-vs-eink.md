@@ -33,7 +33,7 @@ The confusion has a mechanical cause: for about two decades E Ink supplied the f
 
 ## What makes a display e-paper
 
-Four properties together. Miss one and you are looking at something else wearing the name.
+Four properties together. Miss one and you are looking at something else wearing the name. The controller and part-number side of this is in [E-paper names decoded](/en/articles/epaper-names-decoded/).
 
 1. **Reflective.** It uses ambient light. There is no backlight, so contrast depends on how much light falls on the surface, and reading in the dark needs an external lamp.
 2. **Bistable.** The image stays with the power removed. Energy is spent moving pigment, not holding a picture — which is why a shelf label can run for years on one cell.
