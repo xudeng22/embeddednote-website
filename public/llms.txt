@@ -14,6 +14,7 @@ benchmark results it has not measured, and it says so in the article.
 ## Tools and references
 
 - [E-paper glossary](https://embeddednote.com/en/e-paper/glossary/): E6, BWRY, RAW4, partial refresh, ghosting, TCON, PPI, one sentence each.
+- [E-paper selection table](https://embeddednote.com/en/e-paper/selection/): 39 E5/E6 panels by size, with active area, colours, resolution and packed image size (CSV available).
 - [E6 module table](https://embeddednote.com/en/articles/epaper-names-decoded/): 15 sizes with resolution, pixel count and packed bytes.
 
 ## Tools

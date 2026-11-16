@@ -1,0 +1,193 @@
+---
+import Base from '../../../layouts/Base.astro';
+import selection from '../../../data/epaper-selection.json';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'zh' } }];
+}
+
+const lang = Astro.params.lang === 'zh' ? 'zh' : 'en';
+const zh = lang === 'zh';
+const translations = { en: '/en/e-paper/selection/', zh: '/zh/e-paper/selection/' };
+
+const APP_ZH: Record<string, string> = {
+  'Button badge': '胸章',
+  'NFC e-card': 'NFC 电子卡',
+  'Phone case': '手机壳',
+  'Phone case / badge': '手机壳 / 胸章',
+  'ESL label': '电子价签',
+  'ESL label + Touch': '电子价签（触控）',
+  'ID badge': '胸牌',
+  'Table card': '桌牌',
+  'Table card / badge': '桌牌 / 胸章',
+  'Badge / table card': '胸章 / 桌牌',
+  'Badge / door sign': '胸章 / 门牌',
+  'Table sign / door sign': '桌签 / 门牌',
+  'Table sign / frame': '桌签 / 相框',
+  'Power bank / doorbell': '充电宝 / 门铃',
+  'Digital photo frame': '数码相框',
+  'Picture frame': '画框',
+  'NFC E-waybill': 'NFC 电子面单',
+  'Advertising display': '广告拼接屏'
+};
+
+const rows = selection as Array<{
+  app: string; series: string; bits: string; size: number;
+  activeArea: string; color: string; w: number; h: number; kb: number;
+}>;
+
+const seriesCounts = rows.reduce<Record<string, number>>((acc, r) => {
+  acc[r.series] = (acc[r.series] ?? 0) + 1;
+  return acc;
+}, {});
+
+const fmt = (n: number) => n.toLocaleString(zh ? 'zh-CN' : 'en-US', { maximumFractionDigits: 2 });
+---
+
+<Base
+  lang={lang}
+  title={zh ? '电子纸选型表:39 个型号的尺寸、颜色与图片容量' : 'E-paper selection table: 39 panels with size, colour and image size'}
+  description={zh
+    ? '按尺寸排列的电子纸选型表:E5 四色与 E6 六色共 39 个型号,含有效显示区、分辨率与打包后的图片容量,可下载 CSV。'
+    : 'A selection table sorted by size: 39 E5 four-colour and E6 six-colour panels with active area, resolution and packed image size, downloadable as CSV.'}
+  translations={translations}
+>
+  <section class="sel-page">
+    <p class="eyebrow">EMBEDDEDNOTE · {zh ? '选型表' : 'SELECTION'}</p>
+    <h1>{zh ? '电子纸选型表' : 'E-paper selection table'}</h1>
+    <p class="sel-lede">
+      {zh
+        ? '39 个型号,按对角线尺寸排序。看三件事就够了:有效显示区决定排版,分辨率决定清晰度,图片容量决定帧缓冲和传输时间。'
+        : 'Thirty-nine panels, sorted by diagonal. Three numbers decide most of the work: active area sets your layout, resolution sets sharpness, and image size sets the frame buffer and the transfer time.'}
+    </p>
+
+    <div class="sel-filters">
+      <button class="sel-chip is-on" data-series="all">{zh ? '全部' : 'All'} · {rows.length}</button>
+      <button class="sel-chip" data-series="E6">E6 · {seriesCounts.E6 ?? 0}</button>
+      <button class="sel-chip" data-series="E5">E5 · {seriesCounts.E5 ?? 0}</button>
+      <button class="sel-chip" data-series="mono">{zh ? '黑白 / 其他' : 'Mono / other'} · {seriesCounts['—'] ?? 0}</button>
+      <input class="sel-search" type="search" placeholder={zh ? '筛选用途,例如 价签' : 'Filter by application, e.g. frame'} aria-label={zh ? '筛选' : 'Filter'} />
+    </div>
+
+    <div class="sel-table-wrap">
+      <table id="sel-table">
+        <thead>
+          <tr>
+            <th>{zh ? '用途' : 'Application'}</th>
+            <th>{zh ? '系列' : 'Series'}</th>
+            <th>{zh ? '位深' : 'Bit depth'}</th>
+            <th>{zh ? '尺寸' : 'Size'}</th>
+            <th>{zh ? '有效区 (mm)' : 'Active area (mm)'}</th>
+            <th>{zh ? '颜色' : 'Colours'}</th>
+            <th>{zh ? '分辨率' : 'Resolution'}</th>
+            <th>{zh ? '图片容量' : 'Image size'}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr data-series={r.series === '—' ? 'mono' : r.series} data-app={(zh ? APP_ZH[r.app] ?? r.app : r.app).toLowerCase()}>
+              <td>{zh ? APP_ZH[r.app] ?? r.app : r.app}</td>
+              <td>{r.series}</td>
+              <td>{r.bits}</td>
+              <td>{r.size} in</td>
+              <td>{r.activeArea}</td>
+              <td class="sel-colour">{r.color}</td>
+              <td>{r.w} × {r.h}</td>
+              <td>{fmt(r.kb)} KB</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <p class="sel-note">
+      {zh
+        ? '图片容量 = 宽 × 高 × 存储位深 ÷ 8 ÷ 1024。E6 是 3 位颜色(六色),但按 4 位半字节打包存放,所以按 4 位计算;E5 四色按 2 位。有效区带 * 的是由对角尺寸与分辨率推算,数据手册未直接给出。'
+        : 'Image size = width × height × storage bits ÷ 8 ÷ 1024. E6 carries three bits of colour (six colours) but is packed as 4-bit nibbles, so those rows use four bits; E5 four-colour rows use two. Active areas marked with * are derived from the diagonal and resolution where the datasheet does not state them.'}
+    </p>
+
+    <p class="sel-download">
+      <a href="/downloads/epaper-selection.csv" download>{zh ? '下载这张表(CSV)' : 'Download this table (CSV)'}</a>
+    </p>
+
+    <h2>{zh ? '怎么用这张表' : 'How to use it'}</h2>
+    <ul class="sel-steps">
+      <li>
+        <strong>{zh ? '先按用途缩小范围' : 'Start from the application'}</strong>
+        <span>{zh ? '价签通常 2.1–4.2 寸,胸牌 3.5–4 寸,相框 7–13 寸,画框 20 寸以上。' : 'Labels sit at 2.1–4.2 inch, badges at 3.5–4, photo frames at 7–13, picture frames above 20.'}</span>
+      </li>
+      <li>
+        <strong>{zh ? '再算帧缓冲' : 'Then size the buffer'}</strong>
+        <span>{zh ? '表格最后一列就是整帧字节数;加上行补齐和双缓冲,再乘 2。' : 'The last column is a full frame; add row padding and double buffering, then multiply by two.'}</span>
+      </li>
+      <li>
+        <strong>{zh ? '最后看颜色与温区' : 'Then check colour and temperature'}</strong>
+        <span>{zh ? '六色比四色多一倍数据,温区也更窄——四色常见 0–40 °C,六色常见 0–50 °C,以具体型号数据手册为准。' : 'Six colours doubles the data and usually narrows the range too — four-colour parts are often 0–40 °C where six-colour ones state 0–50 °C. Confirm on the exact datasheet.'}</span>
+      </li>
+    </ul>
+
+    <div class="sel-cta">
+      <p>
+        {zh
+          ? '这张表就是我们供货的型号范围。要样品、要定制排线,或者需要一个能直接点亮的驱动板,从供货页开始。'
+          : 'This table is the range we supply. For samples, a custom FPC or a board that drives the panel, start at the supply page.'}
+      </p>
+      <a href={`/${lang}/supply/`}>{zh ? '供货与打样 →' : 'Supply and samples →'}</a>
+    </div>
+  </section>
+</Base>
+
+<script is:inline>
+  (function () {
+    var table = document.getElementById('sel-table');
+    if (!table) return;
+    var chips = document.querySelectorAll('.sel-chip');
+    var search = document.querySelector('.sel-search');
+    var rows = Array.prototype.slice.call(table.tBodies[0].rows);
+    var series = 'all';
+
+    function apply() {
+      var q = (search && search.value || '').trim().toLowerCase();
+      rows.forEach(function (row) {
+        var okSeries = series === 'all' || row.getAttribute('data-series') === series;
+        var okText = !q || (row.getAttribute('data-app') || '').indexOf(q) >= 0;
+        row.style.display = okSeries && okText ? '' : 'none';
+      });
+    }
+
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        series = chip.getAttribute('data-series');
+        chips.forEach(function (c) { c.classList.toggle('is-on', c === chip); });
+        apply();
+      });
+    });
+    if (search) search.addEventListener('input', apply);
+  })();
+</script>
+
+<style>
+  .sel-page { width: min(100%, 900px); margin: 0 auto; padding: clamp(34px, 5vw, 64px) 0 clamp(60px, 8vw, 100px); }
+  .sel-page h1 { font: 700 clamp(30px, 4.2vw, 46px)/1.14 Georgia, 'Noto Serif SC', serif; letter-spacing: -.03em; margin: 10px 0 16px; color: #17211e; }
+  .sel-page h2 { font: 700 clamp(20px, 2.2vw, 26px)/1.3 Georgia, 'Noto Serif SC', serif; margin: 40px 0 12px; color: #17211e; }
+  .sel-lede { color: #4d574f; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.75; margin: 0 0 24px; }
+  .sel-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; align-items: center; }
+  .sel-chip { border: 1px solid #cfc8bc; background: #fffdf9; color: #17211e; font: 700 12.5px/1 system-ui, sans-serif; padding: 9px 12px; cursor: pointer; }
+  .sel-chip.is-on { background: #17211e; border-color: #17211e; color: #f8f4ed; }
+  .sel-search { flex: 1 1 200px; min-width: 160px; border: 1px solid #cfc8bc; background: #fffdf9; padding: 9px 12px; font: 14px system-ui, sans-serif; color: #17211e; }
+  .sel-table-wrap { overflow-x: auto; border: 1px solid #e3dccf; background: #fffdf9; }
+  #sel-table { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+  #sel-table th { background: #f4eee3; text-align: left; font-weight: 700; padding: 10px 12px; border-bottom: 2px solid #d6cdbd; white-space: nowrap; }
+  #sel-table td { padding: 9px 12px; border-bottom: 1px solid #ece5d8; }
+  #sel-table tbody tr:hover { background: #fbf6ec; }
+  .sel-colour { font-size: 12px; color: #5c665f; }
+  .sel-note { color: #6a736c; font-size: 13.5px; line-height: 1.7; margin: 12px 0 14px; }
+  .sel-download a { color: #b94530; font-weight: 700; text-underline-offset: 3px; }
+  .sel-steps { list-style: none; margin: 14px 0 0; padding: 0; }
+  .sel-steps li { padding: 12px 0; border-bottom: 1px solid #ece5d8; }
+  .sel-steps strong { display: block; color: #17211e; margin-bottom: 3px; }
+  .sel-steps span { color: #4d574f; font-size: 14.5px; line-height: 1.65; }
+  .sel-cta { margin-top: 38px; border-top: 1px solid #d0c8bb; padding-top: 20px; }
+  .sel-cta p { color: #4d574f; line-height: 1.75; margin: 0 0 10px; }
+  .sel-cta a { color: #b94530; font-weight: 700; text-underline-offset: 3px; }
+</style>

@@ -1,0 +1,40 @@
+application,series,bit_depth,size_in,active_area_mm,colors,resolution,image_kb
+Button badge,E6,3bit,1.18,30.00×25.85,B/W/R/Y/B/G,240x206,24.141
+Button badge,E6,3bit,1.43,36.30×36.30,B/W/R/Y/B/G,432x432,91.125
+NFC e-card,—,1bit,1.54,27.00×27.00,B/W,200x200,4.883
+Button badge,E6,3bit,1.54,26.90×26.90,B/W/R/Y/B/G,240x240,28.125
+Phone case / badge,E6,3bit,1.69,43.00×43.00,B/W/R/Y/B/G,400x400,78.125
+ESL label,E5,2bit,2.13,23.705×48.550,B/W/R/Y,122x250,7.446
+ESL label,E5,2bit,2.13,23.645×48.603,B/W/R/Y,296x144,10.406
+ESL label,E6,3bit,2.53,45.48×45.48,B/W/R/Y/B/G,428x428,89.445
+Phone case,E6,3bit,2.61,46.80×46.80,B/W/R/Y/B/G,400x400,78.125
+ESL label,E5,2bit,2.66,60.088×30.704,B/W/R/Y,296x152,10.984
+ESL label + Touch,—,1bit,2.9,29.06×66.90,B/W,128x296,4.625
+ESL label,E5,2bit,2.9,66.896×29.056,B/W/R/Y,296x128,9.25
+Badge / table card,—,1bit,3.43,54.18×68.37,B/W,336x424,17.391
+NFC E-waybill,—,1bit,3.5,38.18×79.68,B/W,184x384,8.625
+ID badge,E6,3bit,3.68,51.78×77.67,B/W/R/Y/B/G,528x792,204.188
+Table card,E5,2bit,3.7,47.04×81.54,B/W/R/Y,240x416,24.375
+Table card / badge,E6,3bit,3.7,51.60×77.04,B/W/R/Y/B/G,480x720,168.75
+ID badge,E6,3bit,3.97,51.75×86.40,B/W/R/Y/B/G,460x768,172.5
+Phone case,E5,2bit,3.97,51.84×86.40,B/W/R/Y,480x800,93.75
+ID badge,E6,3bit,3.98,59.00×82.10,B/W/R/Y/B/G,552x768,207.0
+Power bank / doorbell,E5,2bit,4.0,55.026×81.54,B/W/R/Y,540x800,105.469
+Table sign / door sign,E6,3bit,4.0,58.94×82.72,B/W/R/Y/B/G,570x800,222.656
+Badge / door sign,E6,3bit,4.05,75.504×69.888,B/W/R/Y/B/G,832x768,312.0
+ESL label,E5,2bit,4.2,84.80×63.60,B/W/R/Y,400x300,29.297
+Table sign / door sign,E5,2bit,4.26,92.80×55.68,B/W/R/Y,800x480,93.75
+Phone case,E6,3bit,4.38,63.84×91.20,B/W/R/Y/B/G,560x800,218.75
+Digital photo frame,E6,3bit,7.09,202.80×270.40,B/W/R/Y/B/G,1600x1200,937.5
+Table sign / door sign,E6,3bit,7.5,163.84×97.20,B/W/R/Y/B/G,1024x600,300.0
+Table sign / frame,E6,3bit,8.14,180.22×101.38,B/W/R/Y/B/G,1024x576,288.0
+Digital photo frame,E6,3bit,9.7,201.60×141.12,B/W/R/Y/B/G,1120x784,428.75
+Digital photo frame,E6,3bit,10.1,203.20×152.40,B/W/R/Y/B/G,1600x1200,937.5
+Picture frame,E6,3bit,12.43,190.26×252.00,B/W/R/Y/B/G,1208x1600,943.75
+ESL label,E5,2bit,17.06,29.684×432.36,B/W/R/Y,164x2400,96.094
+ESL label,E6,3bit,18.56,58.48×467.84,B/W/R/Y/B/G,400x3200,625.0
+Picture frame,E6,3bit,20.2,297.279×419.688,B/W/R/Y/B/G,1530x2160,1613.672
+Picture frame,E6,3bit,20.3,420.198×296.960,B/W/R/Y/B/G,2264x1600,1768.75
+Picture frame,E6,3bit,28.5,418.003×592.171,B/W/R/Y/B/G,2160x3060,3227.344
+Picture frame,E6,3bit,31.5,696.32×391.68,B/W/R/Y/B/G,2560x1440,1800.0
+Picture frame,E6,3bit,40.5,594.558×839.376,B/W/R/Y/B/G,3060x4320,6454.688

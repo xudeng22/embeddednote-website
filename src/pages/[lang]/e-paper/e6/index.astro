@@ -112,6 +112,15 @@ const description = zh
       </p>
     </div>
   </section>
+
+  <section class="e6-more">
+    <p>
+      {zh
+        ? '这份表只覆盖六色 E6。四色 E5、黑白以及 20 寸以上的画框尺寸,见完整选型表。'
+        : 'This page covers the six-colour E6 family only. Four-colour E5, mono and the 20-inch-plus picture frames are in the full selection table.'}
+      <a href={`/${lang}/e-paper/selection/`}>{zh ? '打开选型表 →' : 'Open the selection table →'}</a>
+    </p>
+  </section>
 </Base>
 
 <style>
@@ -191,4 +200,10 @@ const description = zh
   .e6-hub-cta p { color: #4d574f; line-height: 1.75; margin: 0 0 12px; }
   .e6-hub-email { font-size: clamp(18px, 2vw, 22px); }
   .e6-hub-email a { color: #b94530; text-underline-offset: 3px; overflow-wrap: anywhere; }
+</style>
+
+<style>
+  .e6-more { width: min(100%, 820px); margin: 0 auto 70px; border-top: 1px solid #d0c8bb; padding-top: 18px; }
+  .e6-more p { color: #4d574f; line-height: 1.75; margin: 0; }
+  .e6-more a { color: #b94530; font-weight: 700; text-underline-offset: 3px; }
 </style>
