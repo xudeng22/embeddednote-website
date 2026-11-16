@@ -10,7 +10,7 @@ series: epaper
 supplyCta: true
 author: EmbeddedNote
 sourceUrl: https://github.com/DarkZeros/LightInk
-title: 'LightInk: A Solar E-Ink Watch That Sleeps in Microseconds'
+title: 'LightInk: A Solar E-Ink Watch That Wakes in Microseconds'
 description: 'LightInk is an ESP32-PICO-D4 e-paper watch that refreshes from the RTC wake stub instead of a full boot. The author reports months on a 100 mAh cell; here is the design and its limits.'
 tags:
 - LightInk
