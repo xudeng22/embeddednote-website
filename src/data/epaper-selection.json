@@ -427,5 +427,16 @@
   "w": 3060,
   "h": 4320,
   "kb": 6454.688
+ },
+ {
+  "app": "Advertising display",
+  "series": "Kaleido3",
+  "bits": "1-4bit",
+  "size": 55.0,
+  "activeArea": "1205.76×678.24",
+  "color": "Kaleido 3 color",
+  "w": 3840,
+  "h": 2160,
+  "kb": 4050.0
  }
 ]

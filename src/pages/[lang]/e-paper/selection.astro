@@ -46,10 +46,10 @@ const fmt = (n: number) => n.toLocaleString(zh ? 'zh-CN' : 'en-US', { maximumFra
 
 <Base
   lang={lang}
-  title={zh ? '电子纸选型表:39 个型号的尺寸、颜色与图片容量' : 'E-paper selection table: 39 panels with size, colour and image size'}
+  title={zh ? '电子纸选型表:40 个型号的尺寸、颜色与图片容量' : 'E-paper selection table: 40 panels with size, colour and image size'}
   description={zh
-    ? '按尺寸排列的电子纸选型表:E5 四色与 E6 六色共 39 个型号,含有效显示区、分辨率与打包后的图片容量,可下载 CSV。'
-    : 'A selection table sorted by size: 39 E5 four-colour and E6 six-colour panels with active area, resolution and packed image size, downloadable as CSV.'}
+    ? '按尺寸排列的电子纸选型表:E5 四色、E6 六色与 Kaleido 3 共 40 个型号,含有效显示区、分辨率与打包后的图片容量,可下载 CSV。'
+    : 'A selection table sorted by size: 40 E5, E6 and Kaleido 3 panels with active area, resolution and packed image size, downloadable as CSV.'}
   translations={translations}
 >
   <section class="sel-page">
@@ -57,14 +57,15 @@ const fmt = (n: number) => n.toLocaleString(zh ? 'zh-CN' : 'en-US', { maximumFra
     <h1>{zh ? '电子纸选型表' : 'E-paper selection table'}</h1>
     <p class="sel-lede">
       {zh
-        ? '39 个型号,按对角线尺寸排序。看三件事就够了:有效显示区决定排版,分辨率决定清晰度,图片容量决定帧缓冲和传输时间。'
-        : 'Thirty-nine panels, sorted by diagonal. Three numbers decide most of the work: active area sets your layout, resolution sets sharpness, and image size sets the frame buffer and the transfer time.'}
+        ? '40 个型号,按对角线尺寸排序。看三件事就够了:有效显示区决定排版,分辨率决定清晰度,图片容量决定帧缓冲和传输时间。'
+        : 'Forty panels, sorted by diagonal. Three numbers decide most of the work: active area sets your layout, resolution sets sharpness, and image size sets the frame buffer and the transfer time.'}
     </p>
 
     <div class="sel-filters">
       <button class="sel-chip is-on" data-series="all">{zh ? '全部' : 'All'} · {rows.length}</button>
       <button class="sel-chip" data-series="E6">E6 · {seriesCounts.E6 ?? 0}</button>
       <button class="sel-chip" data-series="E5">E5 · {seriesCounts.E5 ?? 0}</button>
+      <button class="sel-chip" data-series="Kaleido3">Kaleido 3 · {seriesCounts.Kaleido3 ?? 0}</button>
       <button class="sel-chip" data-series="mono">{zh ? '黑白 / 其他' : 'Mono / other'} · {seriesCounts['—'] ?? 0}</button>
       <input class="sel-search" type="search" placeholder={zh ? '筛选用途,例如 价签' : 'Filter by application, e.g. frame'} aria-label={zh ? '筛选' : 'Filter'} />
     </div>
