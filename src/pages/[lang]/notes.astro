@@ -39,6 +39,7 @@ for (const a of notes) {
       : 'Open-source project write-ups, engineering practice, project teardowns, selection and supply-chain observations, and industry moves. They are not a system, but they are often where readers first find us.'}
     articles={[]}
     tools={[]}
+    showCta={false}
   />
 
   <section class="notes-groups">
@@ -51,9 +52,21 @@ for (const a of notes) {
       </a>
     ))}
   </section>
+
+  <div class="notes-cta">
+    <p>
+      {zh
+        ? '这些文章背后是我们自己在做的产品:面板、TCON、整机。要样品或报价,从供货页开始。'
+        : 'Behind these articles are products we build ourselves: panels, TCON boards, finished frames. For samples or a quote, start at the supply page.'}
+    </p>
+    <a href={`/${lang}/supply/`}>{zh ? '供货与打样 →' : 'Supply and samples →'}</a>
+  </div>
 </Base>
 
 <style>
+  .notes-cta { width: min(100%, 820px); margin: 0 auto 80px; border-top: 1px solid #d0c8bb; padding-top: 20px; }
+  .notes-cta p { color: #4d574f; line-height: 1.75; margin: 0 0 10px; }
+  .notes-cta a { color: #b94530; font-weight: 700; text-underline-offset: 3px; }
   .notes-groups {
     width: min(100%, 820px);
     margin: 0 auto 80px;

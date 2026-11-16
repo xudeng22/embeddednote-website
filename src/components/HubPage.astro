@@ -14,8 +14,9 @@ interface Props {
   articles: HubArticle[];
   tools: { label: string; href: string; note: string }[];
   sections?: { heading: string; items: HubArticle[] }[];
+  showCta?: boolean;
 }
-const { lang, eyebrow, heading, lede, articles, tools, sections = [] } = Astro.props;
+const { lang, eyebrow, heading, lede, articles, tools, sections = [], showCta = true } = Astro.props;
 const zh = lang === 'zh';
 ---
 <>
@@ -65,14 +66,14 @@ const zh = lang === 'zh';
       </div>
     )}
 
-    <div class="hub-cta">
+    {showCta && <div class="hub-cta">
       <p>
         {zh
           ? '这些文章背后是我们自己在做的产品:面板、TCON、整机。要样品或报价,从供货页开始。'
           : 'Behind these articles are products we build ourselves: panels, TCON boards, finished frames. For samples or a quote, start at the supply page.'}
       </p>
       <a href={`/${lang}/supply/`}>{zh ? '供货与打样 →' : 'Supply and samples →'}</a>
-    </div>
+    </div>}
   </section>
 
   <style>
