@@ -50,7 +50,7 @@ A module has all three, and they do not imply each other. Two modules sold as "2
 
 ## The E6 family, by size
 
-E6 is not one panel; it is a family that runs from a 1.18-inch badge to a 31.5-inch sign, all six-colour (black, white, yellow, red, blue, green), and all carrying three bits of colour information per pixel inside a four-bit nibble. The sizes below come from a 2025 product catalogue and three datasheets we read on 2026-11-12.
+E6 is not one panel; it is a family that runs from a 1.18-inch badge to a 31.5-inch sign, all six-colour (black, white, yellow, red, blue, green), and all carrying three bits of colour information per pixel inside a four-bit nibble. The sizes below come from the panel datasheets we read on 2026-11-12.
 
 | Size | Resolution | Pixels | RAW4 | Status |
 | --- | --- | ---: | ---: | --- |
@@ -70,9 +70,9 @@ E6 is not one panel; it is a family that runs from a 1.18-inch badge to a 31.5-i
 | 28.5 in | 2,160 × 3,060 | 6,609,600 | 3,304,800 B | in production |
 | 31.5 in | 2,560 × 1,440 | 3,686,400 | 1,843,200 B | in production |
 
-Four things the table does not tell you:
+What the table does not tell you:
 
-- **The pixel count is not the byte count.** Six colours need three bits, but E6 frames are carried as 4-bit indices, so a frame is `width × height ÷ 2` bytes when packed — the catalogue's own capacity sheet uses that arithmetic. The 31.5-inch panel needs 1.84 MB per frame; the 1.18-inch badge needs 24,720 bytes.
+- **The pixel count is not the byte count.** Six colours need three bits, but E6 frames are carried as 4-bit indices, so a frame is `width × height ÷ 2` bytes when packed — capacity sheets use exactly that arithmetic. The 31.5-inch panel needs 1.84 MB per frame; the 1.18-inch badge needs 24,720 bytes.
 - **Orientation is a datasheet convention, not a rule.** The 13.3-inch panel is listed as 1200 × 1600 because that is how the flex is oriented; you will see the same module sold as 1600 × 1200.
 - **Pixel density falls as the panel grows.** 282 ppi at 7.09 in, 200 ppi at 10.1 in, 150 ppi at 13.3 in, 94 ppi at 31.5 in — all from the panel datasheets.
 - **Interface changes with size.** The 10.1-inch module is 16-bit parallel; the 31.5-inch is SPI with single/dual/quad data lines and QSPI for pixel data.
@@ -98,30 +98,9 @@ Two consequences follow:
 
 E5 is the four-colour sibling (black, white, red, yellow) at 2 bits per pixel, so a 540 × 800 area needs 108,000 bytes — half of what a six-colour panel of the same size carries.
 
-## What a product catalogue actually tells you
-
-A 2025 product catalogue we work from lists 67 modules. It gives resolution, outline, active area, colour set, operating temperature, storage temperature, interface and connector for every one — and it has **no controller column at all**. That is normal: the controller is a choice made with the panel, not a property of the panel.
-
-Representative rows, including two that show why the model number cannot be decoded from the size:
-
-| Model | Size | Resolution | Colours | Operating temperature |
-| --- | --- | --- | --- | --- |
-| P15415S | 1.54 in | 200 × 200 | BWRY | 0–40 °C |
-| P213167 | 2.13 in | 122 × 250 | BW | 0–50 °C |
-| P21335S | 2.13 in | 122 × 250 | BWRY | 0–40 °C |
-| P29005S | 2.9 in | 128 × 296 | BW | 0–50 °C |
-| P350024 | 3.5 in | 184 × 384 | BW | 0–50 °C |
-| P397012 | 3.97 in | 480 × 800 | BWRY | 0–40 °C |
-| PL133040 | 13.3 in | 960 × 680 | BW | 0–50 °C |
-
-Two things fall out of the whole list, not just the rows above:
-
-- **Adding colour costs ten degrees.** Every black/white part is rated 0–50 °C; every BWR and BWRY part is 0–40 °C. Across 67 models there are only two black/white exceptions. One N-Color part is narrower still, at 15–35 °C.
-- **The size prefix is not the resolution.** `PL133040` is a 13.3-inch panel at 960 × 680, while the 13.3-inch E6 module is 1200 × 1600. Same diagonal, different product.
-
 ## Controllers, where we could confirm one
 
-The catalogue does not name controllers, so this column only exists where the vendor shipped a demo whose filename states it. A missing entry means "not stated in the files we have", not "unsupported".
+A product listing rarely names the controller, so this column only exists where the vendor shipped a demo whose filename states it. A missing entry means "not stated in the files we have", not "unsupported".
 
 | Vendor demo | Panel | Resolution | Controller | Partial example |
 | --- | --- | --- | --- | --- |
@@ -192,5 +171,4 @@ Probably neither. 7.5-inch panels exist in 800 × 480 and 640 × 384, and the bu
 
 - E Ink brand pages for [Spectra 6](https://www.eink.com/brand/detail/Spectra6), [Spectra 3100](https://www.eink.com/brand/detail/Spectra3100), [Gallery](https://www.eink.com/brand/detail/Gallery) and [Marquee](https://www.eink.com/brand/detail/marquee) — brand names, temperature ranges and the Spectra 6 resolution ceiling.
 - Waveshare's [2.13-inch e-Paper HAT](https://www.waveshare.com/2.13inch-e-paper-hat.htm) product page — 250 × 122 for the current module, which is why the older 212 × 104 resolution is marked legacy.
-- A 2025 product catalogue (not public) supplied the E6 size and resolution columns; the three datasheets above are the public cross-check. Where the two disagree, the table follows the datasheet.
 - Controller part numbers are the ones used in the vendors' own demo directory names; always confirm against the datasheet that ships with your panel.

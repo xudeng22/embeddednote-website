@@ -81,6 +81,8 @@ Large panels take longer to settle, and the residue from partial updates is more
 
 The 55-inch deserves its own note: it is Kaleido 3, not E6. It gives 4K and a wider colour impression, but it builds colour with a filter array over a black-and-white panel, so it reflects less light than a pure E6 panel and refreshes differently. For a bright room, E6 at 40.5 is usually the safer choice; for a dark retail wall where resolution sells, the 55 is the one.
 
+The 31.5-inch frame we build from this panel is documented in [our solution designs](/en/solutions/): TCON board, 12 V 3 A supply, acrylic enclosure and the app provisioning flow. If you are choosing between sizes, the [selection table](/en/e-paper/selection/) has all 40 panels in one view.
+
 ## What this page does not tell you
 
 - It does not compare reflectance or colour accuracy between panels, because we have not measured them side by side.
