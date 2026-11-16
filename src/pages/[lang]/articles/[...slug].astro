@@ -61,9 +61,22 @@ const canonicalUrl = new URL(Astro.url.pathname, 'https://embeddednote.com').hre
 const category = channels.find((c) => c.slug === article.data.category);
 const categoryLabel = category?.[lang] ?? article.data.category;
 
+// Categories were collapsed into three hubs; the crumb points at the hub the
+// article actually belongs to, so it never travels through a 301.
+const hubFor = (slug: string, series?: string) => {
+  if (series === 'epaper' || slug === 'display') {
+    return { path: `/${lang}/e-paper/`, en: 'E-paper', zh: '电子纸' };
+  }
+  if (series === 'ble' || slug === 'connectivity') {
+    return { path: `/${lang}/connectivity/`, en: 'Connectivity', zh: '低功耗无线' };
+  }
+  return { path: `/${lang}/notes/`, en: 'Notes', zh: '笔记' };
+};
+const hub = hubFor(article.data.category, article.data.series);
+
 const breadcrumbs = [
   { name: lang === 'zh' ? '首页' : 'Home', path: `/${lang}/` },
-  { name: categoryLabel, path: `/${lang}/category/${article.data.category}/` },
+  { name: lang === 'zh' ? hub.zh : hub.en, path: hub.path },
   { name: article.data.title }
 ];
 
