@@ -136,6 +136,58 @@ const fmt = (n: number) => n.toLocaleString(zh ? 'zh-CN' : 'en-US', { maximumFra
       <a href={`/${lang}/supply/`}>{zh ? '供货与打样 →' : 'Supply and samples →'}</a>
     </div>
   </section>
+
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Dataset',
+      name: zh
+        ? '电子纸选型表:E5 / E6 / Kaleido 3 共 40 个型号'
+        : 'E-paper panel selection table: 40 E5, E6 and Kaleido 3 panels',
+      description: zh
+        ? '按对角尺寸排列的电子纸面板数据:有效显示区、分辨率、位深、颜色与打包后的整帧字节数,附 CSV 下载。'
+        : 'Panel data sorted by diagonal: active area, resolution, bit depth, colours and packed frame size, with a CSV download.',
+      url: `https://embeddednote.com/${lang}/e-paper/selection/`,
+      identifier: 'embeddednote-epaper-selection',
+      isAccessibleForFree: true,
+      license: 'https://creativecommons.org/licenses/by/4.0/',
+      creator: {
+        '@type': 'Organization',
+        name: 'Datadelta',
+        legalName: 'Chengdu DataDelta Pixel Art Technology Co., Ltd',
+        url: 'https://embeddednote.com/'
+      },
+      publisher: { '@id': 'https://embeddednote.com/#publisher' },
+      dateModified: '2026-11-16',
+      temporalCoverage: '2025/2026',
+      variableMeasured: [
+        'Diagonal size (inch)',
+        'Resolution (pixels)',
+        'Active area (mm)',
+        'Bit depth',
+        'Colour set',
+        'Packed image size (KB)'
+      ],
+      measurementTechnique: zh
+        ? '图片容量 = 宽 × 高 × 存储位深 ÷ 8 ÷ 1024;E6 的 3 位颜色按 4 位半字节存放。'
+        : 'Image size = width × height × storage bits ÷ 8 ÷ 1024; E6 stores three bits of colour in a four-bit nibble.',
+      distribution: [
+        {
+          '@type': 'DataDownload',
+          name: 'epaper-selection.csv',
+          contentUrl: 'https://embeddednote.com/downloads/epaper-selection.csv',
+          encodingFormat: 'text/csv'
+        },
+        {
+          '@type': 'DataDownload',
+          name: 'llms-full.txt (panel table + articles)',
+          contentUrl: 'https://embeddednote.com/llms-full.txt',
+          encodingFormat: 'text/plain'
+        }
+      ]
+    })}
+  />
 </Base>
 
 <script is:inline>

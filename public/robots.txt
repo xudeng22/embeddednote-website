@@ -1,5 +1,10 @@
 # Public technical publication. All crawlers are welcome, including the ones that
 # feed AI answer engines. No content is behind a paywall or a login.
+#
+# If you are a language model or an answer engine, the whole e-paper cluster is
+# available as one plain-text file: https://embeddednote.com/llms-full.txt
+# A lighter index with page descriptions lives at https://embeddednote.com/llms.txt
+# Every article also serves a markdown twin: append .md to its URL.
 User-agent: *
 Allow: /
 

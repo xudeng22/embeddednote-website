@@ -83,6 +83,51 @@ const breadcrumbs = [
 const publishedIso = article.data.pubDate.toISOString();
 const modifiedIso = (article.data.updatedDate ?? article.data.pubDate).toISOString();
 
+// Question headings (### ...?) become an FAQPage, which answer engines read.
+const faqItems: { q: string; a: string }[] = (() => {
+  const body = article.body ?? '';
+  const blocks = body.split(/\n(?=### )/);
+  const items: { q: string; a: string }[] = [];
+  for (const block of blocks) {
+    const firstLine = block.split('\n')[0].trim();
+    if (!firstLine.startsWith('### ') || !firstLine.endsWith('?')) continue;
+    const answer = block
+      .split('\n')
+      .slice(1)
+      .join(' ')
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+      .replace(/[*_`>#]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+    if (answer.length > 40) {
+      items.push({ q: firstLine.slice(4).trim(), a: answer.slice(0, 900) });
+    }
+  }
+  return items.slice(0, 8);
+})();
+
+const KNOWN_ENTITIES: Record<string, string> = {
+  'spectra 6': 'E Ink Spectra 6',
+  'spectra6': 'E Ink Spectra 6',
+  'spectra 3100': 'E Ink Spectra 3100',
+  'kaleido': 'E Ink Kaleido',
+  'ssd1680': 'SSD1680',
+  'ssd1675': 'SSD1675',
+  'ssd1683': 'SSD1683',
+  'uc8151': 'UC8151',
+  'raw4': 'RAW4 image packing',
+  'e-paper': 'Electronic paper',
+  'electronic paper': 'Electronic paper',
+  'eink': 'E Ink'
+};
+
+const entityNames = new Set<string>();
+for (const value of [article.data.title, ...(article.data.tags ?? [])]) {
+  for (const [needle, name] of Object.entries(KNOWN_ENTITIES)) {
+    if (String(value).toLowerCase().includes(needle)) entityNames.add(name);
+  }
+}
+
 const jsonld = {
   '@context': 'https://schema.org',
   '@type': 'TechArticle',
@@ -102,6 +147,8 @@ const jsonld = {
   thumbnailUrl: ogImageUrl,
   articleSection: categoryLabel,
   keywords: article.data.tags.join(', '),
+  about: (article.data.tags ?? []).map((t: string) => ({ '@type': 'Thing', name: t })),
+  mentions: [...entityNames].map((name: string) => ({ '@type': 'Thing', name })),
   isPartOf: { '@id': 'https://embeddednote.com/#website' }
 };
 ---
@@ -193,6 +240,20 @@ const jsonld = {
     type="application/ld+json"
     set:html={JSON.stringify(jsonld)}
   />
+  {faqItems.length >= 2 && (
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqItems.map((item) => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: { '@type': 'Answer', text: item.a }
+        }))
+      })}
+    />
+  )}
   <script is:inline>
     document.addEventListener('click', function (event) {
       var img = event.target.closest('.prose img');

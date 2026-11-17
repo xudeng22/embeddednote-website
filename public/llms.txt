@@ -11,6 +11,12 @@ Editorial rule: numbers are either calculated from stated formulas, quoted from 
 document that defines them, or labelled as unverified. The site does not publish
 benchmark results it has not measured, and it says so in the article.
 
+## Read this first
+
+- [Full text bundle](https://embeddednote.com/llms-full.txt): every e-paper article plus the 40-panel table in one plain-text file, 146 KB, no navigation.
+- Every article also has a markdown twin: add `.md` to its URL, for example
+  https://embeddednote.com/en/articles/epaper-size-chart.md
+
 ## Tools and references
 
 - [E-paper glossary](https://embeddednote.com/en/e-paper/glossary/): E6, BWRY, RAW4, partial refresh, ghosting, TCON, PPI, one sentence each.
