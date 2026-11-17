@@ -6,7 +6,7 @@ the repository root when the project builds.
 
 ## What works with no configuration
 
-The form renders, validates, posts, and shows the `xudeng@embeddednote.com`
+The form renders, validates, posts, and shows the `xudeng@datadelta.cn`
 fallback when the endpoint answers `503`. That means a missing binding never
 leaves a reader on a broken page — but it also means **no address is stored**
 until at least one of the options below is set.
@@ -18,7 +18,7 @@ until at least one of the options below is set.
 | `SUBSCRIBERS` | KV namespace binding | Stores one key per signup: `sub:<timestamp>:<email>` |
 | `SUBSCRIBE_WEBHOOK` | URL | Forwards the JSON payload to Zapier / Make / n8n / your own API |
 | `RESEND_API_KEY` + `NOTIFY_TO` | string | Sends a notification mail per signup via Resend |
-| `RESEND_FROM` | string | Verified sender for the notification (default `xudeng@embeddednote.com`) |
+| `RESEND_FROM` | string | Verified sender for the notification (default `notes@embeddednote.com`) |
 
 ### Option A — KV only (no third-party account)
 
