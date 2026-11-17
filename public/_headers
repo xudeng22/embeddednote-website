@@ -1,8 +1,24 @@
 # Cache policy for a static site behind Cloudflare Pages.
 #
-# Hashed build assets and media never change under the same URL, so they can be
-# cached for a year. HTML must be revalidated: a deploy replaces it.
+# Note on matching: Pages matches these patterns against the REQUEST path, so a
+# rule for "/*.html" never fires for "/en/" even though that serves index.html.
+# HTML therefore needs explicit path rules, and those come last so the asset
+# rules above them stay authoritative.
 
+# Plain-text twins for agents: never indexed, served as markdown.
+/*.md
+  X-Robots-Tag: noindex
+  Content-Type: text/markdown; charset=utf-8
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/llms-full.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+# Hashed build output: the URL changes when the file changes.
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
 
@@ -24,35 +40,13 @@
 /downloads/*
   Cache-Control: public, max-age=86400
 
-/*.webp
-  Cache-Control: public, max-age=2592000
-
-/*.png
-  Cache-Control: public, max-age=2592000
-
-/*.svg
-  Cache-Control: public, max-age=2592000
-
-/*.pdf
-  Cache-Control: public, max-age=604800
-
-# Edge-only caching for pages: a short TTL keeps deploys visible, and
-# stale-while-revalidate absorbs crawler bursts without hitting the origin.
-/*.html
+# HTML: short edge TTL so a deploy shows up quickly, with stale-while-revalidate
+# absorbing crawler bursts instead of passing them to the origin.
+/en/*
   Cache-Control: public, max-age=0, s-maxage=600, stale-while-revalidate=86400
 
-/*.xml
-  Cache-Control: public, max-age=0, s-maxage=1800
+/zh/*
+  Cache-Control: public, max-age=0, s-maxage=600, stale-while-revalidate=86400
 
-# Serve the plain-text twins to agents without letting search engines index them.
-/*.md
-  X-Robots-Tag: noindex
-  Content-Type: text/markdown; charset=utf-8
-
-/llms.txt
-  Content-Type: text/plain; charset=utf-8
-  Cache-Control: public, max-age=3600
-
-/llms-full.txt
-  Content-Type: text/plain; charset=utf-8
-  Cache-Control: public, max-age=3600
+/
+  Cache-Control: public, max-age=0, s-maxage=600, stale-while-revalidate=86400
