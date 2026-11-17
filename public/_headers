@@ -1,5 +1,50 @@
-# Serve the plain-text twins to agents without letting Google index them as
-# duplicates of the HTML pages.
+# Cache policy for a static site behind Cloudflare Pages.
+#
+# Hashed build assets and media never change under the same URL, so they can be
+# cached for a year. HTML must be revalidated: a deploy replaces it.
+
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=2592000
+
+/uploads/*
+  Cache-Control: public, max-age=2592000
+
+/og/*
+  Cache-Control: public, max-age=2592000
+
+/icons/*
+  Cache-Control: public, max-age=2592000
+
+/pagefind/*
+  Cache-Control: public, max-age=604800
+
+/downloads/*
+  Cache-Control: public, max-age=86400
+
+/*.webp
+  Cache-Control: public, max-age=2592000
+
+/*.png
+  Cache-Control: public, max-age=2592000
+
+/*.svg
+  Cache-Control: public, max-age=2592000
+
+/*.pdf
+  Cache-Control: public, max-age=604800
+
+# Edge-only caching for pages: a short TTL keeps deploys visible, and
+# stale-while-revalidate absorbs crawler bursts without hitting the origin.
+/*.html
+  Cache-Control: public, max-age=0, s-maxage=600, stale-while-revalidate=86400
+
+/*.xml
+  Cache-Control: public, max-age=0, s-maxage=1800
+
+# Serve the plain-text twins to agents without letting search engines index them.
 /*.md
   X-Robots-Tag: noindex
   Content-Type: text/markdown; charset=utf-8
