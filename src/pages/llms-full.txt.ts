@@ -56,7 +56,8 @@ ${table}
 
 Image size = width × height × storage bits ÷ 8 ÷ 1024. E6 carries three bits of
 colour in a four-bit nibble, so those rows use four bits.
-CSV: https://embeddednote.com/downloads/epaper-selection.csv`);
+CSV: https://embeddednote.com/downloads/epaper-selection.csv
+Citable dataset (DOI): https://doi.org/10.5281/zenodo.24297081`);
 
   for (const article of sorted) {
     const body = cleanBody(article.body ?? '');
