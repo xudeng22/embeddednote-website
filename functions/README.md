@@ -18,7 +18,7 @@ until at least one of the options below is set.
 | `SUBSCRIBERS` | KV namespace binding | Stores one key per signup: `sub:<timestamp>:<email>` |
 | `SUBSCRIBE_WEBHOOK` | URL | Forwards the JSON payload to Zapier / Make / n8n / your own API |
 | `RESEND_API_KEY` + `NOTIFY_TO` | string | Sends a notification mail per signup via Resend |
-| `RESEND_FROM` | string | Verified sender for the notification (default `notes@embeddednote.com`) |
+| `RESEND_FROM` | string | Verified sender for the notification (default `xudeng@datadelta.cn`) |
 
 ### Option A — KV only (no third-party account)
 

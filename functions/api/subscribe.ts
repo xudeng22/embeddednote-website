@@ -8,7 +8,7 @@
  *   SUBSCRIBE_WEBHOOK  URL                   — forward the JSON payload
  *   RESEND_API_KEY     string                — send a notification mail
  *   NOTIFY_TO          address               — recipient for the notification
- *   RESEND_FROM        address               — verified sender, e.g. notes@embeddednote.com
+ *   RESEND_FROM        address               — verified sender, e.g. xudeng@datadelta.cn
  *
  * With none of them set the endpoint answers 503 and the client shows the
  * mailto fallback, so the page never looks broken.
@@ -130,7 +130,7 @@ export const onRequestPost = async (context: { request: Request; env: Env }): Pr
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          from: env.RESEND_FROM ?? 'EmbeddedNote <notes@embeddednote.com>',
+          from: env.RESEND_FROM ?? 'EmbeddedNote <xudeng@datadelta.cn>',
           to: [env.NOTIFY_TO],
           subject: `Spec-sheet request: ${email}`,
           text: [
