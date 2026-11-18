@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use the panel data, tables or byte counts from this project, cite the dataset below."
+title: "E-paper panel selection table: 40 E5, E6 and Kaleido 3 panels with active area, resolution and packed frame size"
+type: dataset
+authors:
+  - family-names: Xu
+    given-names: Deng
+    affiliation: "Chengdu DataDelta Pixel Art Technology Co., Ltd"
+  - name: "Datadelta"
+    affiliation: "Chengdu DataDelta Pixel Art Technology Co., Ltd"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.24297081
+    description: "Concept DOI: always resolves to the newest version of the dataset"
+date-released: "2026-11-17"
+version: "1.0.1"
+license: CC-BY-4.0
+url: "https://embeddednote.com/en/e-paper/selection/"
+repository-code: "https://github.com/xudeng22/embeddednote-website"
+keywords:
+  - e-paper
+  - electronic paper
+  - E Ink
+  - Spectra 6
+  - Kaleido
+  - display specification
+  - frame buffer
+  - panel selection
+abstract: >-
+  A machine-readable table of 40 colour electronic-paper panels across E Ink Spectra 6,
+  four-colour E5 and Kaleido 3, covering 1.18 to 55 inch. For each panel the table records
+  the application, panel family, colour bit depth, diagonal, active area, colour set,
+  resolution, the packed size of one full frame, and the resulting pixel density.
+  Image size is computed from the storage format rather than the colour count: E6 carries
+  three bits of colour information in a four-bit nibble, so a frame is width x height / 2
+  bytes, and all 40 rows reconcile under that rule to within one percent. No measurements
+  were taken; this is a specification table, not a lab report.
