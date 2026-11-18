@@ -115,7 +115,12 @@ const fmt = (n: number) => n.toLocaleString(zh ? 'zh-CN' : 'en-US', { maximumFra
           ? '数据已作为数据集发布在 Zenodo,带 DOI,可被论文与报告正式引用:'
           : 'The data is published as a dataset on Zenodo, with a DOI, so papers and reports can cite it:'}
       </p>
-      <code>Datadelta &amp; Xu, D. (2026). E-paper panel selection table: 40 E5, E6 and Kaleido 3 panels (Version 1.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24297081</code>
+      <code>Datadelta &amp; Xu, D. (2026). E-paper panel selection table: 40 E5, E6 and Kaleido 3 panels (Version 1.0.1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24297081</code>
+
+      <p class="sel-cite-mirror">
+        {zh ? '镜像' : 'Mirror'}:
+        <a href="https://huggingface.co/datasets/xudeng/epaper-panel-selection" rel="noopener">Hugging Face</a>
+      </p>
       <p>
         <a href="https://doi.org/10.5281/zenodo.24297081" rel="noopener">doi.org/10.5281/zenodo.24297081</a>
         {zh ? '(概念 DOI,始终指向最新版本)' : '(concept DOI, always points at the newest version)'}
@@ -164,15 +169,27 @@ const fmt = (n: number) => n.toLocaleString(zh ? 'zh-CN' : 'en-US', { maximumFra
         : 'Panel data sorted by diagonal: active area, resolution, bit depth, colours and packed frame size, with a CSV download.',
       url: `https://embeddednote.com/${lang}/e-paper/selection/`,
       identifier: 'https://doi.org/10.5281/zenodo.24297081',
-      sameAs: ['https://doi.org/10.5281/zenodo.24297082', 'https://zenodo.org/records/24297082'],
+      sameAs: [
+        'https://doi.org/10.5281/zenodo.24297082',
+        'https://zenodo.org/records/24297082',
+        'https://huggingface.co/datasets/xudeng/epaper-panel-selection'
+      ],
       isAccessibleForFree: true,
       license: 'https://creativecommons.org/licenses/by/4.0/',
-      creator: {
-        '@type': 'Organization',
-        name: 'Datadelta',
-        legalName: 'Chengdu DataDelta Pixel Art Technology Co., Ltd',
-        url: 'https://embeddednote.com/'
-      },
+      creator: [
+        {
+          '@type': 'Organization',
+          name: 'Datadelta',
+          legalName: 'Chengdu DataDelta Pixel Art Technology Co., Ltd',
+          url: 'https://embeddednote.com/'
+        },
+        {
+          '@type': 'Person',
+          name: 'Deng Xu',
+          identifier: 'https://orcid.org/0009-0008-1539-3536',
+          sameAs: ['https://orcid.org/0009-0008-1539-3536', 'https://github.com/xudeng22']
+        }
+      ],
       publisher: { '@id': 'https://embeddednote.com/#publisher' },
       dateModified: '2026-11-16',
       temporalCoverage: '2025/2026',
@@ -254,6 +271,8 @@ const fmt = (n: number) => n.toLocaleString(zh ? 'zh-CN' : 'en-US', { maximumFra
   .sel-cite p { margin: 0 0 6px; color: #4d574f; font-size: 14px; line-height: 1.6; }
   .sel-cite-label { font-weight: 700; color: #17211e; }
   .sel-cite code { display: block; font-size: 12.5px; line-height: 1.6; background: #fff; border: 1px solid #ece5d8; padding: 8px 10px; margin: 0 0 8px; overflow-wrap: anywhere; }
+  .sel-cite-mirror { font-size: 13px; color: #6a736c; }
+  .sel-cite-mirror a { color: #b94530; font-weight: 700; }
   .sel-cite a { color: #b94530; font-weight: 700; text-underline-offset: 3px; }
   .sel-download a { color: #b94530; font-weight: 700; text-underline-offset: 3px; }
   .sel-steps { list-style: none; margin: 14px 0 0; padding: 0; }
