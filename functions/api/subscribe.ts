@@ -185,14 +185,6 @@ export const onRequestPost = async (context: { request: Request; env: Env }): Pr
     }
   }
 
-  // __envDebug: names only, never values. Removed once the bindings are confirmed.
-  const debugWanted = new URL(request.url).searchParams.get('debug') === '1';
-  if (debugWanted) {
-    results.debug_keys = Object.keys(env).sort().join(',');
-    results.debug_mail = String(Boolean(env.RESEND_API_KEY));
-    results.debug_to = String(Boolean(env.NOTIFY_TO));
-  }
-
   const anySuccess = Object.values(results).some((value) => value === 'ok');
 
   if (!wantsJson) {
