@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import EmailCapture from '../../components/EmailCapture.astro';
 
 export function getStaticPaths() {
   return [
@@ -29,6 +30,16 @@ const translations = { en: '/en/contact/', zh: '/zh/contact/' };
         : 'Project suggestions and technical corrections are welcome. For panels, design work or datasheets, use the business cooperation page.'}
     </p>
         <p><a href={`/${lang}/partner/`} data-en-event="partner_link_click" data-en-placement="contact">{zh ? '商务合作 →' : 'Business cooperation →'}</a></p>
+    <EmailCapture
+      lang={lang}
+      source="contact"
+      heading={zh ? '写信给我们' : 'Write to us'}
+      blurb={zh
+        ? '留下邮箱,我们会直接回信。如果你要的是规格书、报价或样品,写清型号和数量,回复会更快。'
+        : 'Leave an address and we will reply directly. If you need a datasheet, a quote or samples, name the part and the quantity and the reply comes faster.'}
+      cta={zh ? '发送' : 'Send'}
+    />
+
 <p class="en-contact-email">
       <strong>{zh ? '邮箱：' : 'Email:'}</strong>
       <a href="mailto:xudeng@datadelta.cn">xudeng@datadelta.cn</a>

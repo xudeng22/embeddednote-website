@@ -94,7 +94,7 @@ BWR and BWRY land on the same byte count for different reasons: the three-colour
 Two consequences follow:
 
 - **Do not compute an E6 frame as `pixels × 3 ÷ 8`.** For a 31.5-inch panel that gives 1.38 MB; the real frame is 1.84 MB, because the controller takes a nibble per pixel and leaves the spare bit unused.
-- **The nibble codes are not always 0–5.** At least one public implementation assigns black 0, white 1, yellow 2, red 3, blue 5 and green 6, leaving 4 unused. A converter that emits sequential 0–5 indices needs a mapping table before the bytes reach the controller.
+- **The nibble codes are not always 0–5.** The [OpenDisplay display data format](https://www.opendisplay.org/protocol/display-data-format.html) specifies black 0, white 1, yellow 2, red 3, blue 5 and green 6, leaving 4 unused. A converter that emits sequential 0–5 indices needs a mapping table before the bytes reach the controller.
 
 E5 is the four-colour sibling (black, white, red, yellow) at 2 bits per pixel, so a 540 × 800 area needs 108,000 bytes — half of what a six-colour panel of the same size carries.
 
