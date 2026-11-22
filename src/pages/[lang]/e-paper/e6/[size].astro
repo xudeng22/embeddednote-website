@@ -142,27 +142,32 @@ const breadcrumbs = [
   { name: `${sizeIn} in` }
 ];
 
-const productLd = {
+const panelLd = {
   '@context': 'https://schema.org',
-  '@type': 'Product',
+  '@type': 'ItemPage',
   name: zh
     ? `E6 ${sizeIn} 寸六色电子纸面板（${res}）`
     : `E6 ${sizeIn} inch six-colour e-paper panel (${res})`,
   description: zh
     ? `E6（Spectra 6）${sizeIn} 寸六色电子纸面板，分辨率 ${res}，一帧 RAW4 ${raw4b} / RAW8 ${raw8b}。`
     : `E6 (Spectra 6) ${sizeIn}-inch six-colour e-paper panel, ${res} resolution, one frame ${raw4b} in RAW4 or ${raw8b} in RAW8.`,
-  category: 'Electronic paper display module',
-  brand: { '@type': 'Brand', name: 'EmbeddedNote' },
   url: new URL(translations[lang], 'https://embeddednote.com').href,
-  additionalProperty: [
-    { '@type': 'PropertyValue', name: 'Diagonal', value: `${sizeIn} in` },
-    { '@type': 'PropertyValue', name: 'Resolution', value: res },
-    { '@type': 'PropertyValue', name: 'Pixels', value: pixels },
-    { '@type': 'PropertyValue', name: 'Colours', value: '6 (black, white, yellow, red, blue, green)' },
-    { '@type': 'PropertyValue', name: 'RAW4 bytes per frame', value: raw4 },
-    { '@type': 'PropertyValue', name: 'RAW8 bytes per frame', value: raw8 },
-    ...(ppi ? [{ '@type': 'PropertyValue', name: 'Pixel density', value: `${ppi} ppi` }] : [])
-  ]
+  inLanguage: zh ? 'zh-CN' : 'en',
+  isPartOf: { '@id': 'https://embeddednote.com/#website' },
+  mainEntity: {
+    '@type': 'Thing',
+    name: zh ? `E6 ${sizeIn} 寸六色电子纸面板` : `E6 ${sizeIn} inch six-colour e-paper panel`,
+    category: 'Electronic paper display module',
+    additionalProperty: [
+      { '@type': 'PropertyValue', name: 'Diagonal', value: `${sizeIn} in` },
+      { '@type': 'PropertyValue', name: 'Resolution', value: res },
+      { '@type': 'PropertyValue', name: 'Pixels', value: pixels },
+      { '@type': 'PropertyValue', name: 'Colours', value: '6 (black, white, yellow, red, blue, green)' },
+      { '@type': 'PropertyValue', name: 'RAW4 bytes per frame', value: raw4 },
+      { '@type': 'PropertyValue', name: 'RAW8 bytes per frame', value: raw8 },
+      ...(ppi ? [{ '@type': 'PropertyValue', name: 'Pixel density', value: `${ppi} ppi` }] : [])
+    ]
+  }
 };
 
 const faqLd = {
@@ -192,7 +197,7 @@ const related = [
   breadcrumbs={breadcrumbs}
 >
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(productLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(panelLd)} />
     <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
   </Fragment>
 
