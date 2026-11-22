@@ -150,6 +150,41 @@ export const onRequestPost = async (context: { request: Request; env: Env }): Pr
     }
   }
 
+  // Auto-reply with the four frame briefs, in the language the form was in.
+  if (env.RESEND_API_KEY && env.NOTIFY_TO) {
+    const zh = record.lang === 'zh';
+    const REPLY_BRIEFS = [
+      { label: '7.09 in', file: zh ? 'e6-frame-7.09in.pdf' : 'e6-frame-7.09in-en.pdf' },
+      { label: '10 in', file: zh ? 'e6-frame-10in.pdf' : 'e6-frame-10in-en.pdf' },
+      { label: '13.3 in', file: zh ? 'e6-frame-13.3in.pdf' : 'e6-frame-13.3in-en.pdf' },
+      { label: '31.5 in', file: zh ? 'e6-frame-31.5in.pdf' : 'e6-frame-31.5in-en.pdf' }
+    ];
+    const links = REPLY_BRIEFS.map(
+      (item) => `· ${item.label} — https://embeddednote.com/downloads/e6-frame/${item.file}`
+    ).join('\n');
+    const text = zh
+      ? `谢谢索取。四份 E6 相框方案书在这里:\n\n${links}\n\n每一份写的是我们实际在做的 TCON、供电和结构,不是数据手册的复述。\n\n电子纸工程笔记每两周一封。要样品或报价,直接回这封信,写清尺寸和数量即可。\n\n— Deng Xu, EmbeddedNote`
+      : `Thanks for asking. The four E6 frame briefs are here:\n\n${links}\n\nEach one covers the TCON, the power rail and the enclosure we actually build, rather than a datasheet reprint.\n\nThe engineering notes follow every two weeks. For samples or a quote, reply to this address with the panel size and the quantity.\n\n— Deng Xu, EmbeddedNote`;
+    try {
+      const response = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${env.RESEND_API_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          from: env.RESEND_FROM ?? 'EmbeddedNote <xudeng@embeddednote.com>',
+          to: [record.email],
+          subject: zh ? 'E6 相框方案书' : 'Your E6 frame briefs',
+          text
+        })
+      });
+      results.reply = response.ok ? 'ok' : `http ${response.status}`;
+    } catch (error) {
+      results.reply = `failed: ${String(error)}`;
+    }
+  }
+
   const anySuccess = Object.values(results).some((value) => value === 'ok');
 
   if (!wantsJson) {
