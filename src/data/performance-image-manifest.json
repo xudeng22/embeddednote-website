@@ -39,21 +39,61 @@
 1628,
 253
 ],
+"/images/p0/ble-packet-layout.svg": [
+960,
+330
+],
 "/images/p0/ble-transfer-budget-from-mtu-to-time-cover.webp": [
 1280,
 720
+],
+"/images/p0/ble-transfer-layers.svg": [
+1200,
+540
 ],
 "/images/p0/epaper-engineering-field-guide-cover.webp": [
 1280,
 720
 ],
+"/images/p0/epaper-error-layers-zh.svg": [
+960,
+470
+],
+"/images/p0/epaper-error-layers.svg": [
+960,
+470
+],
+"/images/p0/epaper-ghosting-timeline-zh.svg": [
+960,
+320
+],
+"/images/p0/epaper-ghosting-timeline.svg": [
+960,
+320
+],
+"/images/p0/epaper-image-pipeline.svg": [
+1200,
+540
+],
 "/images/p0/epaper-palette-raw4-packing-guide-cover.webp": [
 1280,
 720
 ],
+"/images/p0/epaper-partial-refresh-waveform.svg": [
+960,
+300
+],
+"/images/p0/epaper-refresh-timeline.svg": [
+1200,
+540
+],
 "/images/p0/epaper-refresh-timing-pipeline-cover.webp": [
 1280,
 720
+],
+"/images/p0/raw4-odd-width.svg": [
+1200,
+540
 ],
 "/og/Embedded Project on GitHub Capacitor Explosion Alarm Clock.webp": [
 1200,
@@ -80,6 +120,10 @@
 630
 ],
 "/og/ble-transfer-budget-from-mtu-to-time.webp": [
+1200,
+630
+],
+"/og/claude-electronics-design.webp": [
 1200,
 630
 ],
@@ -140,6 +184,10 @@
 630
 ],
 "/og/kensat-2u-cubesat-llm.webp": [
+1200,
+630
+],
+"/og/lightink-watch.webp": [
 1200,
 630
 ],
@@ -518,6 +566,86 @@
 "/uploads/berkeley-humanoid-lite/berkeley-humanoid-lite-04.webp": [
 1080,
 630
+],
+"/uploads/claude-electronics/claude-electronics-benchmark-640.webp": [
+640,
+416
+],
+"/uploads/claude-electronics/claude-electronics-benchmark.webp": [
+1600,
+1040
+],
+"/uploads/claude-electronics/claude-electronics-design-640.webp": [
+640,
+380
+],
+"/uploads/claude-electronics/claude-electronics-design.webp": [
+1600,
+951
+],
+"/uploads/claude-electronics/claude-electronics-enclosure-640.webp": [
+640,
+296
+],
+"/uploads/claude-electronics/claude-electronics-enclosure.webp": [
+1600,
+741
+],
+"/uploads/claude-electronics/claude-electronics-flow-en-640.webp": [
+640,
+347
+],
+"/uploads/claude-electronics/claude-electronics-flow-en.webp": [
+1900,
+1030
+],
+"/uploads/claude-electronics/claude-electronics-flow-zh-640.webp": [
+640,
+347
+],
+"/uploads/claude-electronics/claude-electronics-flow-zh.webp": [
+1900,
+1030
+],
+"/uploads/claude-electronics/claude-electronics-hero-640.webp": [
+640,
+427
+],
+"/uploads/claude-electronics/claude-electronics-hero.webp": [
+1600,
+1067
+],
+"/uploads/claude-electronics/claude-electronics-hub-pcb-640.webp": [
+640,
+360
+],
+"/uploads/claude-electronics/claude-electronics-hub-pcb.webp": [
+1600,
+900
+],
+"/uploads/claude-electronics/claude-electronics-routing-640.webp": [
+640,
+316
+],
+"/uploads/claude-electronics/claude-electronics-routing.webp": [
+1600,
+791
+],
+"/uploads/claude-electronics/claude-electronics-speaker-pcb-640.webp": [
+640,
+360
+],
+"/uploads/claude-electronics/claude-electronics-speaker-pcb.webp": [
+1600,
+900
+],
+"/uploads/claude-electronics/claude-electronics-video-poster-640.webp": [
+640,
+360
+],
+"/uploads/claude-electronics/claude-electronics-video-poster.webp": [
+1280,
+720
 ],
 "/uploads/codex-hardware-41-projects-2026/codex-41-hardware-cover.webp": [
 1200,
@@ -1110,6 +1238,54 @@
 "/uploads/kensat-2u-cubesat-llm/kensat-2u-cubesat-llm-05.webp": [
 1080,
 989
+],
+"/uploads/lightink/lightink-case-640.webp": [
+640,
+853
+],
+"/uploads/lightink/lightink-case.webp": [
+900,
+1200
+],
+"/uploads/lightink/lightink-hero-640.webp": [
+640,
+677
+],
+"/uploads/lightink/lightink-hero.webp": [
+1100,
+1164
+],
+"/uploads/lightink/lightink-internals-640.webp": [
+640,
+853
+],
+"/uploads/lightink/lightink-internals.webp": [
+900,
+1200
+],
+"/uploads/lightink/lightink-panel-640.webp": [
+640,
+853
+],
+"/uploads/lightink/lightink-panel-wiring-640.webp": [
+640,
+853
+],
+"/uploads/lightink/lightink-panel-wiring.webp": [
+900,
+1200
+],
+"/uploads/lightink/lightink-panel.webp": [
+900,
+1200
+],
+"/uploads/lightink/lightink-schematic-640.webp": [
+640,
+454
+],
+"/uploads/lightink/lightink-schematic.webp": [
+1500,
+1065
 ],
 "/uploads/meshtastic/meshtastic-01.webp": [
 831,
@@ -2058,141 +2234,5 @@
 "/uploads/x-track/x-track-cover.webp": [
 1200,
 675
-],
-"/uploads/claude-electronics/claude-electronics-benchmark-640.webp": [
-640,
-416
-],
-"/uploads/claude-electronics/claude-electronics-benchmark.webp": [
-1600,
-1040
-],
-"/uploads/claude-electronics/claude-electronics-design-640.webp": [
-640,
-380
-],
-"/uploads/claude-electronics/claude-electronics-design.webp": [
-1600,
-951
-],
-"/uploads/claude-electronics/claude-electronics-enclosure-640.webp": [
-640,
-296
-],
-"/uploads/claude-electronics/claude-electronics-enclosure.webp": [
-1600,
-741
-],
-"/uploads/claude-electronics/claude-electronics-flow-en-640.webp": [
-640,
-347
-],
-"/uploads/claude-electronics/claude-electronics-flow-en.webp": [
-1900,
-1030
-],
-"/uploads/claude-electronics/claude-electronics-flow-zh-640.webp": [
-640,
-347
-],
-"/uploads/claude-electronics/claude-electronics-flow-zh.webp": [
-1900,
-1030
-],
-"/uploads/claude-electronics/claude-electronics-hero-640.webp": [
-640,
-427
-],
-"/uploads/claude-electronics/claude-electronics-hero.webp": [
-1600,
-1067
-],
-"/uploads/claude-electronics/claude-electronics-hub-pcb-640.webp": [
-640,
-360
-],
-"/uploads/claude-electronics/claude-electronics-hub-pcb.webp": [
-1600,
-900
-],
-"/uploads/claude-electronics/claude-electronics-routing-640.webp": [
-640,
-316
-],
-"/uploads/claude-electronics/claude-electronics-routing.webp": [
-1600,
-791
-],
-"/uploads/claude-electronics/claude-electronics-speaker-pcb-640.webp": [
-640,
-360
-],
-"/uploads/claude-electronics/claude-electronics-speaker-pcb.webp": [
-1600,
-900
-],
-"/uploads/claude-electronics/claude-electronics-video-poster-640.webp": [
-640,
-360
-],
-"/uploads/claude-electronics/claude-electronics-video-poster.webp": [
-1280,
-720
-],
-"/og/claude-electronics-design.webp": [
-1200,
-630
-],
-"/uploads/lightink/lightink-case-640.webp": [
-640,
-853
-],
-"/uploads/lightink/lightink-case.webp": [
-900,
-1200
-],
-"/uploads/lightink/lightink-hero-640.webp": [
-640,
-677
-],
-"/uploads/lightink/lightink-hero.webp": [
-1100,
-1164
-],
-"/uploads/lightink/lightink-internals-640.webp": [
-640,
-853
-],
-"/uploads/lightink/lightink-internals.webp": [
-900,
-1200
-],
-"/uploads/lightink/lightink-panel-640.webp": [
-640,
-853
-],
-"/uploads/lightink/lightink-panel-wiring-640.webp": [
-640,
-853
-],
-"/uploads/lightink/lightink-panel-wiring.webp": [
-900,
-1200
-],
-"/uploads/lightink/lightink-panel.webp": [
-900,
-1200
-],
-"/uploads/lightink/lightink-schematic-640.webp": [
-640,
-454
-],
-"/uploads/lightink/lightink-schematic.webp": [
-1500,
-1065
-],
-"/og/lightink-watch.webp": [
-1200,
-630
 ]
 }

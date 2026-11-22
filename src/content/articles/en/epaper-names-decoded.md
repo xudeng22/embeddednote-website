@@ -62,6 +62,7 @@ E6 is not one panel; it is a family that runs from a 1.18-inch badge to a 31.5-i
 | 4.0 in | 570 × 800 | 456,000 | 228,000 B | in production |
 | 4.38 in | 560 × 800 | 448,000 | 224,000 B | in production |
 | 6.19 in | 494 × 1,490 | 736,060 | 368,030 B | in production |
+| 7.09 in | 1,600 × 1,200 | 1,920,000 | 960,000 B | in production |
 | 9.7 in | 1,120 × 784 | 878,080 | 439,040 B | in production |
 | 10.1 in | 1,600 × 1,200 | 1,920,000 | 960,000 B | in production |
 | 13.3 in | 1,200 × 1,600 | 1,920,000 | 960,000 B | in production |

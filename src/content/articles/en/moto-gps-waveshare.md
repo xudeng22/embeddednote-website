@@ -65,11 +65,11 @@ The public Waveshare schematic makes the display bus easy to audit. On J3, `LCD_
 
 The TE line is the one people skip. A display can light up without it, but the map will tear when it rotates quickly. The firmware waits for the panel's frame-start pulse before starting a QSPI transfer, then schedules the next render around a 25 ms target. That is a display-synchronisation problem, not a graphics-library setting.
 
-<p><a href="/uploads/moto-gps-waveshare/moto-gps-board-en.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-board-en.webp" alt="MOTO GPS board-level wiring diagram" style="width:100%;"></a></p>
+<p><a href="/uploads/moto-gps-waveshare/moto-gps-board-en.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-board-en.webp" alt="MOTO GPS board-level wiring diagram" style="width:100%;" width="1800" height="1215"></a></p>
 
 *Display, touch, IMU and PMIC signal assignments. Pin names follow Waveshare's J3 and the project BSP; this is a reading aid, not a fabrication drawing. Open full size.*
 
-<p><a href="/uploads/moto-gps-waveshare/moto-gps-schematic-j3.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-schematic-j3.webp" alt="Waveshare ESP32-S3-Touch-AMOLED-1.75C schematic, J3 detail" style="width:100%;"></a></p>
+<p><a href="/uploads/moto-gps-waveshare/moto-gps-schematic-j3.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-schematic-j3.webp" alt="Waveshare ESP32-S3-Touch-AMOLED-1.75C schematic, J3 detail" style="width:100%;" width="1600" height="1219"></a></p>
 
 *The J3 detail from the public Waveshare schematic. The display uses QSPI plus a dedicated TE line; touch uses I²C with interrupt and reset. Open full size.*
 
@@ -77,7 +77,7 @@ The custom **H0175 EVT A1** board is a different story. It is a **52 mm four-lay
 
 None of that is ready to order. The hardware folder is marked **DO NOT ORDER**. The KiCad ERC and DRC pass, but the display FPC, power-path switching, RF behavior, thermal margin and vibration resistance have not been validated. The A1 and V3 work is paused while the Waveshare build is developed. Treat the files as an engineering record, not a production release.
 
-<p><a href="/uploads/moto-gps-waveshare/moto-gps-a1-pcb.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-a1-pcb.webp" alt="H0175 EVT A1 custom round PCB" style="width:100%;"></a></p>
+<p><a href="/uploads/moto-gps-waveshare/moto-gps-a1-pcb.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-a1-pcb.webp" alt="H0175 EVT A1 custom round PCB" style="width:100%;" width="1400" height="1400"></a></p>
 
 *The A1 PCB preview. A 52 mm four-layer round board with GNSS, IMU, magnetometer and charging hardware. It remains an engineering candidate.*
 
@@ -87,7 +87,7 @@ The architecture is deliberately asymmetric. The phone is the authority for posi
 
 What the display receives is a projection: a navigation snapshot, a local slice of route geometry, and an optional map window with roads and buildings around the current position. The window is capped at **24 road polylines / 192 road points** and **16 building footprints / 128 building points**. That is enough for the next few hundred meters, not for a city.
 
-<p><a href="/uploads/moto-gps-waveshare/moto-gps-system-en.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-system-en.webp" alt="MOTO GPS system data path" style="width:100%;"></a></p>
+<p><a href="/uploads/moto-gps-waveshare/moto-gps-system-en.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-system-en.webp" alt="MOTO GPS system data path" style="width:100%;" width="1800" height="1065"></a></p>
 
 *The phone keeps the route and the routing state. The ESP32 receives a cropped display projection and renders it. Open full size.*
 
@@ -101,7 +101,7 @@ The radio link is where hobby projects usually stop at a characteristic UUID and
 
 Every GATT operation carries one complete protocol frame. The v1 header is ten bytes: magic `0xB7`, protocol version `1`, message type, flags, a 16-bit sequence number, a 16-bit fragment offset and a 16-bit total message length. The payload follows, then a two-byte CRC-16/CCITT-FALSE. Flags carry `START`, `END`, `ACK_REQUESTED` and `URGENT`; every fragment is checked independently.
 
-<p><a href="/uploads/moto-gps-waveshare/moto-gps-ble-en.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-ble-en.webp" alt="MOTO GPS BLE v1 frame format" style="width:100%;"></a></p>
+<p><a href="/uploads/moto-gps-waveshare/moto-gps-ble-en.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-ble-en.webp" alt="MOTO GPS BLE v1 frame format" style="width:100%;" width="1800" height="1088"></a></p>
 
 *The v1 frame: a ten-byte header, N payload bytes and a CRC16. At MTU 23 the payload is only eight bytes, so the protocol fragments and reassembles its own messages. Open full size.*
 
@@ -125,7 +125,7 @@ The firmware uses two **320-row PSRAM draw buffers**. LVGL renders into one whil
 
 The UI is built around the circle. A fixed arrow marks the rider's position; the route and surrounding roads move and rotate beneath it. The bottom half carries the turn icon, distance and a progress arc. Speed, heading and music each get a page, switched by a horizontal swipe. The page indicator hides after five seconds, and the PWR button requests a software shutdown through the PMIC after a three-second hold.
 
-<p><a href="/uploads/moto-gps-waveshare/moto-gps-ui-pages.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-ui-pages.webp" alt="MOTO GPS four round-screen pages" style="width:100%;"></a></p>
+<p><a href="/uploads/moto-gps-waveshare/moto-gps-ui-pages.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-ui-pages.webp" alt="MOTO GPS four round-screen pages" style="width:100%;" width="1500" height="1240"></a></p>
 
 *Navigation, speed, heading and music. The same LVGL UI builds for the device and the WebAssembly preview.*
 
@@ -149,7 +149,7 @@ The map layer is easy to misread. The phone downloads roads and buildings from O
 
 That data is background only. Place search, new route planning, off-route recalculation and live traffic still require the network. The offline package does not contain a routing graph, and the README says so directly. Coverage also depends on local OSM density: an area with sparse building data will look sparse, not fabricated.
 
-<p><a href="/uploads/moto-gps-waveshare/moto-gps-app-maps.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-app-maps.webp" alt="MOTO GPS iPhone map and offline download settings" style="display:block;width:100%;max-width:520px;margin-left:auto;margin-right:auto;"></a></p>
+<p><a href="/uploads/moto-gps-waveshare/moto-gps-app-maps.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-app-maps.webp" alt="MOTO GPS iPhone map and offline download settings" style="display:block;width:100%;max-width:520px;margin-left:auto;margin-right:auto;" width="900" height="1957"></a></p>
 
 *The iPhone map-management screen. Offline downloads store roads and buildings, not a routing engine or live traffic.*
 
@@ -170,7 +170,7 @@ The unfinished list is longer than the feature list:
 
 The automated checks are real but narrow. As of the September 2026 update, the project reports 9 C++ native test groups, 60 backend tests, 12 Swift core tests and 13 BLE policy tests, plus demo-fixture and map-database validation. Those check code and data paths. They do not prove a motorcycle ride, a locked phone, a weak-signal reconnect or a long battery run.
 
-<p><a href="/uploads/moto-gps-waveshare/moto-gps-app-routes.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-app-routes.webp" alt="MOTO GPS iPhone route selection screen" style="display:block;width:100%;max-width:520px;margin-left:auto;margin-right:auto;"></a></p>
+<p><a href="/uploads/moto-gps-waveshare/moto-gps-app-routes.webp" target="_blank" rel="noopener"><img src="/uploads/moto-gps-waveshare/moto-gps-app-routes.webp" alt="MOTO GPS iPhone route selection screen" style="display:block;width:100%;max-width:520px;margin-left:auto;margin-right:auto;" width="900" height="1957"></a></p>
 
 *The iPhone route picker. Up to three AMap candidates are compared by time, distance and traffic before navigation starts.*
 
