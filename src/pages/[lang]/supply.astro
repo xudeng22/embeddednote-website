@@ -118,7 +118,7 @@ const families = zh
       </li>
       <li>
         <strong>{zh ? '样品' : 'Sample'}</strong>
-        <span>{zh ? '先给一块能点亮的样品和对应数据手册。样品按成本收费,你自己验波形和显示效果。' : 'A working sample and its datasheet, so you can check the waveform and the image yourself. Samples are charged at cost.'}</span>
+        <span>{zh ? '先给一块能点亮的样品和对应数据手册。样品按成本收费，具体金额随报价单给出，可在首个量产订单中抵扣。' : 'A working sample and its datasheet, so you can check the waveform and the image yourself. Samples are charged at cost; the amount is on the quotation and is credited against your first volume order.'}</span>
       </li>
       <li>
         <strong>{zh ? '验证' : 'Validation'}</strong>
@@ -140,11 +140,11 @@ const families = zh
       <li>{zh ? '时间节点:打样、试产、量产' : 'Timeline: prototype, pilot, mass production'}</li>
     </ul>
 
-    <h2>{zh ? '两件我们不做的事' : 'Two things we do not do'}</h2>
+    <h2>{zh ? '我们怎么报价' : 'How we quote'}</h2>
     <p>
       {zh
-        ? '第一,不编数据。给不出的参数,我们说给不出,不拿别家型号的数字顶上。第二,不写软文。这个站点的文章是编辑内容,供应商付费不会改变结论——包括我们自己供货的型号。'
-        : 'We do not invent numbers: if a figure is not available, we say so instead of borrowing one from a similar part. And we do not sell reviews: the articles here stay editorial, and paying us does not change a conclusion, including about parts we supply.'}
+        ? '报价里的每个数字，要么来自数据手册，要么是算出来的，要么是实测的，报价单会注明是哪一种。拿不到的数字我们说拿不到，不拿别家型号的顶上。编辑结论不进入任何商业协议。'
+        : 'Every figure in a quote is a datasheet value, a calculation or a measurement, and the quote says which. Where a number is not available we say so rather than borrowing one from a similar part. Editorial conclusions are never part of a commercial agreement.'}
     </p>
 
 
@@ -152,8 +152,8 @@ const families = zh
     <dl class="supply-faq">
       <dt>{zh ? '样品收费吗?' : 'Do samples cost anything?'}</dt>
       <dd>{zh
-        ? '收成本费。样品给的是能点亮、带数据手册的实物,你可以先验波形和显示效果再决定。'
-        : 'Yes, at cost. A sample ships as a working module with its datasheet, so you can check the waveform and the image before committing.'}</dd>
+        ? '收成本费，具体金额随报价单给出，可在首个量产订单中抵扣。样品给的是能点亮、带数据手册的实物，你可以先验波形和显示效果再决定。'
+        : 'Yes, at cost. The amount is on the quotation and is credited against your first volume order. A sample ships as a working module with its datasheet, so you can check the waveform and the image before committing.'}</dd>
       <dt>{zh ? 'MOQ 是多少?' : 'What is the MOQ?'}</dt>
       <dd>{zh
         ? '按型号定。同一尺寸换个分辨率或颜色数,起订量就不一样,所以在报价里一起给,不单独挂一个笼统数字。'
@@ -177,14 +177,14 @@ const families = zh
     <div class="supply-contact">
       <p>
         {zh
-          ? '把上面的信息发到这个邮箱,标题用「电子纸选型」;我们会在一个工作日内回,先回答能不能做,再谈价格。'
-          : 'Send the list above to this address with "E-paper panel enquiry" in the subject. We reply within one working day, first on whether it is feasible, then on price.'}
+          ? '把上面的信息发到这个邮箱，标题用「电子纸选型」；我们会在一个工作日内回复（周一至周五），先回答能不能做，再谈价格。'
+          : 'Send the list above to this address with "E-paper panel enquiry" in the subject. We reply within one business day (Mon–Fri, GMT+8), first on whether it is feasible, then on price.'}
       </p>
       <p class="supply-email">
         <a href={`mailto:${email}?subject=${encodeURIComponent(subject)}`}>{email}</a>
       </p>
       <p class="supply-company">
-        {zh ? '供货方:Datadelta' : 'Supplied by Datadelta'}
+        <a href={`/${lang}/company/`}>{zh ? '供货方：DataDelta（Chengdu DataDelta Pixel Art Technology Co., Ltd.）' : 'Supplied by DataDelta (Chengdu DataDelta Pixel Art Technology Co., Ltd.)'}</a>
       </p>
     </div>
   </section>

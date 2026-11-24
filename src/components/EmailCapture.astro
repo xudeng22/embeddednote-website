@@ -29,10 +29,10 @@ const {
 } = Astro.props;
 
 const zh = lang === 'zh';
-const headingText = heading ?? (zh ? '把英文规格书发给我' : 'Send me the English spec sheets');
+const headingText = heading ?? (zh ? '获取 E6 相框方案书' : 'Get the E6 frame spec sheets');
 const blurbText = blurb ?? (zh
   ? '四份 E6 相框方案书（7.09 / 10 / 13.3 / 31.5 寸）的英文版，加上每两周一封的电子纸工程笔记。随时可以退订。'
-  : 'English editions of the four E6 frame briefs (7.09, 10, 13.3 and 31.5 inch), plus a short e-paper engineering note every two weeks. Unsubscribe any time.');
+  : 'The four E6 frame briefs (7.09, 10, 13.3 and 31.5 inch), plus a short e-paper engineering note every two weeks. Unsubscribe any time.');
 const ctaText = cta ?? (zh ? '发给我' : 'Send them');
 ---
 

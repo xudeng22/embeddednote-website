@@ -355,4 +355,4 @@ Across the 41 entries, the most convincing starting points are small problems wi
 
 Coding agents do not make analog circuits, power supplies, optics, thermal design or mechanical tolerances disappear. They can help write drivers, organize tests, search documentation, build interfaces and even assist with PCB work. Someone still has to verify motor stops, camera recovery paths and the fit of a medical-accessibility attachment. Before attempting any of these builds, check the individual project for available code, BOMs, licenses and hardware revisions.
 
-For more embedded engineering projects, follow the Embedded Notes WeChat account. Feedback and comments are always welcome.
+For more embedded engineering projects, see the [notes archive](/en/notes/). Feedback and corrections are always welcome.

@@ -15,7 +15,7 @@ const blurbs=zh
   :[
     'E-paper panels and modules: monochrome, BWRY and E6 six-colour from 0.97 to 31.5 inch, with driver boards and custom FPC.',
     'TCON and bridge boards, BLE plus Wi-Fi products, our own image engine, mechanics and certification.',
-    'Datasheet work, application notes, joint technical articles. We do not sell reviews, and a conclusion is not for sale.'
+    'Datasheet work, application notes, joint technical articles.'
   ];
 const links=zh
   ?[{href:`/${lang}/supply/`,label:'供货与打样 →'},{href:`/${lang}/solutions/`,label:'方案设计 →'},{href:`/${lang}/about/`,label:'编辑与证据说明 →'}]
@@ -23,15 +23,15 @@ const links=zh
 ---
 <Base
   lang={lang}
-  title={zh?'商务合作':'Business cooperation'}
+  title={zh?'商务合作':'Work with us'}
   description={zh
-    ? 'EmbeddedNote 的商务合作:电子纸面板与模组供货、方案设计与定制开发、技术资料合作。编辑内容不接受付费结论。'
-    : 'Business cooperation with EmbeddedNote: e-paper panel and module supply, solution design and custom development, and technical material collaboration. Editorial conclusions are not for sale.'}
+    ? 'EmbeddedNote 的商务合作：电子纸面板与模组供货、方案设计与定制开发、技术资料合作。编辑内容不接受付费结论。'
+    : 'Work with EmbeddedNote: e-paper panel and module supply, solution design and custom development, and technical material collaboration.'}
   translations={{en:'/en/partner/',zh:'/zh/partner/'}}
 >
 <section class="en-partner" data-pagefind-body>
-  <p class="eyebrow">EMBEDDEDNOTE / {zh?'商务合作':'BUSINESS COOPERATION'}</p>
-  <h1>{zh?'商务合作':'Business cooperation'}</h1>
+  <p class="eyebrow">EMBEDDEDNOTE / {zh?'商务合作':'WORK WITH US'}</p>
+  <h1>{zh?'商务合作':'Work with us'}</h1>
   <p class="lead">
     {zh
       ? '这一页处理的是商业问题:买屏、做方案、整理技术资料。它和网站上的文章是两件事——文章按证据写,合作按项目谈。'
@@ -101,7 +101,7 @@ const links=zh
     if(!f.reportValidity())return;
     const data=new FormData(f);
     const val=(key:string)=>String(data.get(key)||'').trim();
-    const subject=`Business cooperation - ${val('type')}`;
+    const subject=`Enquiry - ${val('type')}`;
     const body=`Company: ${val('company')}\nEmail: ${val('email')}\nType: ${val('type')}\n\n${val('brief')}`;
     const mailto=`mailto:xudeng@datadelta.cn?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     const plain=`${toLabel}: xudeng@datadelta.cn\n${subjectLabel}: ${subject}\n\n${body}`;

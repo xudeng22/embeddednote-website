@@ -130,8 +130,8 @@ const faqs = [
   {
     q: zh ? `${sizeIn} 寸 E6 能拿样品吗？` : `Can I get a sample of the ${sizeIn}-inch E6 panel?`,
     a: zh
-      ? '可以。样品按成本收费，发的是能点亮、带数据手册的实物模组，你可以先验波形和显示效果再决定。选型、MOQ 与交期按具体型号单独报。'
-      : 'Yes. Samples are charged at cost and ship as working modules with the datasheet, so you can check the waveform and the image before committing. MOQ and lead time are quoted per confirmed part.'
+      ? '可以。样品按成本收费，具体金额随报价单给出，可在首个量产订单中抵扣。发的是能点亮、带数据手册的实物模组，你可以先验波形和显示效果再决定。选型、MOQ 与交期按具体型号单独报。'
+      : 'Yes. Samples are charged at cost; the amount is on the quotation and is credited against your first volume order. They ship as working modules with the datasheet, so you can check the waveform and the image before committing. MOQ and lead time are quoted per confirmed part.'
   }
 ];
 
@@ -255,8 +255,8 @@ const related = [
     <h2>{zh ? '样品、驱动板与点亮固件' : 'Samples, driver boards and bring-up'}</h2>
     <p>
       {zh
-        ? `这块屏我们供货。样品按成本收费，给的是能点亮、带数据手册的实物模组，你可以先验波形和显示效果；需要的话配一块驱动板（升压、电平转换、SPI）和 ESP32 / STM32 / nRF 上的点亮固件。定制排线、结构图和刷新型号选择也在范围内。`
-        : `We supply this panel. A sample ships at cost as a working module with its datasheet, so you can check the waveform and the image before committing, and it can come with a driver board (boost rails, level shifting, SPI) plus bring-up firmware for ESP32, STM32 and nRF parts. Custom FPC, mechanical drawings and waveform selection are part of the same conversation.`}
+        ? `这块屏我们供货。样品按成本收费，具体金额随报价单给出，可在首个量产订单中抵扣。给的是能点亮、带数据手册的实物模组，你可以先验波形和显示效果；需要的话配一块驱动板（升压、电平转换、SPI）和 ESP32 / STM32 / nRF 上的点亮固件。定制排线、结构图和刷新型号选择也在范围内。`
+        : `We supply this panel. A sample ships at cost — the amount is on the quotation and is credited against your first volume order — as a working module with its datasheet, so you can check the waveform and the image before committing. It can come with a driver board (boost rails, level shifting, SPI) plus bring-up firmware for ESP32, STM32 and nRF parts. Custom FPC, mechanical drawings and waveform selection are part of the same conversation.`}
     </p>
     <p class="e6-size-inline-cta">
       <a href={`/${lang}/supply/`}>{zh ? '看供货与流程 →' : 'See what we supply →'}</a>
@@ -291,8 +291,8 @@ const related = [
     <div class="e6-size-cta">
       <p>
         {zh
-          ? '要样品或报价，把尺寸、分辨率、颜色数、接口、目标产量和时间节点发到邮箱，一个工作日内回。'
-          : 'For a sample or a quote, send the size, resolution, colour count, interface, target volume and timeline. We reply within one working day.'}
+          ? '要样品或报价，把尺寸、分辨率、颜色数、接口、目标产量和时间节点发到邮箱，一个工作日内回复（周一至周五）。'
+          : 'For a sample or a quote, send the size, resolution, colour count, interface, target volume and timeline. We reply within one business day (Mon–Fri, GMT+8).'}
       </p>
       <p class="e6-size-email">
         <a href={`mailto:xudeng@datadelta.cn?subject=${encodeURIComponent(zh ? `E6 ${sizeIn} 寸选型咨询` : `E6 ${sizeIn} inch panel enquiry`)}`}>xudeng@datadelta.cn</a>

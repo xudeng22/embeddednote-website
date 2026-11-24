@@ -17,7 +17,7 @@ const previousLabel = lang === 'zh' ? '上一页' : 'Previous';
 const nextLabel = lang === 'zh' ? '下一页' : 'Next';
 const countLabel = lang === 'zh'
   ? `显示第 ${firstItem}–${lastItem} 篇，共 ${total} 篇文章（每页 ${perPage} 篇）`
-  : `Showing ${firstItem}–${lastItem} of ${total} articles (${perPage} per page)`;
+  : `Showing ${firstItem}–${lastItem} of ${total} articles`;
 ---
 {total > 0 && <div class="en-pagination-row">
   <p class="en-pagination-count">{countLabel}</p>

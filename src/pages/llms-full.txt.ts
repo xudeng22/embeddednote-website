@@ -43,7 +43,7 @@ export const GET: APIRoute = async () => {
 > A bilingual engineering publication about electronic paper: waveform, ghosting,
 > partial refresh, image packing, power budgets and panel selection. Everything
 > below is reproducible arithmetic or a cited datasheet; the site states which is
-> which. Published by Datadelta (Chengdu DataDelta Pixel Art Technology Co., Ltd).
+> which. Published by DataDelta (Chengdu DataDelta Pixel Art Technology Co., Ltd).
 > Canonical site: https://embeddednote.com/
 > Human-readable index: https://embeddednote.com/en/e-paper/
 > Licence: text CC BY 4.0, cite with the page URL.`);

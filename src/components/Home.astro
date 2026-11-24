@@ -17,8 +17,8 @@ const visible = articles.slice((page-1)*perPage, page*perPage);
 // Search snippets are intentionally richer than the short, visible Hero subtitle.
 // This changes the HTML meta description, not the typography or homepage copy.
 const seoDescriptions = {
-  en: 'EmbeddedNote is an editorially independent bilingual engineering publication, published by Datadelta, with free tools for embedded developers. Explore MCUs, PCB design, BLE, NFC, e-paper and open-source hardware.',
-  zh: 'EmbeddedNote（嵌入式杂谈）是 Datadelta 出品的编辑独立中英双语工程出版物，分享 MCU、硬件设计、BLE、NFC、电子纸、开源项目与免费在线工具。'
+  en: 'EmbeddedNote is an editorially independent bilingual engineering publication, published by DataDelta, with free tools for embedded developers. Explore MCUs, PCB design, BLE, NFC, e-paper and open-source hardware.',
+  zh: 'EmbeddedNote（嵌入式杂谈）是 DataDelta 出品的编辑独立中英双语工程出版物，分享 MCU、硬件设计、BLE、NFC、电子纸、开源项目与免费在线工具。'
 };
 const seoDescription = page > 1
   ? (lang === 'zh'
@@ -79,8 +79,8 @@ const seoDescription = page > 1
       <span class="hs-kicker">{lang === 'zh' ? '供货' : 'SUPPLY'}</span>
       <strong>{lang === 'zh' ? '电子纸面板与模组' : 'E-paper panels and modules'}</strong>
       <p>{lang === 'zh'
-        ? '黑白、BWRY、E6 六色,0.97 至 31.5 寸,配驱动板与定制排线。样品按成本收费。'
-        : 'Monochrome, BWRY and E6 six-colour, 0.97 to 31.5 inch, with driver boards and custom FPC. Samples at cost.'}</p>
+        ? '黑白、BWRY、E6 六色，0.97 至 31.5 寸，配驱动板与定制排线。样品按成本收费，可在首个量产订单中抵扣。'
+        : 'Monochrome, BWRY and E6 six-colour, 0.97 to 31.5 inch, with driver boards and custom FPC. Samples at cost, credited against your first volume order.'}</p>
       <em>{lang === 'zh' ? '看供货与打样 →' : 'See supply and samples →'}</em>
     </a>
   </section>
