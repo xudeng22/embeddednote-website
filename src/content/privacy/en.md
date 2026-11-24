@@ -1,61 +1,102 @@
 ---
 title: Privacy Policy
-description: How EmbeddedNote handles website access information, cookies, email enquiries, optional comments and future advertising.
+description: Who controls this site, what the server, analytics, email forms and comments actually collect, and what happens when you decline analytics.
 locale: en
 ---
 # Privacy Policy
 
 **Effective date: October 15, 2026**  
-**Last updated: October 15, 2026**
+**Last updated: November 24, 2026**
 
-EmbeddedNote ("we", "us", or "our") publishes the website [embeddednote.com](https://embeddednote.com/), a bilingual publication about embedded systems, hardware, semiconductors and open-source engineering. This Policy explains how information may be collected, used and shared when you visit our website or contact us. For privacy enquiries, please email **[xudeng@datadelta.cn](mailto:xudeng@datadelta.cn)**.
+## Who we are
 
-## 1. Information we process
+The data controller for this website is **Chengdu DataDelta Pixel Art Technology Co., Ltd.**, Room 2610–2611, Building A, Changhong Technology Tower, Tianfu 4th Street, High-Tech Zone, Chengdu, Sichuan, China.
 
-**Website access and security information.** When you visit the site, our hosting and security providers may process technical information such as your IP address, browser and device information, requested URLs, approximate location derived from your IP address, referring pages, access times and security events. We use such information as needed to deliver the site, maintain availability, troubleshoot problems and protect it from abuse.
+[embeddednote.com](https://embeddednote.com/) is our bilingual publication about embedded systems, hardware, semiconductors and open-source engineering. Privacy questions and requests go to **[xudeng@datadelta.cn](mailto:xudeng@datadelta.cn)**; put "privacy" in the subject line and we will route it to the person responsible.
 
-**Messages you send.** If you email us, we receive your email address and whatever information you choose to include. We use it to respond, deal with editorial corrections or enquiries, and retain a record where reasonably necessary.
+This page describes what the site does today, not what it might do one day. Where a feature is conditional, we say so.
 
-**On-site search.** Our site uses Pagefind, a browser-based search interface operating with a published search index. Search terms entered into the built-in search are not intentionally sent to EmbeddedNote as a separate search-query service. Normal web requests for search assets may still be recorded by hosting infrastructure.
+## 1. What is collected
 
-**Optional comments.** Where discussion features are enabled, comments are provided using Giscus and GitHub Discussions. Your interaction with those features may involve GitHub account information, cookies and requests to GitHub/Giscus services. Such processing is governed in part by the relevant providers' policies. You can read technical articles without creating a website account.
+**Server and security logs.** Our hosting and CDN provider, Cloudflare, processes the technical data needed to serve a request: IP address, browser and device type, requested URL, referring page, time, and security events. This is what any web server needs to run and to resist abuse.
 
-## 2. Cookies and similar technologies
+**Aggregate traffic measurement (no cookies).** Every page loads Cloudflare Web Analytics. It reports page views and referrers in aggregate, without cookies and without building a profile of you across sites. It runs whether or not you accept optional analytics, because it does not store anything on your device.
 
-The website or its service providers may use cookies or similar technologies needed for security, network delivery and optional features. Third-party features may use their own cookies or other identifiers. You can control or delete cookies using your browser settings. Blocking some cookies may affect optional functionality.
+**Optional analytics — only after you accept.** If you press "Allow analytics", two further tools load:
 
-If we introduce non-essential analytics, advertising or other tracking, we will update this Policy and provide any notices and consent controls required by applicable law. A privacy policy by itself is **not** a cookie-consent mechanism.
+- **Microsoft Clarity** — interaction analytics: clicks, scrolling, layout and page-rendering data, which can be assembled into a session replay of how a page was used.
+- **PostHog** — event analytics, configured here with autocapture off, page-view capture off, session recording off, and no persistent identifier (storage is memory-only, so nothing is written to your device).
 
-## 3. Advertising, including Google AdSense
+Both stay loaded for the rest of that browsing session. If you decline, neither is requested: no script, no request, no cookie.
 
-We may enable advertising, including Google AdSense, in the future. **When advertising is enabled**, Google and other advertising partners may use cookies, web beacons, IP addresses or other identifiers to collect information about visits, deliver and measure ads, limit repeated ads and help prevent fraud. Third-party vendors, including Google, may place or read cookies in your browser and serve ads based on your visits to this website and other websites.
+**Email forms.** The spec-sheet and notes form asks for your work email, optionally your company, and which panel size you care about. The submission is delivered to our mailbox through **Resend** (our email delivery provider) and kept in our Cloudflare account so we can send the documents and the notes. We use the address to send what you asked for and to reply to enquiries — nothing else. Every note includes a way to stop receiving them, and replying "stop" works too.
 
-Google's advertising cookies enable Google and its partners to serve ads based on users' visits to this site and/or other sites on the internet. You may manage personalized advertising through [Google My Ad Center](https://myadcenter.google.com/) and, for participating vendors, [aboutads.info](https://www.aboutads.info/choices/). Learn [how Google uses information from partner sites and apps](https://policies.google.com/technologies/partner-sites).
+**The enquiry form on the work-with-us page does not upload anything.** It builds a message in your browser and hands it to your own mail client. Nothing reaches our server unless you send the email.
 
-Where required, we will request consent for non-essential advertising technologies and relevant personal-data processing **before** enabling them for affected visitors. For advertising in the European Economic Area, the United Kingdom and Switzerland, we will implement the consent-management arrangements required by Google's publisher policies before serving ads there. Those controls are separate from this Policy.
+**On-site search.** Search runs on Pagefind: the index is downloaded and the query is matched in your browser. Search terms are not sent to us.
 
-## 4. Why we process information
+**Comments.** Article pages can show comments through **Giscus**, which stores discussions in GitHub Discussions. Opening or using comments involves GitHub: your GitHub account, and GitHub's cookies, if you sign in to post. Reading articles never requires an account.
 
-Our purposes include providing and securing the website, responding to messages, maintaining technical and editorial quality, meeting legal obligations, and—if activated—supporting measurement and advertising subject to required choices. Where applicable, we rely on legitimate interests for routine site operation and security; on your request to respond to enquiries; on legal obligations when required; and on consent where law requires it for non-essential cookies, advertising personalization or similar processing.
+**Email you send us.** We receive your address and whatever you write, and keep it as long as needed to answer and to keep an editorial record of corrections.
 
-## 5. Service providers, disclosures and international processing
+## 2. Cookies and local storage
 
-We use **Cloudflare** for website hosting, content delivery and associated security features. Optional discussions may rely on **GitHub/Giscus**. If enabled, advertising involves **Google** and its advertising partners. These providers may process technical information under their own applicable terms and privacy policies, and information may be processed in countries other than your own. We may also disclose information when legally required or reasonably necessary to protect the website or users. We do not sell visitor contact lists.
+| Item | Set by | Purpose | Lifetime |
+|---|---|---|---|
+| `embeddednote_analytics_choice_v1` | this site (localStorage) | remembers whether you allowed or declined analytics | until you clear site data |
+| Security and routing cookies | Cloudflare | bot mitigation and request routing | session to a few days, per Cloudflare |
+| `_clck`, `_clsk` | Microsoft Clarity | distinguishes visits for interaction analytics | up to 1 year |
+| No persistent storage | PostHog | configured memory-only here | — |
+| GitHub cookies | GitHub / Giscus | only when you use comments | per GitHub |
 
-You can review [Cloudflare's privacy policy](https://www.cloudflare.com/privacypolicy/) and [GitHub's privacy statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement).
+There are no advertising cookies on this site.
 
-## 6. Retention and security
+## 3. Advertising
 
-We keep correspondence only for as long as reasonably needed to respond, maintain editorial records, resolve disputes or comply with applicable legal requirements. Hosting and security logs are retained according to the relevant provider's settings and retention practices. We use reasonable safeguards, but no online transmission or storage method is completely secure.
+**This site carries no advertising.** The advertising loader that used to be included was removed in November 2026 because it was running without serving anything, and it contacted Google before visitors had a choice.
 
-## 7. Your privacy choices and rights
+If advertising is ever introduced, this page and the consent banner will say so first, and nothing non-essential will load before you are asked.
 
-Depending on your location and applicable law, you may have rights to request access, correction or deletion of personal information, object to or restrict certain processing, or withdraw consent where processing is based on consent. To make a request, email [xudeng@datadelta.cn](mailto:xudeng@datadelta.cn). We may need to verify your request and will respond as required by applicable law. Browser controls and any consent-management interface made available on the website can also be used to manage applicable cookie choices.
+## 4. Why we process it, and on what basis
+
+- **Serving the site and keeping it secure** — legitimate interests in operating a website and defending it against abuse.
+- **Aggregate, cookieless traffic counts** — legitimate interests in knowing which articles are read; no device storage, no cross-site profile.
+- **Clarity and PostHog** — your consent, which you can withdraw at any time by clearing the site's storage or by declining on your next visit.
+- **Sending the documents and notes you asked for** — steps taken at your request.
+- **Answering enquiries and keeping editorial records** — legitimate interests and, where relevant, legal obligations.
+
+## 5. Who else is involved
+
+| Provider | Role |
+|---|---|
+| Cloudflare | hosting, CDN, security, aggregate analytics, storage of form records |
+| Resend | delivery of our notification and reply emails |
+| Microsoft Clarity | optional interaction analytics (consent required) |
+| PostHog | optional event analytics (consent required) |
+| GitHub / Giscus | comment threads on article pages |
+
+These providers process data under their own terms and may process it outside your country. We do not sell personal information, we do not run advertising networks, and we do not share your address with anyone for marketing.
+
+## 6. How long we keep it
+
+Enquiries and sign-ups are kept while the commercial or editorial relationship is live, then for as long as needed for legal, tax or dispute purposes. Server logs follow Cloudflare's retention. Analytics data follows the provider's retention setting. You can ask us to delete your enquiry record at any time and we will, unless we are required to keep it.
+
+## 7. Your rights
+
+Depending on where you live, you may have the right to access, correct, delete or receive a copy of your personal data, to object to or restrict processing, and to withdraw consent. Write to **[xudeng@datadelta.cn](mailto:xudeng@datadelta.cn)** and we will respond within the period the applicable law allows. We may ask a question or two to confirm the request is really yours.
+
+You can also object to the optional analytics without contacting us: decline the banner, or clear this site's storage and decline again.
 
 ## 8. Children and external links
 
-EmbeddedNote is intended for a general technical readership, not specifically for children. We do not knowingly request personal information from children through the website. Articles may link to external sites, which have their own privacy practices; we do not control those sites.
+The site is written for a professional engineering readership, not for children, and we do not knowingly collect information from children. Articles link to other sites, including GitHub and component vendors; those sites have their own policies and we do not control them.
 
-## 9. Changes and contact
+## 9. Changes
 
-We may revise this Policy as services or legal requirements change. The updated version and date will be shown on this page. For questions, corrections or privacy requests, contact **[xudeng@datadelta.cn](mailto:xudeng@datadelta.cn)**.
+If what the site actually does changes — a new tool, a new provider, advertising — this page changes with it, and the date above changes too. We will not quietly widen what is collected.
+
+## 10. Contact
+
+**Chengdu DataDelta Pixel Art Technology Co., Ltd.**
+Room 2610–2611, Building A, Changhong Technology Tower, Tianfu 4th Street, High-Tech Zone, Chengdu, Sichuan, China
+Email: **[xudeng@datadelta.cn](mailto:xudeng@datadelta.cn)**
