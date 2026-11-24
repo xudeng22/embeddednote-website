@@ -67,19 +67,76 @@ const links=zh
       <button type="submit">{zh?'生成邮件':'Compose email'}</button>
       <p class="full note">{zh?'也可以直接写信到':'Or write to'} <a href="mailto:xudeng@datadelta.cn" data-en-event="partner_email_click" data-en-placement="partner">xudeng@datadelta.cn</a></p>
     </form>
+
+    <div id="en-partner-result" class="partner-result" hidden>
+      <p class="partner-result-lead">
+        {zh
+          ? '邮件已生成。如果邮件客户端没有自动弹出,用下面任一方式继续:'
+          : 'The message is ready. If your mail app did not open, use one of these:'}
+      </p>
+      <p class="partner-result-actions">
+        <a id="en-partner-open" href="mailto:xudeng@datadelta.cn">{zh?'用邮件客户端打开':'Open in your mail app'}</a>
+        <button type="button" id="en-partner-copy">{zh?'复制邮件内容':'Copy the message'}</button>
+        <span id="en-partner-copied" hidden>{zh?'已复制':'Copied'}</span>
+      </p>
+      <pre id="en-partner-preview"></pre>
+    </div>
   </div>
 </section>
 </Base>
 <script>
   const f=document.querySelector<HTMLFormElement>('#en-partner-form');
+  const result=document.querySelector<HTMLDivElement>('#en-partner-result');
+  const openLink=document.querySelector<HTMLAnchorElement>('#en-partner-open');
+  const copyBtn=document.querySelector<HTMLButtonElement>('#en-partner-copy');
+  const copied=document.querySelector<HTMLSpanElement>('#en-partner-copied');
+  const preview=document.querySelector<HTMLPreElement>('#en-partner-preview');
+
+  const isZH=document.documentElement.lang.startsWith('zh');
+  const toLabel=isZH?'收件人':'To';
+  const subjectLabel=isZH?'主题':'Subject';
+
   f?.addEventListener('submit',event=>{
-    event.preventDefault();if(!f.reportValidity())return;
+    event.preventDefault();
+    if(!f.reportValidity())return;
     const data=new FormData(f);
     const val=(key:string)=>String(data.get(key)||'').trim();
     const subject=`Business cooperation - ${val('type')}`;
     const body=`Company: ${val('company')}\nEmail: ${val('email')}\nType: ${val('type')}\n\n${val('brief')}`;
+    const mailto=`mailto:xudeng@datadelta.cn?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const plain=`${toLabel}: xudeng@datadelta.cn\n${subjectLabel}: ${subject}\n\n${body}`;
+
     (window as any).embeddednoteAnalytics?.capture?.('partner_email_compose',{type:val('type'),page:location.pathname});
-    location.href=`mailto:xudeng@datadelta.cn?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // Show a real link and a copyable copy of the message first: assigning
+    // location.href to a mailto: is silently dropped on machines with no
+    // default mail handler, which looks like a dead button.
+    if(openLink)openLink.href=mailto;
+    if(preview)preview.textContent=plain;
+    if(copied)copied.hidden=true;
+    if(result){result.hidden=false;result.scrollIntoView({block:'nearest',behavior:'smooth'});}
+
+    location.href=mailto;
+  });
+
+  copyBtn?.addEventListener('click',async()=>{
+    const text=preview?.textContent||'';
+    if(!text)return;
+    let ok=false;
+    try{await navigator.clipboard.writeText(text);ok=true;}catch{}
+    if(!ok&&preview){
+      const range=document.createRange();
+      range.selectNodeContents(preview);
+      const sel=window.getSelection();
+      sel?.removeAllRanges();
+      sel?.addRange(range);
+      try{ok=document.execCommand('copy');}catch{}
+    }
+    if(copied){
+      copied.textContent=isZH?(ok?'已复制':'请手动复制下面的内容'):(ok?'Copied':'Select and copy the text below');
+      copied.hidden=false;
+      setTimeout(()=>{copied.hidden=true;},3000);
+    }
   });
 </script>
 <style>
@@ -103,5 +160,13 @@ const links=zh
 .partner-contact button:hover{background:#923322}
 .partner-contact .note{font-size:13px;margin:0}
 .partner-contact a{color:#b94530}
+.partner-result{margin-top:18px;padding:16px 18px;border:1px solid #d0c8bb;background:#fffdf8;border-radius:4px}
+.partner-result-lead{margin:0 0 10px!important;font:600 13px/1.6 system-ui,sans-serif;color:#17211e}
+.partner-result-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:0 0 12px!important}
+.partner-result-actions a{color:#b94530;font-weight:700;text-underline-offset:3px}
+.partner-result-actions button{background:#17211e;color:#fff;border:0;border-radius:3px;padding:8px 12px;font:600 13px system-ui;cursor:pointer}
+.partner-result-actions button:hover{background:#2c3a35}
+#en-partner-copied{color:#2e7d32;font:600 12px system-ui}
+.partner-result pre{margin:0;padding:12px;background:#f4eee3;border-radius:3px;font:12.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;word-break:break-word;max-height:240px;overflow:auto;color:#17211e}
 @media(max-width:650px){.partner-grid,.partner-contact form{grid-template-columns:1fr}.en-partner{padding-top:25px}.partner-contact{padding:17px}}
 </style>
