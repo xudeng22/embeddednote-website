@@ -118,6 +118,31 @@ We have not characterised partial-refresh lifetime for a specific panel, and the
 
 For the mechanism behind the residue, read [E-Paper Ghosting](/en/articles/epaper-ghosting-causes-and-fixes/). For the frame-size arithmetic that tells you how much data a partial update actually moves, see the [image converter](/en/tools/epaper-image-converter/) and [the pipeline guide](/en/articles/epaper-engineering-field-guide/).
 
+## Two implementations, often confused
+
+"Partial refresh" describes two different mechanisms, and mixing them produces contradictory advice.
+
+**Windowed.** The host sends only the changed rectangle plus its coordinates. Pixels outside the window are not driven in that frame, so the controller's idea of the panel and the panel's actual state drift apart. The longer it runs, the less stable those pixels become, which shows up as a washed-out panel with uneven contrast.
+
+**Whole-frame comparison.** The host still sends the full frame; the driver compares each byte against the previous image, holds the pixels that match and drives only the ones that differ. Every pixel stays under control, at the cost of the bus time you were trying to save.
+
+The trade is unambiguous:
+
+| | Windowed | Whole-frame comparison |
+| --- | --- | --- |
+| Bus time | saved | not saved |
+| Panel state | drifts outside the window | always controlled |
+| Long-term risk | cumulative degradation | residue, cleared by a full refresh |
+| Fits | tiny edits, short-lived products | anything that runs for months |
+
+**This is also why some panel makers stopped offering windowed partial refresh and keep only whole-frame comparison.** For panel lifetime the savings do not cover the drift: you trade a few hundred milliseconds for a panel that slowly degrades.
+
+What it means for a design:
+
+- If the controller supports comparison, prefer it; do not open a window to save a few hundred milliseconds
+- If only windowed mode exists, write the forced full refresh into the design rather than hoping
+- Both need a refresh budget, but of different kinds: windowed guards against pixel drift, comparison against residue build-up
+
 ## Three questions that follow the gates
 
 ### My controller supports a partial window. Should I update only the 20 × 20 area that changed?

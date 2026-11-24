@@ -22,6 +22,11 @@ const terms = zh
       ['波形(waveform)', '驱动颜料的一组电压时序。同一块屏在不同温度下要用不同波形,靠屏上的温度传感器选表。'],
       ['TCON', '时序控制板。把主控送来的图像数据转换成面板需要的扫描时序和电压,大尺寸电子纸通常需要独立 TCON。'],
       ['全刷(baseline)', '完整的擦除—写入—闪烁序列,用来清掉残影。它是唯一能让薄膜回到干净状态的操作。'],
+      ['FPL(前面板膜)', 'Front Panel Laminate,封装带电颜料微胶囊的那层膜。同一块 TFT 背板配不同 FPL,就得到黑白、三色、四色或六色产品——颜色差异来自膜,不来自驱动。'],
+      ['TFT 背板', '每个像素一个薄膜晶体管的玻璃基板,负责把电荷送到像素电极。也是阳光下漏电、低温下响应变慢的那一层。'],
+      ['CoG(驱动 IC)', 'Chip on Glass,直接绑定在玻璃上的驱动芯片。波形表、行扫描、升压电路通常都在里面,所以"换控制器"往往等于换整套时序。'],
+      ['PS(间隔物)', 'Photo Spacer,撑住上下基板之间间隙的微结构。间隙决定颜料颗粒能走多远,压坏或受挤压会留下永久痕迹。'],
+      ['FPC(排线)', 'Flexible Printed Circuit,把面板引到主控的柔性线路板。大尺寸屏的 FPC 还会带温度传感器和升压后的高压走线。'],
       ['PPI', '每英寸像素数 = 分辨率 ÷ 有效显示区英寸数。同样 1200×1600,7.09 寸是 282 ppi,13.3 寸只有 150 ppi。']
     ]
   : [
@@ -36,6 +41,11 @@ const terms = zh
       ['Waveform', 'The voltage sequence that drives the pigment. The same panel needs different waveforms at different temperatures, selected from a table using the panel temperature sensor.'],
       ['TCON', 'Timing controller. Converts image data from the host into the scan timing and voltages the panel needs; large e-paper panels usually need a separate TCON board.'],
       ['Full refresh (baseline)', 'The complete erase-write-flash sequence that clears residue. It is the only operation that returns the film to a clean state.'],
+      ['FPL (front panel laminate)', 'The film that encapsulates the charged pigment. The same TFT backplane with a different FPL gives a mono, three-colour, four-colour or six-colour product: the colour difference lives in the film, not in the driver.'],
+      ['TFT backplane', 'A glass substrate with one thin-film transistor per pixel, delivering charge to the pixel electrode. It is also the layer that leaks under direct sunlight and slows down in the cold.'],
+      ['CoG (driver IC)', 'Chip on Glass: the driver die bonded directly to the glass. Waveform tables, row scanning and the boost supply usually live here, which is why changing the controller usually means changing the whole timing chain.'],
+      ['PS (photo spacer)', 'The microstructure that holds the gap between the two substrates. The gap sets how far the pigment particles travel; crush it and the mark is permanent.'],
+      ['FPC (flexible printed circuit)', 'The ribbon that carries the panel to the host. On larger panels it also carries the temperature sensor and the boosted high-voltage rails.'],
       ['PPI', 'Pixels per inch, resolution divided by the active area in inches. The same 1200 × 1600 is 282 ppi at 7.09 inch and 150 ppi at 13.3 inch.']
     ];
 

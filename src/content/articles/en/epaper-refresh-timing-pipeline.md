@@ -80,6 +80,22 @@ Test full updates and permitted partial updates separately, at documented ambien
 
 A measurement report should include a scope trace or raw log, timestamps, definitions, and a photo of the actual test configuration. Without that evidence, call the numbers calculations or preliminary estimates—not “benchmarked” results.
 
+## The clock ceiling is lower than the bus suggests
+
+SPI can be clocked far faster than an e-paper controller accepts. In this panel class the write path is typically rated at **20 MHz** and the read path at **2.5 MHz** — reading status, OTP or the controller's ID is roughly eight times slower than writing pixels.
+
+That asymmetry matters when you poll BUSY over SPI instead of using an interrupt: the status read itself costs measurable time, and a tight poll loop can spend more time asking than waiting.
+
+What the write clock buys, at 960,000 bytes per frame (a 13.3-inch E6 panel):
+
+| Clock | Ideal transfer | Realistic after command overhead |
+| --- | ---: | ---: |
+| 1 MHz | 7.68 s | 8 s+ |
+| 4 MHz | 1.92 s | 2.1 s |
+| 20 MHz | 0.38 s | 0.45 s |
+
+Those numbers are the bus only. **At 20 MHz the transfer stops being the story**: the frame arrives in under half a second and the rest of the wait is waveform and optical settling, which is exactly where [refresh modes](/en/articles/epaper-refresh-modes/) and the BUSY behaviour above take over.
+
 ## Where to optimize after measuring
 
 If preparation dominates, profile image conversion and memory copies. If SPI dominates, examine effective transaction sizes, DMA, clocks and extra framing while respecting device timing limits. If BUSY dominates, check whether the selected manufacturer-supported update mode matches the use case. If a wireless transfer precedes every update, measure radio time separately with the [BLE Transfer Planner](/en/tools/ble-throughput-calculator/). If incorrect colors or layout are the problem, start with the [RAW4 and palette checklist](/en/articles/epaper-palette-raw4-packing-guide/) rather than shortening a waveform.
