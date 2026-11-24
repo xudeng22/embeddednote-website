@@ -1,0 +1,121 @@
+---
+import Base from '../../layouts/Base.astro';
+export function getStaticPaths(){return ['en','zh'].map(lang=>({params:{lang}}));}
+const lang=Astro.params.lang==='zh'?'zh':'en';
+const zh=lang==='zh';
+const translations={en:'/en/quality/',zh:'/zh/quality/'};
+
+const docs = zh ? [
+  ['RoHS 检测报告','面板与模组','有。按料号提供，随报价或按需发送'],
+  ['REACH 声明（SVHC）','面板与模组','有。按料号提供'],
+  ['CE / UKCA','成品整机','模组层面不适用；按项目申请'],
+  ['FCC','含无线的成品','按项目申请']
+] : [
+  ['RoHS test report','Panel and module','Held. Provided per part number, with the quotation or on request'],
+  ['REACH declaration (SVHC)','Panel and module','Held. Provided per part number'],
+  ['CE / UKCA','Finished assembly','Not applicable at module level; applied per project'],
+  ['FCC','Assembly with a radio','Applied per project']
+];
+---
+
+<Base
+  lang={lang}
+  title={zh?'质量与合规':'Quality and compliance'}
+  description={zh
+    ? '电子纸模组随货提供 RoHS 检测报告与 REACH 声明；成品整机的 CE、UKCA、FCC 按项目申请。这里写清楚哪些文件我们持有，哪些必须按项目做。'
+    : 'RoHS and REACH documents ship with our e-paper modules; CE, UKCA and FCC apply per project for finished assemblies. This page states what we hold and what has to be applied for.'}
+  translations={translations}
+>
+  <section class="en-quality">
+    <p class="eyebrow">EMBEDDEDNOTE / {zh?'质量与合规':'QUALITY & COMPLIANCE'}</p>
+    <h1>{zh?'哪些文件我们有，哪些必须按项目申请':'What we hold, and what has to be applied for'}</h1>
+    <p class="lead">
+      {zh
+        ? '一笔订单会涉及两类完全不同的文件：面板与模组的符合性文件，和整机的认证。大多数供应商把这两件事混在一起说，我们不混。'
+        : 'An order involves two different kinds of document: conformity for the panel and module, and certification for the finished product. Most suppliers blur the two. We keep them apart, because the difference decides what you can legally ship and where.'}
+    </p>
+
+    <h2>{zh?'模组层面':'At module level'}</h2>
+    <div class="q-table">
+      <table>
+        <thead>
+          <tr>
+            <th>{zh?'文件':'Document'}</th>
+            <th>{zh?'覆盖范围':'Covers'}</th>
+            <th>{zh?'状态':'Status'}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {docs.map(([d,c,s])=>
+            <tr>
+              <td>{d}</td>
+              <td>{c}</td>
+              <td>{s}</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+
+    <h2>{zh?'为什么模组没有 CE':'Why there is no CE mark on a bare module'}</h2>
+    <p>
+      {zh
+        ? 'CE 属于成品，而不属于器件。EMC、安规和无线电性能取决于外壳、供电和天线——这三样在模组层面都还不存在。一个把 CE 证书发给裸屏的供应商，给你的是一份覆盖不到你最终产品的东西。'
+        : 'A CE mark belongs to a finished product, not to a component. EMC, safety and radio performance depend on the enclosure, the power design and the antenna, none of which exist at module level. A supplier who hands you a CE certificate for a bare panel is giving you a document that does not cover the thing you are actually building.'}
+    </p>
+    <p>
+      {zh
+        ? '整机的符合性工作按项目做：先定目标市场、外壳与无线配置，再定测试范围和周期。这些在报价阶段就会说清楚，不会等到出货前才提。'
+        : 'For an assembled unit the conformity work is run per project: the destination market, the enclosure and the radio configuration decide the test scope and the timeline. That scope is agreed at quotation, not discovered before shipment.'}
+    </p>
+
+    <h2>{zh?'下单前你可以自己验的':'What you can verify before you commit'}</h2>
+    <ul class="q-list">
+      <li>{zh
+        ? '样品是能点亮的实物模组，附数据手册——波形和显示效果你自己看，不用听我们说。'
+        : 'The sample ships as a working module with its datasheet, so you can judge the waveform and the image yourself instead of taking our word for it.'}</li>
+      <li>{zh
+        ? '温度边界写在面板家族上，而不是藏在参数表里：E6 是 0–50 °C，BWRY 更窄，具体的以该型号数据手册为准。'
+        : 'Temperature limits are stated per panel family rather than buried: 0–50 °C for E6, narrower for BWRY, and the exact datasheet governs your part.'}</li>
+      <li>{zh
+        ? '定制排线和结构图在开模前与你确认，避免到货才发现装不进外壳。'
+        : 'Custom FPC and mechanical drawings are confirmed against your enclosure before tooling, not after the goods land.'}</li>
+    </ul>
+
+    <h2>{zh?'告诉我们目的地':'Tell us the destination'}</h2>
+    <p>
+      {zh
+        ? '认证取决于两件事：产品卖到哪，以及里面有没有射频。把这两点写进第一封邮件，我们会在报价前告诉你需要哪些文件、由谁负责、大概多久。'
+        : 'Certification depends on two things: where the product ships, and whether it carries a radio. Put both in your first email and we will say which documents apply, who owns each step, and roughly how long it takes — before you order.'}
+    </p>
+    <p class="q-rule">
+      {zh
+        ? '一条底线：不把别的型号的证书转给你，也不把别人的 CE 说成我们的。'
+        : 'One rule: we do not forward a certificate issued for a different part, and we do not present someone else\'s CE mark as ours.'}
+    </p>
+
+    <div class="q-links">
+      <a href={`/${lang}/company/`}>{zh?'公司信息 →':'Company →'}</a>
+      <a href={`/${lang}/supply/`}>{zh?'供货与打样 →':'Supply and samples →'}</a>
+      <a href={`/${lang}/partner/`}>{zh?'商务合作 →':'Work with us →'}</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .en-quality{width:min(100%,820px);margin:0 auto;padding:clamp(38px,6vw,72px) 0 clamp(64px,8vw,110px);color:#17211e}
+  .en-quality h1{font:700 clamp(30px,4vw,46px)/1.16 Georgia,'Noto Serif SC',serif;letter-spacing:-.02em;margin:12px 0 20px}
+  .en-quality h2{font:700 clamp(20px,2.2vw,26px)/1.3 Georgia,'Noto Serif SC',serif;margin:40px 0 12px}
+  .en-quality .lead{color:#4d574f;font-size:clamp(16px,1.5vw,19px);line-height:1.75;margin:0 0 28px}
+  .en-quality p{line-height:1.8;color:#3f4a44}
+  .q-table{overflow-x:auto;border:1px solid #e3dccf;background:#fffdf9;margin-top:16px}
+  .q-table table{width:100%;min-width:560px;border-collapse:collapse;font-size:14px}
+  .q-table th{background:#f4eee3;text-align:left;font-weight:700;padding:11px 14px;border-bottom:2px solid #d6cdbd}
+  .q-table td{padding:11px 14px;border-bottom:1px solid #ece5d8;line-height:1.55;vertical-align:top}
+  .q-table tr:last-child td{border-bottom:0}
+  .q-list{margin:14px 0 0;padding-left:20px;color:#3f4a44;line-height:1.85}
+  .q-list li{margin-bottom:8px}
+  .q-rule{margin-top:18px;padding:14px 16px;border-left:4px solid #b94530;background:#faf5f2;font-weight:600;color:#17211e}
+  .q-links{display:flex;flex-wrap:wrap;gap:18px;margin-top:38px;padding-top:22px;border-top:1px solid #d0c8bb}
+  .q-links a{color:#b94530;font-weight:700;text-underline-offset:3px}
+</style>

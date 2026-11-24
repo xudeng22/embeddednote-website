@@ -1,0 +1,97 @@
+---
+import Base from '../../layouts/Base.astro';
+export function getStaticPaths(){return ['en','zh'].map(lang=>({params:{lang}}));}
+const lang=Astro.params.lang==='zh'?'zh':'en';
+const zh=lang==='zh';
+const translations={en:'/en/company/',zh:'/zh/company/'};
+
+const facts = zh ? [
+  ['法定名称','Chengdu DataDelta Pixel Art Technology Co., Ltd.'],
+  ['成立时间','2024 年 1 月'],
+  ['注册地址','中国四川省成都市高新区天府四街，长虹科技大厦 A 座 2610–2611 室'],
+  ['业务范围','电子纸方案设计与整机组装；TCON、固件、图像处理算法、结构与认证'],
+  ['自制的部分','板卡设计、固件、图像链路、整机组装与出货检验'],
+  ['外协的部分','SMT 贴片与电子纸贴合，由长期合作的合格供应商完成'],
+  ['不做的部分','面板本身不是我们生产的'],
+  ['工作语言','中文、英文'],
+  ['回复时效','一个工作日内（周一至周五，GMT+8）']
+] : [
+  ['Legal name','Chengdu DataDelta Pixel Art Technology Co., Ltd.'],
+  ['Founded','January 2024'],
+  ['Registered address','Room 2610–2611, Building A, Changhong Technology Tower, Tianfu 4th Street, High-Tech Zone, Chengdu, Sichuan, China'],
+  ['What we do','E-paper solution design and final assembly: TCON, firmware, image pipeline, mechanics, certification'],
+  ['Made in-house','Board design, firmware, image pipeline, final assembly and outgoing inspection'],
+  ['Subcontracted','SMT and e-paper lamination, at qualified partners we have worked with on the same families'],
+  ['Not ours','The panels themselves'],
+  ['Languages','Chinese, English'],
+  ['Response time','One business day (Mon–Fri, GMT+8)']
+];
+---
+
+<Base
+  lang={lang}
+  title={zh?'关于公司':'Company'}
+  description={zh
+    ? 'EmbeddedNote 由 Chengdu DataDelta Pixel Art Technology Co., Ltd. 运营：电子纸方案设计与整机制造，成都自有产线，SMT 与贴合外协。'
+    : 'EmbeddedNote is published by Chengdu DataDelta Pixel Art Technology Co., Ltd. — e-paper solution design and manufacturing, assembled in Chengdu.'}
+  translations={translations}
+>
+  <section class="en-company">
+    <p class="eyebrow">EMBEDDEDNOTE / {zh?'公司':'COMPANY'}</p>
+    <h1>{zh?'谁在运营这个站，谁在造那些东西':'Who publishes this site, and who builds the hardware'}</h1>
+    <p class="lead">
+      {zh
+        ? 'EmbeddedNote 由 Chengdu DataDelta Pixel Art Technology Co., Ltd. 运营。我们做电子纸方案设计与整机制造——设计在成都，组装也在成都。'
+        : 'EmbeddedNote is published by Chengdu DataDelta Pixel Art Technology Co., Ltd. We design e-paper solutions and build the finished units — designed in Chengdu, assembled in Chengdu.'}
+    </p>
+
+    <dl class="co-facts">
+      {facts.map(([k,v])=>
+        <div>
+          <dt>{k}</dt>
+          <dd>{v}</dd>
+        </div>
+      )}
+    </dl>
+
+    <h2>{zh?'哪些是我们做的，哪些不是':'What is ours and what is not'}</h2>
+    <p>
+      {zh
+        ? '板卡、固件、图像链路和整机组装是我们自己做的，出厂检验也在自己厂里完成。SMT 贴片和电子纸贴合交给长期合作的供应商，同一批产品家族他们已经做了很久。面板本身不是我们生产的——这一点不打算含糊。'
+        : 'We design the boards, write the firmware, build the image pipeline and assemble the finished unit in Chengdu. SMT and e-paper lamination run at partners we have used on the same product families for a long time. The panels themselves are not ours, and we would rather say so than blur it.'}
+    </p>
+    <p>
+      {zh
+        ? '为什么要把这条讲清楚？因为买家真正要知道的不是「你是不是面板厂」，而是「到货的那个模组，出了问题是找谁」。答案是：找我们。面板的追溯、波形适配、结构配合和出货状态,都在我们的责任范围内。'
+        : 'Why bother stating it? Because the question that matters to a buyer is not whether we are a panel fab. It is who is accountable when the module misbehaves after it arrives. That answer is us: the traceability of the panel, the waveform fit, the mechanical integration and the condition it ships in are all inside our responsibility.'}
+    </p>
+
+    <h2>{zh?'想确认我们是真的':'If you want to check that we are real'}</h2>
+    <p>
+      {zh
+        ? '地址写在上面的表里，可以直接查。要更多材料——营业执照、开票信息、厂房照片、质量与合规文件——写信给我们，说明你的公司和用途，我们按商务流程提供。'
+        : 'The address above is a real one you can check. For anything beyond it — business licence, invoicing details, factory photos, quality and compliance documents — write to us with your company and what you need it for, and we will send it through the usual commercial process.'}
+    </p>
+
+    <div class="co-links">
+      <a href={`/${lang}/quality/`}>{zh?'质量与合规 →':'Quality and compliance →'}</a>
+      <a href={`/${lang}/supply/`}>{zh?'供货与打样 →':'Supply and samples →'}</a>
+      <a href={`/${lang}/partner/`}>{zh?'商务合作 →':'Work with us →'}</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .en-company{width:min(100%,820px);margin:0 auto;padding:clamp(38px,6vw,72px) 0 clamp(64px,8vw,110px);color:#17211e}
+  .en-company h1{font:700 clamp(30px,4vw,46px)/1.16 Georgia,'Noto Serif SC',serif;letter-spacing:-.02em;margin:12px 0 20px}
+  .en-company h2{font:700 clamp(20px,2.2vw,26px)/1.3 Georgia,'Noto Serif SC',serif;margin:40px 0 12px}
+  .en-company .lead{color:#4d574f;font-size:clamp(16px,1.5vw,19px);line-height:1.75;margin:0 0 28px}
+  .en-company p{line-height:1.8;color:#3f4a44}
+  .co-facts{margin:26px 0 8px;border-top:1px solid #d8d0c3}
+  .co-facts div{display:grid;grid-template-columns:170px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid #e6dfd2}
+  .co-facts dt{font:600 13px/1.6 system-ui,sans-serif;color:#6a736c;letter-spacing:.02em}
+  .co-facts dd{margin:0;font-size:15px;line-height:1.65;color:#17211e}
+  .co-links{display:flex;flex-wrap:wrap;gap:18px;margin-top:38px;padding-top:22px;border-top:1px solid #d0c8bb}
+  .co-links a{color:#b94530;font-weight:700;text-underline-offset:3px}
+  @media(max-width:640px){.co-facts div{grid-template-columns:1fr;gap:4px}}
+</style>
