@@ -226,6 +226,19 @@ main.en-home-layout{padding-top:12px!important;}
   .masthead .masthead-tagline { font-size: 11px; }
 }
 
+/* Between 701 and 1100px the right-hand cell (nav shortcuts plus the language
+   picker) is wider than its track, so it overflowed leftwards across the
+   tagline. Drop the tagline in that range and give the masthead two columns
+   instead of three. Below 700px the tagline already gets its own row. */
+@media (min-width: 701px) and (max-width: 1100px) {
+  .masthead .masthead-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 14px;
+  }
+  .masthead .masthead-tagline { display: none; }
+  .masthead .en-language-select { justify-self: end; }
+}
+
 /* Three-link navigation: a full-width bar instead of three loose items */
 .mainnav .navlinks.navlinks-3 {
   display: grid;
