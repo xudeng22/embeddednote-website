@@ -1,11 +1,14 @@
 # EmbeddedNote
 
-> EmbeddedNote(嵌入式杂谈)is an independent bilingual engineering publication about
+> EmbeddedNote (嵌入式杂谈) is an editorially independent bilingual engineering publication about
 > practical embedded systems: MCU and SoC selection, hardware design, Bluetooth Low
 > Energy, e-paper displays and open-source hardware. It publishes original analysis
 > with explicit assumptions, plus two free browser-based engineering tools that run
 > entirely on the reader's device. English is the primary language; Chinese editions
-> of most articles are published alongside.
+> of most articles are published alongside. It is published by Datadelta, which also
+> supplies e-paper panels and design services: editorial decisions are independent of
+> that business, and commercial relationships are disclosed at
+> https://embeddednote.com/en/partner/.
 
 Editorial rule: numbers are either calculated from stated formulas, quoted from the
 document that defines them, or labelled as unverified. The site does not publish
@@ -68,7 +71,7 @@ benchmark results it has not measured, and it says so in the article.
 
 ## What this site is not
 
-- Not a vendor, reseller or affiliate. No sponsored rankings.
+- Not a disinterested third party: the publisher, Datadelta, also supplies e-paper panels and design work. Editorial decisions are independent of that business and every commercial relationship is disclosed at https://embeddednote.com/en/partner/. No sponsored rankings, no advertising.
 - Not a measurement lab: it has not characterised a physical panel or phone for the articles marked as models.
 - Not a news wire: project coverage is secondary to the engineering guides.
 

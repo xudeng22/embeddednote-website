@@ -35,6 +35,77 @@ const frames = [
     use: zh ? '墙面画框、门店' : 'wall frame, retail'
   }
 ];
+
+// Anonymous deliverables. Each row restates something already published elsewhere on
+// the site (a form factor, a panel, a host platform), never a client name or a number
+// we cannot point at.
+const cases = [
+  {
+    form: zh ? '家电 · 桌面信息屏与相框' : 'Home appliances · desk info display and frame',
+    panel: '7.09–13.3 in E6 · 1200 × 1600',
+    host: zh ? 'BK725X + BLE 伴生芯片,Wi-Fi 传图' : 'BK725X + BLE companion, Wi-Fi image transfer',
+    scope: zh ? 'TCON、固件、App 配网、亚克力结构' : 'TCON, firmware, app provisioning, acrylic enclosure'
+  },
+  {
+    form: zh ? '家电 · 大尺寸墙面画框' : 'Home appliances · large wall frame',
+    panel: '31.5 in E6 · 2560 × 1440 · 94 ppi',
+    host: 'T2000 TCON · 12 V 3 A Type-C',
+    scope: zh ? '时序板、供电、大幅面残影消除' : 'Timing board, power, large-format ghosting removal'
+  },
+  {
+    form: zh ? '汽车与交通 · 带编码器反馈的旋钮显示' : 'Automotive and transport · knob display with encoder feedback',
+    panel: zh ? '段码 / 小尺寸' : 'Segment / small size',
+    host: zh ? '主控 MCU + 编码器' : 'Host MCU + encoder',
+    scope: zh ? '驱动板、固件、结构配合' : 'Driver board, firmware, mechanical fit'
+  },
+  {
+    form: zh ? '物流与仓储装备 · 电子标签、货架签与胸章' : 'Logistics and warehouse equipment · tags, shelf labels and badges',
+    panel: 'BWRY 1.54–17.06 in',
+    host: 'SPI',
+    scope: zh ? '模组、驱动板、波形调优' : 'Module, driver board, waveform tuning'
+  },
+  {
+    form: zh ? '医疗器械 · 骨锯/环钻/吸脂一体主机' : 'Medical devices · bone saw, trephine and liposuction host',
+    panel: zh ? '7 in 串口屏 + 霍尔板' : '7 in serial display + Hall sensor board',
+    host: zh ? '自研系统板' : 'In-house system board',
+    scope: zh ? '系统板、屏驱动、整机集成(客户完成器械注册)' : 'System board, display driver, integration (registration completed by the customer)'
+  },
+  {
+    form: zh ? '医疗器械 · 牙科设备主控' : 'Medical devices · dental unit main control',
+    panel: '5.48 in AMOLED',
+    host: 'Ingenic X2000 · Linux + Qt',
+    scope: zh ? '主控板与 Qt 界面深度定制' : 'Main control board and deeply customised Qt interface'
+  }
+];
+
+// TODO(owner): the last two rows state the *basis* (per part, per batch) rather than a
+// figure. Replace them with measured ranges once you have them, e.g.
+//   sample lead time: "3–5 working days for stock parts"
+//   batch yield:      "99.2–99.6 % outgoing inspection, 2026 H1"
+// Do not put an estimate here — the site's own rule is that a number is either quoted,
+// calculated or measured.
+const metrics = [
+  {
+    k: zh ? '尺寸范围' : 'Size range',
+    v: zh ? '0.97–31.5 in(模组)· TCON 覆盖 10.1–43 in' : '0.97–31.5 in modules · TCON covers 10.1–43 in',
+    basis: zh ? '选型表逐项可查' : 'listed panel by panel in the selection table'
+  },
+  {
+    k: zh ? '工作温度' : 'Operating temperature',
+    v: '0–50 °C',
+    basis: zh ? '面板额定值,非整机实测' : 'panel rating, not a whole-product measurement'
+  },
+  {
+    k: zh ? '打样交期' : 'Sample lead time',
+    v: zh ? '按料号在报价单给出' : 'quoted per part on the quotation',
+    basis: zh ? '现货与定制 FPC 不同' : 'stock parts and custom FPC differ'
+  },
+  {
+    k: zh ? '批次良率' : 'Batch yield',
+    v: zh ? '按批次提供出厂检验记录' : 'per batch, with the outgoing inspection record',
+    basis: zh ? '不给统一数字' : 'no site-wide number is claimed'
+  }
+];
 ---
 
 <Base
@@ -89,11 +160,11 @@ const frames = [
       </article>
     </div>
 
-    <p class="sol-cross">
-      {zh
-        ? '还没定尺寸?先看[选型表](/zh/e-paper/selection/);已经过了 20 寸,看[大尺寸画框怎么选](/zh/articles/epaper-large-frames/)。'
-        : 'Not sure of the size yet? Start with the [selection table](/en/e-paper/selection/); above 20 inches, read [choosing a large frame](/en/articles/epaper-large-frames/).'}
-    </p>
+    {zh ? (
+      <p class="sol-cross">还没定尺寸?先看<a href="/zh/e-paper/selection/">选型表</a>;已经过了 20 寸,看<a href="/zh/articles/epaper-large-frames/">大尺寸画框怎么选</a>。</p>
+    ) : (
+      <p class="sol-cross">Not sure of the size yet? Start with the <a href="/en/e-paper/selection/">selection table</a>; above 20 inches, read <a href="/en/articles/epaper-large-frames/">choosing a large frame</a>.</p>
+    )}
 
     <h2>{zh ? '四款 E6 全彩相框参考设计' : 'Four E6 full-colour frame reference designs'}</h2>
     <div class="sol-table-wrap">
@@ -159,17 +230,68 @@ const frames = [
       <li>{zh ? '电子皮肤驱动:Prism3S 单段到 320 段,±15 V / ±30 V,RS485 可级联 255 块。' : 'Electronic-skin drivers: Prism3S segments from 1 to 320, ±15 V or ±30 V, RS485 cascading to 255 boards.'}</li>
     </ul>
 
-    <h2>{zh ? '定制开发做过什么' : 'What custom development has covered'}</h2>
-    <p>
+    <h2>{zh ? '交付过的行业' : 'Industries we have delivered to'}</h2>
+    <p class="sol-clients">
       {zh
-        ? '医用骨锯/环钻/吸脂一体主机(自研系统板、7 寸串口屏、霍尔板,客户已完成医疗器械注册)、牙科设备主控(5.48 寸 AMOLED,Linux 深度定制 Qt)、带编码器反馈的旋钮屏。这些不在网站的技术文章里,但它们说明了同一件事:端到端做整机,而不只是卖屏。'
-        : 'A modular medical host for bone saw, trephine and liposuction (in-house system board, 7-inch serial display, Hall sensor board, with the customer completing device registration); a dental unit built on Ingenic X2000 with a 5.48-inch AMOLED and a deeply customised Qt interface; knob displays with encoder feedback. They do not appear in the articles here, but they describe the same thing: end-to-end product work, not panel sales.'}
+        ? '家电 · 汽车与交通 · 物流与仓储装备 · 航空 · 医疗器械'
+        : 'Home appliances · Automotive and transport · Logistics and warehouse equipment · Aviation · Medical devices'}
+    </p>
+    <p class="sol-note">
+      {zh
+        ? '客户名称受保密协议约束,不在公开页列出。可核验的是形态、规格和交付范围;需要参考项目时,可以在 NDA 下提供。'
+        : 'Client names are under NDA and are not published here. What can be checked is the form factor, the specification and the scope we delivered; reference projects are available under NDA.'}
     </p>
 
-    <h2>{zh ? '已服务的客户' : 'Who we have delivered to'}</h2>
-    <p class="sol-clients">
-      Midea · Haier · Hisense · GAC · CIMC · SF Express · Airbus
+    <h2>{zh ? '已交付的形态' : 'What we have actually shipped'}</h2>
+    <div class="sol-table-wrap">
+      <table class="sol-cases">
+        <thead>
+          <tr>
+            <th>{zh ? '行业与形态' : 'Industry and form factor'}</th>
+            <th>{zh ? '屏与规格' : 'Panel and spec'}</th>
+            <th>{zh ? '主控 / 接口' : 'Host / interface'}</th>
+            <th>{zh ? '我们交付的部分' : 'What we delivered'}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cases.map((c) => (
+            <tr>
+              <td>{c.form}</td>
+              <td>{c.panel}</td>
+              <td>{c.host}</td>
+              <td>{c.scope}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="sol-note">
+      {zh
+        ? '这些项目不在本站的技术文章里,但它们说明了同一件事:端到端做整机,而不只是卖屏。'
+        : 'These projects do not appear in the articles here, but they describe the same thing: end-to-end product work, not panel sales.'}
     </p>
+
+    <h2>{zh ? '可核验的指标' : 'Numbers you can check'}</h2>
+    <div class="sol-table-wrap">
+      <table class="sol-metrics">
+        <thead>
+          <tr>
+            <th>{zh ? '指标' : 'Metric'}</th>
+            <th>{zh ? '数值' : 'Value'}</th>
+            <th>{zh ? '口径' : 'Basis'}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {metrics.map((m) => (
+            <tr>
+              <td>{m.k}</td>
+              <td>{m.v}</td>
+              <td class="sol-basis">{m.basis}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
 
     <div class="sol-cta">
       <p>
@@ -178,6 +300,7 @@ const frames = [
           : 'If what you need is the panel plus a board that drives it plus a product that ships, start from the supply page. If you only have a product definition so far, that is also a fine place to start.'}
       </p>
       <a href={`/${lang}/supply/`}>{zh ? '供货与打样 →' : 'Supply and samples →'}</a>
+      <a class="sol-cta-alt" href={`/${lang}/partner/`}>{zh ? '商务合作 →' : 'Business cooperation →'}</a>
     </div>
   </section>
 <script is:inline>
@@ -248,8 +371,14 @@ const frames = [
     white-space: nowrap;
   }
   .sol-table-wrap td { padding: 10px 14px; border-bottom: 1px solid #ece5d8; }
+  .sol-table-wrap table.sol-cases { min-width: 660px; }
+  .sol-table-wrap table.sol-cases td { vertical-align: top; line-height: 1.55; }
+  .sol-table-wrap table.sol-cases td:first-child { font-weight: 700; color: #17211e; }
+  .sol-table-wrap table.sol-metrics td { vertical-align: top; }
+  .sol-basis { color: #6a736c; font-size: 13px; }
   .sol-table-wrap tr:last-child td { border-bottom: 0; }
   .sol-note { color: #6a736c; font-size: 14px; line-height: 1.7; margin: 12px 0 0; }
+  .sol-cross a { color: #b94530; text-underline-offset: 3px; }
   .doc-link {
     display: inline-block;
     background: #17211e;
@@ -293,4 +422,5 @@ const frames = [
   }
   .sol-cta p { color: #4d574f; line-height: 1.75; margin: 0 0 10px; }
   .sol-cta a { color: #b94530; font-weight: 700; text-underline-offset: 3px; }
+  .sol-cta a.sol-cta-alt { margin-left: 18px; color: #5c665f; font-weight: 600; }
 </style>

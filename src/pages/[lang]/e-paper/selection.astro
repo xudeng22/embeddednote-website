@@ -147,11 +147,11 @@ const fmt = (n: number) => n.toLocaleString(zh ? 'zh-CN' : 'en-US', { maximumFra
     </ul>
 
     <div class="sel-cta">
-      <p>
-        {zh
-          ? '这张表就是我们供货的型号范围。要样品、要定制排线,或者需要一个能直接点亮的驱动板,从供货页开始;整机方案(TCON、供电、结构)见[方案设计](/zh/solutions/)。'
-          : 'This table is the range we supply. For samples, a custom FPC or a board that drives the panel, start at the supply page; for a finished product design (TCON, power, mechanics) see the [solution designs](/en/solutions/).'}
-      </p>
+      {zh ? (
+        <p>这张表就是我们供货的型号范围。要样品、要定制排线,或者需要一个能直接点亮的驱动板,从供货页开始;整机方案(TCON、供电、结构)见<a href="/zh/solutions/">方案设计</a>。</p>
+      ) : (
+        <p>This table is the range we supply. For samples, a custom FPC or a board that drives the panel, start at the supply page; for a finished product design (TCON, power, mechanics) see the <a href="/en/solutions/">solution designs</a>.</p>
+      )}
       <a href={`/${lang}/supply/`}>{zh ? '供货与打样 →' : 'Supply and samples →'}</a>
     </div>
   </section>

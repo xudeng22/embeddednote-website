@@ -17,8 +17,8 @@ const visible = articles.slice((page-1)*perPage, page*perPage);
 // Search snippets are intentionally richer than the short, visible Hero subtitle.
 // This changes the HTML meta description, not the typography or homepage copy.
 const seoDescriptions = {
-  en: 'EmbeddedNote is an independent bilingual engineering blog with free tools for embedded developers. Explore MCUs, PCB design, BLE, NFC, e-paper and open-source hardware.',
-  zh: 'EmbeddedNote（嵌入式杂谈）是独立运营的中英双语嵌入式技术博客，分享 MCU、硬件设计、BLE、NFC、电子纸、开源项目与免费在线工具。'
+  en: 'EmbeddedNote is an editorially independent bilingual engineering publication, published by Datadelta, with free tools for embedded developers. Explore MCUs, PCB design, BLE, NFC, e-paper and open-source hardware.',
+  zh: 'EmbeddedNote（嵌入式杂谈）是 Datadelta 出品的编辑独立中英双语工程出版物，分享 MCU、硬件设计、BLE、NFC、电子纸、开源项目与免费在线工具。'
 };
 const seoDescription = page > 1
   ? (lang === 'zh'
@@ -33,7 +33,7 @@ const seoDescription = page > 1
       <h1>{t.title}</h1>
       <div class="hero-accent" aria-hidden="true"></div>
       <p>{t.description}</p>
-      <p class="hero-site-type">{lang === 'zh' ? '独立嵌入式技术博客 · 免费在线工程工具' : 'Independent engineering blog · Free tools for embedded developers'}</p>
+      <p class="hero-site-type">{lang === 'zh' ? '编辑独立 · 免费在线工程工具' : 'Editorially independent · Free tools for embedded developers'}</p>
     </div>
     <div class="hero-visual">
       <img src="/images/embeddednote-hero.webp"
