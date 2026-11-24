@@ -17,6 +17,7 @@ draft: false
 seoTitle: 'OpenTrailPaper: An Offline ESP32-S3 E-Paper Bike Computer'
 seoDescription: How OpenTrailPaper turns LILYGO’s T5 E-Paper S3 Pro into a standalone cycling computer with offline maps, GPX routes,
   FIT logs and BLE sensors.
+supplyCta: true
 ---
 
 A development board with GPS, LoRa and a 4.7-inch e-paper display would make a perfectly serviceable weather station. [OpenTrailPaper](https://github.com/RaemondBW/OpenTrailPaper) takes it in a different direction: it turns the **LILYGO T5 E-Paper S3 Pro** into a bicycle computer that works without a phone or mobile data connection.

@@ -14,6 +14,7 @@ draft: false
 seoTitle: Moving AI E-Paper Desk Companion for Daily Tasks
 seoDescription: 'A concept overview of a moving e-paper desk companion, with interface examples, engineering constraints and open validation questions.'
 updatedDate: '2026-11-06'
+supplyCta: true
 ---
 
 A task can be correctly entered into an app and still be forgotten. The problem is often not storing the task; it is keeping the right one visible when you return to your desk. PaperPal explores a deliberately narrow interface: a small e-paper companion that shows a persistent reminder card instead of another stream of phone notifications.

@@ -15,6 +15,7 @@ tags:
 draft: false
 seoTitle: OpenTrailPaper：基于 ESP32-S3 与电子纸的离线骑行码表
 seoDescription: 开源项目 OpenTrailPaper 将 LILYGO 4.7 英寸电子纸开发板改造成支持离线地图、GPX 导航和 FIT 记录的骑行码表。
+supplyCta: true
 ---
 
 拿到一块带GPS、LoRa和电子纸的ESP32-S3开发板，大多数人第一反应是拿它做个天气站或者电子书阅读器。

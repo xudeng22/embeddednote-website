@@ -17,6 +17,7 @@ author: EmbeddedNote
 sourceUrl: https://github.com/TalismanDesign/PocketMage_PDA
 seoTitle: 'PocketMage PDA：ESP32-S3、电子纸与OLED双屏开源掌上电脑'
 seoDescription: 'PocketMage将3.1英寸电子纸与256×32 OLED结合，搭载ESP32-S3、实体键盘及PocketMageOS。查看最新KiCad硬件文件、SDK、ELF应用和双屏设计。'
+supplyCta: true
 ---
 
 这些年用 ESP32 做掌上设备的不少，但同时放电子墨水屏和 OLED 的还真不多。PocketMage PDA 就是这么一台小机器：翻盖外形、实体键盘、透明外壳，主屏是一块电子纸，键盘上方还塞了一条细长的 OLED。看着有点像当年的掌上电脑，里面跑的却是 ESP32-S3 和作者自己用 C++ 写的系统。

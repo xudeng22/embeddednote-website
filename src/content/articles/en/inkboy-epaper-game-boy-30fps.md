@@ -20,6 +20,7 @@ seoDescription: An ESP32-S3, SSD1681 controller and selective pixel-driving
   scheme bring Game Boy to a 200×200 e-paper display at roughly 30 fps.
   Understand the trade-offs.
 updatedDate: '2026-11-06'
+supplyCta: true
 ---
 E-paper is an unlikely choice for a Game Boy display. Even a partial refresh on a small panel can take hundreds of milliseconds, which is fine for a price tag but disastrous for a scrolling game. Developer Bo Made It has demonstrated something rather different: an ESP32-S3 board running Game Boy games on a **1.54-inch, 200 × 200 e-paper panel**, with roughly **30 display updates per second**. Hackaday covered the experiment on October 14, 2026.
 

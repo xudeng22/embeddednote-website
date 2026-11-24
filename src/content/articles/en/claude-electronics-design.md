@@ -96,6 +96,8 @@ The DFM pass found six solder-mask slivers that were too thin to manufacture. Cl
 
 *The hub’s front copper with ground poured between parts and signals. Image: Anthropic.*
 
+Everything above is geometry, and geometry is checkable: ERC, DRC, a DFM pass. None of it says whether the board behaves across the temperature range it will ship in, or whether the firmware's timing assumptions survive a slow clock. Those questions only close with a measurement, and the demo ships no measurements. For a panel-based product the gap is wider than it looks: an e-paper frame is mostly a timing problem, not a routing one, which is why the [e-paper engineering notes](/en/e-paper/) spend so little time on layout.
+
 ## The enclosure is part of the circuit
 
 Anthropic’s examples also show why “PCB design” is too narrow a description. The enclosure changes what the board can do.
@@ -137,3 +139,5 @@ For now, the honest reading is this: Claude Fable 5.2 can produce a plausible, b
 ![Eight-step workflow from prompt to a working prototype](/uploads/claude-electronics/claude-electronics-flow-en.webp)
 
 *The workflow Anthropic describes, broken into design actions. The last step is still human: fabrication, assembly and test.*
+
+The boards we design are narrower: e-paper frames, where panel timing, the image pipeline and the enclosure all have to agree before anything is fabricated. [The frame designs and spec sheets](/en/solutions/) are where that work is written down.

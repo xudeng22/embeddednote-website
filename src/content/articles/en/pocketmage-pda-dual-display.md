@@ -17,6 +17,7 @@ author: EmbeddedNote
 sourceUrl: https://github.com/TalismanDesign/PocketMage_PDA
 seoTitle: 'PocketMage PDA: ESP32-S3, E-Paper and an OLED Status Display'
 seoDescription: 'PocketMage is an ESP32-S3 PDA with e-paper, OLED and a physical keyboard. Explore its latest KiCad hardware, PocketMageOS SDK and SD-card-loaded ELF apps.'
+supplyCta: true
 ---
 
 There is a reason most small e-paper projects avoid keyboards: a display that takes hundreds of milliseconds to update is a poor place to show every keystroke. PocketMage tackles that problem without asking the e-paper panel to do something it cannot. It gives the main display a narrow OLED companion, then puts both into a tiny clamshell computer powered by an ESP32-S3.

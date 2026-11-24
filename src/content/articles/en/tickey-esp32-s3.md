@@ -16,6 +16,7 @@ tags:
 seoTitle: 'TICKEY: ESP32-S3 Color E-Paper Card Raises $850K'
 seoDescription: 'Inside TICKEY: a 3.7-inch color e-paper display, ESP32-S3, wireless connectivity, NFC, refresh modes, and room for custom firmware.'
 updatedDate: '2026-11-06'
+supplyCta: true
 ---
 
 Color e-paper has made its way into plenty of products over the past couple of years: desktop calendars, digital photo frames, electronic shelf labels, and information displays. Most follow the same idea—put a low-power screen in a fixed location. TICKEY takes a different route. It packs a 3.7-inch color e-paper display into an aluminum body only slightly larger than a credit card, then adds a keyring, magnetic mounting, and a desktop stand.

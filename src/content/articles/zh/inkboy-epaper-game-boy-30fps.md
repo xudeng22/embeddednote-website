@@ -18,6 +18,7 @@ seoTitle: ESP32-S3电子纸跑Game Boy：InkBoy如何实现约30 FPS更新
 seoDescription: 1.54英寸200×200电子纸实现约30
   FPS更新？看InkBoy如何用SSD1681短波形、逐像素HOLD和ESP32-S3运行Game Boy，以及残影和寿命风险。
 updatedDate: '2026-11-06'
+supplyCta: true
 ---
 一块 1.54 英寸电子纸，正常局部刷新要几百毫秒，拿来玩 Game Boy，听着就像故意给自己找麻烦。开发者 Bo Made It 偏偏在微雪 ESP32-S3 开发板上做出了约 **30 FPS** 的演示：画面能跟着游戏动，黑白像素和四级灰阶都能跑。项目叫 **InkBoy**，用的是 200×200 电子纸，并不是换了一块高刷 LCD。10 月 14 日，Hackaday 报道了这个实验。
 

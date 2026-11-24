@@ -9,8 +9,8 @@ series: open-hardware
 updatedDate: '2026-11-11'
 author: EmbeddedNote
 sourceUrl: https://github.com/mx3353672833-debug/moto-gps-waveshare
-title: 'MOTO GPS: A Round-Screen Motorcycle Navigator With the Phone in Your Pocket'
-description: 'MOTO GPS pairs a Waveshare ESP32-S3 AMOLED board with an iPhone app, a custom BLE protocol and a round PCB. The phone plans; the screen shows the next turn.'
+title: 'MOTO GPS on GitHub: A Round-Screen Motorcycle Navigator'
+description: 'Source-available ESP32-S3 motorcycle navigator on a Waveshare round AMOLED board: repo, schematic notes, custom BLE protocol and firmware. The phone plans the route; the screen shows the next turn.'
 tags:
 - MOTO GPS
 - ESP32-S3
@@ -20,8 +20,8 @@ tags:
 - Motorcycle Navigation
 - LVGL
 - Source Available
-seoTitle: 'MOTO GPS: ESP32-S3 Round-Screen Motorcycle Navigator'
-seoDescription: 'Inside MOTO GPS: Waveshare ESP32-S3 AMOLED hardware, CO5300 pins, a BLE v1 frame format, a shared C++ navigation core and a round PCB.'
+seoTitle: 'MOTO GPS on GitHub: ESP32-S3 Round-Screen Navigator'
+seoDescription: 'Source-available MOTO GPS on GitHub: Waveshare ESP32-S3 AMOLED, CO5300 pins, a BLE v1 frame format, a shared C++ navigation core and a round PCB.'
 ---
 
 A 1.75-inch circle sits on the handlebar. The phone stays in a jacket pocket. The screen shows a white route, the next turn and a distance — not a mirrored phone display. **[MOTO GPS](https://github.com/mx3353672833-debug/moto-gps-waveshare)**, by Maler X, is built around the **Waveshare ESP32-S3-Touch-AMOLED-1.75C**, but the board is only half the story. The repository also contains an iPhone app, an Android app, a routing gateway, a shared C++ navigation core, a custom BLE protocol and a four-layer round PCB that has been designed but not fabricated.
