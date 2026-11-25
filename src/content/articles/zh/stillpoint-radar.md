@@ -38,7 +38,7 @@ seoDescription: "拆解 Stillpoint：BGT60TR13C 60GHz FMCW 雷达、EFR32MG26、
 | 许可 | CERN-OHL-S-2.0 |
 | 状态 | rev A 设计文件；实物 bring-up 尚未完成 |
 
-**GitHub：** https://github.com/techmiguel/stillpoint
+**GitHub：** [github.com/techmiguel/stillpoint](https://github.com/techmiguel/stillpoint)
 
 ![Stillpoint 爆炸图：天花板底盘、盖子、Ø60mm 主板和带 radome 的外壳](/uploads/stillpoint/stillpoint-exploded.webp)
 

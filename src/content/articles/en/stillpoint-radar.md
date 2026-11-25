@@ -23,7 +23,7 @@ seoTitle: 'Stillpoint: 60 GHz Radar for Presence and Fall Detection'
 seoDescription: "Inside Stillpoint, an open-hardware ceiling sensor that uses a 60 GHz FMCW radar, on-device DSP and Matter over Thread to detect presence, posture and falls without a camera."
 ---
 
-Most room-presence sensors force a trade-off. A camera can see posture and falls, but it also produces images of the people it watches. A passive infrared sensor is cheap and private, but it goes blind when someone sits still. Stillpoint takes a third path: a 60 GHz FMCW radar in a ceiling-mounted Ø60 mm puck. It counts people, estimates whether they are standing, sitting or lying down, and raises a fall alert. The result goes out over Matter on Thread. There is no camera, microphone, cloud account or image stream.
+Most room-presence sensors force a trade-off. A camera can see posture and falls, but it also produces images of the people it watches. A passive infrared sensor is cheap and private, but it goes blind when someone sits still. Stillpoint takes a third path: a 60 GHz FMCW radar in a ceiling-mounted Ø60 mm puck. It counts people, estimates whether they are standing, sitting or lying down, and raises a fall alert. The result goes out over Matter over Thread. There is no camera, microphone, cloud account or image stream.
 
 The project is by Miguel (techmiguel) and was published in October 2026 under CERN-OHL-S-2.0. The repository contains the KiCad schematic and four-layer board, a FreeCAD enclosure, C firmware and a Python reference implementation. It is a rev A design: the board has been checked and documented, but it has not yet been fabricated or validated as a physical unit.
 
@@ -38,7 +38,7 @@ The project is by Miguel (techmiguel) and was published in October 2026 under CE
 | License | CERN-OHL-S-2.0 |
 | Status | Rev A design files; physical bring-up still open |
 
-**GitHub:** https://github.com/techmiguel/stillpoint
+**GitHub:** [github.com/techmiguel/stillpoint](https://github.com/techmiguel/stillpoint)
 
 ![Stillpoint exploded view: ceiling plate, lid, Ø60 mm board and radome enclosure](/uploads/stillpoint/stillpoint-exploded.webp)
 
@@ -110,7 +110,7 @@ The board is located by three supports and clamped by three lid posts at the sam
 
 The repository is unusually complete for a project at this stage: schematic, PCB, fabrication outputs, FreeCAD enclosure, C firmware, a Python reference, a feature contract, golden vectors and regression plots. The C implementation is compared with the Python reference frame by frame: the README reports the same counts, at least 99.8% identical quantised features, and identical postures, fall decisions and alarm times.
 
-That is still simulation and host-side verification. The hardware notes say the board is not ordered before the F2 kits close, and the bring-up checklist still has 1:1 print checks, polarity checks, CPL rotation checks and first power-on open. The power, CPU and RAM figures in the architecture document are estimates, not measurements. There is no independent fall-detection dataset, no EMC report and no thermal test in the repository.
+That is still simulation and host-side verification. The hardware notes say the board will not be ordered until the F2 kit phase closes, and the bring-up checklist still has 1:1 print checks, polarity checks, CPL rotation checks and first power-on open. The power, CPU and RAM figures in the architecture document are estimates, not measurements. There is no independent fall-detection dataset, no EMC report and no thermal test in the repository.
 
 ![C firmware and Python reference compared on four scenarios](/uploads/stillpoint/stillpoint-c-vs-python.webp)
 
