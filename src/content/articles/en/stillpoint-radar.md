@@ -23,9 +23,9 @@ seoTitle: 'Stillpoint: 60 GHz Radar for Presence and Fall Detection'
 seoDescription: "Inside Stillpoint, an open-hardware ceiling sensor that uses a 60 GHz FMCW radar, on-device DSP and Matter over Thread to detect presence, posture and falls without a camera."
 ---
 
-Most room-presence sensors force a trade-off. A camera can see posture and falls, but it also produces images of the people it watches. A passive infrared sensor is cheap and private, but it goes blind when someone sits still. Stillpoint takes a third path: a 60 GHz FMCW radar in a ceiling-mounted Ø60 mm puck. It counts people, estimates whether they are standing, sitting or lying down, and raises a fall alert. The result goes out over Matter over Thread. There is no camera, microphone, cloud account or image stream.
+Most room-presence sensors force a trade-off. A camera can see posture and falls, but it also produces images of the people it watches. A passive infrared sensor is cheap and private, but it goes blind when someone sits still. Stillpoint takes a third path: a 60 GHz FMCW radar in a ceiling-mounted Ø60 mm puck. It counts people, estimates whether they are standing, sitting or lying down, and raises a fall alert. The result goes out over Matter/Thread. There is no camera, microphone, cloud account or image stream.
 
-The project is by Miguel (techmiguel) and was published in October 2026 under CERN-OHL-S-2.0. The repository contains the KiCad schematic and four-layer board, a FreeCAD enclosure, C firmware and a Python reference implementation. It is a rev A design: the board has been checked and documented, but it has not yet been fabricated or validated as a physical unit.
+Miguel (techmiguel) published the project in October 2026 under CERN-OHL-S-2.0. The repository contains the KiCad schematic and four-layer board, a FreeCAD enclosure, C firmware and a Python reference implementation. It is a rev A design: the board has been checked and documented, but it has not yet been fabricated or validated as a physical unit.
 
 | Item | Details |
 | --- | --- |
